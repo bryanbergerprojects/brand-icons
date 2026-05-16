@@ -1,0 +1,63 @@
+name: Trademark removal request
+description: Request the removal, modification, or correction of a brand icon.
+title: "[Trademark removal] <Brand>"
+labels: ["trademark", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contacting us. Please read [BRAND_OWNERS.md](../BRAND_OWNERS.md) before submitting.
+        For confidential requests, email **contact+brand-icons@bryanberger.dev** instead.
+
+  - type: input
+    id: brand
+    attributes:
+      label: Brand name
+      placeholder: e.g. Acme Corp
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: Icon slug
+      description: The slug used in `icons/<slug>/`.
+      placeholder: e.g. acme-corp
+    validations:
+      required: true
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request type
+      options:
+        - Removal
+        - Modification
+        - Correction
+        - Usage restriction
+    validations:
+      required: true
+
+  - type: textarea
+    id: authorization
+    attributes:
+      label: Your role / authorization
+      description: How are you authorized to act on behalf of the brand?
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Request details
+      description: Describe the requested change. Link to relevant brand guidelines if applicable.
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact email
+      description: A verifiable email associated with the brand.
+    validations:
+      required: true

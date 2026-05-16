@@ -1,0 +1,43 @@
+{
+  "name": "brand-icons",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Multi-variant, multi-framework brand icons library.",
+  "author": "Bryan Berger <contact@bryanberger.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanbergerprojects/brand-icons.git"
+  },
+  "homepage": "https://github.com/bryanbergerprojects/brand-icons#readme",
+  "bugs": {
+    "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "turbo run build",
+    "build:icons": "turbo run build --filter=@brand-icons/build-icons",
+    "dev": "turbo run dev",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "turbo run build --filter='./packages/*' && changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@changesets/cli": "^2.27.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.7.0"
+  }
+}

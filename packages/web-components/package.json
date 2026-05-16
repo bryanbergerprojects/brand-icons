@@ -1,0 +1,48 @@
+{
+  "name": "@brand-icons/wc",
+  "version": "0.0.0",
+  "description": "Framework-agnostic Web Components for Brand Icons.",
+  "license": "MIT",
+  "author": "Bryan Berger <contact@bryanberger.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanbergerprojects/brand-icons.git",
+    "directory": "packages/web-components"
+  },
+  "homepage": "https://github.com/bryanbergerprojects/brand-icons/tree/main/packages/web-components",
+  "bugs": {
+    "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
+  },
+  "type": "module",
+  "sideEffects": ["./dist/index.js"],
+  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@brand-icons/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

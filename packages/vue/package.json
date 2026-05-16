@@ -1,0 +1,53 @@
+{
+  "name": "@brand-icons/vue",
+  "version": "0.0.0",
+  "description": "Vue 3 components for Brand Icons.",
+  "license": "MIT",
+  "author": "Bryan Berger <contact@bryanberger.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanbergerprojects/brand-icons.git",
+    "directory": "packages/vue"
+  },
+  "homepage": "https://github.com/bryanbergerprojects/brand-icons/tree/main/packages/vue",
+  "bugs": {
+    "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@brand-icons/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": ">=3.4"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

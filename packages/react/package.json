@@ -1,0 +1,56 @@
+{
+  "name": "@brand-icons/react",
+  "version": "0.0.0",
+  "description": "React components for Brand Icons.",
+  "license": "MIT",
+  "author": "Bryan Berger <contact@bryanberger.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanbergerprojects/brand-icons.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/bryanbergerprojects/brand-icons/tree/main/packages/react",
+  "bugs": {
+    "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@brand-icons/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Generated icon outputs (committed only as source, not generated)
+packages/*/src/icons/generated/
+packages/core/src/icons/
+packages/core/src/manifest.ts
+packages/react/src/icons/
+packages/vue/src/icons/
+packages/svelte/src/icons/
+packages/web-components/src/icons/
+
+# Tests
+coverage/
+.vitest/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Misc
+.cache/
+tmp/
+temp/
