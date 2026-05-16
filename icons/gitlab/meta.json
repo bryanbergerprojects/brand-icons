@@ -12,6 +12,18 @@
   "latest": "2022",
   "years": [
     {
+      "year": "2014",
+      "palette": ["#231F20"],
+      "source": "https://gitlab.com/gitlab-com/gitlab-artwork/-/raw/67e77488/vector/fox.svg",
+      "notes": "Original detailed tanuki face mark by Dmitriy Zaporozhets — line-art illustration in #231F20 (near-black), no orange. Sourced from the initial 2014-03-05 commit of gitlab-com/gitlab-artwork; Inkscape metadata stripped, transforms preserved and wrapped in a 24x24 viewBox scale group (baked at build via SVGO convertTransform)."
+    },
+    {
+      "year": "2015",
+      "palette": ["#FC6D26", "#E24329", "#FCA326"],
+      "source": "https://gitlab.com/gitlab-com/gitlab-artwork/-/raw/master/logo/logo-square.svg",
+      "notes": "Geometric tanuki redesign introduced May 2015 — abstract three-tone triangular composition replacing the 2014 illustrated face mark. Sourced from gitlab-com/gitlab-artwork commit 880662ad (2015-07-08); Sketch metadata stripped, transforms wrapped in a 24x24 viewBox scale group (baked at build via SVGO convertTransform)."
+    },
+    {
       "year": "2022",
       "palette": ["#E24329", "#FC6D26", "#FCA326"],
       "source": "https://about.gitlab.com/images/press/gitlab-logo-500-rgb.svg",

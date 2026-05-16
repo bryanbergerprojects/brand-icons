@@ -9,13 +9,25 @@
   "repository": "https://github.com/openai",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["chatgpt"],
-  "latest": "2022",
+  "latest": "2025",
   "years": [
+    {
+      "year": "2015",
+      "palette": ["#7C94A6"],
+      "source": "https://commons.wikimedia.org/wiki/File:OpenAI_Logo_2015.svg",
+      "notes": "Original founding-era wordmark in geometric sans-serif, light gray-blue (non-square mark, scaled into 24x24 viewBox)."
+    },
     {
       "year": "2022",
       "palette": ["#000000"],
       "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg",
-      "notes": "Knot mark (not the 2025 blossom refresh)."
+      "notes": "Knot/blossom symbol (pre-2025 refresh)."
+    },
+    {
+      "year": "2025",
+      "palette": ["#000000"],
+      "source": "https://commons.wikimedia.org/wiki/File:OpenAI_logo_2025_(symbol).svg",
+      "notes": "Refined Blossom symbol (February 2025 refresh by Veit Moeller and Shannon Jager) with corrected geometry and cleaner curves."
     }
   ],
   "addedAt": "2026-05-16",

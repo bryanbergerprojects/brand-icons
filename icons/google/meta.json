@@ -11,6 +11,18 @@
   "latest": "2015",
   "years": [
     {
+      "year": "2010",
+      "palette": ["#1B4EED", "#EE2B34", "#FCB110", "#00B817"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_logo_(2010-2013).svg",
+      "notes": "Catull BQ serif wordmark refined May 2010 — slightly more orange 'o' and reduced drop shadow versus the 1999 Kedar mark. Gradients flattened to mid-stop solid colors; wordmark scaled to fit 24×24 viewBox (text renders very small at icon sizes — cataloging tradeoff)."
+    },
+    {
+      "year": "2013",
+      "palette": ["#186DEE", "#DA4531", "#FFBA03", "#009B58"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_logo_(2013-2015).svg",
+      "notes": "Final flat Catull serif wordmark (Sep 2013 – Aug 2015) — shadows removed, slightly flatter colors before the 2015 Product Sans rebrand. Gradients flattened to mid-stop solid colors; wordmark scaled to fit 24×24 viewBox."
+    },
+    {
       "year": "2015",
       "palette": ["#4285F4", "#EA4335", "#FBBC05", "#34A853"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg",
@@ -18,5 +30,6 @@
     }
   ],
   "addedAt": "2026-05-16",
-  "updatedAt": "2026-05-16"
+  "updatedAt": "2026-05-16",
+  "notes": "Pre-2010 wordmarks (1998 Baskerville 'Google!' by Sergey Brin, 1999 Ruth Kedar Catull serif) were not added: no authoritative true-vector SVG exists on Wikimedia Commons, Logopedia, or archive.org — only raster PNGs (and SVG containers wrapping embedded PNGs from third-party logo sites, which do not qualify as true vectors). Per the no-invent rule, these millésimes were skipped."
 }

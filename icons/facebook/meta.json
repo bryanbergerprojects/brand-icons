@@ -12,6 +12,18 @@
   "latest": "2019",
   "years": [
     {
+      "year": "2005",
+      "palette": ["#3B5998", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg",
+      "notes": "Original 'f' favicon on dark blue rounded square (used 2005-2019). Wordmark by Mike Buzzard / Cuban Council based on Klavika (Eric Olson) is 266×100 — illegible scaled into 24×24, so the contemporaneous 'f' mark is used instead per acquisition guidance. Decorative #6D84B4 chrome stripe from the source asset removed."
+    },
+    {
+      "year": "2015",
+      "palette": ["#3B5998", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Facebook_New_Logo_%282015%29.svg",
+      "notes": "2015 wordmark refresh (July 1, 2015): refined letterforms, tighter 'a/c/e' geometry, on the same #3B5998 dark blue. Scale-wrapped from 266×100 into 24×24 — text reads small. Note: #1877F2 was not introduced until the May 2019 brand refresh; in 2015 the brand color was still #3B5998."
+    },
+    {
       "year": "2019",
       "palette": ["#1877F2", "#FFFFFF"],
       "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/facebook.svg",

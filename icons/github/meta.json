@@ -12,6 +12,12 @@
   "latest": "2013",
   "years": [
     {
+      "year": "2008",
+      "palette": ["#010101", "#F5CCB3", "#9EDCF2", "#FFFFFF", "#7DBCE7", "#AF5C51", "#C4E5D9"],
+      "source": "https://logowiki.net/uploads/logo/g/github-octocat.svg",
+      "notes": "Original Octocat (née 'Octopuss') by Simon Oxley, 2008. Full illustrated mark with octopus tentacles, cat face, blue puddle and ink droplet — used 2008-2013 before the simplified silhouette refinement."
+    },
+    {
       "year": "2013",
       "palette": ["#181717"],
       "source": "https://brand.github.com/GitHub_Logos.zip",

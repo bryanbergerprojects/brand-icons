@@ -11,6 +11,24 @@
   "latest": "2012",
   "years": [
     {
+      "year": "1975",
+      "palette": ["#000000"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo_(1975).svg",
+      "notes": "Original hand-drawn 'Micro-Soft' stacked wordmark from the Paul Allen / Bill Gates era — pre-disco 'blibbet'. Wide horizontal mark scaled to fit 24×24; illegible at small icon sizes."
+    },
+    {
+      "year": "1980",
+      "palette": ["#000000"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo_(1980).svg",
+      "notes": "'Blibbet' logo — the O with horizontal lines. Wide wordmark scaled to fit 24×24; illegible at small icon sizes."
+    },
+    {
+      "year": "1987",
+      "palette": ["#000000"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo_(1987).svg",
+      "notes": "'Pacman' logo by Scott Baker — italic Microsoft wordmark with sliced O. The longest-lived Microsoft logo (1987–2012). Wide wordmark scaled to fit 24×24; illegible at small icon sizes."
+    },
+    {
       "year": "2012",
       "palette": ["#F25022", "#7FBA00", "#00A4EF", "#FFB900"],
       "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg",

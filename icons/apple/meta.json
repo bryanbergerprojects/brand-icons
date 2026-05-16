@@ -11,6 +11,18 @@
   "latest": "2017",
   "years": [
     {
+      "year": "1976",
+      "palette": ["#75BD21", "#FFC728", "#FF661C", "#CF0F2B", "#B01CAB", "#00A1DE"],
+      "source": "https://commons.wikimedia.org/wiki/File:Apple_Computer_Logo_rainbow.svg",
+      "notes": "Rainbow Apple by Rob Janoff (six horizontal stripes: green, yellow, orange, red, purple, blue). Officially adopted in 1977 and used through 1998; the 1977 variant is identical to this mark and is therefore not separately committed."
+    },
+    {
+      "year": "1998",
+      "palette": ["#1A1A1A"],
+      "source": "https://commons.wikimedia.org/wiki/File:Apple_Logo.svg",
+      "notes": "Monochrome silhouette adopted after Steve Jobs's return, used through the Aqua / Mac OS X era with a glossy vertical gradient (dark to translucent)."
+    },
+    {
       "year": "2017",
       "palette": ["#000000"],
       "source": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
