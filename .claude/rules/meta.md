@@ -115,8 +115,10 @@ A deliberate constant — any deviation triggers a Zod error.
 ### 1.10 `latest` must resolve
 
 `meta.latest` must equal one of `meta.years[].year`. The pipeline
-exposes the matching entry as the default export of the icon component
-(`<AppleIcon />` ≡ `<AppleIcon.Latest />`).
+exposes the matching entry through an alias component: e.g. with
+`latest: "2017"`, the React package ships `<Apple2017Icon />` plus
+`<AppleLatestIcon />` (= `Apple2017Icon`). Same convention in Vue /
+Svelte ; WC reads `meta.latest` at runtime.
 
 ### 1.11 `years[].year`
 
