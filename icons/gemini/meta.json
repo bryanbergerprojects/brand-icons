@@ -6,9 +6,17 @@
   "tags": ["google", "llm", "multimodal", "assistant", "generative-ai", "ai-model", "chatbot"],
   "brandColor": "#1C69FF",
   "url": "https://gemini.google.com",
-  "source": "https://gemini.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["google-gemini", "bard"],
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2023",
+      "palette": ["#1C7DFF", "#1C69FF", "#F0DCD6"],
+      "source": "https://gemini.google.com",
+      "notes": "Four-pointed star, geometric reconstruction (non-authoritative source)."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

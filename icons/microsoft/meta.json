@@ -6,9 +6,17 @@
   "tags": ["windows", "azure", "office", "xbox", "surface", "platform", "enterprise"],
   "brandColor": "#F25022",
   "url": "https://www.microsoft.com",
-  "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
+  "latest": "2012",
+  "years": [
+    {
+      "year": "2012",
+      "palette": ["#F25022", "#7FBA00", "#00A4EF", "#FFB900"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg",
+      "notes": "Four colored squares (2012 rebrand under Jeff Hansen)."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

@@ -6,9 +6,17 @@
   "tags": ["jira", "confluence", "bitbucket", "trello", "collaboration", "agile", "saas", "team"],
   "brandColor": "#0052CC",
   "url": "https://www.atlassian.com",
-  "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/atlassian.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#2684FF", "#0052CC"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/atlassian.svg",
+      "notes": "Current 'A' mark with blue gradient (2017 rebrand)."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

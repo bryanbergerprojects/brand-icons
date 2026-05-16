@@ -6,9 +6,17 @@
   "tags": ["macos", "ios", "iphone", "ipad", "mac", "ecosystem", "consumer-electronics", "hardware"],
   "brandColor": "#000000",
   "url": "https://www.apple.com",
-  "source": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#000000"],
+      "source": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
+      "notes": "Flat monochrome silhouette (current era)."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

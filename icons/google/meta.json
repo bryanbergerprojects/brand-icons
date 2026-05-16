@@ -6,9 +6,17 @@
   "tags": ["search", "cloud", "android", "workspace", "ads", "maps", "chrome", "platform"],
   "brandColor": "#4285F4",
   "url": "https://www.google.com",
-  "source": "https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
+  "latest": "2015",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#4285F4", "#EA4335", "#FBBC05", "#34A853"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg",
+      "notes": "Sans-serif 'G' (Product Sans rebrand, 2015)."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

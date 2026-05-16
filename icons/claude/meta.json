@@ -6,9 +6,17 @@
   "tags": ["anthropic", "llm", "chatbot", "assistant", "ai-model", "generative-ai"],
   "brandColor": "#D97757",
   "url": "https://www.anthropic.com/claude",
-  "source": "https://commons.wikimedia.org/wiki/File:Claude_AI_symbol.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["anthropic"],
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#D97757"],
+      "source": "https://commons.wikimedia.org/wiki/File:Claude_AI_symbol.svg",
+      "notes": "Sparkle/burst mark wrapped in <g transform='scale(0.24)'>."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }

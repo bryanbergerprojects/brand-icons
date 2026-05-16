@@ -6,9 +6,17 @@
   "tags": ["professional", "networking", "jobs", "recruiting", "social-network", "business", "career"],
   "brandColor": "#0A66C2",
   "url": "https://www.linkedin.com",
-  "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["linked-in"],
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#0A66C2", "#FFFFFF"],
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg",
+      "notes": "Current 'in' mark on blue square (2019 refresh). Trace from simple-icons, not brand-kit official."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }
