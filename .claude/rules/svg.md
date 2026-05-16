@@ -84,7 +84,7 @@ icons/<slug>/
     └── mono.svg       # Single-color, currentColor
 ```
 
-`color-bg.svg`, `mono-dark-bg.svg` etc. are **not** committed. The `background` prop is resolved at runtime by the framework component (wraps the SVG in a `<rect fill={brandColor}>`). Equally, `mode="bw" | "invert" | "mono"` is a runtime CSS transform — no pre-generated derivative variants.
+`color-bg.svg`, `mono-dark-bg.svg` etc. are **not** committed. The `background` prop is resolved at runtime by the framework component (wraps the SVG in a `<rect fill={brandColor}>`). Equally, `mode="bw" | "wb" | "mono"` is a runtime CSS transform — no pre-generated derivative variants.
 
 ### 2.2 Indentation & formatting
 
