@@ -81,9 +81,11 @@ expect(generated).toMatchFileSnapshot('./__snapshots__/github.react.tsx');
 ### Framework setup
 
 - `globals: false` — import explicitly:
+
   ```ts
   import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
   ```
+
 - Each package owns its `vitest.config.ts`. Shared config can live at the monorepo root if it grows.
 
 ### File location

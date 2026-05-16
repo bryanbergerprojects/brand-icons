@@ -14,13 +14,13 @@ Each variant available **with or without background**, in any size, across multi
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| [`@brand-icons/core`](./packages/core) | Raw SVG strings, manifest, types |
-| [`@brand-icons/react`](./packages/react) | React components |
-| [`@brand-icons/vue`](./packages/vue) | Vue 3 components |
-| [`@brand-icons/svelte`](./packages/svelte) | Svelte 5 components |
-| [`@brand-icons/wc`](./packages/web-components) | Web Components |
+| Package                                        | Description                      |
+| ---------------------------------------------- | -------------------------------- |
+| [`@brand-icons/core`](./packages/core)         | Raw SVG strings, manifest, types |
+| [`@brand-icons/react`](./packages/react)       | React components                 |
+| [`@brand-icons/vue`](./packages/vue)           | Vue 3 components                 |
+| [`@brand-icons/svelte`](./packages/svelte)     | Svelte 5 components              |
+| [`@brand-icons/wc`](./packages/web-components) | Web Components                   |
 
 ## Documentation
 

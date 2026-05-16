@@ -26,7 +26,11 @@ In `apps/docs`, the icon manifest is read at build time. Never wrap it in a clie
 'use client';
 const Page = () => {
   const [icons, setIcons] = useState([]);
-  useEffect(() => { fetch('/manifest.json').then(r => r.json()).then(setIcons); }, []);
+  useEffect(() => {
+    fetch('/manifest.json')
+      .then((r) => r.json())
+      .then(setIcons);
+  }, []);
   return <Gallery icons={icons} />;
 };
 
@@ -49,7 +53,9 @@ Destructure primitive fields out of objects when feeding deps.
 
 ```tsx
 // ❌ Bad — object ref changes every render
-useEffect(() => { sync(filters); }, [filters]);
+useEffect(() => {
+  sync(filters);
+}, [filters]);
 
 // ✅ Good
 useEffect(() => {
@@ -122,7 +128,9 @@ access during SSR.
 'use client';
 import { useEffect } from 'react';
 const ImportWc = () => {
-  useEffect(() => { void import('@brand-icons/wc'); }, []);
+  useEffect(() => {
+    void import('@brand-icons/wc');
+  }, []);
   return null;
 };
 ```

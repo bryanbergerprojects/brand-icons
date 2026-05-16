@@ -21,18 +21,18 @@ chore(release): version packages
 
 ### 1.2 Allowed types
 
-| Type | Use |
-|---|---|
-| `feat` | New feature or new icon |
-| `fix` | Bug fix |
-| `docs` | Documentation only (PLAN, README, CONTRIBUTING, MDX) |
-| `refactor` | Internal rewrite, no behavior change |
-| `perf` | Measured performance improvement |
-| `test` | Tests added or adjusted |
-| `build` | Tooling, deps, configs (`pnpm`, `turbo`, `tsup`, `biome`) |
-| `ci` | GitHub Actions workflow changes |
-| `chore` | Maintenance, release commits |
-| `revert` | Reverts a prior commit |
+| Type       | Use                                                       |
+| ---------- | --------------------------------------------------------- |
+| `feat`     | New feature or new icon                                   |
+| `fix`      | Bug fix                                                   |
+| `docs`     | Documentation only (PLAN, README, CONTRIBUTING, MDX)      |
+| `refactor` | Internal rewrite, no behavior change                      |
+| `perf`     | Measured performance improvement                          |
+| `test`     | Tests added or adjusted                                   |
+| `build`    | Tooling, deps, configs (`pnpm`, `turbo`, `tsup`, `biome`) |
+| `ci`       | GitHub Actions workflow changes                           |
+| `chore`    | Maintenance, release commits                              |
+| `revert`   | Reverts a prior commit                                    |
 
 ### 1.3 Allowed scopes
 

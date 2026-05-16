@@ -1,7 +1,7 @@
 name: Trademark removal request
 description: Request the removal, modification, or correction of a brand icon.
-title: "[Trademark removal] <Brand>"
-labels: ["trademark", "needs-triage"]
+title: '[Trademark removal] <Brand>'
+labels: ['trademark', 'needs-triage']
 body:
   - type: markdown
     attributes:

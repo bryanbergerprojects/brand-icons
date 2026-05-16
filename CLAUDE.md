@@ -87,15 +87,15 @@ Invoke via the Task tool with `subagent_type: 'icon-fetcher'` or
 
 Path-scoped authoring rules — read them before editing matching files:
 
-| File | Applies to |
-|---|---|
-| `typescript.md` | `**/*.{ts,tsx}` |
-| `react.md` | React components (`packages/react`, `apps/docs`) |
-| `tests.md` | `**/__tests__/**`, `**/*.test.ts` |
-| `monorepo.md` | workspace, generated files, scripts |
-| `svg.md` | `icons/**/*.svg`, generated `packages/*/src/icons/**` |
-| `meta.md` | `icons/**/meta.json` |
-| `commits.md` | git commit messages |
+| File            | Applies to                                            |
+| --------------- | ----------------------------------------------------- |
+| `typescript.md` | `**/*.{ts,tsx}`                                       |
+| `react.md`      | React components (`packages/react`, `apps/docs`)      |
+| `tests.md`      | `**/__tests__/**`, `**/*.test.ts`                     |
+| `monorepo.md`   | workspace, generated files, scripts                   |
+| `svg.md`        | `icons/**/*.svg`, generated `packages/*/src/icons/**` |
+| `meta.md`       | `icons/**/meta.json`                                  |
+| `commits.md`    | git commit messages                                   |
 
 `§1 Must follow` sections are non-negotiable. `§2 Conventions` are
 project style — follow unless justified.
