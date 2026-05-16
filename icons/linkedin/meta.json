@@ -1,0 +1,14 @@
+{
+  "slug": "linkedin",
+  "name": "LinkedIn",
+  "category": "social",
+  "description": "LinkedIn is a professional networking platform for career development, recruiting, and business connections.",
+  "tags": ["professional", "networking", "jobs", "recruiting", "social-network", "business", "career"],
+  "brandColor": "#0A66C2",
+  "url": "https://www.linkedin.com",
+  "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["linked-in"],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

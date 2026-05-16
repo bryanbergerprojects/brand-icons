@@ -1,0 +1,23 @@
+{
+  "slug": "gitlab",
+  "name": "GitLab",
+  "category": "dev-tools",
+  "description": "GitLab is a web-based DevOps platform providing Git repository hosting, CI/CD pipelines, and integrated tooling for the software development lifecycle.",
+  "tags": [
+    "git",
+    "code",
+    "ci-cd",
+    "devops",
+    "vcs",
+    "pipelines",
+    "repository"
+  ],
+  "brandColor": "#FC6D26",
+  "url": "https://about.gitlab.com",
+  "repository": "https://gitlab.com/gitlab-org/gitlab",
+  "source": "https://about.gitlab.com/images/press/gitlab-logo-500-rgb.svg",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

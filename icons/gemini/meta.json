@@ -1,0 +1,14 @@
+{
+  "slug": "gemini",
+  "name": "Gemini",
+  "category": "ai",
+  "description": "Google Gemini is a family of multimodal AI models handling text, images, audio, video, and code.",
+  "tags": ["google", "llm", "multimodal", "assistant", "generative-ai", "ai-model", "chatbot"],
+  "brandColor": "#1C69FF",
+  "url": "https://gemini.google.com",
+  "source": "https://gemini.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-gemini", "bard"],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

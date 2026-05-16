@@ -1,0 +1,14 @@
+{
+  "slug": "claude",
+  "name": "Claude",
+  "category": "ai",
+  "description": "Claude is a family of large language models built by Anthropic for conversational and agentic AI tasks.",
+  "tags": ["anthropic", "llm", "chatbot", "assistant", "ai-model", "generative-ai"],
+  "brandColor": "#D97757",
+  "url": "https://www.anthropic.com/claude",
+  "source": "https://commons.wikimedia.org/wiki/File:Claude_AI_symbol.svg",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["anthropic"],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

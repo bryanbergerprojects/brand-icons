@@ -1,0 +1,14 @@
+{
+  "slug": "apple",
+  "name": "Apple",
+  "category": "platforms",
+  "description": "Apple is a technology company designing consumer electronics, software, and services including the iPhone, Mac, iPad, and macOS.",
+  "tags": ["macos", "ios", "iphone", "ipad", "mac", "ecosystem", "consumer-electronics", "hardware"],
+  "brandColor": "#000000",
+  "url": "https://www.apple.com",
+  "source": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

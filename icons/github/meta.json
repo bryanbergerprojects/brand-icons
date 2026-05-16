@@ -1,0 +1,15 @@
+{
+  "slug": "github",
+  "name": "GitHub",
+  "category": "dev-tools",
+  "description": "GitHub is a developer platform for hosting Git repositories, code review, issue tracking, and collaborative software development.",
+  "tags": ["git", "code", "vcs", "repository", "collaboration", "open-source", "devops"],
+  "brandColor": "#181717",
+  "url": "https://github.com",
+  "repository": "https://github.com/github",
+  "source": "https://brand.github.com/GitHub_Logos.zip",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}

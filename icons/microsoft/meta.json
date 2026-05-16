@@ -1,0 +1,14 @@
+{
+  "slug": "microsoft",
+  "name": "Microsoft",
+  "category": "platforms",
+  "description": "Microsoft is a technology company providing Windows, Office, Azure cloud services, Xbox, and enterprise software.",
+  "tags": ["windows", "azure", "office", "xbox", "surface", "platform", "enterprise"],
+  "brandColor": "#F25022",
+  "url": "https://www.microsoft.com",
+  "source": "https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "addedAt": "2026-05-16",
+  "updatedAt": "2026-05-16"
+}
