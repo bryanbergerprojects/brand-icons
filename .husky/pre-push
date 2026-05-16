@@ -1,0 +1,4 @@
+# Load the project Node version (.nvmrc) — git may run hooks with a different Node on PATH.
+[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" && nvm use --silent
+
+pnpm exec validate-branch-name

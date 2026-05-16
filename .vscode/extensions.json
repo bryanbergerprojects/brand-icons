@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "biomejs.biome",
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "bradlc.vscode-tailwindcss",
+    "YoavBls.pretty-ts-errors",
+    "aaron-bond.better-comments",
+    "DavidAnson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "jock.svg"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "always",
+    "source.organizeImports.biome": "explicit",
+    "source.addMissingImports": "never",
+    "source.removeUnusedImports": "always"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.autoClosingTags": true
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "javascript.autoClosingTags": true,
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.preferences.jsxAttributeCompletionStyle": "none",
+    "javascript.preferences.importModuleSpecifier": "project-relative",
+    "javascript.preferences.importModuleSpecifierEnding": "minimal"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.autoClosingTags": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "typescript.autoClosingTags": true,
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.preferences.jsxAttributeCompletionStyle": "none",
+    "typescript.preferences.importModuleSpecifier": "project-relative",
+    "typescript.preferences.importModuleSpecifierEnding": "minimal"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svg]": {
+    "editor.formatOnSave": false
+  },
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "fixme",
+      "color": "#ffde1f",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ]
+}
