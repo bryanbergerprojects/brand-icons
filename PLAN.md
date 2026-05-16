@@ -29,7 +29,7 @@ Bibliothèque d'icônes de marque pour intégration rapide dans applications web
 | Site doc | Next.js 15 (App Router) + shadcn/ui v4 + Tailwind v4 + lucide-react + MDX |
 | Conversion raster→SVG | Hybride : potrace/imagetracerjs → Claude nettoie |
 | CI | GitHub Actions |
-| Deploy doc | Vercel |
+| Deploy doc | Scaleway (Serverless Containers — Next.js standalone Docker) |
 | License code | MIT |
 | Node target | 20+ |
 
@@ -448,7 +448,28 @@ Steps :
 - Changesets action :
   - Si changesets pending → ouvre/met à jour PR "Version Packages".
   - Si release PR merged → publish NPM avec provenance + crée tags + GitHub releases.
-- Deploy Vercel triggered séparément par webhook sur tag.
+- Deploy Scaleway via workflow séparé `deploy-docs.yml` déclenché sur tag release.
+
+### 12.3 `.github/workflows/deploy-docs.yml`
+
+Trigger : push tag `docs-v*` ou release Changesets sur main.
+
+Steps :
+- Setup pnpm + Node 20.
+- `pnpm build --filter=docs` (Next.js standalone).
+- Login Scaleway Container Registry (`docker login rg.fr-par.scw.cloud`).
+- Build image Docker depuis `apps/docs/Dockerfile`.
+- Push image taggée (`latest` + commit SHA).
+- `scw container container update <container-id> registry-image=<tag>` via Scaleway CLI.
+
+### 12.4 Hébergement Scaleway
+
+- **Service** : Scaleway Serverless Containers, région `fr-par`.
+- **Container Registry** : `rg.fr-par.scw.cloud/<namespace>/brand-icons-docs`.
+- **Image** : Next.js 15 `output: "standalone"` dans Dockerfile multi-stage.
+- **Resources** : 256-512 MiB RAM, 70 mVCPU (ajustable selon trafic).
+- **Domain** : custom `brand-icons.bryanberger.dev` (ou similaire) mappé au container.
+- **Secrets GitHub Actions** : `SCW_ACCESS_KEY`, `SCW_SECRET_KEY`, `SCW_PROJECT_ID`, `SCW_DEFAULT_REGION=fr-par`, `SCW_REGISTRY_NAMESPACE`, `SCW_CONTAINER_ID`.
 
 ---
 
@@ -503,7 +524,7 @@ Tags exemples :
 | 6 | Site `apps/docs` : init Next.js 15 + Tailwind v4 + shadcn/ui (CLI add components), structure layout, galerie + search/filtres, MDX pages docs | 5-6j |
 | 7 | Site : playground live + code copy + download SVG | 3j |
 | 8 | Subagent `icon-fetcher.md` + `tools/raster-to-svg` helper | 3-4j |
-| 9 | CI publish Changesets + provenance NPM + deploy Vercel + BRAND_OWNERS.md | 2j |
+| 9 | CI publish Changesets + provenance NPM + Dockerfile + workflow deploy Scaleway + BRAND_OWNERS.md | 3j |
 | 10 | Premier batch +20 icônes via subagent pour valider workflow scalable | 2-3j |
 
 Total MVP publiable : ~5-6 semaines temps plein.
@@ -520,7 +541,87 @@ Total MVP publiable : ~5-6 semaines temps plein.
 
 ---
 
-## 17. Décisions verrouillées
+## 17. Sprint 1.5 — Setup polish (en cours)
+
+Travaux post initial commit, avant Sprint 2.
+
+### 17.1 Hébergement
+- Bascule Vercel → **Scaleway Serverless Containers**.
+- Dockerfile `apps/docs/Dockerfile` (multi-stage, Next.js standalone) **(à créer sprint 6/9)**.
+- Workflow `.github/workflows/deploy-docs.yml` **(à créer sprint 9)**.
+
+### 17.2 Installation dépendances
+- `pnpm install` à la racine du monorepo.
+- Commit `pnpm-lock.yaml`.
+
+### 17.3 CLAUDE.md racine
+Document chargé automatiquement dans le contexte Claude Code. Format optimisé d'après doc officielle :
+- Concis (< 200 lignes).
+- Sections : Project overview · Commands · Architecture · Conventions · Workflows.
+- Pas de banalités. Spécifique au repo.
+- Liste les commandes pnpm/turbo utiles.
+- Pointe vers `.claude/rules/*.md` pour règles détaillées.
+- Pointe vers `.claude/agents/*.md` pour subagents disponibles.
+- Note les fichiers générés (ne pas éditer manuellement).
+
+### 17.4 Split agents
+
+Le précédent `icon-fetcher.md` était trop large. Découpe en deux agents spécialisés :
+
+#### `.claude/agents/icon-fetcher.md` (mis à jour — acquisition)
+Responsabilité : récupérer source officielle d'une marque et produire `color.svg` + `mono.svg` + `meta.json`.
+- WebSearch + WebFetch source SVG officiel.
+- Fallback raster (PNG/JPEG/WebP) → tracer + nettoyage Claude.
+- Normalisation viewBox 24×24, suppression metadata.
+- Génération `mono.svg` (currentColor, flatten).
+- Remplit `meta.json` (slug, name, category, description, tags, brandColor, url, repository, source, license).
+- Ne crée **pas** `custom.svg` — délègue à `icon-maker`.
+
+#### `.claude/agents/icon-maker.md` (nouveau — design custom variant)
+Responsabilité : créer la variante `custom.svg` style Lucide-stroke à partir de `color.svg` (et/ou `mono.svg`).
+- Analyse forme du logo (`Read color.svg`, identifie primitives géométriques).
+- Redessine en stroke 1.5px arrondi, fill="none", currentColor.
+- viewBox 24×24, contenu dans 20×20 centré.
+- Style cohérent avec [Lucide](https://lucide.dev) : minimalisme, primitives reconnaissables, lisibilité 16-24px.
+- Valide via `pnpm build:icons --icon=<slug>` après écriture.
+- Peut aussi générer variantes d'icônes "homemade" depuis brief texte (pas de logo officiel).
+
+#### Workflow combiné
+```bash
+/agents icon-fetcher add linear
+# → icons/linear/color.svg + mono.svg + meta.json créés
+/agents icon-maker draw linear
+# → icons/linear/custom.svg créé
+```
+
+### 17.5 Rules `.claude/rules/`
+
+Inspirées de `snapship-next`, adaptées au scope librairie d'icônes (pas de DB, pas d'auth, pas de Server Actions). Frontmatter avec `paths` pour scoping ciblé.
+
+| Fichier | Scope | Origine |
+|---|---|---|
+| `typescript.md` | `**/*.{ts,tsx}` | snapship-next adapté |
+| `react.md` | composants React de `packages/react` + `apps/docs` | snapship-next adapté |
+| `tests.md` | `**/__tests__/**`, `**/*.test.ts` | snapship-next adapté Vitest + snapshot SVG |
+| `monorepo.md` | racine — workspace rules | nouveau |
+| `svg.md` | `icons/**/*.svg`, `packages/*/src/icons/**` | nouveau (project-specific) |
+| `meta.md` | `icons/**/meta.json` | nouveau (project-specific) |
+| `commits.md` | git messages | snapship-next adapté (conventional) |
+
+### 17.6 Ordre d'exécution
+
+1. ✅ Update `PLAN.md` (Scaleway + section §17).
+2. `pnpm install` → lockfile.
+3. Write `CLAUDE.md` racine.
+4. Update `.claude/agents/icon-fetcher.md` (retirer custom variant).
+5. Write `.claude/agents/icon-maker.md`.
+6. Write `.claude/rules/{typescript,react,tests,monorepo,svg,meta,commits}.md`.
+7. Commit `chore: add Claude Code context, rules, agents; switch deploy to Scaleway`.
+8. Push.
+
+---
+
+## 18. Décisions verrouillées
 
 - ✅ Scope NPM : `@brand-icons/*`
 - ✅ License code : MIT
@@ -529,6 +630,8 @@ Total MVP publiable : ~5-6 semaines temps plein.
 - ✅ Format dist : ESM only, TS strict
 - ✅ Monorepo : pnpm + Turborepo
 - ✅ Site doc : Next.js 15 + shadcn/ui v4 + Tailwind v4 + lucide-react + MDX
+- ✅ Hébergement docs : Scaleway Serverless Containers (région `fr-par`)
+- ✅ Agents : split `icon-fetcher` (acquisition) + `icon-maker` (custom variant design)
 - ✅ Frameworks supportés : React + Vue + Svelte + Web Components + SVG raw
 - ✅ Variant custom : style Lucide stroke 1.5px
 - ✅ Pipeline build : génération automatique + override manuel possible
