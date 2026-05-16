@@ -52,8 +52,8 @@ to humans.
 
 Required: `slug`, `name`, `category`, `description`, `tags`, `brandColor`,
 `url`, `license`, `latest`, `years` (≥1 entry), `addedAt`, `updatedAt`.
-Optional: `repository`, `aliases`, `notes`. Each `years[]` entry requires
-`year`, `palette`, `source`; `notes` optional.
+Optional: `repository`, `aliases`, `parent`, `notes`. Each `years[]`
+entry requires `year`, `palette`, `source`; `notes` optional.
 
 ### 1.2 `slug` constraints
 
@@ -142,6 +142,32 @@ The URL the SVG was downloaded from. `web.archive.org/wayback/...`
 permitted for retired official assets — see open question in
 [[00-vision-stack]].
 
+### 1.14 `parent` (optional)
+
+Slug of the parent brand when the icon represents a sub-product or
+sister mark (e.g. `google-meet`, `google-docs`, `google-calendar`
+all carry `"parent": "google"`).
+
+Rules:
+
+- Must reference an existing brand `slug` in the catalog — Zod
+  resolves it at build time and fails if the target is missing.
+- Cannot be self-referential (`parent !== slug`).
+- One level only — no transitive parents. If brand X has `parent: "Y"`,
+  brand Y cannot itself have a `parent`. The Zod refinement enforces
+  the constraint by requiring `meta[parent].parent` to be absent.
+- Used by docs/search to group sister icons and by the React package
+  to surface a `parent` field on the manifest type.
+
+```json
+{
+  "slug": "google-meet",
+  "name": "Google Meet",
+  "parent": "google",
+  ...
+}
+```
+
 ## §2 Conventions
 
 ### 2.1 `aliases`
@@ -170,7 +196,7 @@ Stable order for clean diffs:
 
 ```
 slug → name → category → description → tags → brandColor →
-url → repository → license → aliases → latest → years →
+url → repository → license → aliases → parent → latest → years →
 addedAt → updatedAt → notes
 ```
 

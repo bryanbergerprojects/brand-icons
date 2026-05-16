@@ -130,6 +130,7 @@ Schema (full spec : `.claude/rules/meta.md`) :
   "repository": "<optional fallback URL>",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
+  "parent": "<optional — slug of parent brand if this is a sub-product>",
   "latest": "<year string matching one of years[].year>",
   "years": [
     {
@@ -156,6 +157,11 @@ Rules :
 - `description` neutral and factual. No marketing language.
 - `addedAt` / `updatedAt` = ISO dates from `date +%Y-%m-%d` via Bash.
 - `years` sorted ascending, no duplicates, `latest` ∈ `years[].year`.
+- `parent` optional. Set when the brand is a sub-product of another
+  brand already in the catalog (e.g. `google-meet` → `parent: "google"`).
+  Must match an existing `slug`, cannot equal `slug`, and the target
+  cannot itself carry a `parent` (1 level max). Omit the field entirely
+  for top-level brands.
 
 ### 7. Validate
 
