@@ -28,7 +28,7 @@ Use the [`icon-fetcher`](./.claude/agents/icon-fetcher.md) Claude Code subagent:
 The agent will:
 
 1. Search and download the official SVG (or convert a raster image).
-2. Generate `mono.svg` and `custom.svg` variants.
+2. Generate the `mono.svg` variant.
 3. Create `meta.json` with brand metadata.
 4. Validate against the build pipeline.
 5. Create a branch, commit, and changeset.
@@ -39,8 +39,7 @@ The agent will:
 2. Add the following files:
    - `color.svg` — official multi-color logo (24×24 viewBox).
    - `mono.svg` — monochrome version with `fill="currentColor"`.
-   - `custom.svg` — Lucide-style stroke 1.5px reinterpretation.
-   - `meta.json` — see schema in [PLAN.md §5.2](./PLAN.md).
+   - `meta.json` — see schema in [`.claude/rules/meta.md`](./.claude/rules/meta.md).
 3. Run `pnpm build:icons --icon=<slug>` to validate.
 4. Run `pnpm changeset` and select the affected packages.
 5. Open a PR.
@@ -50,7 +49,6 @@ The agent will:
 - **viewBox**: `0 0 24 24` whenever possible.
 - **`color.svg`**: faithful to brand guidelines, no background unless integral.
 - **`mono.svg`**: use `fill="currentColor"`, flatten gradients, single-color.
-- **`custom.svg`**: stroke `currentColor`, `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`, no fill. Style consistent with Lucide.
 
 ## Commit conventions
 

@@ -8,7 +8,6 @@ One folder per brand. Folder name = `slug` (kebab-case ASCII).
 | ------------ | ---------------------------------------------------------------------------------------- |
 | `color.svg`  | Official multi-color SVG. `viewBox="0 0 24 24"`. No editor metadata. Fills as-is.        |
 | `mono.svg`   | Single-color variant. `fill="currentColor"`. Gradients flattened. No `<linearGradient>`. |
-| `custom.svg` | Lucide-style stroke variant. `stroke="currentColor"`, `stroke-width="1.5"`, `fill="none"`. Centered in 20×20 inside 24×24. |
 | `meta.json`  | Brand metadata validated by Zod. See `.claude/rules/meta.md`.                            |
 
 ## Optional files
@@ -26,11 +25,10 @@ One folder per brand. Folder name = `slug` (kebab-case ASCII).
 
 ## Adding an icon via Claude Code
 
-Invoke the agents:
+Invoke the agent:
 
 ```
 Task: icon-fetcher  → produces color.svg + mono.svg + meta.json
-Task: icon-maker    → produces custom.svg
 ```
 
-Manual creation also fine — agents are convenience, not requirement.
+Manual creation also fine — agent is convenience, not requirement.

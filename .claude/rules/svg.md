@@ -51,16 +51,13 @@ Strip on every save:
 
 SVGO config in `tools/build-icons` enforces this. The hand-edited input must already be clean — the pipeline is a safety net, not a substitute for craft.
 
-### 1.4 `currentColor` for mono and custom
+### 1.4 `currentColor` for mono
 
-- `mono.svg`: every fill is `fill="currentColor"`. No hex, no named colors.
-- `custom.svg`: stroke is `stroke="currentColor"`, fill is `fill="none"`.
+`mono.svg`: every fill is `fill="currentColor"`. No hex, no named colors. Consumers set the color via CSS `color` on a parent element.
 
-Consumers set the color via CSS `color` on a parent element.
+### 1.5 No gradients in `mono`
 
-### 1.5 No gradients in `mono` or `custom`
-
-`<linearGradient>` / `<radialGradient>` / `<pattern>` are allowed only in `color.svg`. Mono and custom must be solid single-color renderings.
+`<linearGradient>` / `<radialGradient>` / `<pattern>` are allowed only in `color.svg`. Mono must be solid single-color renderings.
 
 ### 1.6 No `<script>`, no event handlers, no external refs
 
@@ -75,10 +72,6 @@ SVG strings are inlined into JS and HTML — anything dynamic is a security and 
 
 Each `.svg` must be self-contained. The build pipeline assumes this when generating per-icon files.
 
-### 1.8 Coordinates snap to half-pixels
-
-In `custom.svg`, all path coordinates are `.0` or `.5` increments — no `0.3`, `12.27`. Crisp rendering at 16–24 px depends on it. `color.svg` may keep brand-faithful sub-pixel coordinates.
-
 ## §2 Conventions
 
 ### 2.1 File layout
@@ -87,7 +80,6 @@ In `custom.svg`, all path coordinates are `.0` or `.5` increments — no `0.3`, 
 icons/<slug>/
 ├── color.svg       # Official, multi-color
 ├── mono.svg        # Single-color, currentColor
-├── custom.svg      # Lucide-style stroke 1.5px
 └── meta.json
 ```
 
@@ -96,7 +88,6 @@ icons/<slug>/
 ### 2.2 Indentation & formatting
 
 - 2 spaces, LF endings.
-- One element per line for `custom.svg`.
 - `color.svg` may keep the upstream formatting if SVGO output is more compact — round-trip through SVGO before commit.
 
 ### 2.3 Attribute order

@@ -27,12 +27,11 @@ icons/                  # Source of truth — one folder per brand
   <slug>/
     color.svg           # Official multi-color (hand-edited)
     mono.svg            # Monochrome with currentColor (hand-edited)
-    custom.svg          # Lucide-style stroke 1.5px (hand-edited)
     meta.json           # Brand metadata (validated by Zod)
 tools/
   build-icons/          # @brand-icons/build-icons — generates package sources
 .claude/
-  agents/               # icon-fetcher, icon-maker
+  agents/               # icon-fetcher
   rules/                # Authoring rules (typescript, react, svg, meta, …)
 ```
 
@@ -75,13 +74,9 @@ When adding or modifying an icon:
 
 - **`.claude/agents/icon-fetcher.md`** — acquires the source of a new brand
   from the web (SVG or raster), generates `color.svg` + `mono.svg`, writes
-  `meta.json`. Does not produce `custom.svg`.
-- **`.claude/agents/icon-maker.md`** — draws the Lucide-style `custom.svg`
-  variant from `color.svg`/`mono.svg`, or designs a homemade icon from a
-  text brief when no logo exists.
+  `meta.json`.
 
-Invoke via the Task tool with `subagent_type: 'icon-fetcher'` or
-`'icon-maker'`.
+Invoke via the Task tool with `subagent_type: 'icon-fetcher'`.
 
 ## Rules (`.claude/rules/`)
 

@@ -6,9 +6,10 @@
 
 A growing collection of brand SVG icons with multiple variants per brand:
 
-- **Color** — official multi-color logo.
+- **Color** — official multi-color logo (current and historical variants per brand).
 - **Mono Dark** / **Mono Light** — monochrome variants for light/dark UIs.
-- **Custom** — Lucide-style stroke-based geometric reinterpretation.
+- **Year variants** — `<BrandIcon.Latest />`, `<BrandIcon.1984 />` dot-notation API for historical logos.
+- **Color conversion** — runtime transforms: black-and-white, inverted, monochrome (white / black / solid color).
 
 Each variant available **with or without background**, in any size, across multiple frameworks.
 

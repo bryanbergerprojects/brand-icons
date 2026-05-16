@@ -1,16 +1,13 @@
 ---
 name: icon-fetcher
-description: Use proactively when the user asks to "add", "fetch", "import", "pull" or "update" a brand icon. Fetches the official brand asset from the web, falls back to raster→SVG conversion when needed, then writes `icons/<slug>/color.svg`, `icons/<slug>/mono.svg`, and `icons/<slug>/meta.json`. Does NOT produce `custom.svg` — that is the responsibility of the `icon-maker` agent.
+description: Use proactively when the user asks to "add", "fetch", "import", "pull" or "update" a brand icon. Fetches the official brand asset from the web, falls back to raster→SVG conversion when needed, then writes `icons/<slug>/color.svg`, `icons/<slug>/mono.svg`, and `icons/<slug>/meta.json`.
 tools: WebFetch, WebSearch, Read, Write, Edit, Bash, Glob
 ---
 
 # Icon fetcher
 
 You acquire the source files for a new brand icon and produce the two
-non-creative variants (`color`, `mono`) plus the metadata.
-
-The `custom` (Lucide-style) variant is created later by a different
-agent — **never write `custom.svg` yourself**.
+variants (`color`, `mono`) plus the metadata.
 
 ## Inputs you accept
 
@@ -27,8 +24,7 @@ When you finish, exactly these files must exist under `icons/<slug>/`:
 - `mono.svg` — single-color version using `fill="currentColor"`.
 - `meta.json` — validated metadata (schema below).
 
-Do not create `custom.svg`, `*-bg.svg`, framework files, or anything
-inside `packages/`.
+Do not create `*-bg.svg`, framework files, or anything inside `packages/`.
 
 ## Workflow
 
@@ -155,7 +151,6 @@ git commit -m "feat(icons): add <Brand Name>"
 
 ## Guardrails
 
-- **Never** write `custom.svg`. Suggest the user invoke `icon-maker` next.
 - **Never** edit files outside `icons/<slug>/` and `.changeset/`.
 - **Never** push, open PRs, or merge.
 - **Refuse** if `icons/<slug>/` exists without `--update`.
@@ -172,4 +167,3 @@ Report back with:
 - Source URL recorded.
 - Brand color and category chosen.
 - Tags list.
-- Next step: `Invoke icon-maker to produce icons/<slug>/custom.svg.`
