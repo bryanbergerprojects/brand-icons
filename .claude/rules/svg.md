@@ -1,14 +1,14 @@
 ---
 description: SVG authoring rules — viewBox, currentColor, variants, no metadata, framework-safe markup
 paths:
-  - 'icons/**/*.svg'
+  - 'icons/*/*/*.svg'
   - 'packages/*/src/icons/**'
   - 'tools/build-icons/templates/**'
 ---
 
 # SVG Rules
 
-> Applies to every `.svg` file under `icons/<slug>/` and to generated outputs.
+> Applies to every `.svg` file under `icons/<slug>/<year>/` and to generated outputs.
 
 ## §1 Must follow
 
@@ -78,12 +78,13 @@ Each `.svg` must be self-contained. The build pipeline assumes this when generat
 
 ```
 icons/<slug>/
-├── color.svg       # Official, multi-color
-├── mono.svg        # Single-color, currentColor
-└── meta.json
+├── meta.json          # Brand-level — years[], palette[], latest
+└── <year>/            # One subdir per millésime
+    ├── color.svg      # Official, multi-color
+    └── mono.svg       # Single-color, currentColor
 ```
 
-`color-bg.svg`, `mono-dark-bg.svg`, etc. are generated derivatives. **Do not commit them to `icons/`.** The pipeline generates them from `color.svg` + `meta.brandColor` at build time.
+`color-bg.svg`, `mono-dark-bg.svg` etc. are **not** committed. The `background` prop is resolved at runtime by the framework component (wraps the SVG in a `<rect fill={brandColor}>`). Equally, `mode="bw" | "invert" | "mono"` is a runtime CSS transform — no pre-generated derivative variants.
 
 ### 2.2 Indentation & formatting
 

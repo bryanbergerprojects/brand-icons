@@ -1,5 +1,5 @@
 ---
-description: meta.json schema and constraints — required fields, categories, slug rules, validation
+description: meta.json schema and constraints — brand-level, year-aware (years[], palette[], latest)
 paths:
   - 'icons/**/meta.json'
   - 'tools/build-icons/src/validation.ts'
@@ -7,30 +7,53 @@ paths:
 
 # meta.json Rules
 
-Every icon directory contains a `meta.json` validated by Zod in
-`tools/build-icons`. The schema is the source of truth — these rules
-make the schema legible to humans.
+Every brand directory contains **one** `meta.json` at the brand root
+(`icons/<slug>/meta.json`) — never per year. The Zod schema in
+`tools/build-icons` is the source of truth; these rules make it legible
+to humans.
 
 ## §1 Must follow
 
-### 1.1 Required fields
+### 1.1 Required shape
 
 ```json
 {
-  "slug": "github",
-  "name": "GitHub",
-  "category": "dev-tools",
-  "description": "Platform for hosting and collaborating on Git-based source code.",
-  "tags": ["git", "code", "vcs", "repository", "collaboration", "open-source", "devops"],
-  "brandColor": "#181717",
-  "url": "https://github.com",
+  "slug": "apple",
+  "name": "Apple",
+  "category": "platforms",
+  "description": "American hardware and software company (Mac, iPhone, iPad).",
+  "tags": ["hardware", "macos", "ios", "consumer-electronics", "cupertino"],
+  "brandColor": "#000000",
+  "url": "https://apple.com",
   "license": "Trademark — usage for identification (fair use)",
+  "latest": "2017",
+  "years": [
+    {
+      "year": "1976",
+      "palette": ["#A6CE39", "#FFB81C", "#F37021", "#E51E32", "#7B287D", "#0079C2"],
+      "source": "https://...",
+      "notes": "Rainbow Apple, designed by Rob Janoff."
+    },
+    {
+      "year": "1998",
+      "palette": ["#000000"],
+      "source": "https://..."
+    },
+    {
+      "year": "2017",
+      "palette": ["#000000"],
+      "source": "https://..."
+    }
+  ],
   "addedAt": "2026-05-16",
   "updatedAt": "2026-05-16"
 }
 ```
 
-All of the above are mandatory. `repository`, `source`, `aliases`, `notes` are optional.
+Required: `slug`, `name`, `category`, `description`, `tags`, `brandColor`,
+`url`, `license`, `latest`, `years` (≥1 entry), `addedAt`, `updatedAt`.
+Optional: `repository`, `aliases`, `notes`. Each `years[]` entry requires
+`year`, `palette`, `source`; `notes` optional.
 
 ### 1.2 `slug` constraints
 
@@ -49,8 +72,7 @@ design · payments · analytics · e-commerce · search-web · storage-cloud ·
 media · gaming · finance · other
 ```
 
-Adding a new category is a breaking change and requires ≥ 3 candidate
-icons to justify.
+Adding a new category is breaking and requires ≥ 3 candidate icons.
 
 ### 1.4 `description`
 
@@ -62,73 +84,96 @@ icons to justify.
 ### 1.5 `tags`
 
 - 5 to 10 entries.
-- Lowercase, kebab-case, ASCII only.
+- Lowercase kebab-case ASCII.
 - Distinct from `slug`, `name`, `category` (no redundancy).
 - Sorted from most to least specific.
-
-```json
-// ❌ Bad — too few, redundant with name, marketing
-["github", "best", "vcs"]
-
-// ✅ Good
-["git", "code", "vcs", "repository", "collaboration", "open-source", "devops"]
-```
 
 ### 1.6 `brandColor`
 
 - Format `#RRGGBB` (uppercase hex), no shorthand.
-- Must match the dominant color of the official logo (or the primary brand color when the logo is multicolor).
-- Used to render the `*-bg` variants — choose a value with sufficient contrast against white text at 16 px.
+- Equals the dominant color of the **`latest`** year's `color.svg` —
+  pipeline derives it from `years[latest].palette[0]` if omitted, but
+  the canonical value lives here for clarity.
+- Used to render the `background` prop default.
 
 ### 1.7 `url` and `repository`
 
 - `url`: official site of the brand. Must respond 200.
-- `repository`: optional fallback when no marketing site exists (open-source projects). Must point to the brand's organization or canonical repo.
+- `repository`: optional fallback when no marketing site exists.
 
 ### 1.8 `license`
 
 Literal string: `"Trademark — usage for identification (fair use)"`.
-Other text triggers a validation error — this field is a deliberate
-constant so we cannot accidentally claim ownership.
+A deliberate constant — any deviation triggers a Zod error.
 
 ### 1.9 Dates
 
 - `addedAt`: never mutates after creation.
-- `updatedAt`: refreshed whenever any file in the icon folder changes.
+- `updatedAt`: refreshed whenever any file under `icons/<slug>/**` changes.
 - Both ISO 8601 date-only (`YYYY-MM-DD`).
+
+### 1.10 `latest` must resolve
+
+`meta.latest` must equal one of `meta.years[].year`. The pipeline
+exposes the matching entry as the default export of the icon component
+(`<AppleIcon />` ≡ `<AppleIcon.Latest />`).
+
+### 1.11 `years[].year`
+
+- Format `^\d{4}$` (string, not number — preserves leading zero safety
+  and matches the directory name `icons/<slug>/<year>/`).
+- A directory `icons/<slug>/<year>/` MUST exist with both `color.svg`
+  and `mono.svg` for every entry.
+- Sorted ascending in the file (chronological).
+- No duplicates.
+
+### 1.12 `years[].palette`
+
+- 1 to 12 hex colors `#RRGGBB`, uppercase.
+- Dominant colors of that year's `color.svg`, sorted by surface area
+  (most prominent first).
+- Pipeline extracts via SVG fill scan + clustering; humans may edit
+  the result but the build will re-extract and fail the build on
+  divergence > 1 entry.
+
+### 1.13 `years[].source`
+
+The URL the SVG was downloaded from. `web.archive.org/wayback/...`
+permitted for retired official assets — see open question in
+[[00-vision-stack]].
 
 ## §2 Conventions
 
 ### 2.1 `aliases`
 
-Use for alternative slugs that should redirect / resolve in the docs
-search but not occupy their own directory.
+Alternative slugs that resolve in docs search but don't get their own
+directory. Must not collide with another icon's `slug` or `aliases`.
 
 ```json
 "aliases": ["visual-studio-code", "ms-code"]
 ```
 
-Aliases must not collide with another icon's `slug` or `aliases`.
+### 2.2 `years[].notes`
 
-### 2.2 `source`
+Free-form one-liner per millésime: designer, context, anecdote.
+Surfaces in the docs site under the year picker.
 
-The URL the SVG was downloaded from. Helps reviewers verify authenticity.
+### 2.3 Brand-level `notes`
 
-```json
-"source": "https://github.com/logos"
-```
+Optional free-form one-liner for the brand itself (e.g. raster fallback
+on a specific year, non-square viewBox justification). Surfaces in CI
+logs, not in the docs gallery.
 
-### 2.3 `notes`
-
-Free-form one-liner for unusual situations (e.g. raster fallback used, non-square viewBox justification). Surfaces in CI logs, not in the docs site.
-
-### 2.4 Ordering of keys
+### 2.4 Key ordering
 
 Stable order for clean diffs:
 
 ```
 slug → name → category → description → tags → brandColor →
-url → repository → source → license → aliases → addedAt → updatedAt → notes
+url → repository → license → aliases → latest → years →
+addedAt → updatedAt → notes
 ```
+
+Within each `years[]` entry: `year → palette → source → notes`.
 
 The build pipeline rewrites `meta.json` in this order after validation.
