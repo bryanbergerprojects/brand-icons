@@ -15,7 +15,11 @@
   },
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "svelte": "./dist/index.js",
   "exports": {
     ".": {

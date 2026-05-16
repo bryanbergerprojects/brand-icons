@@ -14,8 +14,14 @@
     "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
   },
   "type": "module",
-  "sideEffects": ["./dist/index.js"],
-  "files": ["dist", "README.md", "LICENSE"],
+  "sideEffects": [
+    "./dist/index.js"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
