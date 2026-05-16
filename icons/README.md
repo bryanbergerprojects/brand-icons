@@ -1,34 +1,45 @@
 # Icons — source of truth
 
-One folder per brand. Folder name = `slug` (kebab-case ASCII).
+One folder per brand. Folder name = `slug` (kebab-case ASCII). Each brand
+is **year-aware** : SVGs live in `<year>/` subdirectories, metadata is
+brand-level.
+
+## Layout
+
+```
+icons/<slug>/
+├── meta.json              # Brand-level — see .claude/rules/meta.md
+└── <year>/                # One subdir per millésime (e.g. 1976, 1998, 2017)
+    ├── color.svg          # Official multi-color
+    └── mono.svg           # currentColor monochrome
+```
 
 ## Required files
 
-| File         | Purpose                                                                                  |
-| ------------ | ---------------------------------------------------------------------------------------- |
-| `color.svg`  | Official multi-color SVG. `viewBox="0 0 24 24"`. No editor metadata. Fills as-is.        |
-| `mono.svg`   | Single-color variant. `fill="currentColor"`. Gradients flattened. No `<linearGradient>`. |
-| `meta.json`  | Brand metadata validated by Zod. See `.claude/rules/meta.md`.                            |
+| File                       | Purpose                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------- |
+| `meta.json`                | Brand-level metadata with `years[]`, `palette[]`, `latest`. Validated by Zod.            |
+| `<year>/color.svg`         | Official multi-color SVG. `viewBox="0 0 24 24"`. No editor metadata. Fills as-is.        |
+| `<year>/mono.svg`          | Single-color variant. `fill="currentColor"`. Gradients flattened.                        |
 
-## Optional files
-
-| File          | Purpose                                                       |
-| ------------- | ------------------------------------------------------------- |
-| `color-bg.svg` | Variant with brand-colored background, when applicable.       |
+Each entry in `meta.years[]` MUST have a matching `<year>/` directory
+with both `color.svg` and `mono.svg`. `meta.latest` MUST equal one of
+`meta.years[].year`.
 
 ## Rules
 
 - Edit by hand only. Generated files in `packages/*/src/icons/` are never edited here.
-- New icon = new folder. PR + Changeset required.
+- New brand = new top-level folder + ≥ 1 `<year>/` subdir. PR + Changeset required.
+- New millésime of an existing brand = add `<year>/` subdir + push new entry into `meta.years[]`.
 - Run `pnpm build:icons` after any change to regenerate framework packages.
-- Validate against schema before commit — see `.claude/rules/meta.md` and `.claude/rules/svg.md`.
+- Validate against schema before commit — see [`.claude/rules/meta.md`](../.claude/rules/meta.md) and [`.claude/rules/svg.md`](../.claude/rules/svg.md).
 
-## Adding an icon via Claude Code
+## Adding via Claude Code
 
 Invoke the agent:
 
 ```
-Task: icon-fetcher  → produces color.svg + mono.svg + meta.json
+Task: icon-fetcher  → produces meta.json + <year>/color.svg + <year>/mono.svg
 ```
 
 Manual creation also fine — agent is convenience, not requirement.

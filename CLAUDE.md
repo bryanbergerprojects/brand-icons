@@ -23,11 +23,12 @@ packages/
   web-components/       # @brand-icons/wc
 apps/
   docs/                 # Next.js documentation + gallery + playground
-icons/                  # Source of truth — one folder per brand
+icons/                  # Source of truth — one folder per brand, year-aware
   <slug>/
-    color.svg           # Official multi-color (hand-edited)
-    mono.svg            # Monochrome with currentColor (hand-edited)
-    meta.json           # Brand metadata (validated by Zod)
+    meta.json           # Brand-level metadata: years[], palette[], latest (Zod-validated)
+    <year>/             # One subdir per millésime (e.g. 1976, 1998, 2017)
+      color.svg         # Official multi-color (hand-edited)
+      mono.svg          # Monochrome with currentColor (hand-edited)
 tools/
   build-icons/          # @brand-icons/build-icons — generates package sources
 .claude/
@@ -66,15 +67,18 @@ from version control.
 When adding or modifying an icon:
 
 1. Edit files inside `icons/<slug>/` only.
-2. Run `pnpm build:icons` to regenerate the package sources.
-3. Run `pnpm typecheck && pnpm test` to validate.
-4. `pnpm changeset` and pick the affected packages (typically all of them).
+2. New brand → create `<slug>/meta.json` + at least one `<slug>/<year>/{color,mono}.svg`. `meta.latest` must point to one of `meta.years[].year`.
+3. New millésime of existing brand → add `<year>/` subdir + push entry into `meta.years[]`.
+4. Run `pnpm build:icons` to regenerate the package sources.
+5. Run `pnpm typecheck && pnpm test` to validate.
+6. `pnpm changeset` and pick the affected packages (typically all of them).
 
 ## Subagents
 
 - **`.claude/agents/icon-fetcher.md`** — acquires the source of a new brand
-  from the web (SVG or raster), generates `color.svg` + `mono.svg`, writes
-  `meta.json`.
+  from the web (SVG or raster), generates `<year>/color.svg` +
+  `<year>/mono.svg` per millésime, writes brand-level `meta.json`
+  (with `years[]`, `palette[]`, `latest`).
 
 Invoke via the Task tool with `subagent_type: 'icon-fetcher'`.
 
