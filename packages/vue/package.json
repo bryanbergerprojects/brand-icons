@@ -1,6 +1,6 @@
 {
   "name": "@brand-icons/vue",
-  "version": "0.0.0",
+  "version": "0.1.0-canary.0",
   "description": "Vue 3 components for Brand Icons.",
   "license": "MIT",
   "author": "Bryan Berger <contact@bryanberger.dev>",
