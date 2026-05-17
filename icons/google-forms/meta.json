@@ -1,0 +1,28 @@
+{
+  "slug": "google-forms",
+  "name": "Google Forms",
+  "category": "productivity",
+  "description": "Online form and survey builder in Google Workspace for collecting responses into Sheets.",
+  "tags": ["forms", "surveys", "questionnaires", "data-collection", "workspace", "google-suite", "online-forms"],
+  "brandColor": "#7248B9",
+  "url": "https://www.google.com/forms/about/",
+  "repository": "https://workspace.google.com/products/forms/",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#673AB7", "#F1F1F1", "#B39DDB", "#311B92"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Forms_logo_(2014-2020).svg",
+      "notes": "Material Design rounded purple sheet with folded corner (Deep Purple 500 #673AB7), inner question checkboxes and lines in #F1F1F1, lighter fold triangle in Deep Purple 200 #B39DDB, and #311B92 shadow gradient. Used 2014-2020 across Drive, Workspace and consumer surfaces. Redrawn to a 24×24 viewBox (translate(3.2727 0) scale(0.36364) over the native 48×66 source) preserving aspect ratio and original geometry."
+    },
+    {
+      "year": "2020",
+      "palette": ["#7248B9", "#FFFFFF", "#56368A"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Forms_2020_Logo.svg",
+      "notes": "Workspace 2020 refresh. Unlike Docs/Sheets/Slides — which adopted the four-color outline rule — Forms kept its purple identity: a flat rounded-square sheet in #7248B9 with a darker fold #56368A and a single white outlined sheet of three checkbox-line rows. Redrawn to a 24×24 viewBox (translate(3.2727 0) scale(0.27273) over the native 64×88 source). Current mark as of 2026."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}
