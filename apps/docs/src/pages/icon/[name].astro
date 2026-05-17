@@ -1,0 +1,135 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import { latestIconBySlug } from '@/lib/all-icons';
+import { type ManifestEntry, manifest } from '@brand-icons/core';
+
+export const getStaticPaths = () =>
+  manifest.map((icon) => ({ params: { name: icon.slug }, props: { icon } }));
+
+type Props = { icon: ManifestEntry };
+
+const { icon } = Astro.props;
+const Icon = latestIconBySlug[icon.slug];
+
+const capitalize = (slug: string): string => slug.charAt(0).toUpperCase() + slug.slice(1);
+
+const pascalSlug = capitalize(icon.slug);
+
+const frameworkUsageSnippets: ReadonlyArray<{ label: string; code: string }> = [
+  {
+    label: 'React',
+    code: `import { ${pascalSlug}LatestIcon } from '@brand-icons/react';\n\n<${pascalSlug}LatestIcon size={48} />`,
+  },
+  {
+    label: 'Vue',
+    code: `<script setup>\nimport { ${pascalSlug}LatestIcon } from '@brand-icons/vue';\n</script>\n\n<${pascalSlug}LatestIcon :size="48" />`,
+  },
+  {
+    label: 'Svelte',
+    code: `<script>\n  import { ${pascalSlug}LatestIcon } from '@brand-icons/svelte';\n</script>\n\n<${pascalSlug}LatestIcon size={48} />`,
+  },
+  {
+    label: 'Web Components',
+    code: `<script type="module">\n  import '@brand-icons/wc';\n</script>\n\n<brand-icon-${icon.slug}-latest size="48"></brand-icon-${icon.slug}-latest>`,
+  },
+];
+---
+
+<BaseLayout
+  title={`${icon.name} — Brand Icons`}
+  description={icon.description}
+>
+  <article class="mx-auto max-w-5xl px-6 py-16">
+    <a
+      href="/library"
+      class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
+    >
+      ← Library
+    </a>
+
+    <header class="mt-8 grid gap-10 border-b border-ink/10 pb-12 md:grid-cols-[auto_1fr] md:items-center">
+      <div class="flex h-64 w-64 items-center justify-center border border-ink/10 bg-surface">
+        {Icon ? <Icon size={160} /> : <span class="text-ink-muted">{icon.name}</span>}
+      </div>
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+          {icon.category} · v{icon.latest}
+        </p>
+        <h1 class="mt-3 text-5xl font-medium tracking-tight">{icon.name}</h1>
+        <p class="mt-4 text-lg text-ink-muted">{icon.description}</p>
+        <dl class="mt-6 grid grid-cols-1 gap-3 font-mono text-xs sm:grid-cols-2">
+          <div>
+            <dt class="uppercase tracking-widest text-ink-muted">Brand color</dt>
+            <dd class="mt-1 flex items-center gap-2">
+              <span
+                class="inline-block h-4 w-4 border border-ink/10"
+                style={`background-color:${icon.brandColor}`}
+              ></span>
+              {icon.brandColor}
+            </dd>
+          </div>
+          <div>
+            <dt class="uppercase tracking-widest text-ink-muted">License</dt>
+            <dd class="mt-1">{icon.license}</dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="uppercase tracking-widest text-ink-muted">Website</dt>
+            <dd class="mt-1">
+              <a href={icon.url} target="_blank" rel="noopener" class="hover:text-accent">
+                {icon.url}
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    {
+      icon.tags.length > 0 ? (
+        <section class="mt-10">
+          <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Tags</h2>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {icon.tags.map((tag) => (
+              <li class="border border-ink/10 px-3 py-1 font-mono text-xs">{tag}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null
+    }
+
+    <section class="mt-10">
+      <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Millésimes</h2>
+      <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+        {
+          icon.years.map((year) => (
+            <li class="border border-ink/10 p-4">
+              <p class="font-medium">{year.year}</p>
+              <p class="mt-1 font-mono text-xs text-ink-muted">
+                {year.palette.join(' · ')}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Usage</h2>
+      <div class="mt-4 space-y-6">
+        {
+          frameworkUsageSnippets.map((snippet) => (
+            <div>
+              <p class="font-mono text-xs uppercase tracking-widest text-ink">
+                {snippet.label}
+              </p>
+              <pre class="mt-2 overflow-x-auto border border-ink/10 bg-surface p-4 font-mono text-xs leading-relaxed"><code>{snippet.code}</code></pre>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 font-mono text-xs text-ink-muted">
+        Interactive playground arrives in phase 7.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

@@ -19,6 +19,8 @@
     "@astrojs/react": "^4.0.0",
     "@brand-icons/core": "workspace:*",
     "@brand-icons/react": "workspace:*",
+    "@fontsource-variable/inter-tight": "^5.1.0",
+    "@fontsource-variable/jetbrains-mono": "^5.1.0",
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.0.0",
     "class-variance-authority": "^0.7.0",

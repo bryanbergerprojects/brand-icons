@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@import "@fontsource-variable/inter-tight";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* Dark mode tokens are scaffolded but the toggle is deferred (phase 6.4). */
 @custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------
@@ -177,7 +181,7 @@
 --------------------------------------------------------------- */
 @layer base {
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
   }
 
   * {

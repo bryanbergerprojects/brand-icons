@@ -1,0 +1,32 @@
+---
+title: Contributing
+description: How to add a new brand, update an existing icon, or improve the brand-icons monorepo.
+---
+
+## Add a brand
+
+1. Open an issue describing the brand and link the official asset source.
+2. Wait for confirmation before opening a PR — duplicates and out-of-scope
+   submissions are closed.
+3. Create `icons/<slug>/meta.json` plus at least one `icons/<slug>/<year>/{color,mono}.svg`.
+4. Run `pnpm build:icons` to regenerate the package sources.
+5. Run `pnpm typecheck && pnpm test`.
+6. Run `pnpm changeset` and select every framework package plus `@brand-icons/core` as a patch bump.
+
+## Update an existing brand
+
+- New millésime → add `icons/<slug>/<year>/` and push an entry into `meta.years[]`.
+- Logo correction → replace the existing SVG, document the rationale in the PR body.
+
+## Conventions
+
+- Conventional commits, English, imperative mood, lowercase.
+- Branch format: `{type}/{scope-or-slug}` — e.g. `add-icon/linear`, `fix/svgo-config`.
+- One commit = one intention.
+
+## SVG rules
+
+- `viewBox="0 0 24 24"` unless documented exception.
+- Strip editor metadata (Inkscape, Sketch, Illustrator).
+- Monochrome uses `fill="currentColor"` — no gradients in mono.
+- See `.claude/rules/svg.md` for the full list.

@@ -1,0 +1,16 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-ink/10 bg-paper">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 font-mono text-xs uppercase tracking-widest text-ink-muted sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p>© {year} Bryan Berger · MIT license</p>
+    <nav class="flex gap-6">
+      <a href="/resources/license" class="hover:text-accent transition-colors">License</a>
+      <a href="/resources/brand-owners" class="hover:text-accent transition-colors">Brand owners</a>
+      <a href="/resources/contributing" class="hover:text-accent transition-colors">Contributing</a>
+    </nav>
+  </div>
+</footer>

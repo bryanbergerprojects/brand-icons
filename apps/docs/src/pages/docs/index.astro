@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('docs');
+const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Docs — Brand Icons" description="Documentation for installing, importing, and rendering brand-icons across every supported framework.">
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <header class="border-b border-ink/10 pb-8">
+      <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Docs</p>
+      <h1 class="mt-3 text-4xl font-medium tracking-tight sm:text-5xl">Documentation</h1>
+      <p class="mt-4 text-lg text-ink-muted">
+        Install, import, and render brand-icons across every supported framework.
+      </p>
+    </header>
+    <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+      {
+        sorted.map((entry) => (
+          <li>
+            <a
+              href={`/docs/${entry.id}`}
+              class="group flex items-center justify-between py-5 transition-colors hover:text-accent"
+            >
+              <span class="flex flex-col gap-1">
+                <span class="font-medium">{entry.data.title}</span>
+                <span class="text-sm text-ink-muted">{entry.data.description}</span>
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-ink-muted group-hover:text-accent">
+                →
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

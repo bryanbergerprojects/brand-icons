@@ -1,0 +1,44 @@
+---
+const links = [
+  { href: '/library', label: 'Library' },
+  { href: '/docs', label: 'Docs' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string): boolean =>
+  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<header class="border-b border-ink/10 bg-paper">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a
+      href="/"
+      class="font-mono text-xs tracking-widest uppercase text-ink hover:text-accent transition-colors"
+    >
+      brand-icons
+    </a>
+    <nav class="flex items-center gap-6">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'font-mono text-xs tracking-widest uppercase transition-colors hover:text-accent',
+              isActive(link.href) ? 'text-accent' : 'text-ink',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="https://github.com/bryanbergerprojects/brand-icons"
+        target="_blank"
+        rel="noopener"
+        class="font-mono text-xs tracking-widest uppercase text-ink hover:text-accent transition-colors"
+      >
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>

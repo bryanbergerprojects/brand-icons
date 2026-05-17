@@ -1,4 +1,6 @@
 ---
+import Footer from '@/components/footer.astro';
+import Nav from '@/components/nav.astro';
 import '@/styles/global.css';
 
 type Props = {
@@ -19,7 +21,11 @@ const { title, description = 'Multi-variant, multi-framework brand icons library
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-paper text-ink font-sans antialiased">
-    <slot />
+  <body class="flex min-h-screen flex-col bg-paper text-ink font-sans antialiased">
+    <Nav />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

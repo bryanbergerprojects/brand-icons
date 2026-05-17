@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+
+export const getStaticPaths = async () => {
+  const entries = await getCollection('docs');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+};
+
+type Props = { entry: CollectionEntry<'docs'> };
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} — Brand Icons`} description={entry.data.description}>
+  <article class="mx-auto max-w-3xl px-6 py-16">
+    <a
+      href="/docs"
+      class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
+    >
+      ← Docs
+    </a>
+    <header class="mt-8 border-b border-ink/10 pb-8">
+      <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Docs</p>
+      <h1 class="mt-3 text-4xl font-medium tracking-tight sm:text-5xl">{entry.data.title}</h1>
+      <p class="mt-4 text-lg text-ink-muted">{entry.data.description}</p>
+    </header>
+    <div class="prose prose-neutral mt-10 max-w-none font-sans text-ink">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
