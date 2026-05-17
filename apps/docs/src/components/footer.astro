@@ -24,9 +24,9 @@ const RESOURCE_LINKS: readonly FooterLink[] = [
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-ink text-paper pt-14 pb-8">
-  <div class="container mx-auto px-10">
-    <div class="grid grid-cols-[2fr_1fr_1fr] gap-9">
+<footer class="bg-ink text-paper pt-10 pb-8 sm:pt-12 lg:pt-14">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_1fr_1fr] lg:gap-9">
       <div>
         <a href="/" class="inline-block text-4xl font-extrabold tracking-display-sm text-paper">
           Brand<span class="text-accent">·</span>Icons
@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear();
         <p class="mb-4.5 font-mono text-mono font-bold uppercase tracking-mono text-white/50">
           Product
         </p>
-        <ul class="flex flex-col gap-2.5">
+        <ul class="flex flex-row flex-wrap gap-x-5 gap-y-2.5 lg:flex-col lg:gap-2.5">
           {
             PRODUCT_LINKS.map((link) => (
               <li>
@@ -64,7 +64,7 @@ const currentYear = new Date().getFullYear();
         <p class="mb-4.5 font-mono text-mono font-bold uppercase tracking-mono text-white/50">
           Resources
         </p>
-        <ul class="flex flex-col gap-2.5">
+        <ul class="flex flex-row flex-wrap gap-x-5 gap-y-2.5 lg:flex-col lg:gap-2.5">
           {
             RESOURCE_LINKS.map((link) => (
               <li>
@@ -82,10 +82,10 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div
-      class="mt-14 flex items-center justify-between border-t border-white/20 pt-6 font-mono text-mono tracking-wider text-white/50"
+      class="mt-10 flex flex-row items-center justify-between gap-6 border-t border-white/20 pt-6 font-mono text-mono tracking-wider text-white/50 lg:mt-14"
     >
       <p>© {currentYear} Bryan Berger</p>
-      <a href="/resources/license" class="transition-colors hover:text-paper">Terms</a>
+      <a href="/terms" class="transition-colors hover:text-paper">Terms</a>
     </div>
   </div>
 </footer>

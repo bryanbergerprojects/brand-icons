@@ -53,7 +53,7 @@ const A11Y_SOURCE = `<GitHubLatestIcon size={20} title="Open on GitHub" />
 // title sets <title> and role="img" on the <svg>`;
 ---
 
-<section class="border-t border-ink pt-18 pb-18">
+<section class="border-t border-ink pt-12 pb-12 sm:pt-14 sm:pb-14 lg:pt-18 lg:pb-18">
   <H id="usage" num="02" kicker="Usage" title="Import. Place. Style." />
 
   <p class="text-base text-ink-soft-2">
@@ -66,7 +66,7 @@ const A11Y_SOURCE = `<GitHubLatestIcon size={20} title="Open on GitHub" />
     <code class="bg-paper-alt px-1.5 py-px font-mono">variant="mono"</code>. No CSS to load.
   </p>
 
-  <div class="mt-6 grid grid-cols-2 gap-5">
+  <div class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
     <div>
       <Eyebrow label="React" />
       <CodeBlock lang="react" source={REACT_SOURCE} />
@@ -85,7 +85,7 @@ const A11Y_SOURCE = `<GitHubLatestIcon size={20} title="Open on GitHub" />
     </div>
   </div>
 
-  <div class="mt-6 grid grid-cols-2 gap-5">
+  <div class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
     <div>
       <Eyebrow label="Theming via CSS" />
       <CodeBlock lang="css" source={THEMING_SOURCE} />

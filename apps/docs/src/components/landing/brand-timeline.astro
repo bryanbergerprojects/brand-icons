@@ -42,11 +42,11 @@ const firefoxEras = Object.entries(firefox.years)
   .sort((a, b) => a.year.localeCompare(b.year));
 ---
 
-<section class="border-t border-ink bg-paper-warm py-18">
-  <div class="container mx-auto px-10">
-    <SecNum kicker="Historical timeline" label="The same logo, five eras."/>
+<section class="border-t border-ink bg-paper-warm py-12 sm:py-14 lg:py-18">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10">
+    <SecNum kicker="Historical timeline" label="The same logo, five eras." labelClass="text-stat sm:text-h3 md:text-h2 lg:text-h1"/>
 
-    <div class="grid grid-cols-[1fr_3fr] gap-9">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_3fr] lg:gap-9">
       <p class="m-0 max-w-80 text-base leading-normal text-ink-soft-2">
         Every brand evolves. Its identity shifts, but its older forms still matter — for the
         press, archives, retrospectives. <strong>Brand Icons</strong> keeps them all, available
@@ -55,7 +55,7 @@ const firefoxEras = Object.entries(firefox.years)
 
       <div>
         <div class="relative h-px bg-ink"></div>
-        <div class="grid grid-cols-5 border-l border-ink">
+        <div class="grid grid-cols-2 border-l border-ink sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {
             firefoxEras.map((era, i) => {
               const isLast = i === firefoxEras.length - 1;

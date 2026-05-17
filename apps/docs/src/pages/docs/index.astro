@@ -13,8 +13,8 @@ import { CORE_VERSION } from '@/lib/version';
   title="Docs — Brand Icons"
   description="Install, integrate, theme and tree-shake Brand Icons in any framework. React 19, Vue 3.5, Svelte 5, Web Components. ESM-only."
 >
-  <section class="border-b border-ink px-10 pt-18 pb-8">
-    <div class="flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
+  <section class="border-b border-ink px-4 pt-12 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-10 lg:pt-18">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
       <span class="text-accent">—</span>
       <span>·</span>
       <span>Documentation</span>
@@ -23,17 +23,17 @@ import { CORE_VERSION } from '@/lib/version';
       <span>·</span>
       <span>5 chapters</span>
     </div>
-    <h1 class="m-0 mt-6 text-h1-2xl font-extrabold tracking-display-xl">Docs<span class="text-accent">.</span></h1>
-    <p class="mt-6 max-w-155 text-lg font-normal leading-snug text-ink-soft-2">
+    <h1 class="m-0 mt-5 text-stat font-extrabold tracking-display-sm sm:mt-6 sm:text-h2 md:text-h1 lg:text-h1-2xl lg:tracking-display-xl">Docs<span class="text-accent">.</span></h1>
+    <p class="mt-4 max-w-155 text-base font-normal leading-snug text-ink-soft-2 sm:mt-6 sm:text-lg">
       Everything you need to ship Brand Icons. Install, integrate, ship a smaller bundle, keep up
       with releases.
     </p>
   </section>
 
-  <div class="grid grid-cols-[280px_1fr] border-b border-ink">
+  <div class="grid grid-cols-1 border-b border-ink lg:grid-cols-[180px_1fr] xl:grid-cols-[280px_1fr]!">
     <Toc client:idle version={CORE_VERSION} />
-    <div class="border-l border-ink bg-paper">
-      <div class="container mx-0 px-15 py-10 pb-15">
+    <div class="bg-paper lg:border-l lg:border-ink">
+      <div class="container mx-0 px-4 py-8 pb-10 sm:px-8 sm:py-10 lg:px-15 lg:pb-15">
         <Install />
         <Usage />
         <Props />

@@ -32,7 +32,7 @@ const InstallTabs = ({ commands }: InstallTabsProps) => {
 
   return (
     <div className="flex flex-col gap-3.5">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-y-2">
           {FRAMEWORKS.map((f) => {
             const active = f === framework;

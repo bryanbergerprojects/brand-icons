@@ -115,15 +115,15 @@ const YearVariantCard = ({ iconName, slug, componentName, entry }: YearVariantCa
 
   return (
     <article className="border border-ink bg-paper">
-      <header className="flex items-baseline justify-between border-b border-ink px-5 py-4">
+      <header className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-ink px-5 py-4">
         <h3 className="m-0 font-sans text-xl font-extrabold tracking-tight text-ink">{entry.year}</h3>
         <span className="font-mono text-mono-sm font-bold uppercase tracking-mono text-ink-soft">
           {iconName} · {entry.year}
         </span>
       </header>
 
-      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-        <div className="relative flex h-full min-h-56 items-center justify-center overflow-hidden border-r border-ink bg-canvas-grid">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <div className="relative flex h-full min-h-56 items-center justify-center overflow-hidden border-b border-ink bg-canvas-grid md:border-r md:border-b-0">
           <span className="pointer-events-none absolute top-0 bottom-0 left-1/2 border-l border-dashed border-black/10" aria-hidden />
           <span className="pointer-events-none absolute top-1/2 right-0 left-0 border-t border-dashed border-black/10" aria-hidden />
 
@@ -155,7 +155,7 @@ const YearVariantCard = ({ iconName, slug, componentName, entry }: YearVariantCa
             <p className="mb-3 font-mono text-mono-sm font-bold uppercase tracking-uppercase text-ink-soft">
               Palette · {entry.palette.length} color{entry.palette.length === 1 ? '' : 's'}
             </p>
-            <ul className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${Math.min(entry.palette.length, 10)}, minmax(0, 1fr))` }}>
+            <ul className="grid gap-1.5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(2.75rem, 1fr))' }}>
               {entry.palette.map((hex, index) => {
                 const key = `${entry.year}-${hex}-${index}`;
                 const isCopied = copiedSwatch === key;

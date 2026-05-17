@@ -115,8 +115,8 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
   title={`${icon.name} icon — Brand Icons`}
   description={`${icon.name} icon · ${familyLabel} category · ${sortedManifest.length} icons in Brand Icons library. Copy code for React, Vue, Svelte, SVG.`}
 >
-  <section class="border-b border-ink px-10 py-10">
-    <nav aria-label="Breadcrumb" class="mb-4.5 flex items-center gap-2 font-mono text-mono font-semibold uppercase tracking-uppercase text-ink-soft">
+  <section class="border-b border-ink px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
+    <nav aria-label="Breadcrumb" class="mb-4.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-mono font-semibold uppercase tracking-uppercase text-ink-soft">
       <a href="/library" class="hover:text-accent">Library</a>
       <span aria-hidden>/</span>
       <a href={categoryQuery(icon.category)} class="hover:text-accent">{familyLabel}</a>
@@ -124,10 +124,10 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
       <span class="text-accent">[{icon.slug}]</span>
     </nav>
 
-    <div class="flex flex-wrap items-baseline justify-between gap-8">
-      <h1 class="m-0 text-h1-2xl font-extrabold tracking-display-xl text-ink">{icon.name}</h1>
+    <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-5">
+      <h1 class="m-0 text-stat font-extrabold tracking-display-sm text-ink sm:text-h2 md:text-h1 lg:text-h1-2xl lg:tracking-display-xl">{icon.name}</h1>
 
-      <div class="flex flex-wrap gap-x-8 gap-y-3">
+      <div class="flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8">
         <div>
           <p class="font-mono text-mono font-bold uppercase tracking-uppercase text-ink-soft">Family</p>
           <p class="mt-1 text-sm font-semibold">{familyLabel}</p>
@@ -144,7 +144,7 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
     </div>
   </section>
 
-  <section class="border-b border-ink px-10 py-12">
+  <section class="border-b border-ink px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
     <div class="max-w-245 mx-auto">
       <Playground
         client:idle
@@ -160,7 +160,7 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
   </section>
 
   {yearVariantEntries.length > 0 ? (
-    <section class="border-b border-ink px-10 py-14">
+    <section class="border-b border-ink px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
       <div class="max-w-245 mx-auto">
         <YearVariants
           client:visible
@@ -173,14 +173,14 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
     </section>
   ) : null}
 
-  <section class="border-b border-ink bg-paper-warm px-10 py-14">
+  <section class="border-b border-ink bg-paper-warm px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
     <p class="mb-6 flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
       <span class="text-accent">—</span>
       <span>Related</span>
       <span>·</span>
       <span>Same category</span>
     </p>
-    <h2 class="m-0 text-h3 font-extrabold tracking-display-xs text-ink">
+    <h2 class="m-0 text-3xl font-extrabold tracking-display-xs text-ink sm:text-h3">
       More from <span class="text-accent">{familyLabel}</span>.
     </h2>
 
@@ -188,14 +188,15 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
       <p class="mt-8 text-ink-soft">No siblings in this category yet.</p>
     ) : (
       <div class="mt-8 overflow-hidden border border-ink bg-paper">
-        <div class="-mr-px -mb-px grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5">
+        <div class="-mr-px -mb-px grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {related.map((entry, i) => (
             <a
               href={`/icon/${entry.slug}`}
               class:list={[
                 'group related-card relative flex min-h-32 flex-col items-center gap-2.5 border-r border-b border-ink bg-paper px-2 pt-5.5 pb-3.5 text-ink transition-colors hover:bg-paper-alt',
-                i >= 5 && i < 10 && 'hidden md:flex',
-                i >= 10 && 'hidden lg:flex',
+                i >= 6 && i < 9 && 'hidden sm:flex',
+                i >= 9 && i < 12 && 'hidden md:flex',
+                i >= 12 && 'hidden lg:flex',
               ]}
             >
               <span class="absolute left-2.5 top-2.5 font-mono text-mono-xs text-ink-soft">#{entry.index}</span>

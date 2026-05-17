@@ -45,7 +45,7 @@ const Toc = ({ version }: TocProps) => {
   }, []);
 
   return (
-    <aside className="sticky top-20 min-h-[calc(100vh-80px)] self-start py-10 pr-6 pl-10">
+    <aside className="hidden self-start px-4 py-6 lg:px-6 sm:py-8 lg:sticky lg:top-20 lg:block lg:min-h-[calc(100vh-80px)] lg:py-10 lg:pr-6 lg:pl-10">
       <nav aria-label="Documentation">
         <p className="mb-4.5 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">Documentation</p>
         <ul className="flex flex-col">
@@ -53,7 +53,9 @@ const Toc = ({ version }: TocProps) => {
             const active = section.id === activeId;
             return (
               <li key={section.id} className="relative">
-                {active ? <span aria-hidden="true" className="absolute top-1/2 -left-10 h-0.5 w-6 -translate-y-1/2 bg-accent" /> : null}
+                {active ? (
+                  <span aria-hidden="true" className="absolute top-1/2 -left-10 h-0.5 lg:w-4 xl:w-6 -translate-y-1/2 bg-accent" />
+                ) : null}
                 <a
                   href={`#${section.id}`}
                   aria-current={active ? 'location' : undefined}
@@ -72,12 +74,16 @@ const Toc = ({ version }: TocProps) => {
           })}
         </ul>
       </nav>
-      <div className="mt-9 flex flex-col gap-1 font-mono text-mono-sm text-ink-soft">
+      <div className="mt-9 flex flex-col gap-1 font-mono text-mono-sm text-ink-soft -ml-3 xl:-ml-0">
         <span>{`// v${version} · MIT`}</span>
-        <span>{'// last edited 16 May 2026'}</span>
         <span>
           {'// edit on '}
-          <a href={GITHUB_EDIT_URL} target="_blank" rel="noopener" className="text-ink transition-colors hover:text-accent">
+          <a
+            href={GITHUB_EDIT_URL}
+            target="_blank"
+            rel="noopener"
+            className="text-ink transition-colors hover:text-accent text-nowrap whitespace-nowrap"
+          >
             [GitHub ↗]
           </a>
         </span>

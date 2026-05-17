@@ -53,7 +53,7 @@ const HEADER_CELL =
 const BODY_BASE = 'border-t border-paper-alt border-r border-paper-alt px-3.5 py-3 last:border-r-0';
 ---
 
-<section class="border-t border-ink pt-18 pb-18">
+<section class="border-t border-ink pt-12 pb-12 sm:pt-14 sm:pb-14 lg:pt-18 lg:pb-18">
   <H id="props" num="03" kicker="Props" title="Seven props. No surprises." />
 
   <p class="text-base text-ink-soft-2">
@@ -64,7 +64,8 @@ const BODY_BASE = 'border-t border-paper-alt border-r border-paper-alt px-3.5 py
     prop, so unused millésimes tree-shake away.
   </p>
 
-  <div class="mt-6 grid grid-cols-[180px_280px_140px_1fr] border border-ink text-13">
+  <div class="mt-6 overflow-x-auto border border-ink">
+    <div class="grid min-w-[760px] grid-cols-[180px_280px_140px_1fr] text-13">
     <div class={HEADER_CELL}>Prop</div>
     <div class={HEADER_CELL}>Type</div>
     <div class={HEADER_CELL}>Default</div>
@@ -83,5 +84,6 @@ const BODY_BASE = 'border-t border-paper-alt border-r border-paper-alt px-3.5 py
         );
       })
     }
+    </div>
   </div>
 </section>

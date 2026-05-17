@@ -219,7 +219,7 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-7 gap-y-5 border-t border-ink p-4">
+      <div className="grid grid-cols-1 gap-x-7 gap-y-5 border-t border-ink p-4 sm:grid-cols-2">
         <div>
           <p className="mb-2 font-mono text-mono-sm font-bold uppercase tracking-uppercase text-ink-soft">Year</p>
           <ToggleGroup

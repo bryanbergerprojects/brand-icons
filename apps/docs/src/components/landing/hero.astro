@@ -24,23 +24,23 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
 <section data-hero-section class="relative overflow-hidden">
   <TimelineBackdrop client:load />
 
-  <div class="container relative z-10 mx-auto px-10 pt-14 pb-20">
-    <div class="grid grid-cols-[1.25fr_1fr] gap-12">
-      <div>
-        <h1 class="m-0 text-h1 font-extrabold tracking-display-sm">
+  <div class="container relative z-10 mx-auto px-4 pt-8 pb-12 sm:px-6 sm:pt-10 sm:pb-16 md:px-8 lg:px-10 lg:pt-14 lg:pb-20">
+    <div class="grid grid-cols-1 gap-0 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
+      <div class="contents lg:block">
+        <h1 class="m-0 text-stat font-extrabold tracking-display-sm sm:text-h3 md:text-h2 lg:text-h1">
           Every brand.<br />Every era.<br />One <span class="text-accent">library</span>.
         </h1>
 
-        <p class="mt-7 max-w-130 text-lg font-normal text-ink-soft-2">
+        <p class="mt-5 max-w-130 text-base font-normal text-ink-soft-2 sm:mt-6 sm:text-lg lg:mt-7">
           From Apple's 1977 logo to yesterday's rebrand. In one line of code.
         </p>
 
-        <div class="mt-9 flex h-11 items-stretch gap-3.5">
+        <div class="mt-7 flex flex-col items-stretch gap-3 sm:h-11 sm:flex-row sm:gap-3.5 lg:mt-9">
           <button
             type="button"
             data-open-command-palette
             aria-label="Search an icon"
-            class="group flex flex-1 items-center gap-3.5 border-thin border-ink bg-paper pl-4.5 pr-1 py-1 text-left outline-none transition-colors hover:bg-paper-alt focus-visible:ring-2 focus-visible:ring-accent"
+            class="group flex h-11 flex-1 items-center gap-3 border-thin border-ink bg-paper pl-4 pr-1 py-1 text-left outline-none transition-colors hover:bg-paper-alt focus-visible:ring-2 focus-visible:ring-accent sm:h-auto sm:gap-3.5 sm:pl-4.5"
           >
             <svg
               aria-hidden="true"
@@ -52,22 +52,23 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
               stroke-width="1.75"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="text-ink-soft"
+              class="shrink-0 text-ink-soft"
             >
               <circle cx="11" cy="11" r="7"></circle>
               <path d="m20 20-3.5-3.5"></path>
             </svg>
-            <span class="flex-1 text-base font-normal text-ink-soft">
-              Search an icon… (e.g. arrow, lock, bell)
+            <span class="flex-1 truncate text-sm font-normal text-ink-soft sm:text-base">
+              <span class="sm:hidden">Search an icon…</span>
+              <span class="hidden sm:inline">Search an icon… (e.g. arrow, lock, bell)</span>
             </span>
-            <span class="px-3 font-mono text-mono font-semibold whitespace-nowrap text-ink-soft">⌘ K</span>
+            <span class="hidden px-3 font-mono text-mono font-semibold whitespace-nowrap text-ink-soft sm:inline">⌘ K</span>
           </button>
           <a href="/library" class={buttonVariants({ variant: 'accent', size: 'cta', className: 'rounded-none' })}>
             Browse library →
           </a>
         </div>
 
-        <div class="mt-9 flex flex-wrap items-center gap-6">
+        <div class="order-4 mt-7 flex flex-wrap items-center gap-4 sm:gap-6 lg:order-none lg:mt-9">
           <LiveCounter client:visible count={iconCount} />
           <span class="text-xs font-medium text-ink-soft">
             <span class="font-bold text-accent">●</span> Open source · MIT · v{CORE_VERSION}
@@ -75,7 +76,7 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
         </div>
       </div>
 
-      <div>
+      <div class="order-3 mt-8 lg:order-none lg:mt-0">
         <Playground
           client:visible
           iconName={apple.name}

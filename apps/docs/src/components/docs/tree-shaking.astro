@@ -41,7 +41,7 @@ const AVOID_SOURCE = `import * as Icons from '@brand-icons/react';
 // referencing the namespace defeats tree-shaking — every icon ships`;
 ---
 
-<section class="border-t border-ink pt-18 pb-18">
+<section class="border-t border-ink pt-12 pb-12 sm:pt-14 sm:pb-14 lg:pt-18 lg:pb-18">
   <H id="tree" num="04" kicker="Tree shaking" title="Pay for what you render." />
 
   <p class="text-base text-ink-soft-2">
@@ -51,12 +51,10 @@ const AVOID_SOURCE = `import * as Icons from '@brand-icons/react';
     icon you don't import — sizes below are minified + gzip.
   </p>
 
-  <div class="mt-6 grid grid-cols-4 border border-ink bg-paper">
+  <div class="mt-6 grid grid-cols-2 border-t border-l border-ink bg-paper lg:grid-cols-4">
     {
-      STATS.map((s, i) => {
-        const last = i === STATS.length - 1;
-        return (
-          <div class={`p-5 px-5.5 ${last ? '' : 'border-r border-ink'}`}>
+      STATS.map((s) => (
+          <div class="border-r border-b border-ink p-5 px-5.5">
             <span class="font-mono text-mono-sm font-bold tracking-mono text-accent">{s.num}</span>
             <div class="mt-2 text-stat font-extrabold leading-none tracking-display-sm tabular-nums">
               {s.count}
@@ -64,8 +62,7 @@ const AVOID_SOURCE = `import * as Icons from '@brand-icons/react';
             <div class="mt-1.5 text-xs text-ink-soft">{s.label}</div>
             <div class="mt-2 font-mono text-mono font-bold text-ink">{s.size}</div>
           </div>
-        );
-      })
+        ))
     }
   </div>
 
@@ -73,7 +70,7 @@ const AVOID_SOURCE = `import * as Icons from '@brand-icons/react';
     // measured with esbuild · react + react-dom external · brotli ≈ 20% lower
   </p>
 
-  <div class="mt-6 grid grid-cols-2 gap-5">
+  <div class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
     <div>
       <p class="mb-2 font-mono text-mono-sm font-bold uppercase tracking-mono text-kind-fix">
         Good — granular import
