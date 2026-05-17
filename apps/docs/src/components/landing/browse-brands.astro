@@ -1,0 +1,170 @@
+---
+import SecNum from '@/components/sec-num.astro';
+import { brands, type IconBrand, manifest, type ManifestEntry } from '@brand-icons/core';
+
+const FEATURED_SLUGS: readonly string[] = [
+  'apple',
+  'claude',
+  'linear',
+  'notion',
+  'firefox',
+  'github',
+  'openai',
+  'vscode',
+  'discord',
+  'gitlab',
+  'netflix',
+  'twitter',
+] as const;
+
+const INVERTED_INDEX = 5;
+
+const totalBrands = manifest.length;
+const totalIcons = manifest.reduce((acc, entry) => acc + entry.years.length * 2, 0);
+
+const slugToCamel = (slug: string): string => slug.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
+
+const namespaceSvgIds = ({ raw, prefix }: { raw: string; prefix: string }): string => {
+  const ids = new Set<string>();
+  const idPattern = /\sid="([^"]+)"/g;
+  let match: RegExpExecArray | null;
+  match = idPattern.exec(raw);
+  while (match !== null) {
+    if (match[1]) ids.add(match[1]);
+    match = idPattern.exec(raw);
+  }
+  let out = raw;
+  for (const id of ids) {
+    const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`\\sid="${escaped}"`, 'g'), ` id="${prefix}-${id}"`);
+    out = out.replace(new RegExp(`url\\(#${escaped}\\)`, 'g'), `url(#${prefix}-${id})`);
+    out = out.replace(new RegExp(`href="#${escaped}"`, 'g'), `href="#${prefix}-${id}"`);
+    out = out.replace(new RegExp(`xlink:href="#${escaped}"`, 'g'), `xlink:href="#${prefix}-${id}"`);
+  }
+  return out;
+};
+
+const formatEra = (entry: ManifestEntry): string => {
+  const sorted = [...entry.years].sort((a, b) => a.year.localeCompare(b.year));
+  const first = sorted[0];
+  if (!first) return '—';
+  return `${first.year} — now`;
+};
+
+const brandRecord = brands as Record<string, IconBrand>;
+
+type FeaturedBrand = {
+  readonly slug: string;
+  readonly name: string;
+  readonly era: string;
+  readonly svg: string;
+  readonly index: string;
+};
+
+const featured: readonly FeaturedBrand[] = FEATURED_SLUGS.map((slug, i) => {
+  const entry = manifest.find((m) => m.slug === slug);
+  if (!entry) throw new Error(`Missing manifest entry for slug: ${slug}`);
+  const brand = brandRecord[slugToCamel(slug)];
+  if (!brand) throw new Error(`Missing brand module for slug: ${slug}`);
+  const latest = brand.years[entry.latest];
+  if (!latest) throw new Error(`Missing latest year ${entry.latest} for ${slug}`);
+  const raw = i === INVERTED_INDEX ? latest.mono : latest.color;
+  return {
+    slug,
+    name: entry.name,
+    era: formatEra(entry),
+    svg: namespaceSvgIds({ raw, prefix: `bb-${slug}` }),
+    index: `#${String(i + 1).padStart(3, '0')}`,
+  };
+});
+
+const moreCount = totalBrands - featured.length;
+---
+
+<section id="brands" class="border-t border-ink py-18">
+  <div class="container mx-auto px-10">
+    <SecNum kicker="Browse by brand" label={`${totalBrands} brands · ${featured.length} shown.`} />
+
+    <div class="grid grid-cols-4 border border-ink bg-paper">
+      {
+        featured.map((brand, i) => {
+          const inverted = i === INVERTED_INDEX;
+          const col = i % 4;
+          const isLastCol = col === 3;
+          const totalRows = Math.ceil(featured.length / 4);
+          const isLastRow = Math.floor(i / 4) === totalRows - 1;
+          return (
+            <a
+              href={`/icon/${brand.slug}`}
+              class:list={[
+                'group flex min-h-44 flex-col justify-between p-6 pt-6 pb-5 transition-colors',
+                !isLastCol && 'border-r border-ink',
+                !isLastRow && 'border-b border-ink',
+                inverted ? 'bg-ink text-paper hover:bg-ink/90' : 'bg-paper hover:bg-paper-warm',
+              ]}
+            >
+              <div
+                class:list={[
+                  'font-mono text-mono-sm font-bold tracking-segment',
+                  inverted ? 'text-white/55' : 'text-ink-soft',
+                ]}
+              >
+                <span>{brand.index}</span>
+              </div>
+
+              <div class="my-4 flex h-14 items-center">
+                <div
+                  class:list={['browse-icon h-14 w-14', inverted && 'text-paper']}
+                  aria-hidden="true"
+                  set:html={brand.svg}
+                />
+              </div>
+
+              <div class="mt-auto flex items-end justify-between gap-3">
+                <div>
+                  <div class:list={['text-base font-bold tracking-tight', inverted && 'text-paper']}>
+                    {brand.name}
+                  </div>
+                  <div
+                    class:list={[
+                      'mt-0.5 font-mono text-mono-sm',
+                      inverted ? 'text-white/55' : 'text-ink-soft',
+                    ]}
+                  >
+                    {brand.era}
+                  </div>
+                </div>
+                <span class:list={['text-sm leading-none', inverted ? 'text-accent' : 'text-ink-soft']}>→</span>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <div class="mt-5 flex items-center justify-between border border-ink bg-paper-warm px-6 py-4">
+      <div>
+        <p class="font-mono text-mono font-bold uppercase tracking-mono text-ink-soft">
+          … and {moreCount} more
+        </p>
+        <p class="mt-1 text-xl font-bold tracking-tight">
+          {totalBrands} brands · {totalIcons.toLocaleString('en-US')} icons total.
+        </p>
+      </div>
+      <a
+        href="/library"
+        class="inline-flex items-center gap-2.5 bg-accent px-5 py-3.5 text-13 font-semibold tracking-cta text-paper transition-colors hover:bg-accent/90"
+      >
+        Browse the full library <span class="font-mono">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .browse-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

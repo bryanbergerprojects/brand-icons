@@ -1,0 +1,29 @@
+{
+  "slug": "disney-plus",
+  "name": "Disney+",
+  "category": "media",
+  "description": "Subscription video-on-demand streaming service from The Walt Disney Company featuring Disney, Pixar, Marvel, Star Wars and National Geographic content.",
+  "tags": ["streaming", "svod", "video-on-demand", "entertainment", "disney", "walt-disney", "ott"],
+  "brandColor": "#01147C",
+  "url": "https://disneyplus.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["disneyplus"],
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#021192", "#0008CE", "#0001FA", "#010CB4", "#0004E1", "#0F1EFF", "#01147C"],
+      "source": "https://commons.wikimedia.org/wiki/File:Disney%2B_Original_Logo.svg",
+      "notes": "Launch logo (November 2019). Wordmark + plus mark and arc with radial blue gradient. Intrinsically wide mark — vertically centered inside 24x24 viewBox."
+    },
+    {
+      "year": "2024",
+      "palette": ["#01147C"],
+      "source": "https://commons.wikimedia.org/wiki/File:Disney%2B_2024_(Print).svg",
+      "notes": "March 2024 refresh — redrawn arc and tighter '+' geometry, print variant in solid deep blue. Intrinsically wide mark — vertically centered inside 24x24 viewBox."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Disney+ wordmark is intrinsically non-square (~1.8:1 aspect). Per svg.md §1.1, scaled and vertically centered inside the 24x24 viewBox. Parent 'disney' brand is not yet in the catalog, so the 'parent' field is omitted; add it once disney/ is created."
+}

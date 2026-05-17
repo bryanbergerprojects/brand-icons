@@ -75,12 +75,25 @@ When adding or modifying an icon:
 
 ## Subagents
 
-- **`.claude/agents/icon-fetcher.md`** — acquires the source of a new brand
-  from the web (SVG or raster), generates `<year>/color.svg` +
-  `<year>/mono.svg` per millésime, writes brand-level `meta.json`
-  (with `years[]`, `palette[]`, `latest`).
+Three specialized agents form the icon-onboarding pipeline:
 
-Invoke via the Task tool with `subagent_type: 'icon-fetcher'`.
+- **`.claude/agents/icon-fetcher.md`** — research only. Performs web
+  discovery for one brand (current + historic millésimes), downloads
+  raw assets, and writes `/tmp/brand-icons-fetch/<slug>.json` plus the
+  raw files. Never writes inside `icons/` or `packages/`, never runs git.
+- **`.claude/agents/icon-builder.md`** — consumes the fetcher's JSON in
+  an isolated git worktree, materializes `icons/<slug>/meta.json` plus
+  per-year `color.svg` + `mono.svg`, runs `pnpm build:icons`, adds a
+  changeset, commits, pushes `feat/add-<slug>`, and opens the PR.
+- **`.claude/agents/icon-reviewer.md`** — read-only verdict comparing
+  builder output to fetcher truth. Returns a JSON pass/fail report
+  with a precise issue list so a fix builder can be re-spawned.
+
+Invoke any of them directly via the Agent tool with
+`subagent_type: '<name>'`, or — for any multi-brand request — use the
+`add-icons` skill (`.claude/skills/add-icons/SKILL.md`), which fans
+them out in parallel (≤ 10 brands), runs the full
+fetch → build → review → fix loop, and returns one PR per brand.
 
 ## Rules (`.claude/rules/`)
 

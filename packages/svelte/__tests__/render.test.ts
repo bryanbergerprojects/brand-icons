@@ -7,7 +7,7 @@ import {
   AppleLatestIcon,
   GitHub2008Icon,
   GitHubLatestIcon,
-  VSCode2015Icon,
+  VSCode2017Icon,
 } from '../src/icons';
 
 type AnyProps = Record<string, unknown>;
@@ -122,9 +122,9 @@ describe('className prop', () => {
   });
 });
 
-describe('VSCode2015 brand-name based naming', () => {
+describe('VSCode2017 brand-name based naming', () => {
   it('mounts via brand-name-derived component', () => {
-    const svg = renderIcon(VSCode2015Icon);
+    const svg = renderIcon(VSCode2017Icon);
     expect(svg).toBeTruthy();
   });
 });

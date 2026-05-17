@@ -1,44 +1,15 @@
 ---
+import BrandTimeline from '@/components/landing/brand-timeline.astro';
+import BrowseBrands from '@/components/landing/browse-brands.astro';
+import Hero from '@/components/landing/hero.astro';
 import BaseLayout from '@/layouts/base.astro';
-import { manifest } from '@brand-icons/core';
 ---
 
-<BaseLayout title="Brand Icons — Multi-variant brand icons library">
-  <section class="mx-auto max-w-5xl px-6 py-24">
-    <p class="font-mono text-xs tracking-widest uppercase text-ink-muted">
-      brand-icons / v0.0.0
-    </p>
-    <h1 class="mt-6 text-5xl font-medium tracking-tight sm:text-6xl">
-      Multi-variant, multi-framework brand icons library.
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg text-ink-muted">
-      Color, monochrome and year-aware variants for React, Vue, Svelte and Web Components.
-      {manifest.length} brands and counting — each one redrawn from the official source.
-    </p>
-
-    <div class="mt-10 flex flex-wrap gap-3 font-mono text-xs uppercase tracking-widest">
-      <a
-        href="/library"
-        class="border border-ink bg-ink px-5 py-3 text-paper transition-colors hover:bg-accent hover:border-accent"
-      >
-        Browse library
-      </a>
-      <a
-        href="/docs"
-        class="border border-ink px-5 py-3 text-ink transition-colors hover:border-accent hover:text-accent"
-      >
-        Read the docs
-      </a>
-    </div>
-
-    <div class="mt-16 border-t border-ink/10 pt-8">
-      <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Stack</p>
-      <ul class="mt-4 grid grid-cols-2 gap-2 font-mono text-sm sm:grid-cols-4">
-        <li>Astro 5 (SSG)</li>
-        <li>React 19 Islands</li>
-        <li>Tailwind v4</li>
-        <li>shadcn/ui</li>
-      </ul>
-    </div>
-  </section>
+<BaseLayout
+  title="Brand Icons — One library for every brand, every era"
+  description="From Apple's 1977 logo to yesterday's rebrand. 1,248 versioned icons. Copy as React, Vue, Svelte, WebC, SVG."
+>
+  <Hero />
+  <BrandTimeline />
+  <BrowseBrands />
 </BaseLayout>

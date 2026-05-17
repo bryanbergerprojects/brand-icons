@@ -10,7 +10,7 @@ const rawMono = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" 
 </svg>`;
 
 describe('optimize(color)', () => {
-  const out = optimize(rawColor, 'color');
+  const out = optimize({ svg: rawColor, variant: 'color', prefix: 'test' });
 
   it('preserves the 0 0 24 24 viewBox', () => {
     expect(out).toContain('viewBox="0 0 24 24"');
@@ -27,7 +27,7 @@ describe('optimize(color)', () => {
 });
 
 describe('optimize(mono)', () => {
-  const out = optimize(rawMono, 'mono');
+  const out = optimize({ svg: rawMono, variant: 'mono', prefix: 'test' });
 
   it('rewrites every fill to currentColor', () => {
     expect(out).toContain('currentColor');

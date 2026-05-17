@@ -1,0 +1,23 @@
+{
+  "slug": "claude-code",
+  "name": "Claude Code",
+  "category": "dev-tools",
+  "description": "Anthropic's agentic coding tool that runs in the terminal, IDEs, desktop, and the web to read codebases, edit files, and run commands.",
+  "tags": ["anthropic", "cli", "coding-agent", "ai", "developer-tool", "terminal", "agent"],
+  "brandColor": "#D97757",
+  "url": "https://claude.com/product/claude-code",
+  "repository": "https://github.com/anthropics/claude-code",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "claude",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#D97757"],
+      "source": "https://claude.com/product/claude-code",
+      "notes": "Claude Code pixel-art critter mark — terracotta 8-bit creature with two eye cutouts, side arm bumps, and four legs. Hand-rendered on a 24×24 pixel grid using axis-aligned <rect> elements with shape-rendering=\"crispEdges\" to preserve the pixel-art aesthetic at any size."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

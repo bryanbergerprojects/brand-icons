@@ -1,0 +1,35 @@
+{
+  "slug": "aws",
+  "name": "AWS",
+  "category": "storage-cloud",
+  "description": "Amazon Web Services is the cloud computing platform from Amazon offering compute, storage, networking, and managed services.",
+  "tags": ["cloud", "iaas", "paas", "ec2", "s3", "lambda", "infrastructure", "amazon"],
+  "brandColor": "#FF9900",
+  "url": "https://aws.amazon.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["amazon-web-services"],
+  "parent": "amazon",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2006",
+      "palette": ["#F68D11"],
+      "source": "https://commons.wikimedia.org/wiki/File:AmazonWebservices_Logo.svg",
+      "notes": "Original AWS mark: five isometric cubes arranged in a curved cluster, accompanying the 'Amazon Web Services' wordmark. Cube cluster only retained for the 24×24 icon; wordmark omitted for legibility."
+    },
+    {
+      "year": "2017",
+      "palette": ["#FF9900", "#252F3E"],
+      "source": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg",
+      "notes": "Rebrand to 'AWS' acronym with the Amazon smile arrow underneath. Dark slate wordmark over the iconic orange smile."
+    },
+    {
+      "year": "2025",
+      "palette": ["#FF6200", "#161D26"],
+      "source": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_2025.svg",
+      "notes": "Koto and Amazon XCM refresh (May 2025): redrawn smile with softer curves, Amazon Ember Modern typeface, deeper 'Smile Orange' (#FF6200) and near-black slate."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

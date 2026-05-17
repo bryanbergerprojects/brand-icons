@@ -1,0 +1,50 @@
+{
+  "slug": "chrome",
+  "name": "Google Chrome",
+  "category": "platforms",
+  "description": "Cross-platform web browser developed by Google, built on the open-source Chromium project and the Blink rendering engine.",
+  "tags": ["browser", "web", "blink", "chromium", "v8", "rendering-engine"],
+  "brandColor": "#1A73E8",
+  "url": "https://www.google.com/chrome/",
+  "repository": "https://chromium.googlesource.com/chromium/src",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-chrome"],
+  "parent": "google",
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2011",
+      "palette": [
+        "#0F5B94",
+        "#7FB3DF",
+        "#DF2227",
+        "#F06B59",
+        "#4CB749",
+        "#388B41",
+        "#FCD209",
+        "#F7C616",
+        "#BC821E",
+        "#F6F0EE",
+        "#DDDDDD",
+        "#000000"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(March_2011).svg",
+      "notes": "First major redesign (March 2011) — the original 2008 three-dimensional glossy mark was flattened: shadows and highlights were softened, and the three colored petals around a blue sphere were retained but simplified. Used through August 2014."
+    },
+    {
+      "year": "2014",
+      "palette": ["#DB4437", "#A52714", "#0F9D58", "#055524", "#FFCD40", "#EA6100", "#4285F4", "#F1F1F1", "#FFFFFF", "#3E2723", "#263238"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(September_2014).svg",
+      "notes": "Material Design refresh (September 2014) — flatter petals, brighter primary colors aligned with Google's Material palette, light-gray ring around a Material Blue center. Used through March 2022."
+    },
+    {
+      "year": "2022",
+      "palette": ["#EA4335", "#D93025", "#FBBC04", "#FCC934", "#34A853", "#1E8E3E", "#1A73E8", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(February_2022).svg",
+      "notes": "February 2022 refresh — drop shadow removed, more vibrant gradient-tinted petals, slightly larger central blue circle. Current Chrome mark (unchanged through 2026)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Skipped 2008 original glossy three-dimensional mark: no authoritative true-vector SVG source on Wikimedia Commons, archive.org, or major mirrors — only raster references on Logopedia and 1000logos. Per the no-invent rule the millésime was omitted rather than redrawn. brandColor uses the central Material Blue (#1A73E8) per Google's brand convention, even though by surface area the colored petals dominate the 2022 mark."
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "google-cloud",
+  "name": "Google Cloud",
+  "category": "storage-cloud",
+  "description": "Google Cloud is Google's enterprise cloud computing platform offering compute, storage, networking, data analytics, AI/ML, and managed services across global regions.",
+  "tags": ["cloud", "iaas", "paas", "compute", "hosting", "enterprise", "google", "data"],
+  "brandColor": "#4285F4",
+  "url": "https://cloud.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["gcp", "google-cloud-platform"],
+  "parent": "google",
+  "latest": "2016",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#4285F4", "#EA4335", "#FBBC04", "#34A853"],
+      "source": "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg",
+      "notes": "Four-colour cloud silhouette introduced with the September 2016 'Google Cloud' rebrand, replacing the 2014 multicoloured isometric-hexagon 'Google Cloud Platform' mark. Icon redrawn to a 24×24 viewBox (transform=scale(0.375) over the native 64×64 source) and palette uses the canonical Google brand quartet."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Pre-2016 'Google Cloud Platform' millésime (2014 multicoloured isometric hexagonal cube logo) was not added: no authoritative true-vector SVG of the standalone cube mark exists on Google's brand resource centre, Wikimedia Commons, or archive.org. Available third-party SVGs (BrandEPS, gist-hosted Inkscape exports, etc.) either ship the wrong palette (#547DBF/#FFCE40/#DB4436) or are PNG-trace reconstructions. Per the no-invent rule the 2014 millésime was skipped. The 2022 typographic refresh did not alter the cloud icon, so no separate 2022 entry is warranted."
+}

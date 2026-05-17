@@ -1,0 +1,35 @@
+{
+  "slug": "azure",
+  "name": "Azure",
+  "category": "storage-cloud",
+  "description": "Microsoft Azure is a cloud computing platform offering compute, storage, networking, AI, and managed services across global regions.",
+  "tags": ["cloud", "iaas", "paas", "compute", "hosting", "enterprise", "microsoft"],
+  "brandColor": "#0078D4",
+  "url": "https://azure.microsoft.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["microsoft-azure", "windows-azure"],
+  "parent": "microsoft",
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2010",
+      "palette": ["#00AEF0"],
+      "source": "https://commons.wikimedia.org/wiki/File:Windows_Azure_logo_and_wordmark_-_2012.svg",
+      "notes": "Original 'Windows Azure' identity — Windows-flag tilted 4-pane tile, cyan-blue. Icon portion extracted from the 2012 wordmark and rescaled to 24×24."
+    },
+    {
+      "year": "2017",
+      "palette": ["#0089D6"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_azure-icon.svg",
+      "notes": "Single-line ribbon 'A' icon introduced 26 September 2017, accompanying the 'Azure. Cloud for all.' tagline."
+    },
+    {
+      "year": "2021",
+      "palette": ["#3CCBF4", "#2892DF", "#0078D4", "#0669BC", "#114A8B"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_Azure.svg",
+      "notes": "Fluent Design 3D 'A' — two gradient ribbon faces with a solid #0078D4 cross-bar, aligning Azure with the Microsoft Office Fluent product icon family."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

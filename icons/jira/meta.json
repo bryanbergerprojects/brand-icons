@@ -1,0 +1,29 @@
+{
+  "slug": "jira",
+  "name": "Jira",
+  "category": "productivity",
+  "description": "Atlassian's issue tracking and agile project management tool for software teams, supporting Scrum and Kanban workflows.",
+  "tags": ["atlassian", "issue-tracking", "agile", "scrum", "kanban", "sprint", "project-management", "tracker"],
+  "brandColor": "#2684FF",
+  "url": "https://www.atlassian.com/software/jira",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["jira-software"],
+  "parent": "atlassian",
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#2684FF", "#0052CC"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/8/82/Jira_%28Software%29_logo.svg",
+      "notes": "Jira Software era mark: three overlapping arrowheads with the Atlassian blue gradient, introduced when Jira was split into Software / Service Desk / Core."
+    },
+    {
+      "year": "2023",
+      "palette": ["#2684FF", "#0052CC"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg",
+      "notes": "2023 rebrand: the 'Software' suffix is dropped and the mark becomes three stacked rounded squares — part of Atlassian's unified product iconography."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

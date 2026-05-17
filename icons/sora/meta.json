@@ -1,0 +1,24 @@
+{
+  "slug": "sora",
+  "name": "Sora",
+  "category": "ai",
+  "description": "Sora is OpenAI's text-to-video generative model and the standalone iOS/Android app for creating short AI-generated video clips.",
+  "tags": ["openai", "video", "text-to-video", "generative-ai", "ai-model", "video-generation"],
+  "brandColor": "#012659",
+  "url": "https://sora.com",
+  "repository": "https://openai.com/sora",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["openai-sora"],
+  "parent": "openai",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#012659", "#0968DA", "#6BB6FE", "#FFFFFF"],
+      "source": "https://github.com/lobehub/lobe-icons/blob/master/packages/static-svg/icons/sora-color.svg",
+      "notes": "Rounded-square plate with midnight-to-sky-blue gradient and a white cloud silhouette flanked by four-point sparkles, echoing the iOS app icon introduced for Sora's public release (December 2024) and retained through the Sora 2 refresh (September 2025)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

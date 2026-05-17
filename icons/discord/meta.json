@@ -1,0 +1,28 @@
+{
+  "slug": "discord",
+  "name": "Discord",
+  "category": "communication",
+  "description": "Discord is a voice, video, and text chat platform organized around persistent servers and channels, widely used by gaming and online communities.",
+  "tags": ["chat", "voip", "voice", "messaging", "community", "servers", "gaming"],
+  "brandColor": "#5865F2",
+  "url": "https://discord.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#7289DA"],
+      "source": "https://github.com/simple-icons/simple-icons/blob/c4af0c51dbc410b36911bbffd26825200769a2b5%5E/icons/discord.svg",
+      "notes": "Original 2015 launch mark — Clyde inside a speech-bubble silhouette, rendered in the legacy 'blurple' #7289DA. Used until the June 2021 rebrand."
+    },
+    {
+      "year": "2021",
+      "palette": ["#5865F2"],
+      "source": "https://discord.com/branding",
+      "notes": "June 2021 refresh — speech bubble removed, refined Clyde mascot standalone with the brighter new blurple #5865F2."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

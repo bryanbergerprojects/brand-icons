@@ -1,0 +1,116 @@
+---
+import H from '@/components/docs/section-heading.astro';
+
+type ReleaseKind = 'add' | 'fix' | 'perf' | 'breaking';
+type ReleaseTag = 'major' | 'minor' | 'patch';
+type ReleaseItem = { kind: ReleaseKind; desc: string };
+type Release = { v: string; d: string; tag: ReleaseTag; items: readonly ReleaseItem[] };
+
+const RELEASES: readonly Release[] = [
+  {
+    v: '2.4.0',
+    d: '16 May 2026',
+    tag: 'minor',
+    items: [
+      { kind: 'add', desc: '12 new icons in the Communication family' },
+      { kind: 'add', desc: '`year` prop · pin any icon to a historical era' },
+      { kind: 'fix', desc: 'Optical alignment on `compass`, `flag`, `bookmark`' },
+    ],
+  },
+  {
+    v: '2.3.0',
+    d: '04 Mar 2026',
+    tag: 'minor',
+    items: [
+      { kind: 'add', desc: '`weight="sketch"` style across all 1,248 icons' },
+      { kind: 'perf', desc: 'Median icon −18 % in gzip size' },
+    ],
+  },
+  {
+    v: '2.2.1',
+    d: '12 Jan 2026',
+    tag: 'patch',
+    items: [{ kind: 'fix', desc: 'SSR hydration warning when rendering inside <head>' }],
+  },
+  {
+    v: '2.2.0',
+    d: '02 Dec 2025',
+    tag: 'minor',
+    items: [
+      { kind: 'add', desc: 'Vue 3 package · `@brand/icons-vue`' },
+      { kind: 'add', desc: 'CDN ESM bundle on esm.brandicons.dev' },
+    ],
+  },
+  {
+    v: '2.0.0',
+    d: '18 Sep 2025',
+    tag: 'major',
+    items: [
+      { kind: 'breaking', desc: 'Renamed `color` prop to `stroke`' },
+      { kind: 'breaking', desc: 'Drop CJS · ESM-only' },
+      { kind: 'add', desc: 'Codemod for v1 → v2' },
+    ],
+  },
+];
+
+const TAG_BG: Record<ReleaseTag, string> = {
+  major: 'bg-accent',
+  minor: 'bg-ink',
+  patch: 'bg-ink-soft',
+};
+
+const KIND_CLASS: Record<ReleaseKind, string> = {
+  add: 'text-ink',
+  fix: 'text-kind-fix',
+  perf: 'text-kind-perf',
+  breaking: 'text-accent',
+};
+
+const GITHUB_NOTES = 'https://github.com/bryanbergerprojects/brand-icons/releases';
+---
+
+<section class="border-t border-ink pt-18 pb-18">
+  <H id="changelog" num="05" kicker="Changelog" title="Every release. No drama." />
+
+  <div class="mt-6 border border-ink">
+    {
+      RELEASES.map((release, i) => {
+        const isLatest = i === 0;
+        const rowBg = isLatest ? 'bg-paper-warm' : 'bg-paper';
+        const rowBorder = i === 0 ? '' : 'border-t border-paper-alt';
+        return (
+          <div class={`grid grid-cols-[160px_100px_1fr] p-4.5 px-5.5 ${rowBorder} ${rowBg}`}>
+            <div>
+              <div class="text-2xl font-extrabold tracking-tight">v{release.v}</div>
+              <div class="mt-0.5 font-mono text-mono text-ink-soft">{release.d}</div>
+            </div>
+
+            <div>
+              <span class={`inline-block px-2 py-0.5 font-mono text-mono-sm font-bold uppercase tracking-tab text-paper ${TAG_BG[release.tag]}`}>
+                {release.tag}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              {release.items.map((item) => (
+                <div class="grid grid-cols-[80px_1fr]">
+                  <span class={`font-mono text-mono-sm font-bold uppercase tracking-cap ${KIND_CLASS[item.kind]}`}>
+                    {item.kind}
+                  </span>
+                  <span class="text-13 text-ink">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div class="mt-6 flex justify-between font-mono text-mono text-ink-soft">
+    <span>// migrating? run `npx @brand/migrate --from 2.0 --to 2.4`</span>
+    <a href={GITHUB_NOTES} target="_blank" rel="noopener" class="text-ink transition-colors hover:text-accent">
+      Read full notes on GitHub ↗
+    </a>
+  </div>
+</section>

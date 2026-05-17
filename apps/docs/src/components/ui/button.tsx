@@ -10,6 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        accent: 'bg-accent text-paper rounded-none hover:bg-accent/90',
+        ink: 'bg-ink text-paper border border-ink rounded-none hover:border-accent hover:bg-accent',
+        segment:
+          'border border-ink rounded-none font-mono uppercase tracking-pill font-semibold bg-paper text-ink hover:bg-paper-alt aria-pressed:bg-ink aria-pressed:text-paper',
+        'copy-trigger':
+          'border border-ink rounded-none font-mono uppercase tracking-pill font-bold bg-ink text-paper hover:bg-ink/90 aria-pressed:bg-accent justify-between',
+        swatch:
+          'border border-ink rounded-none p-0 transition-shadow aria-pressed:z-[2] aria-pressed:shadow-[inset_0_0_0_2px_var(--color-paper)] aria-pressed:outline aria-pressed:outline-2 aria-pressed:outline-ink',
         destructive:
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40',
         outline:
@@ -23,6 +31,10 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: 'h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        cta: 'h-11 px-7 text-13 font-semibold tracking-cta',
+        'segment-sm': 'h-8 gap-1 px-2 text-mono',
+        'swatch-md': 'h-7 w-7',
+        'icon-square-sm': 'h-8 w-8',
         icon: 'size-9',
         'icon-xs': "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
         'icon-sm': 'size-8',

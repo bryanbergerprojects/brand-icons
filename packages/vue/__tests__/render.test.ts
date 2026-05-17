@@ -7,7 +7,7 @@ import {
   AppleLatestIcon,
   GitHub2008Icon,
   GitHubLatestIcon,
-  VSCode2015Icon,
+  VSCode2017Icon,
 } from '../src/icons';
 
 describe('alias identity', () => {
@@ -109,9 +109,9 @@ describe('className prop', () => {
   });
 });
 
-describe('VSCode2015 brand-name based naming', () => {
+describe('VSCode2017 brand-name based naming', () => {
   it('mounts via brand-name-derived component', () => {
-    const w = mount(VSCode2015Icon);
+    const w = mount(VSCode2017Icon);
     expect(w.find('svg').exists()).toBe(true);
   });
 });

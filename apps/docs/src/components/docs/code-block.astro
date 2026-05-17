@@ -1,0 +1,58 @@
+---
+import { codeToHtml } from 'shiki';
+import CopyButton from '@/features/docs/copy-button';
+
+type CodeBlockLang = 'shell' | 'react' | 'vue' | 'svelte' | 'css' | 'svg' | 'ts' | 'html' | 'ok' | 'warn';
+
+type Props = {
+  lang: CodeBlockLang;
+  source: string;
+  label?: string;
+};
+
+const LANG_MAP: Record<CodeBlockLang, string> = {
+  shell: 'bash',
+  react: 'tsx',
+  vue: 'vue',
+  svelte: 'svelte',
+  css: 'css',
+  svg: 'xml',
+  ts: 'ts',
+  html: 'html',
+  ok: 'tsx',
+  warn: 'tsx',
+};
+
+const { lang, source, label } = Astro.props;
+
+const html = await codeToHtml(source, {
+  lang: LANG_MAP[lang],
+  theme: 'github-dark',
+});
+---
+
+<div class="relative border border-ink bg-ink text-paper">
+  <div class="flex items-center justify-between border-b border-white/10 px-3.5 py-2">
+    <span class="font-mono text-mono-sm font-bold uppercase tracking-mono text-white/55">
+      {label ?? lang}
+    </span>
+    <CopyButton source={source} client:idle />
+  </div>
+  <div
+    class="shiki-host overflow-x-auto px-4.5 py-4 font-mono text-13 leading-mono"
+    set:html={html}
+  />
+</div>
+
+<style is:global>
+  .shiki-host pre.shiki {
+    background-color: transparent !important;
+    padding: 0;
+    margin: 0;
+    white-space: pre;
+  }
+  .shiki-host code {
+    background: transparent;
+    font: inherit;
+  }
+</style>

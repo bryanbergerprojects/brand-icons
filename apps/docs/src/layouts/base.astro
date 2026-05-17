@@ -15,8 +15,11 @@ const { title, description = 'Multi-variant, multi-framework brand icons library
 const sortedIcons = [...manifest].sort((a, b) => a.name.localeCompare(b.name));
 
 const docLinks: readonly DocLink[] = [
-  { title: 'Getting started', href: '/docs/getting-started' },
-  { title: 'Frameworks', href: '/docs/frameworks' },
+  { title: 'Install', href: '/docs#install' },
+  { title: 'Usage', href: '/docs#usage' },
+  { title: 'Props', href: '/docs#props' },
+  { title: 'Tree shaking', href: '/docs#tree' },
+  { title: 'Changelog', href: '/docs#changelog' },
   { title: 'License', href: '/resources/license' },
   { title: 'Contributing', href: '/resources/contributing' },
   { title: 'Code of conduct', href: '/resources/code-of-conduct' },
@@ -31,7 +34,8 @@ const docLinks: readonly DocLink[] = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
     <title>{title}</title>
   </head>
   <body class="flex min-h-screen flex-col bg-paper text-ink font-sans antialiased">

@@ -1,0 +1,41 @@
+{
+  "slug": "visual-studio",
+  "name": "Visual Studio",
+  "category": "dev-tools",
+  "description": "Microsoft Visual Studio is a full-featured integrated development environment for Windows targeting .NET, C++, and cross-platform mobile and web development.",
+  "tags": ["ide", "microsoft", "dotnet", "csharp", "cplusplus", "debugger", "windows"],
+  "brandColor": "#9A70D4",
+  "url": "https://visualstudio.microsoft.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["microsoft-visual-studio", "vs"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2010",
+      "palette": ["#84C8E3", "#7ABBDB", "#6FABD0", "#6094C0", "#5177AB", "#435693", "#37347A", "#322973", "#4F277C", "#662483"],
+      "source": "https://upload.wikimedia.org/wikipedia/de/1/1e/Microsoft_Visual_Studio_2010_Logo.svg",
+      "notes": "Möbius infinity loop with blue-to-purple gradient — the Aero-era rebrand that introduced the curved infinity. Extracted from the wordmark; only the outermost infinity path is retained for 24×24 legibility."
+    },
+    {
+      "year": "2012",
+      "palette": ["#68217A"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/1/19/Visual_Studio_2012_logo_and_wordmark.svg",
+      "notes": "Modern Style angular VS cube — flat purple replacing the curved 2010 Möbius. Extracted from the wordmark, scaled from 36×36."
+    },
+    {
+      "year": "2017",
+      "palette": ["#865FC5"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Visual_Studio_2017_Logo.svg",
+      "notes": "Refined VS cube in lighter purple (#865FC5) — retains the angular silhouette but a softer Fluent-leaning shade."
+    },
+    {
+      "year": "2022",
+      "palette": ["#9A70D4", "#AE7FE2", "#5E438F", "#C18EF1", "#D59DFF", "#7252AA"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Visual_Studio_Icon_2022.svg",
+      "notes": "Current chevron-infinity refresh — three gradient-filled ribbons forming a stylized Möbius, returning to the curve language of the 2010 era. Drop-shadow filters from the source are omitted for 24×24 rendering."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Visual Studio 2005 was not added — no authoritative SVG of the standalone icon could be located on Wikimedia Commons or Microsoft brand assets (search returned only PNG/EPS sources of insufficient provenance). The 1995-2003 'tape spool' marks were also skipped for the same reason."
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "affine",
+  "name": "AFFiNE",
+  "category": "productivity",
+  "description": "Open-source, privacy-first knowledge base and workspace combining documents, whiteboards and databases, developed by Toeverything Pte. Ltd.",
+  "tags": ["knowledge-base", "workspace", "notes", "whiteboard", "open-source", "local-first", "collaboration"],
+  "brandColor": "#1E96EB",
+  "url": "https://affine.pro",
+  "repository": "https://github.com/toeverything/AFFiNE",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["toeverything"],
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2022",
+      "palette": ["#000000"],
+      "source": "https://github.com/toeverything/AFFiNE/blob/canary/blocksuite/playground/public/logo.svg",
+      "notes": "Original AFFiNE mark used from the public launch in August 2022 through early 2026 — an isometric arrangement of nested rhombuses suggesting layered blocks and modular knowledge. Same artwork ships in the BlockSuite playground and across early AFFiNE branding."
+    },
+    {
+      "year": "2026",
+      "palette": ["#1E96EB"],
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/affine.svg",
+      "notes": "Redesigned mark announced March 30, 2026 — two triangles whose vertices trace Pursuit Curves, referencing the mathematical concept of affine transformation. Symbol-only version used for favicons and small surfaces; same artwork shipped in the AFFiNE admin auth/setup screens."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "2022 source SVG ships on a 512x512 canvas; wrapped in transform=\"scale(0.046875)\" so the SVGO convertTransform pass in tools/build-icons can bake it down to the 24x24 viewBox."
+}

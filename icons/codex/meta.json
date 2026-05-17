@@ -1,0 +1,25 @@
+{
+  "slug": "codex",
+  "name": "Codex",
+  "category": "dev-tools",
+  "description": "OpenAI Codex is an AI coding agent that runs in the terminal, IDE, web and desktop app to read repositories, write code and execute tasks.",
+  "tags": ["coding-agent", "cli", "ai-pair-programming", "terminal", "openai", "code-generation", "developer-tool"],
+  "brandColor": "#000000",
+  "url": "https://openai.com/codex",
+  "repository": "https://github.com/openai/codex",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["openai-codex"],
+  "parent": "openai",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#B1A7FF", "#7A9DFF", "#3941FF"],
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/codex.svg",
+      "notes": "Codex coding agent mark relaunched May 2025 (CLI, web and desktop app). Glyph rendered with the official Codex purple-to-blue vertical gradient (#B1A7FF → #7A9DFF → #3941FF); flat applications render the same path in solid black."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "The original 2021 Codex API model (which powered early GitHub Copilot) shipped with the OpenAI parent wordmark and no distinct symbol — only the relaunched 2025 coding agent has its own brand mark."
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "vscode-insiders",
+  "name": "VS Code Insiders",
+  "category": "dev-tools",
+  "description": "Visual Studio Code Insiders is the nightly preview channel of VS Code, shipping daily builds with the latest features and fixes alongside the stable release.",
+  "tags": ["editor", "ide", "microsoft", "preview", "nightly", "code-editor", "insiders"],
+  "brandColor": "#24BFA5",
+  "url": "https://code.visualstudio.com/insiders/",
+  "repository": "https://github.com/microsoft/vscode",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["vs-code-insiders", "visual-studio-code-insiders"],
+  "parent": "vscode",
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#24BFA5", "#00B294", "#009A7C", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Visual_Studio_Code_Insiders_1.36_icon.svg",
+      "notes": "Green chevron variant of the 2017 VS Code icon refresh — Insiders shipped its first preview builds in late 2016, but this is the canonical green chevron silhouette that has shipped since the October 2017 redesign (see https://code.visualstudio.com/blogs/2017/10/24/theicon)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

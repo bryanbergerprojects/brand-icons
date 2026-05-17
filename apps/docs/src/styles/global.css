@@ -11,13 +11,37 @@
    Single source of truth for raw values. shadcn vars below map to these.
 --------------------------------------------------------------- */
 @theme {
+  /* surfaces */
   --color-paper: #f5f4f1;
-  --color-ink: #111111;
-  --color-ink-muted: #4a4a4a;
-  --color-accent: #d7361a;
+  --color-paper-alt: #ebe9e4;
+  --color-paper-warm: #ece9dd;
   --color-surface: #ffffff;
   --color-surface-muted: #ebe9e4;
 
+  /* ink */
+  --color-ink: #111111;
+  --color-ink-muted: #4a4a4a;
+  --color-ink-soft: #7a7768;
+  --color-ink-soft-2: #4a4a40;
+
+  /* signal */
+  --color-accent: #d7361a;
+  --color-accent-foreground: #f5f4f1;
+
+  /* playground palette */
+  --color-pal-ink: #111111;
+  --color-pal-red: #d7361a;
+  --color-pal-blue: #1f6feb;
+  --color-pal-green: #0e8a4f;
+  --color-pal-gray: #7a7768;
+
+  /* changelog kinds */
+  --color-kind-add: #111111;
+  --color-kind-fix: #0e8a4f;
+  --color-kind-perf: #1f6feb;
+  --color-kind-breaking: #d7361a;
+
+  /* radius — Bureau Suisse = zero radius everywhere */
   --radius-xs: 0;
   --radius-sm: 0;
   --radius-md: 0;
@@ -27,10 +51,89 @@
   --radius-3xl: 0;
   --radius-full: 9999px;
 
-  --font-sans: "Inter Tight Variable", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  /* fonts */
+  --font-sans: "Inter Tight Variable", "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
+  /* custom text scale (not in stock Tailwind) */
+  --text-mono-xs: 9px;
+  --text-mono-xs--line-height: 1;
+  --text-mono-sm: 10px;
+  --text-mono-sm--line-height: 1;
+  --text-mono: 11px;
+  --text-mono--line-height: 1;
+  --text-13: 13px;
+  --text-13--line-height: 1.4;
+  --text-brand: 30px;
+  --text-brand--line-height: 1;
+  --text-stat: 48px;
+  --text-stat--line-height: 1;
+  --text-h3: 56px;
+  --text-h3--line-height: 0.96;
+  --text-h2: 72px;
+  --text-h2--line-height: 0.95;
+  --text-h1: 88px;
+  --text-h1--line-height: 0.95;
+  --text-h1-xl: 96px;
+  --text-h1-xl--line-height: 0.92;
+  --text-h1-2xl: 120px;
+  --text-h1-2xl--line-height: 0.92;
+  --text-canvas: 260px;
+  --text-canvas--line-height: 0.82;
+
+  /* tracking (negative for displays, positive for caps) */
+  --tracking-display-xl: -0.05em;
+  --tracking-display: -0.045em;
+  --tracking-display-sm: -0.04em;
+  --tracking-display-xs: -0.035em;
+  --tracking-meta: 0.22em;
+  --tracking-mono: 0.18em;
+  --tracking-uppercase: 0.16em;
+  --tracking-tab: 0.14em;
+  --tracking-cap: 0.12em;
+  --tracking-segment: 0.08em;
+  --tracking-pill: 0.06em;
+  --tracking-cta: 0.04em;
+
+  /* leading */
+  --leading-display: 0.92;
+  --leading-display-2: 0.95;
+  --leading-display-3: 0.96;
+  --leading-prose: 1.55;
+  --leading-mono: 1.6;
+  --leading-mono-relaxed: 1.7;
+
+  /* shadow signature */
+  --shadow-stack: 2px 2px 0 var(--color-paper-alt);
+
+  /* breakpoints */
+  --breakpoint-xl: 1320px;
   --breakpoint-3xl: 1920px;
+}
+
+/* 1.5px borders — Tailwind ships only 1/2/4/8 */
+@utility border-thin {
+  border-width: 1.5px;
+}
+@utility border-l-thin {
+  border-left-width: 1.5px;
+}
+@utility border-r-thin {
+  border-right-width: 1.5px;
+}
+@utility border-t-thin {
+  border-top-width: 1.5px;
+}
+@utility border-b-thin {
+  border-bottom-width: 1.5px;
+}
+
+/* Playground canvas grid — composed background */
+@utility bg-canvas-grid {
+  background:
+    linear-gradient(var(--color-paper-alt) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--color-paper-alt) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--color-paper-warm);
 }
 
 /* ---------------------------------------------------------------
@@ -150,9 +253,6 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
 
@@ -188,11 +288,26 @@
     border-color: var(--border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   html,
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11", "tnum";
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
   }
 
   *:focus-visible {

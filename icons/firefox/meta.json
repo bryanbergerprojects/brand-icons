@@ -1,0 +1,100 @@
+{
+  "slug": "firefox",
+  "name": "Firefox",
+  "category": "platforms",
+  "description": "Free, open-source web browser developed by the Mozilla Foundation and its subsidiary Mozilla Corporation.",
+  "tags": ["browser", "web", "mozilla", "open-source", "gecko", "quantum", "rendering-engine"],
+  "brandColor": "#FF7139",
+  "url": "https://www.mozilla.org/firefox/",
+  "repository": "https://hg.mozilla.org/mozilla-central",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["mozilla-firefox"],
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2002",
+      "palette": ["#F00027", "#000000", "#F3611E", "#CC002B", "#FE9D2A", "#F8DB00", "#D36224", "#ECD404", "#680000", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Mozilla_Phoenix_logo_vector.svg",
+      "notes": "Phoenix era (Sept 2002 – Apr 2003) — stylised red bird, used before the Firebird/Firefox renames. Recreated SVG on Wikimedia Commons from the original Mozilla Phoenix credit page."
+    },
+    {
+      "year": "2004",
+      "palette": [
+        "#DE7210",
+        "#F6C08F",
+        "#FFFF8B",
+        "#F4950B",
+        "#FEFD00",
+        "#0F80BC",
+        "#0A5F9E",
+        "#110070",
+        "#FEFE26",
+        "#00145A",
+        "#FFFE54",
+        "#FFFF76"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Mozilla_Firefox_logo_2004.svg",
+      "notes": "Original Firefox fox-and-globe by Jon Hicks (concept by Daniel Burka, sketched by Stephen Desroches). Shipped with Firefox 1.0 in November 2004 and used through Firefox 3.0 (2009)."
+    },
+    {
+      "year": "2013",
+      "palette": [
+        "#DC5726",
+        "#B21F24",
+        "#C13F28",
+        "#2578B8",
+        "#941F21",
+        "#8ED8F8",
+        "#00A2DC",
+        "#FFE300",
+        "#FFFFFF",
+        "#F69622",
+        "#70CAF2",
+        "#E57C27"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Mozilla_Firefox_logo_2013.svg",
+      "notes": "Flat redesign by Sean Martell, shipped with Firefox 23 (August 2013) — simpler gradients, refined globe and fox silhouette. Used through Firefox 56."
+    },
+    {
+      "year": "2017",
+      "palette": [
+        "#FF9100",
+        "#FF272D",
+        "#FFEA00",
+        "#C42482",
+        "#FFDD00",
+        "#FFBA00",
+        "#FFAB02",
+        "#0083FF",
+        "#0060E8",
+        "#FF4A1D",
+        "#FFF14F",
+        "#FF6711"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Firefox_Logo,_2017.svg",
+      "notes": "Photon redesign shipped with Firefox 57 (Quantum, November 2017) — flatter fox, textureless globe, brighter palette. Used through Firefox 69."
+    },
+    {
+      "year": "2019",
+      "palette": [
+        "#FFF44F",
+        "#FF980E",
+        "#FF3647",
+        "#E31587",
+        "#FFBD4F",
+        "#EB0878",
+        "#E50080",
+        "#960E18",
+        "#B11927",
+        "#3A8EE6",
+        "#9059FF",
+        "#C139E6"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Firefox_logo,_2019.svg",
+      "notes": "Family-of-icons era introduced with Firefox 70 (October 2019) — purple globe, simplified fox without visible legs. Current Firefox browser mark (unchanged through 2026)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Skipped millésimes: 2003 Firebird (no authoritative vector source on Wikimedia/archive — only low-res raster references), 2005 Firefox 1.5/2.0 (Wikimedia's Mozilla_Firefox_logo_2004.svg explicitly covers 2004–2009, so the 2005 refinement is not separately vectorised), 2009 Firefox 3.5 (only a 512×512 raster PNG exists on Wikimedia — no project raster-to-SVG tool available yet), 2024 (Firefox itself did not rebrand; the 2024 Mozilla rebrand applies to the parent company wordmark, not the Firefox browser mark)."
+}

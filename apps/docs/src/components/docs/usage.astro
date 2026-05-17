@@ -1,0 +1,50 @@
+---
+import CodeBlock from '@/components/docs/code-block.astro';
+import Eyebrow from '@/components/docs/eyebrow.astro';
+import H from '@/components/docs/section-heading.astro';
+
+const USAGE_SOURCE = `import { ArrowRight, Bell, Lock } from '@brand/icons-react'
+
+export function Toolbar () {
+  return (
+    <nav className="toolbar">
+      <ArrowRight size={20} />
+      <Bell       size={20} />
+      <Lock       size={20} weight="solid" />
+    </nav>
+  )
+}`;
+
+const THEMING_SOURCE = `.toolbar       { color: var(--ink); }
+.toolbar:hover { color: var(--accent); }
+/* every icon follows currentColor */`;
+
+const A11Y_SOURCE = `<Bell size={20}
+  title="3 new notifications"
+  role="img" />`;
+---
+
+<section class="border-t border-ink pt-18 pb-18">
+  <H id="usage" num="02" kicker="Usage" title="Import. Place. Style." />
+
+  <p class="text-base text-ink-soft-2">
+    Every icon is a stateless React component that paints in
+    <code class="bg-paper-alt px-1.5 py-px font-mono">currentColor</code> and sizes from a single
+    <code class="bg-paper-alt px-1.5 py-px font-mono">size</code> prop. No CSS to load.
+  </p>
+
+  <div class="mt-6">
+    <CodeBlock lang="react" source={USAGE_SOURCE} />
+  </div>
+
+  <div class="mt-6 grid grid-cols-2 gap-5">
+    <div>
+      <Eyebrow label="Theming via CSS" />
+      <CodeBlock lang="css" source={THEMING_SOURCE} />
+    </div>
+    <div>
+      <Eyebrow label="Accessibility" />
+      <CodeBlock lang="react" source={A11Y_SOURCE} />
+    </div>
+  </div>
+</section>

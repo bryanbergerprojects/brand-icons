@@ -9,15 +9,15 @@
   "repository": "https://github.com/microsoft/vscode",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["visual-studio-code", "vs-code"],
-  "latest": "2015",
+  "latest": "2017",
   "years": [
     {
-      "year": "2015",
+      "year": "2017",
       "palette": ["#007ACC", "#0065A9", "#1F9CF0", "#FFFFFF"],
       "source": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
-      "notes": "Blue chevron with <defs> mask + linearGradient retained in color.svg."
+      "notes": "Blue chevron refresh shipped in 1.17 (October 2017) — see https://code.visualstudio.com/blogs/2017/10/24/theicon. The 2015 preview (blue infinity borrowed from Visual Studio Monaco) and the April 2016 1.0 chevron lack a publishable SVG source, so they are omitted; <defs> placed before consuming group to keep the url(#g) gradient reference resolvable in strict sanitizers."
     }
   ],
   "addedAt": "2026-05-16",
-  "updatedAt": "2026-05-16"
+  "updatedAt": "2026-05-17"
 }

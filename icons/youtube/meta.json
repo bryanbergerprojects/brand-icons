@@ -1,0 +1,35 @@
+{
+  "slug": "youtube",
+  "name": "YouTube",
+  "category": "media",
+  "description": "Online video-sharing and social media platform owned by Google where users can upload, view and share videos.",
+  "tags": ["video", "streaming", "google", "creators", "shorts", "music", "media-platform"],
+  "brandColor": "#FF0033",
+  "url": "https://www.youtube.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#E52D27", "#BF171D", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_play_button_icon_(2013%E2%80%932017).svg",
+      "notes": "First standalone YouTube play-button icon — introduced December 2013 alongside the refined 'YouTube' wordmark and used through August 2017. Horizontal rounded-rectangle 'tube' with red vertical gradient (#E52D27 → #BF171D) and white triangle. Source artwork is 1024×721; placed centred in the 24×24 viewBox via uniform transform (scaled to width, vertically centred with 3.55 unit padding top/bottom)."
+    },
+    {
+      "year": "2017",
+      "palette": ["#FF0000", "#FFFFFF"],
+      "source": "https://www.youtube.com/s/desktop/icons/yt-icon-square.svg",
+      "notes": "August 2017 rebrand by YouTube Creative Lab — flat solid red (#FF0000), updated geometry with rounded-corner 'lozenge' play-button and refined proportions. Mark replaced the 2013 gradient version on 29 August 2017 and remained primary until February 2025. Path data sourced from the YouTube embed-button artwork (also mirrored as simple-icons #FF0000 reference)."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF0033", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_2024.svg",
+      "notes": "June 2024 brand refresh — same play-button geometry as 2017 with a slightly pinker red (#FF0033) and a thinner companion wordmark ('YouTube New' typeface). Promoted to primary mark on 6 February 2025."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Pre-2013 wordmark millésimes (2005-2006 launch wordmark, 2006-2011 'Tube'-with-shadow wordmark, 2011-2013 flat-red wordmark) were not added. These were horizontal 'YouTube' wordmarks (≈2.5:1 aspect) where the iconic visual element is the typography itself; faithful reproduction at 24×24 would require redrawing individual letterforms by hand from rasters, which crosses into invention per .claude/agents/icon-fetcher.md. The earliest authentic standalone play-button mark (2013) is the first millésime that can be reproduced faithfully at icon scale. The icon library convention (simple-icons, font-awesome, lucide) is to use the play-button mark for all eras of YouTube."
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "gemini-cli",
+  "name": "Gemini CLI",
+  "category": "dev-tools",
+  "description": "Gemini CLI is Google's open-source command-line AI agent that runs Gemini models in a terminal for coding tasks.",
+  "tags": ["google", "cli", "coding-agent", "terminal", "ai-agent", "developer-tools", "open-source"],
+  "brandColor": "#078EFB",
+  "url": "https://geminicli.com",
+  "repository": "https://github.com/google-gemini/gemini-cli",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-gemini-cli"],
+  "parent": "gemini",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#078EFB", "#217BFE", "#AC87EB", "#EE4D5D", "#406AFB", "#939AFF", "#D698FC", "#FA6178", "#F2554F", "#1E1E2E"],
+      "source": "https://geminicli.com/brandassets/gemini-cli-icon_full-color.svg",
+      "notes": "Rounded-square frame with terminal '>' chevron, Gemini blue→purple→red gradient. Scaled from 512x512 to 24x24 via group transform."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

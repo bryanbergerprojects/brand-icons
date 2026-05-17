@@ -1,0 +1,30 @@
+{
+  "slug": "brave",
+  "name": "Brave",
+  "category": "platforms",
+  "description": "Free, open-source Chromium-based web browser developed by Brave Software with built-in ad and tracker blocking.",
+  "tags": ["browser", "privacy", "chromium", "ad-blocker", "web", "open-source", "tracking-protection"],
+  "brandColor": "#FB542B",
+  "url": "https://brave.com",
+  "repository": "https://github.com/brave/brave-browser",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["brave-browser"],
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#FF5500", "#FF2000", "#FF452A", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave_lion_icon.svg",
+      "notes": "Lion-in-shield mark by Jimmy Haas, unveiled October 30, 2017 for the Brave 0.18 release. Two-stop orange-to-red gradient (#FF5500 → #FF2000) over a white inset face. Carried Brave through the 1.0 stable release in November 2019 and remains the canonical icon mark."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF5601", "#FF4000", "#FF1F01", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/9/93/Brave_Logo_%282024%29.svg",
+      "notes": "Subtle refresh shipped with the 2024 brand refresh that introduced the Poppins Semibold wordmark. The lion silhouette is geometrically unchanged from 2017; the gradient was tuned to three stops (#FF5601 → #FF4000 → #FF1F01) for a slightly warmer mid-tone. Current mark used across brave.com and Brave Search."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Skipped millésimes: 2016 launch logo (first beta, January 2016 — no authoritative vector survives; only low-res raster references prior to the October 2017 Jimmy Haas redesign). Wordmark/typography changed in 2024 but the icon mark only saw a minor gradient tuning, hence two millésimes rather than three."
+}

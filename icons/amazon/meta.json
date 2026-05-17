@@ -1,0 +1,35 @@
+{
+  "slug": "amazon",
+  "name": "Amazon",
+  "category": "e-commerce",
+  "description": "American multinational technology and e-commerce company operating online retail, cloud computing (AWS), and consumer devices.",
+  "tags": ["retail", "marketplace", "aws", "prime", "kindle", "alexa", "logistics", "online-shopping"],
+  "brandColor": "#FF6201",
+  "url": "https://www.amazon.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["amazon-com"],
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2000",
+      "palette": ["#000000", "#FF9900"],
+      "source": "https://commons.wikimedia.org/wiki/File:Amazon.com-Logo.svg",
+      "notes": "Smile/arrow wordmark introduced 25 January 2000 by Turner Duckworth — 'amazon.com' lowercase with the curved orange arrow from 'a' to 'z'. Used through 2012. Wordmark scaled to fit 24×24 viewBox (text renders very small at icon sizes — cataloging tradeoff)."
+    },
+    {
+      "year": "2012",
+      "palette": ["#221F1F", "#FF9900"],
+      "source": "https://commons.wikimedia.org/wiki/File:Amazon_logo.svg",
+      "notes": "Dropped the '.com' suffix in 2012 — wordmark simplified to 'amazon' over the same smile arrow. Used through April 2024. Wordmark scaled to fit 24×24 viewBox (text renders very small at icon sizes — cataloging tradeoff)."
+    },
+    {
+      "year": "2024",
+      "palette": ["#171D27", "#FF6201"],
+      "source": "https://commons.wikimedia.org/wiki/File:Amazon_2024.svg",
+      "notes": "Refresh released 15 April 2024 — new Amazon Ember Modern wordmark (Koto + NaN Foundry), slightly thicker smile and a deeper 'Smile Orange' (#FF6201) replacing the classic #FF9900. Wordmark scaled to fit 24×24 viewBox (text renders very small at icon sizes — cataloging tradeoff)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Skipped millésimes: 1995 original 'A-river' mark by Turner Duckworth (only low-res raster references on logo-history sites — no authoritative true-vector SVG on Wikimedia Commons or archive.org), 1997 'zebra' refresh and 1998 'amazon.com' serif + 'swish' variants (same — no vector source). Per the no-invent rule these millésimes were skipped. `latest` set to 2024 — current Amazon Ember Modern wordmark with the Smile Orange (#FF6201) palette."
+}

@@ -1,0 +1,59 @@
+---
+import { codeToHtml } from 'shiki';
+import CodeBlock from '@/components/docs/code-block.astro';
+import H from '@/components/docs/section-heading.astro';
+import InstallTabs, { type InstallCommand } from '@/features/docs/install-tabs';
+
+const COMMANDS = {
+  npm: '$ npm i @brand/icons-react',
+  pnpm: '$ pnpm add @brand/icons-react',
+  yarn: '$ yarn add @brand/icons-react',
+  bun: '$ bun add @brand/icons-react',
+} as const;
+
+type Manager = keyof typeof COMMANDS;
+
+const entries = await Promise.all(
+  (Object.keys(COMMANDS) as Manager[]).map(async (key) => {
+    const source = COMMANDS[key];
+    const html = await codeToHtml(source, { lang: 'bash', theme: 'github-dark' });
+    return [key, { source, html } satisfies InstallCommand] as const;
+  })
+);
+const commands = Object.fromEntries(entries) as Record<Manager, InstallCommand>;
+
+const CDN_SOURCE = `<script type="module">
+  import { ArrowRight }
+    from 'https://esm.brandicons.dev/icons@2.4.0'
+</script>`;
+---
+
+<section class="pb-18">
+  <H id="install" num="01" kicker="Install" title="One command. Any runtime." />
+
+  <p class="text-base text-ink-soft-2">
+    Brand Icons ships as ESM-only, one component per icon. Pick your package manager — the CLI
+    flags are identical.
+  </p>
+
+  <div class="mt-6">
+    <InstallTabs commands={commands} client:visible />
+  </div>
+
+  <div class="mt-7 grid grid-cols-2 gap-5">
+    <div class="border border-paper-alt bg-paper p-4.5 px-5">
+      <p class="mb-2 font-mono text-mono-sm font-bold uppercase tracking-mono text-accent">
+        Requirements
+      </p>
+      <ul class="mt-2 flex flex-col gap-1.5 text-13 text-ink">
+        <li>React 18+ (or Vue 3.4+ via <code class="bg-paper-alt px-1.5 py-px font-mono">@brand/icons-vue</code>)</li>
+        <li>Node 18+ for bundlers</li>
+        <li>ES Modules — no CJS fallback shipped</li>
+      </ul>
+    </div>
+
+    <div>
+      <CodeBlock lang="html" label="CDN" source={CDN_SOURCE} />
+    </div>
+  </div>
+</section>

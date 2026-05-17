@@ -1,0 +1,19 @@
+---
+type Props = {
+  id: string;
+  num: string;
+  kicker: string;
+  title: string;
+};
+
+const { id, num, kicker, title } = Astro.props;
+---
+
+<div id={id} class="mb-6 scroll-mt-16">
+  <div class="mb-2.5 flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
+    <span class="font-mono font-bold text-accent">{num}</span>
+    <span>·</span>
+    <span>{kicker}</span>
+  </div>
+  <h2 class="m-0 text-h2 font-extrabold tracking-display-sm">{title}</h2>
+</div>

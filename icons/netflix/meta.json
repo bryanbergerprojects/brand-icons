@@ -1,0 +1,34 @@
+{
+  "slug": "netflix",
+  "name": "Netflix",
+  "category": "media",
+  "description": "American subscription video on-demand streaming service and producer of original films and series.",
+  "tags": ["streaming", "video", "entertainment", "movies", "tv-shows", "originals", "vod", "svod"],
+  "brandColor": "#E50914",
+  "url": "https://netflix.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "latest": "2016",
+  "years": [
+    {
+      "year": "2001",
+      "palette": ["#B4131D", "#211C1D", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Netflix_logo.svg",
+      "notes": "Curved 'Netflix' wordmark with red rectangle background and arched baseline. Used from 20 August 2001 to 12 June 2014. Wordmark scaled to fit 24×24 viewBox; mono variant renders the rectangle silhouette with letters cut out via even-odd fill."
+    },
+    {
+      "year": "2014",
+      "palette": ["#E50914"],
+      "source": "https://commons.wikimedia.org/wiki/File:Netflix_2015_logo.svg",
+      "notes": "Flat 'NETFLIX' wordmark by Gretel — removed the arched baseline and shadow, introduced June 2014 and still the primary logo. Wordmark vertically centered inside 24×24 viewBox."
+    },
+    {
+      "year": "2016",
+      "palette": ["#E50914", "#B1060F", "#7B010C"],
+      "source": "https://commons.wikimedia.org/wiki/File:Netflix_2016_N_logo.svg",
+      "notes": "Three-dimensional red 'N' ribbon symbol, introduced June 2016 as a compact app icon and brand mark for streaming surfaces. Two side panels carry linear gradients reproducing the ribbon's volumetric shading; mono variant flattens to a single 'N' silhouette."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}
