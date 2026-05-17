@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: release-${{ github.workflow }}-${{ github.ref }}
@@ -13,8 +14,9 @@ permissions:
   id-token: write
 
 jobs:
-  release:
-    name: Release
+  stable:
+    name: Release Stable
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       HUSKY: 0
@@ -52,5 +54,62 @@ jobs:
           title: 'chore(release): version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+  canary:
+    name: Release Canary
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/canary'
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build icons (generated package sources)
+        run: pnpm build:icons
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Version canary packages
+        run: pnpm run version
+
+      - name: Commit version bumps
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add -A
+            git commit -m "chore(release): canary packages"
+            git push origin canary
+          else
+            echo "No version changes to commit"
+          fi
+
+      - name: Publish to npm (canary tag)
+        run: pnpm release
+        env:
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Push git tags
+        run: git push --follow-tags
