@@ -6,6 +6,7 @@ import TreeShaking from '@/components/docs/tree-shaking.astro';
 import Usage from '@/components/docs/usage.astro';
 import Toc from '@/features/docs/toc';
 import BaseLayout from '@/layouts/base.astro';
+import { CORE_VERSION } from '@/lib/version';
 ---
 
 <BaseLayout
@@ -18,7 +19,7 @@ import BaseLayout from '@/layouts/base.astro';
       <span>·</span>
       <span>Documentation</span>
       <span>·</span>
-      <span>V2.4.0</span>
+      <span>v{CORE_VERSION}</span>
       <span>·</span>
       <span>5 chapters</span>
     </div>
@@ -30,7 +31,7 @@ import BaseLayout from '@/layouts/base.astro';
   </section>
 
   <div class="grid grid-cols-[280px_1fr] border-b border-ink">
-    <Toc client:idle />
+    <Toc client:idle version={CORE_VERSION} />
     <div class="border-l border-ink bg-paper">
       <div class="container mx-0 px-15 py-10 pb-15">
         <Install />

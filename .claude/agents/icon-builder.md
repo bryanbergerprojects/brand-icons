@@ -42,13 +42,18 @@ When you finish, all of these are true:
    `tools/build-icons` (see `.claude/rules/meta.md`).
 2. For every year in `meta.years[]`, `icons/<slug>/<year>/color.svg` and
    `icons/<slug>/<year>/mono.svg` exist and follow `.claude/rules/svg.md`.
-3. `pnpm build:icons`, `pnpm typecheck`, and `pnpm test` all pass on the
+3. `apps/docs/src/lib/all-icons.ts` imports `<Brand>LatestIcon` from
+   `@brand-icons/react` and registers it in `latestIconBySlug` under the
+   brand `slug`. Without this entry, the library page (`/library`)
+   silently falls back to the brand name as text instead of rendering
+   the icon.
+4. `pnpm build:icons`, `pnpm typecheck`, and `pnpm test` all pass on the
    branch.
-4. A changeset file exists under `.changeset/`.
-5. Exactly one commit: `feat(icons): add <Brand Name>` (or
+5. A changeset file exists under `.changeset/`.
+6. Exactly one commit: `feat(icons): add <Brand Name>` (or
    `fix(icons): <summary>` when invoked with `--fix=...`).
-6. Branch `feat/add-<slug>` is pushed to `origin`.
-7. A PR is opened against `main` (or the fix is pushed to the existing
+7. Branch `feat/add-<slug>` is pushed to `origin`.
+8. A PR is opened against `main` (or the fix is pushed to the existing
    PR's branch when `--fix=...`).
 
 You return the PR URL.
@@ -162,9 +167,17 @@ Follow `.claude/rules/meta.md` §2.4 for key ordering. Use the fetcher's
 `name`, `category`, `description`, `tags`, `url`, `repository`, `aliases`,
 `parent`. Compute fresh values for:
 
+- `latest` ← the chronologically most recent `year` in `years[]` (max of
+  `years[].year`). On a **new brand**, that is the newest millésime you
+  just wrote. On `--fix` adding a new millésime, recompute and bump
+  `latest` if the new year is more recent than the previous `latest`.
+  Must satisfy `.claude/rules/meta.md` §1.10 (`latest ∈ years[].year`).
+  If the fetcher's `latest` disagrees with your computed value, **yours
+  wins** — it reflects the files actually shipped.
 - `brandColor` ← first entry of `years[latest].palette` (yours).
 - `addedAt` ← `date +%Y-%m-%d` (UTC date is fine).
-- `updatedAt` ← same as `addedAt` on first creation.
+- `updatedAt` ← same as `addedAt` on first creation. On `--fix`, refresh
+  to today.
 - `license` ← literal `"Trademark — usage for identification (fair use)"`.
 
 Drop `parent` entirely if `null`/absent. Drop empty `aliases`.
@@ -181,7 +194,30 @@ pnpm test
 Quote any failure verbatim, fix the specific issue, retry. Up to **3
 attempts** before reporting back.
 
-### 9. Create a changeset
+### 9. Register the latest icon in the docs library page
+
+The library page at `/library` reads its slug → component mapping from
+**`apps/docs/src/lib/all-icons.ts`** — a hand-maintained file. Brands
+absent from this map silently fall back to text. Add an entry for the
+new brand:
+
+1. Discover the exact React export name from
+   `packages/react/src/icons/<PascalBrand>Latest.tsx` (the build pipeline
+   just generated it). Example: `TelegramLatestIcon`,
+   `GoogleChromeLatestIcon` (= `chrome` slug),
+   `MicrosoftEdgeLatestIcon` (= `edge` slug). The component name does
+   **not** always match the slug — read the file to confirm.
+2. Insert the import alphabetically into the `import { … } from
+   '@brand-icons/react'` block at the top.
+3. Insert the slug entry alphabetically into the `latestIconBySlug`
+   object, keyed by `meta.slug` (kebab-case), value = the imported
+   component.
+4. Re-run `pnpm typecheck` to confirm the import resolves.
+
+On `--fix` invocations: only touch this file if the reviewer flagged it
+or if the slug entry is still missing.
+
+### 10. Create a changeset
 
 Write `.changeset/add-<slug>.md` directly (the CLI is interactive):
 
@@ -200,17 +236,17 @@ Add **<Brand Name>** brand icon (<N> millésime(s)).
 For a `--fix` invocation, only emit a changeset when the fix touches the
 public manifest; otherwise skip.
 
-### 10. Commit, push, open PR
+### 11. Commit, push, open PR
 
 ```bash
 # First-time creation:
 git checkout -b feat/add-<slug>
-git add icons/<slug>/ .changeset/
+git add icons/<slug>/ apps/docs/src/lib/all-icons.ts .changeset/
 git commit -m "feat(icons): add <Brand Name>"
 git push -u origin HEAD:feat/add-<slug>
 
 # --fix mode (already on origin/feat/add-<slug> from step 2):
-git add icons/<slug>/ .changeset/
+git add icons/<slug>/ apps/docs/src/lib/all-icons.ts .changeset/
 git commit -m "fix(icons): <one-line summary of the reviewer issues>"
 git push origin feat/add-<slug>
 ```
@@ -246,7 +282,8 @@ Capture the PR URL from `gh pr create`'s stdout.
 
 ## Guardrails
 
-- **Never** write outside `icons/<slug>/`, `.changeset/`, or your worktree.
+- **Never** write outside `icons/<slug>/`, `.changeset/`,
+  `apps/docs/src/lib/all-icons.ts`, or your worktree.
 - **Never** `git push --force` or push to `main`.
 - **Never** merge the PR — that is a human decision.
 - **Refuse** if `/tmp/brand-icons-fetch/<slug>.json` is missing or invalid.
