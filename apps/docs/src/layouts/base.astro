@@ -1,6 +1,8 @@
 ---
 import Footer from '@/components/footer.astro';
 import Nav from '@/components/nav.astro';
+import CommandPalette, { type DocLink } from '@/features/command-palette/command-palette';
+import { manifest } from '@brand-icons/core';
 import '@/styles/global.css';
 
 type Props = {
@@ -9,6 +11,17 @@ type Props = {
 };
 
 const { title, description = 'Multi-variant, multi-framework brand icons library.' } = Astro.props;
+
+const sortedIcons = [...manifest].sort((a, b) => a.name.localeCompare(b.name));
+
+const docLinks: readonly DocLink[] = [
+  { title: 'Getting started', href: '/docs/getting-started' },
+  { title: 'Frameworks', href: '/docs/frameworks' },
+  { title: 'License', href: '/resources/license' },
+  { title: 'Contributing', href: '/resources/contributing' },
+  { title: 'Code of conduct', href: '/resources/code-of-conduct' },
+  { title: 'Brand owners', href: '/resources/brand-owners' },
+];
 ---
 
 <!doctype html>
@@ -27,5 +40,6 @@ const { title, description = 'Multi-variant, multi-framework brand icons library
       <slot />
     </main>
     <Footer />
+    <CommandPalette icons={sortedIcons} docs={docLinks} client:idle />
   </body>
 </html>

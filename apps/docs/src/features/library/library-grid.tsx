@@ -1,5 +1,6 @@
 import type { ManifestEntry } from '@brand-icons/core';
-import { type ChangeEvent, useTransition } from 'react';
+import Fuse, { type IFuseOptions } from 'fuse.js';
+import { type ChangeEvent, useMemo, useTransition } from 'react';
 import { Input } from '@/components/ui/input';
 import { latestIconBySlug } from '@/lib/all-icons';
 import { useUrlParam } from '@/lib/use-url-param';
@@ -9,16 +10,17 @@ export type LibraryGridProps = {
   icons: readonly ManifestEntry[];
 };
 
-const matchesQuery = (icon: ManifestEntry, query: string): boolean => {
-  if (query === '') return true;
-  const q = query.toLowerCase();
-  return (
-    icon.name.toLowerCase().includes(q) ||
-    icon.slug.includes(q) ||
-    icon.aliases.some((alias) => alias.toLowerCase().includes(q)) ||
-    icon.tags.some((tag) => tag.toLowerCase().includes(q)) ||
-    icon.description.toLowerCase().includes(q)
-  );
+const fuseOptions: IFuseOptions<ManifestEntry> = {
+  keys: [
+    { name: 'name', weight: 0.4 },
+    { name: 'slug', weight: 0.3 },
+    { name: 'aliases', weight: 0.2 },
+    { name: 'tags', weight: 0.15 },
+    { name: 'description', weight: 0.1 },
+    { name: 'category', weight: 0.05 },
+  ],
+  threshold: 0.35,
+  ignoreLocation: true,
 };
 
 const LibraryGrid = ({ icons }: LibraryGridProps) => {
@@ -27,10 +29,10 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
   const [, startTransition] = useTransition();
 
   const categories = Array.from(new Set(icons.map((icon) => icon.category))).sort();
+  const fuse = useMemo(() => new Fuse([...icons], fuseOptions), [icons]);
 
-  const filtered = icons
-    .filter((icon) => (category === '' ? true : icon.category === category))
-    .filter((icon) => matchesQuery(icon, query));
+  const ranked = query === '' ? icons : fuse.search(query).map((result) => result.item);
+  const filtered = category === '' ? ranked : ranked.filter((icon) => icon.category === category);
 
   const handleQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     const next = event.target.value;
