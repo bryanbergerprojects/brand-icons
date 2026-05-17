@@ -8,8 +8,8 @@ Multi-variant, multi-framework brand icons library. Monorepo pnpm + Turborepo.
 - **Packages**: tsup (esbuild) + TypeScript strict + Vitest, all ESM-only
 - **Lint/format**: Biome (single tool, no ESLint + Prettier)
 - **Frameworks shipped**: React 19, Vue 3.5, Svelte 5, Web Components
-- **Docs site** (`apps/docs`): Next.js 15 App Router + Tailwind v4 + shadcn/ui v4 + lucide-react + MDX + Fuse.js + Shiki + next-themes
-- **Hosting docs**: Scaleway Serverless Containers (region `fr-par`)
+- **Docs site** (`apps/docs`): Astro 5 (static output) + React 19 Islands + Tailwind v4 + shadcn/ui v4 + lucide-react + MDX (content collections) + Fuse.js + Shiki + `next-themes` swap (`@astrojs/react` + theme via class strategy)
+- **Hosting docs**: Scaleway Serverless Containers (region `fr-par`) — static `dist/` served behind a tiny adapter (or pure static CDN if no SSR needed)
 - **Node**: ≥ 20
 
 ## Repo layout
@@ -22,7 +22,7 @@ packages/
   svelte/               # @brand-icons/svelte
   web-components/       # @brand-icons/wc
 apps/
-  docs/                 # Next.js documentation + gallery + playground
+  docs/                 # Astro documentation + gallery + playground (React Islands)
 icons/                  # Source of truth — one folder per brand, year-aware
   <slug>/
     meta.json           # Brand-level metadata: years[], palette[], latest (Zod-validated)
@@ -90,6 +90,9 @@ Path-scoped authoring rules — read them before editing matching files:
 | --------------- | ----------------------------------------------------- |
 | `typescript.md` | `**/*.{ts,tsx}`                                       |
 | `react.md`      | React components (`packages/react`, `apps/docs`)      |
+| `astro.md`      | `apps/docs/**/*.{astro,ts,tsx,mdx}` — pages, islands, content collections |
+| `components.md` | UI vs business split, shadcn restyle, scoping         |
+| `hooks.md`      | `**/use-*.ts`, `**/use-*.tsx`                         |
 | `tests.md`      | `**/__tests__/**`, `**/*.test.ts`                     |
 | `monorepo.md`   | workspace, generated files, scripts                   |
 | `svg.md`        | `icons/**/*.svg`, generated `packages/*/src/icons/**` |
@@ -108,7 +111,8 @@ project style — follow unless justified.
 - 2+ params → single named object. Zod validation at boundaries.
 - No `any`, no `!` non-null assertion, no inline business types in UI.
 - Tailwind v4 — CSS-first config (`@theme` in `globals.css`), no `tailwind.config.ts`.
-- shadcn/ui components live in `apps/docs/components/ui/` — never restyle from call sites.
+- shadcn/ui components live in `apps/docs/src/components/ui/` — never restyle from call sites.
+- Astro pages (`.astro`) stay zero-JS by default. React components hydrate only via `client:*` directives (`load` / `idle` / `visible` / `only`) — pick the lightest that works.
 
 ## Generated files (do not edit)
 
@@ -136,13 +140,15 @@ templates in `tools/build-icons/templates/` instead.
 
 Use **context7** (`mcp__context7__resolve-library-id` +
 `mcp__context7__query-docs`) for any library / framework / SDK doc lookup
-(Next.js 15, Tailwind v4, shadcn/ui v4, Turborepo, Changesets, tsup, SVGO,
-Vitest…) — even when you think you know the answer. Training data drifts.
+(Astro 5, `@astrojs/react`, Tailwind v4, shadcn/ui v4, Turborepo, Changesets,
+tsup, SVGO, Vitest…) — even when you think you know the answer. Training data
+drifts.
 
 ## What this repo is not
 
 - Not a generic icon set. Only brand marks of real organizations.
 - Not a design system. UI primitives live in `shadcn/ui`, not here.
-- Not server-side. No DB, no auth, no Server Actions. The docs site reads
-  the manifest at build time only.
+- Not server-side. No DB, no auth, no server endpoints. The docs site is
+  Astro static — the manifest is imported at build time, never fetched at
+  runtime.
 - Not a CMS. Adding icons is a code change; PR + Changeset, no admin UI.
