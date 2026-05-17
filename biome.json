@@ -19,7 +19,8 @@
       "!**/*.md",
       "!**/*.mdx",
       "!**/*.yml",
-      "!**/*.yaml"
+      "!**/*.yaml",
+      "!**/*.astro"
     ]
   },
   "formatter": {
@@ -55,6 +56,15 @@
     "formatter": {
       "indentWidth": 2,
       "trailingCommas": "none"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "double"
     }
   }
 }

@@ -1,17 +1,19 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------
+   Bureau Suisse — design tokens (D02). See .claude/plan/website/design-system.md.
+   Single source of truth for raw values. shadcn vars below map to these.
+--------------------------------------------------------------- */
 @theme {
-  /* Base palette — Bureau Suisse direction (D02). See .claude/plan/website/design-system.md. */
   --color-paper: #f5f4f1;
   --color-ink: #111111;
   --color-ink-muted: #4a4a4a;
   --color-accent: #d7361a;
-
-  /* Surfaces */
   --color-surface: #ffffff;
   --color-surface-muted: #ebe9e4;
 
-  /* Radii — zero rounding everywhere (design system rule) */
   --radius-xs: 0;
   --radius-sm: 0;
   --radius-md: 0;
@@ -21,28 +23,176 @@
   --radius-3xl: 0;
   --radius-full: 9999px;
 
-  /* Typography */
-  --font-sans: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Inter Tight Variable", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Container */
   --breakpoint-3xl: 1920px;
 }
 
+/* ---------------------------------------------------------------
+   shadcn/ui v4 — CSS variables. Light mode = Bureau Suisse paper/ink.
+--------------------------------------------------------------- */
+:root {
+  --radius: 0;
+
+  --background: #f5f4f1;
+  --foreground: #111111;
+
+  --card: #ffffff;
+  --card-foreground: #111111;
+
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+
+  --primary: #111111;
+  --primary-foreground: #f5f4f1;
+
+  --secondary: #ebe9e4;
+  --secondary-foreground: #111111;
+
+  --muted: #ebe9e4;
+  --muted-foreground: #4a4a4a;
+
+  --accent: #d7361a;
+  --accent-foreground: #f5f4f1;
+
+  --destructive: #d7361a;
+  --destructive-foreground: #f5f4f1;
+
+  --border: rgb(17 17 17 / 0.1);
+  --input: rgb(17 17 17 / 0.15);
+  --ring: #d7361a;
+
+  --chart-1: #d7361a;
+  --chart-2: #111111;
+  --chart-3: #4a4a4a;
+  --chart-4: #8a8a8a;
+  --chart-5: #ebe9e4;
+
+  --sidebar: #f5f4f1;
+  --sidebar-foreground: #111111;
+  --sidebar-primary: #111111;
+  --sidebar-primary-foreground: #f5f4f1;
+  --sidebar-accent: #d7361a;
+  --sidebar-accent-foreground: #f5f4f1;
+  --sidebar-border: rgb(17 17 17 / 0.1);
+  --sidebar-ring: #d7361a;
+}
+
+.dark {
+  --background: #0c0c0c;
+  --foreground: #f5f4f1;
+
+  --card: #161616;
+  --card-foreground: #f5f4f1;
+
+  --popover: #161616;
+  --popover-foreground: #f5f4f1;
+
+  --primary: #f5f4f1;
+  --primary-foreground: #0c0c0c;
+
+  --secondary: #1f1f1f;
+  --secondary-foreground: #f5f4f1;
+
+  --muted: #1f1f1f;
+  --muted-foreground: #a3a3a3;
+
+  --accent: #d7361a;
+  --accent-foreground: #f5f4f1;
+
+  --destructive: #d7361a;
+  --destructive-foreground: #f5f4f1;
+
+  --border: rgb(245 244 241 / 0.1);
+  --input: rgb(245 244 241 / 0.15);
+  --ring: #d7361a;
+
+  --chart-1: #d7361a;
+  --chart-2: #f5f4f1;
+  --chart-3: #a3a3a3;
+  --chart-4: #6a6a6a;
+  --chart-5: #1f1f1f;
+
+  --sidebar: #0c0c0c;
+  --sidebar-foreground: #f5f4f1;
+  --sidebar-primary: #f5f4f1;
+  --sidebar-primary-foreground: #0c0c0c;
+  --sidebar-accent: #d7361a;
+  --sidebar-accent-foreground: #f5f4f1;
+  --sidebar-border: rgb(245 244 241 / 0.1);
+  --sidebar-ring: #d7361a;
+}
+
+/* ---------------------------------------------------------------
+   Expose shadcn vars to Tailwind utility classes (bg-background, text-foreground, …).
+--------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ---------------------------------------------------------------
+   Base layer.
+--------------------------------------------------------------- */
 @layer base {
   :root {
     color-scheme: light dark;
   }
 
+  * {
+    border-color: var(--border);
+  }
+
   html,
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans);
   }
 
   *:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 }
