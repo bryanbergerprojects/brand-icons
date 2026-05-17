@@ -2,10 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "declaration": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "jsx": "preserve",
+    "types": ["vite/client"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/**/*.vue"],
+  "exclude": ["dist", "node_modules", "__tests__"]
 }
