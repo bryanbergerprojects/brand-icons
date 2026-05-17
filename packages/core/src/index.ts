@@ -1,3 +1,4 @@
+export * as brands from './icons/index';
 export { manifest } from './manifest';
 export type {
   BrandIconProps,

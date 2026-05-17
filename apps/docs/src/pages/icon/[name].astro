@@ -1,63 +1,126 @@
 ---
+import IconActions, { type CodeSnippet, type SvgDownload } from '@/features/icon-detail/icon-actions';
 import BaseLayout from '@/layouts/base.astro';
-import { latestIconBySlug } from '@/lib/all-icons';
-import { type ManifestEntry, manifest } from '@brand-icons/core';
+import { brands, type IconBrand, manifest } from '@brand-icons/core';
+import { codeToHtml } from 'shiki';
 
-export const getStaticPaths = () =>
-  manifest.map((icon) => ({ params: { name: icon.slug }, props: { icon } }));
-
-type Props = { icon: ManifestEntry };
+export const getStaticPaths = () => manifest.map((icon) => ({ params: { name: icon.slug }, props: { icon } }));
 
 const { icon } = Astro.props;
-const Icon = latestIconBySlug[icon.slug];
+
+const brand = (brands as Record<string, IconBrand>)[icon.slug];
+if (!brand) throw new Error(`Missing brand module for slug: ${icon.slug}`);
+
+const latestYear = brand.years[icon.latest];
+if (!latestYear) throw new Error(`Brand ${icon.slug} has no entry for latest year ${icon.latest}`);
+
+const colorSvg = latestYear.color;
+const monoSvg = latestYear.mono;
 
 const capitalize = (slug: string): string => slug.charAt(0).toUpperCase() + slug.slice(1);
-
 const pascalSlug = capitalize(icon.slug);
 
-const frameworkUsageSnippets: ReadonlyArray<{ label: string; code: string }> = [
+const usageSnippets: ReadonlyArray<{ id: string; label: string; lang: string; raw: string }> = [
   {
+    id: 'react',
     label: 'React',
-    code: `import { ${pascalSlug}LatestIcon } from '@brand-icons/react';\n\n<${pascalSlug}LatestIcon size={48} />`,
+    lang: 'tsx',
+    raw: `import { ${pascalSlug}LatestIcon } from '@brand-icons/react';\n\nexport const Example = () => <${pascalSlug}LatestIcon size={48} />;\n`,
   },
   {
+    id: 'vue',
     label: 'Vue',
-    code: `<script setup>\nimport { ${pascalSlug}LatestIcon } from '@brand-icons/vue';\n</script>\n\n<${pascalSlug}LatestIcon :size="48" />`,
+    lang: 'vue',
+    raw: `<script setup>\nimport { ${pascalSlug}LatestIcon } from '@brand-icons/vue';\n</script>\n\n<template>\n  <${pascalSlug}LatestIcon :size="48" />\n</template>\n`,
   },
   {
+    id: 'svelte',
     label: 'Svelte',
-    code: `<script>\n  import { ${pascalSlug}LatestIcon } from '@brand-icons/svelte';\n</script>\n\n<${pascalSlug}LatestIcon size={48} />`,
+    lang: 'svelte',
+    raw: `<script>\n  import { ${pascalSlug}LatestIcon } from '@brand-icons/svelte';\n</script>\n\n<${pascalSlug}LatestIcon size={48} />\n`,
   },
   {
+    id: 'wc',
     label: 'Web Components',
-    code: `<script type="module">\n  import '@brand-icons/wc';\n</script>\n\n<brand-icon-${icon.slug}-latest size="48"></brand-icon-${icon.slug}-latest>`,
+    lang: 'html',
+    raw: `<script type="module">\n  import '@brand-icons/wc';\n</script>\n\n<brand-icon-${icon.slug}-latest size="48"></brand-icon-${icon.slug}-latest>\n`,
   },
+  {
+    id: 'svg',
+    label: 'SVG',
+    lang: 'xml',
+    raw: `${colorSvg}\n`,
+  },
+];
+
+const highlighted: readonly CodeSnippet[] = await Promise.all(
+  usageSnippets.map(async (snippet) => ({
+    id: snippet.id,
+    label: snippet.label,
+    raw: snippet.raw,
+    html: await codeToHtml(snippet.raw, {
+      lang: snippet.lang,
+      themes: { light: 'github-light', dark: 'github-dark' },
+    }),
+  }))
+);
+
+const downloads: readonly SvgDownload[] = [
+  { label: 'Color', filename: `${icon.slug}-${icon.latest}-color.svg`, raw: colorSvg },
+  { label: 'Mono', filename: `${icon.slug}-${icon.latest}-mono.svg`, raw: monoSvg },
+];
+
+const sections: ReadonlyArray<{ id: string; label: string }> = [
+  { id: 'preview', label: 'Preview' },
+  { id: 'metadata', label: 'Metadata' },
+  { id: 'millesimes', label: 'Millésimes' },
+  { id: 'usage', label: 'Usage' },
 ];
 ---
 
-<BaseLayout
-  title={`${icon.name} — Brand Icons`}
-  description={icon.description}
->
-  <article class="mx-auto max-w-5xl px-6 py-16">
-    <a
-      href="/library"
-      class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
-    >
-      ← Library
-    </a>
+<BaseLayout title={`${icon.name} — Brand Icons`} description={icon.description}>
+  <article class="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[1fr_180px]">
+    <div>
+      <a href="/library" class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors">
+        ← Library
+      </a>
 
-    <header class="mt-8 grid gap-10 border-b border-ink/10 pb-12 md:grid-cols-[auto_1fr] md:items-center">
-      <div class="flex h-64 w-64 items-center justify-center border border-ink/10 bg-surface">
-        {Icon ? <Icon size={160} /> : <span class="text-ink-muted">{icon.name}</span>}
-      </div>
-      <div>
+      <header class="mt-8 border-b border-ink/10 pb-8">
         <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">
-          {icon.category} · v{icon.latest}
+          {icon.category} · {icon.latest}
         </p>
         <h1 class="mt-3 text-5xl font-medium tracking-tight">{icon.name}</h1>
-        <p class="mt-4 text-lg text-ink-muted">{icon.description}</p>
-        <dl class="mt-6 grid grid-cols-1 gap-3 font-mono text-xs sm:grid-cols-2">
+        <p class="mt-4 max-w-2xl text-lg text-ink-muted">{icon.description}</p>
+      </header>
+
+      <section id="preview" class="mt-12 scroll-mt-24">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Preview</h2>
+        <div class="mt-4 grid gap-px border border-ink/10 bg-ink/10 sm:grid-cols-2">
+          <div class="flex flex-col items-center justify-center gap-3 bg-paper p-8">
+            <div class="flex h-64 w-64 items-center justify-center" set:html={colorSvg} />
+            <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Color</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-3 bg-paper p-8 text-ink">
+            <div class="flex h-64 w-64 items-center justify-center" set:html={monoSvg} />
+            <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Mono</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-3 bg-ink p-8 text-paper">
+            <div class="flex h-64 w-64 items-center justify-center" set:html={monoSvg} />
+            <p class="font-mono text-xs uppercase tracking-widest text-paper/60">Mono · inverse</p>
+          </div>
+          <div
+            class="flex flex-col items-center justify-center gap-3 p-8 text-paper"
+            style={`background-color:${icon.brandColor}`}
+          >
+            <div class="flex h-64 w-64 items-center justify-center" set:html={colorSvg} />
+            <p class="font-mono text-xs uppercase tracking-widest text-paper/70">Brand background</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="metadata" class="mt-12 scroll-mt-24">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Metadata</h2>
+        <dl class="mt-4 grid grid-cols-1 gap-4 font-mono text-xs sm:grid-cols-2">
           <div>
             <dt class="uppercase tracking-widest text-ink-muted">Brand color</dt>
             <dd class="mt-1 flex items-center gap-2">
@@ -72,64 +135,100 @@ const frameworkUsageSnippets: ReadonlyArray<{ label: string; code: string }> = [
             <dt class="uppercase tracking-widest text-ink-muted">License</dt>
             <dd class="mt-1">{icon.license}</dd>
           </div>
+          <div>
+            <dt class="uppercase tracking-widest text-ink-muted">Added</dt>
+            <dd class="mt-1">{icon.addedAt}</dd>
+          </div>
+          <div>
+            <dt class="uppercase tracking-widest text-ink-muted">Updated</dt>
+            <dd class="mt-1">{icon.updatedAt}</dd>
+          </div>
           <div class="sm:col-span-2">
             <dt class="uppercase tracking-widest text-ink-muted">Website</dt>
             <dd class="mt-1">
-              <a href={icon.url} target="_blank" rel="noopener" class="hover:text-accent">
-                {icon.url}
-              </a>
+              <a href={icon.url} target="_blank" rel="noopener" class="hover:text-accent">{icon.url}</a>
             </dd>
           </div>
+          {
+            icon.aliases.length > 0 ? (
+              <div class="sm:col-span-2">
+                <dt class="uppercase tracking-widest text-ink-muted">Aliases</dt>
+                <dd class="mt-1">{icon.aliases.join(', ')}</dd>
+              </div>
+            ) : null
+          }
         </dl>
-      </div>
-    </header>
 
-    {
-      icon.tags.length > 0 ? (
-        <section class="mt-10">
-          <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Tags</h2>
-          <ul class="mt-3 flex flex-wrap gap-2">
-            {icon.tags.map((tag) => (
-              <li class="border border-ink/10 px-3 py-1 font-mono text-xs">{tag}</li>
-            ))}
-          </ul>
-        </section>
-      ) : null
-    }
-
-    <section class="mt-10">
-      <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Millésimes</h2>
-      <ul class="mt-3 grid gap-3 sm:grid-cols-2">
         {
-          icon.years.map((year) => (
-            <li class="border border-ink/10 p-4">
-              <p class="font-medium">{year.year}</p>
-              <p class="mt-1 font-mono text-xs text-ink-muted">
-                {year.palette.join(' · ')}
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section class="mt-12">
-      <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Usage</h2>
-      <div class="mt-4 space-y-6">
-        {
-          frameworkUsageSnippets.map((snippet) => (
-            <div>
-              <p class="font-mono text-xs uppercase tracking-widest text-ink">
-                {snippet.label}
-              </p>
-              <pre class="mt-2 overflow-x-auto border border-ink/10 bg-surface p-4 font-mono text-xs leading-relaxed"><code>{snippet.code}</code></pre>
+          icon.tags.length > 0 ? (
+            <div class="mt-6">
+              <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Tags</p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                {icon.tags.map((tag) => (
+                  <li class="border border-ink/10 px-3 py-1 font-mono text-xs">{tag}</li>
+                ))}
+              </ul>
             </div>
-          ))
+          ) : null
         }
-      </div>
-      <p class="mt-6 font-mono text-xs text-ink-muted">
-        Interactive playground arrives in phase 7.
-      </p>
-    </section>
+      </section>
+
+      <section id="millesimes" class="mt-12 scroll-mt-24">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Millésimes</h2>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+          {
+            icon.years.map((year) => (
+              <li class="border border-ink/10 p-4">
+                <div class="flex items-baseline justify-between">
+                  <p class="font-medium">{year.year}</p>
+                  {year.year === icon.latest ? (
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-accent">Latest</span>
+                  ) : null}
+                </div>
+                {year.palette.length > 0 ? (
+                  <ul class="mt-3 flex flex-wrap gap-2">
+                    {year.palette.map((color) => (
+                      <li class="flex items-center gap-1.5 font-mono text-[11px] text-ink-muted">
+                        <span class="inline-block h-3 w-3 border border-ink/10" style={`background-color:${color}`} />
+                        {color}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {year.notes ? <p class="mt-3 text-xs text-ink-muted">{year.notes}</p> : null}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="usage" class="mt-12 scroll-mt-24">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Usage</h2>
+        <div class="mt-4">
+          <IconActions snippets={highlighted} downloads={downloads} client:visible />
+        </div>
+        <p class="mt-6 font-mono text-xs text-ink-muted">Interactive playground arrives in phase 7.</p>
+      </section>
+    </div>
+
+    <aside class="hidden lg:block">
+      <nav class="sticky top-8 border-l border-ink/10 pl-4">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">On this page</p>
+        <ul class="mt-3 flex flex-col gap-2">
+          {
+            sections.map((section) => (
+              <li>
+                <a
+                  href={`#${section.id}`}
+                  class="font-mono text-xs uppercase tracking-widest text-ink-muted transition-colors hover:text-accent"
+                >
+                  {section.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
   </article>
 </BaseLayout>
