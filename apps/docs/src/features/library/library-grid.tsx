@@ -2,6 +2,7 @@ import type { ManifestEntry } from '@brand-icons/core';
 import Fuse, { type IFuseOptions } from 'fuse.js';
 import { type ChangeEvent, useMemo, useTransition } from 'react';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { latestIconBySlug } from '@/lib/all-icons';
 import { useUrlParam } from '@/lib/use-url-param';
 import { cn } from '@/lib/utils';
@@ -9,6 +10,14 @@ import { cn } from '@/lib/utils';
 export type LibraryGridProps = {
   icons: readonly ManifestEntry[];
 };
+
+type SortMode = 'alpha-asc' | 'alpha-desc' | 'added-desc';
+
+const SORT_OPTIONS: readonly { value: SortMode; label: string }[] = [
+  { value: 'alpha-asc', label: 'A → Z' },
+  { value: 'alpha-desc', label: 'Z → A' },
+  { value: 'added-desc', label: 'Recently added' },
+];
 
 const fuseOptions: IFuseOptions<ManifestEntry> = {
   keys: [
@@ -23,24 +32,51 @@ const fuseOptions: IFuseOptions<ManifestEntry> = {
   ignoreLocation: true,
 };
 
+const parseList = (raw: string): readonly string[] => (raw === '' ? [] : raw.split(',').filter((value) => value !== ''));
+
+const isSortMode = (value: string): value is SortMode => SORT_OPTIONS.some((option) => option.value === value);
+
 const LibraryGrid = ({ icons }: LibraryGridProps) => {
   const [query, setQuery] = useUrlParam('q');
-  const [category, setCategory] = useUrlParam('cat');
+  const [categoriesParam, setCategoriesParam] = useUrlParam('cat');
+  const [sortParam, setSortParam] = useUrlParam('sort');
   const [, startTransition] = useTransition();
 
-  const categories = Array.from(new Set(icons.map((icon) => icon.category))).sort();
+  const activeCategories = parseList(categoriesParam);
+  const sort: SortMode = isSortMode(sortParam) ? sortParam : 'alpha-asc';
+
+  const allCategories = Array.from(new Set(icons.map((icon) => icon.category))).sort();
   const fuse = useMemo(() => new Fuse([...icons], fuseOptions), [icons]);
 
   const ranked = query === '' ? icons : fuse.search(query).map((result) => result.item);
-  const filtered = category === '' ? ranked : ranked.filter((icon) => icon.category === category);
+  const filtered = activeCategories.length === 0 ? ranked : ranked.filter((icon) => activeCategories.includes(icon.category));
+
+  const sorted = (() => {
+    if (sort === 'alpha-desc') return [...filtered].sort((a, b) => b.name.localeCompare(a.name));
+    if (sort === 'added-desc') return [...filtered].sort((a, b) => b.addedAt.localeCompare(a.addedAt));
+    if (query !== '') return filtered;
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  })();
 
   const handleQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     const next = event.target.value;
     startTransition(() => setQuery(next));
   };
 
-  const handleCategory = (next: string): void => {
-    startTransition(() => setCategory(category === next ? '' : next));
+  const handleToggleCategory = (category: string): void => {
+    const next = activeCategories.includes(category)
+      ? activeCategories.filter((value) => value !== category)
+      : [...activeCategories, category];
+    startTransition(() => setCategoriesParam(next.join(',')));
+  };
+
+  const handleClearCategories = (): void => {
+    startTransition(() => setCategoriesParam(''));
+  };
+
+  const handleSort = (next: string): void => {
+    if (!isSortMode(next)) return;
+    startTransition(() => setSortParam(next === 'alpha-asc' ? '' : next));
   };
 
   return (
@@ -53,42 +89,65 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
           aria-label="Search icons"
           className="max-w-sm border-ink/15 bg-paper font-mono text-sm shadow-none"
         />
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-muted">
-          {filtered.length} / {icons.length}
-        </p>
+        <div className="flex items-center gap-4">
+          <Select value={sort} onValueChange={handleSort}>
+            <SelectTrigger
+              aria-label="Sort icons"
+              className="h-9 rounded-none border-ink/15 bg-paper font-mono text-xs uppercase tracking-widest shadow-none"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="rounded-none border-ink/15 bg-paper">
+              {SORT_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value} className="rounded-none font-mono text-xs uppercase tracking-widest">
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-muted">
+            {sorted.length} / {icons.length}
+          </p>
+        </div>
       </div>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => handleCategory('')}
+          onClick={handleClearCategories}
           className={cn(
             'border px-3 py-1 font-mono text-xs uppercase tracking-widest transition-colors',
-            category === '' ? 'border-accent bg-accent text-paper' : 'border-ink/15 text-ink hover:border-accent hover:text-accent'
+            activeCategories.length === 0
+              ? 'border-accent bg-accent text-paper'
+              : 'border-ink/15 text-ink hover:border-accent hover:text-accent'
           )}
         >
           All
         </button>
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={() => handleCategory(cat)}
-            className={cn(
-              'border px-3 py-1 font-mono text-xs uppercase tracking-widest transition-colors',
-              category === cat ? 'border-accent bg-accent text-paper' : 'border-ink/15 text-ink hover:border-accent hover:text-accent'
-            )}
-          >
-            {cat}
-          </button>
-        ))}
+        {allCategories.map((cat) => {
+          const active = activeCategories.includes(cat);
+          return (
+            <button
+              key={cat}
+              type="button"
+              aria-pressed={active}
+              onClick={() => handleToggleCategory(cat)}
+              className={cn(
+                'border px-3 py-1 font-mono text-xs uppercase tracking-widest transition-colors',
+                active ? 'border-accent bg-accent text-paper' : 'border-ink/15 text-ink hover:border-accent hover:text-accent'
+              )}
+            >
+              {cat}
+            </button>
+          );
+        })}
       </div>
 
-      {filtered.length === 0 ? (
+      {sorted.length === 0 ? (
         <p className="mt-12 font-mono text-xs uppercase tracking-widest text-ink-muted">No icon matches the current filters.</p>
       ) : (
         <ul className="mt-10 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((icon) => {
+          {sorted.map((icon) => {
             const Icon = latestIconBySlug[icon.slug];
             return (
               <li key={icon.slug} className="bg-paper">
