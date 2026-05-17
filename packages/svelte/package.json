@@ -28,17 +28,16 @@
       "import": "./dist/index.js"
     },
     "./icons/*": {
-      "types": "./dist/icons/*.d.ts",
-      "svelte": "./dist/icons/*.js",
-      "import": "./dist/icons/*.js"
+      "types": "./dist/icons/*.svelte.d.ts",
+      "svelte": "./dist/icons/*.svelte"
     }
   },
   "scripts": {
-    "build": "svelte-package",
-    "dev": "svelte-package --watch",
+    "build": "svelte-package --input src --output dist",
+    "dev": "svelte-package --input src --output dist --watch",
     "typecheck": "svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
-    "clean": "rm -rf dist .turbo"
+    "clean": "trash dist .turbo"
   },
   "dependencies": {
     "@brand-icons/core": "workspace:*"
@@ -48,9 +47,14 @@
   },
   "devDependencies": {
     "@sveltejs/package": "^2.3.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/svelte": "^5.3.1",
+    "happy-dom": "^20.9.0",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "typescript": "^5.7.0",
+    "vite": "^8.0.13",
     "vitest": "^2.1.0"
   },
   "publishConfig": {

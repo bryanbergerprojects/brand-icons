@@ -2,10 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "declaration": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "types": ["svelte"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/**/*.svelte"],
+  "exclude": ["dist", "node_modules", "__tests__"]
 }
