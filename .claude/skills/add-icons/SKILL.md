@@ -154,6 +154,38 @@ for the fixed PRs only. If a PR fails twice, stop fixing — surface it
 as a `needs_human` item in the final report. A third spawn would burn
 tokens with diminishing returns.
 
+## Phase 5 — Cleanup (always, before the final report)
+
+Once every PR exists on `origin`, remove every worktree spawned by the
+builders. The PR carries the work — the local worktree is disposable.
+
+For each worktree path collected from Phase 2 / Phase 4 builder
+results, run:
+
+```bash
+git worktree unlock <path> 2>/dev/null || true
+git worktree remove <path> --force
+```
+
+Notes:
+
+- The Agent tool's `isolation: "worktree"` locks the worktree, so
+  `unlock` is required before `remove` — the `|| true` covers the
+  rare case where it was not locked.
+- Use `--force` because the worktree's committed branch (e.g.
+  `worktree-agent-<id>`) is intentionally not merged into `main` —
+  the real branch is `feat/add-<slug>`, already on `origin`.
+- Do **not** delete `feat/add-<slug>` locally or on `origin`. The PR
+  needs it.
+- If `git worktree remove` fails, surface the error in the report
+  under a `Cleanup` line — do not retry destructively.
+- Skip cleanup only if the user explicitly asked to keep the
+  worktrees (e.g. for manual inspection of a failed build).
+
+Run all `git worktree remove` calls in a single Bash invocation
+(chained with `&&` or separated by `;`) — they are fast and serial
+keeps output tidy.
+
 ## Final report
 
 Print a single markdown block to the user:
