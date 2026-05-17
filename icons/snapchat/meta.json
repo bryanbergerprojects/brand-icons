@@ -1,0 +1,29 @@
+{
+  "slug": "snapchat",
+  "name": "Snapchat",
+  "category": "social",
+  "description": "Snapchat is a multimedia messaging app for sending ephemeral photos, videos and stories enriched with camera filters and lenses.",
+  "tags": ["messaging", "ephemeral", "camera", "stories", "ghost", "ar-lenses", "snap"],
+  "brandColor": "#FFFC00",
+  "url": "https://www.snapchat.com",
+  "repository": "https://github.com/snapchat",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["snap"],
+  "latest": "2013",
+  "years": [
+    {
+      "year": "2011",
+      "palette": ["#FFFC00", "#FFFFFF", "#000000", "#FF3344"],
+      "source": "https://seekvectors.com/post/old-snapchat-logo",
+      "notes": "Original 'Ghostface Chillah' mark designed by Evan Spiegel in 2011 (Picaboo era). The ghost silhouette carries two black eyes and a tongue sticking out — face features removed in the 2013 rebrand. Face geometry approximated from historical references; the silhouette path matches the canonical 2013 outline used since."
+    },
+    {
+      "year": "2013",
+      "palette": ["#FFFC00", "#FFFFFF"],
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/snapchat.svg",
+      "notes": "2013 rebrand removed the face — clean white ghost silhouette on Snapchat yellow (#FFFC00) rounded square. Still the canonical app icon today; only the corner radius of the container has been refined over subsequent iOS/Android updates."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

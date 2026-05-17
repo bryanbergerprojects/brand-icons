@@ -1,0 +1,22 @@
+{
+  "slug": "notion",
+  "name": "Notion",
+  "category": "productivity",
+  "description": "Notion is an all-in-one workspace combining notes, documents, databases, wikis, and project management for individuals and teams.",
+  "tags": ["notes", "wiki", "documents", "workspace", "collaboration", "knowledge-base", "project-management"],
+  "brandColor": "#000000",
+  "url": "https://notion.so",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "latest": "2016",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#000000"],
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/notion.svg",
+      "notes": "Current 'N' mark inside a document/cube silhouette. Introduced with Notion 1.0 in 2016 and unchanged since."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

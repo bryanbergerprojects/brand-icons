@@ -1,0 +1,34 @@
+{
+  "slug": "twitter",
+  "name": "Twitter / X",
+  "category": "social",
+  "description": "Social networking and microblogging service founded as Twitter in 2006, rebranded to X in 2023, where users post short messages, media, and replies.",
+  "tags": ["microblogging", "social-network", "tweet", "feed", "messaging", "timeline", "elon-musk", "x-corp"],
+  "brandColor": "#000000",
+  "url": "https://x.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["x", "tweet", "twttr"],
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2010",
+      "palette": ["#3AAAE1"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_2012_logo.svg",
+      "notes": "First in-house Larry the Bird (designers Philip Pascuzzo and Douglas Bowman, 2010): asymmetric silhouette with three-circle wings, on cyan #3AAAE1. Wrapped in scale(0.08) to fit 24×24 from the source 300×300 canvas."
+    },
+    {
+      "year": "2012",
+      "palette": ["#1DA1F2"],
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@10/icons/twitter.svg",
+      "notes": "Refined symmetrical bird (June 2012 redesign): plumage removed, color shifted to true blue #1DA1F2. Used until the July 2023 rebrand."
+    },
+    {
+      "year": "2023",
+      "palette": ["#000000"],
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg",
+      "notes": "X mark (July 23, 2023 rebrand under Elon Musk): stylized capital X glyph, monochrome black on white. Replaces Larry the Bird and the Twitter wordmark."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

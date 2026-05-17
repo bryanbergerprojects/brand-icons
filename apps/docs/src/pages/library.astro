@@ -6,21 +6,9 @@ import { manifest } from '@brand-icons/core';
 const sortedIcons = [...manifest].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<BaseLayout title="Library — Brand Icons" description="Browse every brand icon — color and monochrome variants across all millésimes.">
-  <section class="mx-auto max-w-6xl px-6 py-16">
-    <header class="border-b border-ink/10 pb-8">
-      <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">
-        Library · {manifest.length} brands
-      </p>
-      <h1 class="mt-4 text-4xl font-medium tracking-tight sm:text-5xl">All brand icons</h1>
-      <p class="mt-4 max-w-2xl text-ink-muted">
-        Color and monochrome variants for every brand, with year-aware millésimes where the
-        logo has evolved. Search filters live; URL stays shareable.
-      </p>
-    </header>
-
-    <div class="mt-10">
-      <LibraryGrid icons={sortedIcons} client:visible />
-    </div>
-  </section>
+<BaseLayout
+  title="Library — Brand Icons"
+  description={`Browse ${sortedIcons.length} brand icons across categories. Search, filter, and copy code for React, Vue, Svelte.`}
+>
+  <LibraryGrid icons={sortedIcons} client:load />
 </BaseLayout>

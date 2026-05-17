@@ -1,0 +1,22 @@
+{
+  "slug": "cursor",
+  "name": "Cursor",
+  "category": "dev-tools",
+  "description": "Cursor is an AI-first code editor by Anysphere, built as a fork of Visual Studio Code with native LLM-based code completion, chat and agent workflows.",
+  "tags": ["ai", "editor", "ide", "code-editor", "anysphere", "llm", "developer-tools"],
+  "brandColor": "#000000",
+  "url": "https://cursor.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["cursor-ai", "anysphere"],
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2023",
+      "palette": ["#55544F", "#43413C", "#72716D", "#D6D5D2", "#FFFFFF"],
+      "source": "https://cursor.com/brand",
+      "notes": "Isometric 2.5D cube mark (the default app icon per Cursor's brand guidelines). Mono variant uses the official 2D silhouette."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

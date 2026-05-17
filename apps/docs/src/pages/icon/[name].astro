@@ -1,234 +1,227 @@
 ---
-import IconActions, { type CodeSnippet, type SvgDownload } from '@/features/icon-detail/icon-actions';
+import Playground, { type PlaygroundYear } from '@/features/playground/playground';
 import BaseLayout from '@/layouts/base.astro';
-import { brands, type IconBrand, manifest } from '@brand-icons/core';
-import { codeToHtml } from 'shiki';
+import { brands, type IconBrand, manifest, type ManifestEntry } from '@brand-icons/core';
 
-export const getStaticPaths = () => manifest.map((icon) => ({ params: { name: icon.slug }, props: { icon } }));
+const sortedManifest = [...manifest].sort((a, b) => a.name.localeCompare(b.name));
 
-const { icon } = Astro.props;
+export const getStaticPaths = () =>
+  manifest.map((icon) => ({ params: { name: icon.slug }, props: { icon } }));
 
-const brand = (brands as Record<string, IconBrand>)[icon.slug];
+const { icon } = Astro.props as { icon: ManifestEntry };
+
+const slugToCamel = (slug: string): string => slug.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
+const nameToPascal = (name: string): string =>
+  name
+    .split(/[^a-zA-Z0-9]+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+
+const brand = (brands as Record<string, IconBrand>)[slugToCamel(icon.slug)];
 if (!brand) throw new Error(`Missing brand module for slug: ${icon.slug}`);
 
-const latestYear = brand.years[icon.latest];
-if (!latestYear) throw new Error(`Brand ${icon.slug} has no entry for latest year ${icon.latest}`);
-
-const colorSvg = latestYear.color;
-const monoSvg = latestYear.mono;
-
 const capitalize = (slug: string): string => slug.charAt(0).toUpperCase() + slug.slice(1);
-const pascalSlug = capitalize(icon.slug);
+const componentName = nameToPascal(icon.name);
 
-const usageSnippets: ReadonlyArray<{ id: string; label: string; lang: string; raw: string }> = [
-  {
-    id: 'react',
-    label: 'React',
-    lang: 'tsx',
-    raw: `import { ${pascalSlug}LatestIcon } from '@brand-icons/react';\n\nexport const Example = () => <${pascalSlug}LatestIcon size={48} />;\n`,
-  },
-  {
-    id: 'vue',
-    label: 'Vue',
-    lang: 'vue',
-    raw: `<script setup>\nimport { ${pascalSlug}LatestIcon } from '@brand-icons/vue';\n</script>\n\n<template>\n  <${pascalSlug}LatestIcon :size="48" />\n</template>\n`,
-  },
-  {
-    id: 'svelte',
-    label: 'Svelte',
-    lang: 'svelte',
-    raw: `<script>\n  import { ${pascalSlug}LatestIcon } from '@brand-icons/svelte';\n</script>\n\n<${pascalSlug}LatestIcon size={48} />\n`,
-  },
-  {
-    id: 'wc',
-    label: 'Web Components',
-    lang: 'html',
-    raw: `<script type="module">\n  import '@brand-icons/wc';\n</script>\n\n<brand-icon-${icon.slug}-latest size="48"></brand-icon-${icon.slug}-latest>\n`,
-  },
-  {
-    id: 'svg',
-    label: 'SVG',
-    lang: 'xml',
-    raw: `${colorSvg}\n`,
-  },
-];
+const indexInSorted = sortedManifest.findIndex((entry) => entry.slug === icon.slug);
+const id = String(indexInSorted + 1).padStart(4, '0');
 
-const highlighted: readonly CodeSnippet[] = await Promise.all(
-  usageSnippets.map(async (snippet) => ({
-    id: snippet.id,
-    label: snippet.label,
-    raw: snippet.raw,
-    html: await codeToHtml(snippet.raw, {
-      lang: snippet.lang,
-      themes: { light: 'github-light', dark: 'github-dark' },
-    }),
-  }))
-);
+const formatCategory = (category: string): string =>
+  category
+    .split('-')
+    .map((part) => capitalize(part))
+    .join(' ');
 
-const downloads: readonly SvgDownload[] = [
-  { label: 'Color', filename: `${icon.slug}-${icon.latest}-color.svg`, raw: colorSvg },
-  { label: 'Mono', filename: `${icon.slug}-${icon.latest}-mono.svg`, raw: monoSvg },
-];
+const familyLabel = formatCategory(icon.category);
 
-const sections: ReadonlyArray<{ id: string; label: string }> = [
-  { id: 'preview', label: 'Preview' },
-  { id: 'metadata', label: 'Metadata' },
-  { id: 'millesimes', label: 'Millésimes' },
-  { id: 'usage', label: 'Usage' },
-];
+const playgroundYears: readonly PlaygroundYear[] = icon.years
+  .map((summary) => {
+    const yearBrand = brand.years[summary.year];
+    if (!yearBrand) throw new Error(`Brand ${icon.slug} missing year entry ${summary.year}`);
+    return {
+      year: summary.year,
+      mono: yearBrand.mono,
+      color: yearBrand.color,
+      palette: yearBrand.palette,
+    };
+  })
+  .sort((a, b) => a.year.localeCompare(b.year));
+
+const brandRecord = brands as Record<string, IconBrand>;
+
+const namespaceSvgIds = ({ raw, prefix }: { raw: string; prefix: string }): string => {
+  const ids = new Set<string>();
+  const idPattern = /\sid="([^"]+)"/g;
+  let match: RegExpExecArray | null;
+  match = idPattern.exec(raw);
+  while (match !== null) {
+    if (match[1]) ids.add(match[1]);
+    match = idPattern.exec(raw);
+  }
+  let out = raw;
+  for (const id of ids) {
+    const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`\\sid="${escaped}"`, 'g'), ` id="${prefix}-${id}"`);
+    out = out.replace(new RegExp(`url\\(#${escaped}\\)`, 'g'), `url(#${prefix}-${id})`);
+    out = out.replace(new RegExp(`href="#${escaped}"`, 'g'), `href="#${prefix}-${id}"`);
+    out = out.replace(new RegExp(`xlink:href="#${escaped}"`, 'g'), `xlink:href="#${prefix}-${id}"`);
+  }
+  return out;
+};
+
+type RelatedCard = {
+  readonly slug: string;
+  readonly name: string;
+  readonly color: string;
+  readonly index: string;
+};
+
+const related: readonly RelatedCard[] = sortedManifest
+  .filter((entry) => entry.slug !== icon.slug && entry.category === icon.category)
+  .slice(0, 20)
+  .map((entry) => {
+    const relatedBrand = brandRecord[slugToCamel(entry.slug)];
+    if (!relatedBrand) throw new Error(`Missing brand module for slug: ${entry.slug}`);
+    const yearEntry = relatedBrand.years[entry.latest];
+    if (!yearEntry) throw new Error(`Brand ${entry.slug} missing year entry ${entry.latest}`);
+    const idx = sortedManifest.findIndex((m) => m.slug === entry.slug);
+    return {
+      slug: entry.slug,
+      name: entry.name,
+      color: namespaceSvgIds({ raw: yearEntry.color, prefix: `mf-${entry.slug}` }),
+      index: String(idx + 1).padStart(4, '0'),
+    };
+  });
+
+const allCategories = [...new Set(sortedManifest.map((entry) => entry.category))].sort();
+const peerCategories = allCategories.filter((cat) => cat !== icon.category);
+
+const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(cat)}`;
 ---
 
-<BaseLayout title={`${icon.name} — Brand Icons`} description={icon.description}>
-  <article class="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[1fr_180px]">
-    <div>
-      <a href="/library" class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors">
-        ← Library
-      </a>
+<BaseLayout
+  title={`${icon.name} icon — Brand Icons`}
+  description={`${icon.name} icon · ${familyLabel} category · ${sortedManifest.length} icons in Brand Icons library. Copy code for React, Vue, Svelte, SVG.`}
+>
+  <section class="border-b border-ink px-10 py-10">
+    <nav aria-label="Breadcrumb" class="mb-4.5 flex items-center gap-2 font-mono text-mono font-semibold uppercase tracking-uppercase text-ink-soft">
+      <a href="/library" class="hover:text-accent">Library</a>
+      <span aria-hidden>/</span>
+      <a href={categoryQuery(icon.category)} class="hover:text-accent">{familyLabel}</a>
+      <span aria-hidden>/</span>
+      <span class="text-accent">[{icon.slug}]</span>
+    </nav>
 
-      <header class="mt-8 border-b border-ink/10 pb-8">
-        <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">
-          {icon.category} · {icon.latest}
-        </p>
-        <h1 class="mt-3 text-5xl font-medium tracking-tight">{icon.name}</h1>
-        <p class="mt-4 max-w-2xl text-lg text-ink-muted">{icon.description}</p>
-      </header>
+    <div class="flex flex-wrap items-baseline justify-between gap-8">
+      <h1 class="m-0 text-h1-2xl font-extrabold tracking-display-xl text-ink">{icon.name}</h1>
 
-      <section id="preview" class="mt-12 scroll-mt-24">
-        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Preview</h2>
-        <div class="mt-4 grid gap-px border border-ink/10 bg-ink/10 sm:grid-cols-2">
-          <div class="flex flex-col items-center justify-center gap-3 bg-paper p-8">
-            <div class="flex h-64 w-64 items-center justify-center" set:html={colorSvg} />
-            <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Color</p>
-          </div>
-          <div class="flex flex-col items-center justify-center gap-3 bg-paper p-8 text-ink">
-            <div class="flex h-64 w-64 items-center justify-center" set:html={monoSvg} />
-            <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Mono</p>
-          </div>
-          <div class="flex flex-col items-center justify-center gap-3 bg-ink p-8 text-paper">
-            <div class="flex h-64 w-64 items-center justify-center" set:html={monoSvg} />
-            <p class="font-mono text-xs uppercase tracking-widest text-paper/60">Mono · inverse</p>
-          </div>
-          <div
-            class="flex flex-col items-center justify-center gap-3 p-8 text-paper"
-            style={`background-color:${icon.brandColor}`}
+      <div class="flex flex-wrap gap-x-8 gap-y-3">
+        <div>
+          <p class="font-mono text-mono font-bold uppercase tracking-uppercase text-ink-soft">Family</p>
+          <p class="mt-1 text-sm font-semibold">{familyLabel}</p>
+        </div>
+        <div>
+          <p class="font-mono text-mono font-bold uppercase tracking-uppercase text-ink-soft">ID</p>
+          <p class="mt-1 font-mono text-sm font-bold">#{id}</p>
+        </div>
+        <div>
+          <p class="font-mono text-mono font-bold uppercase tracking-uppercase text-ink-soft">Component</p>
+          <p class="mt-1 font-mono text-sm font-bold">{componentName}LatestIcon</p>
+        </div>
+        <div>
+          <p class="font-mono text-mono font-bold uppercase tracking-uppercase text-ink-soft">Since</p>
+          <p class="mt-1 font-mono text-sm font-bold">2.0.0</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-ink px-10 py-12">
+    <div class="max-w-245 mx-auto">
+      <Playground
+        client:idle
+        iconName={icon.name}
+        slug={icon.slug}
+        id={id}
+        componentName={componentName}
+        brandColor={icon.brandColor}
+        years={playgroundYears}
+        defaultYear={icon.latest}
+      />
+    </div>
+  </section>
+
+  <section class="border-b border-ink bg-paper-warm px-10 py-14">
+    <p class="mb-6 flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
+      <span class="text-accent">—</span>
+      <span>·</span>
+      <span>Related</span>
+      <span>·</span>
+      <span>Same category</span>
+    </p>
+    <h2 class="m-0 text-h3 font-extrabold tracking-display-xs text-ink">
+      More from <span class="text-accent">{familyLabel}</span>.
+    </h2>
+
+    {related.length === 0 ? (
+      <p class="mt-8 text-ink-soft">No siblings in this category yet.</p>
+    ) : (
+      <div class="mt-8 grid grid-cols-1 border border-ink bg-paper md:grid-cols-5 lg:grid-cols-5">
+        {related.map((entry, i) => (
+          <a
+            href={`/icon/${entry.slug}`}
+            class:list={[
+              'group related-card relative flex min-h-32 flex-col items-center gap-2.5 border-r border-b border-ink bg-paper px-2 pt-5.5 pb-3.5 text-ink transition-colors hover:bg-paper-alt',
+              i >= 5 && i < 10 && 'hidden md:flex',
+              i >= 10 && 'hidden lg:flex',
+            ]}
           >
-            <div class="flex h-64 w-64 items-center justify-center" set:html={colorSvg} />
-            <p class="font-mono text-xs uppercase tracking-widest text-paper/70">Brand background</p>
-          </div>
-        </div>
-      </section>
+            <span class="absolute left-2.5 top-2.5 font-mono text-mono-xs text-ink-soft">#{entry.index}</span>
+            <span class="absolute right-2.5 top-2.5 font-mono text-mono-sm text-ink-soft">→</span>
+            <span class="related-icon flex h-10 w-10 flex-1 items-center justify-center" set:html={entry.color} />
+            <span class="mt-auto font-mono text-mono font-semibold">{entry.name}</span>
+          </a>
+        ))}
+      </div>
+    )}
 
-      <section id="metadata" class="mt-12 scroll-mt-24">
-        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Metadata</h2>
-        <dl class="mt-4 grid grid-cols-1 gap-4 font-mono text-xs sm:grid-cols-2">
-          <div>
-            <dt class="uppercase tracking-widest text-ink-muted">Brand color</dt>
-            <dd class="mt-1 flex items-center gap-2">
-              <span
-                class="inline-block h-4 w-4 border border-ink/10"
-                style={`background-color:${icon.brandColor}`}
-              ></span>
-              {icon.brandColor}
-            </dd>
-          </div>
-          <div>
-            <dt class="uppercase tracking-widest text-ink-muted">License</dt>
-            <dd class="mt-1">{icon.license}</dd>
-          </div>
-          <div>
-            <dt class="uppercase tracking-widest text-ink-muted">Added</dt>
-            <dd class="mt-1">{icon.addedAt}</dd>
-          </div>
-          <div>
-            <dt class="uppercase tracking-widest text-ink-muted">Updated</dt>
-            <dd class="mt-1">{icon.updatedAt}</dd>
-          </div>
-          <div class="sm:col-span-2">
-            <dt class="uppercase tracking-widest text-ink-muted">Website</dt>
-            <dd class="mt-1">
-              <a href={icon.url} target="_blank" rel="noopener" class="hover:text-accent">{icon.url}</a>
-            </dd>
-          </div>
-          {
-            icon.aliases.length > 0 ? (
-              <div class="sm:col-span-2">
-                <dt class="uppercase tracking-widest text-ink-muted">Aliases</dt>
-                <dd class="mt-1">{icon.aliases.join(', ')}</dd>
-              </div>
-            ) : null
-          }
-        </dl>
-
-        {
-          icon.tags.length > 0 ? (
-            <div class="mt-6">
-              <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Tags</p>
-              <ul class="mt-3 flex flex-wrap gap-2">
-                {icon.tags.map((tag) => (
-                  <li class="border border-ink/10 px-3 py-1 font-mono text-xs">{tag}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null
-        }
-      </section>
-
-      <section id="millesimes" class="mt-12 scroll-mt-24">
-        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Millésimes</h2>
-        <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-          {
-            icon.years.map((year) => (
-              <li class="border border-ink/10 p-4">
-                <div class="flex items-baseline justify-between">
-                  <p class="font-medium">{year.year}</p>
-                  {year.year === icon.latest ? (
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-accent">Latest</span>
-                  ) : null}
-                </div>
-                {year.palette.length > 0 ? (
-                  <ul class="mt-3 flex flex-wrap gap-2">
-                    {year.palette.map((color) => (
-                      <li class="flex items-center gap-1.5 font-mono text-[11px] text-ink-muted">
-                        <span class="inline-block h-3 w-3 border border-ink/10" style={`background-color:${color}`} />
-                        {color}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                {year.notes ? <p class="mt-3 text-xs text-ink-muted">{year.notes}</p> : null}
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section id="usage" class="mt-12 scroll-mt-24">
-        <h2 class="font-mono text-xs uppercase tracking-widest text-ink-muted">Usage</h2>
-        <div class="mt-4">
-          <IconActions snippets={highlighted} downloads={downloads} client:visible />
-        </div>
-        <p class="mt-6 font-mono text-xs text-ink-muted">Interactive playground arrives in phase 7.</p>
-      </section>
+    <div class="mt-5.5 px-5.5 py-3.5 flex flex-wrap items-center justify-between gap-4 border border-ink bg-paper">
+      <p class="text-13 text-ink-soft-2">
+        See all <strong class="font-semibold text-ink">{familyLabel}</strong> icons.
+      </p>
+      <a
+        href={categoryQuery(icon.category)}
+        class="px-4.5 tracking-cta bg-accent py-2.5 text-xs font-semibold uppercase text-paper transition-colors hover:bg-ink"
+      >
+        Open category →
+      </a>
     </div>
 
-    <aside class="hidden lg:block">
-      <nav class="sticky top-8 border-l border-ink/10 pl-4">
-        <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">On this page</p>
-        <ul class="mt-3 flex flex-col gap-2">
-          {
-            sections.map((section) => (
-              <li>
-                <a
-                  href={`#${section.id}`}
-                  class="font-mono text-xs uppercase tracking-widest text-ink-muted transition-colors hover:text-accent"
-                >
-                  {section.label}
-                </a>
-              </li>
-            ))
-          }
+    {peerCategories.length > 0 ? (
+      <div class="mt-9">
+        <p class="mb-2.5 font-mono text-mono-sm font-bold uppercase tracking-mono text-ink-soft">Other categories</p>
+        <ul class="flex flex-wrap gap-2">
+          {peerCategories.map((cat) => (
+            <li>
+              <a
+                href={categoryQuery(cat)}
+                class="inline-block border border-ink bg-paper px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
+              >
+                {formatCategory(cat)}
+              </a>
+            </li>
+          ))}
         </ul>
-      </nav>
-    </aside>
-  </article>
+      </div>
+    ) : null}
+  </section>
 </BaseLayout>
+
+<style>
+  .related-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

@@ -1,0 +1,29 @@
+{
+  "slug": "bitbucket",
+  "name": "Bitbucket",
+  "category": "dev-tools",
+  "description": "Bitbucket is a Git-based source code hosting and collaboration platform from Atlassian, integrated with Jira and the Atlassian developer suite.",
+  "tags": ["git", "scm", "atlassian", "vcs", "repository", "code-review", "ci-cd", "pull-requests"],
+  "brandColor": "#2684FF",
+  "url": "https://bitbucket.org",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "parent": "atlassian",
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2008",
+      "palette": ["#205081"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/bc9f1c0/icons/bitbucket.svg",
+      "notes": "Original stylized bucket mark (top oval + body + center dot) used from launch in 2008 through the 2017 Atlassian rebrand. Sourced from simple-icons commit bc9f1c0 (last pre-redesign revision); the historical Bitbucket dark blue #205081 is applied since simple-icons strips fills to monochrome."
+    },
+    {
+      "year": "2017",
+      "palette": ["#2684FF", "#0052CC"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/bitbucket.svg",
+      "notes": "2017 Atlassian rebrand — three-bucket negative-space mark with the official #0052CC → #2684FF blue gradient from atlassian.design. Gradient layer reconstructed over the simple-icons 24x24 path."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

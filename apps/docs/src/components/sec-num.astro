@@ -1,0 +1,20 @@
+---
+type Props = {
+  kicker: string;
+  label: string;
+  num?: string;
+  accent?: boolean;
+};
+
+const { kicker, label, num, accent = false } = Astro.props;
+---
+
+<div class="mb-12">
+  <div class="mb-3.5 flex items-baseline gap-3.5 font-mono text-mono font-bold uppercase tracking-mono text-ink-soft">
+    {num ? <span class:list={['font-mono font-bold', accent ? 'text-accent' : 'text-ink']}>{num}</span> : null}
+    <span>{kicker}</span>
+  </div>
+  <div class="max-w-[1100px] text-h2 font-extrabold tracking-display-sm text-ink">
+    {label}
+  </div>
+</div>

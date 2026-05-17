@@ -1,0 +1,30 @@
+{
+  "slug": "safari",
+  "name": "Safari",
+  "category": "platforms",
+  "description": "Web browser developed by Apple, built on the WebKit engine and bundled with macOS, iOS, iPadOS, visionOS, and watchOS.",
+  "tags": ["browser", "web", "apple", "webkit", "macos", "ios", "ipados", "rendering-engine"],
+  "brandColor": "#1B88CA",
+  "url": "https://www.apple.com/safari/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["apple-safari"],
+  "parent": "apple",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#DBDBDA", "#69BEFF", "#0072C4", "#FFFFFF", "#EEEEEE", "#FA5153", "#ACACAC", "#CD151E"],
+      "source": "https://brandeps.com/logo-download/s/safari-logo-vector-01.svg",
+      "notes": "Flat redesign that replaced the skeuomorphic 2003 compass — shipped progressively across iOS 7 (2013) and macOS Yosemite (2014). Two-tone blue radial gradient face with a silver bezel, red-and-grey compass needle pointing northeast, and silver tick marks. Used through macOS Catalina (2019)."
+    },
+    {
+      "year": "2020",
+      "palette": ["#BDBDBD", "#FFFFFF", "#06C2E7", "#0DB8EC", "#12AEF1", "#1F86F9", "#107DDD", "#CDCDCD", "#F1F1F1", "#FF5150"],
+      "source": "https://logotyp.us/file/safari.svg",
+      "notes": "Big Sur era refresh shipped with macOS Big Sur and iOS 14 (2020). Brighter cyan-to-blue radial gradient face, thinner silver bezel, and refined red-and-grey compass needle. Current Safari mark in 2026."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17",
+  "notes": "Skipped millésimes: 2003 Mac OS X Panther original skeuomorphic compass (only available as raster PNG icons embedded in the macOS app bundle — no authoritative SVG source; the project's raster-to-SVG tracer is not available yet, and PNG references found online are below the 256×256 quality bar for tracing). 2010 Safari 5 minor refresh (no separately vectorised asset — the 2003-era skeuomorphic compass continued in use)."
+}

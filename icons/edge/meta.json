@@ -1,0 +1,29 @@
+{
+  "slug": "edge",
+  "name": "Microsoft Edge",
+  "category": "platforms",
+  "description": "Cross-platform web browser developed by Microsoft, originally an EdgeHTML rendering engine and rebuilt on Chromium in 2020.",
+  "tags": ["browser", "web", "microsoft", "chromium", "rendering-engine", "windows"],
+  "brandColor": "#0078D4",
+  "url": "https://www.microsoft.com/edge",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["microsoft-edge"],
+  "parent": "microsoft",
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#0078D7"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_Edge_logo_(2015%E2%80%932019).svg",
+      "notes": "Original EdgeHTML-era 'e' monogram unveiled at Build 2015 — solid blue, deliberately reminiscent of Internet Explorer. Used until the November 2019 Chromium rebrand."
+    },
+    {
+      "year": "2019",
+      "palette": ["#0078D4", "#0680D7", "#1B9DE2", "#0C59A4", "#114A8B", "#66EB6E", "#35C1F1", "#2FC2DF", "#2BC3D2", "#36C752"],
+      "source": "https://commons.wikimedia.org/wiki/File:Microsoft_Edge_logo_(2019).svg",
+      "notes": "Chromium-based redesign unveiled November 2019 — swirl / teardrop mark with a blue-to-teal-to-green gradient, breaking from the Internet Explorer 'e' silhouette."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="bitbucket-2017-a" x1="15.7" y1="8.7" x2="11.07" y2="14.61" gradientUnits="userSpaceOnUse">
+      <stop offset="0.18" stop-color="#0052CC"/>
+      <stop offset="1" stop-color="#2684FF"/>
+    </linearGradient>
+  </defs>
+  <path fill="#2684FF" d="M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.772.772 0 00.77-.646l3.27-20.03a.768.768 0 00-.768-.891zM14.52 15.53H9.522L8.17 8.466h7.561z"/>
+  <path fill="url(#bitbucket-2017-a)" d="M22.03 8.466h-6.299L14.52 15.53H9.522l-5.15 6.116c.163.142.372.222.586.224H19.95a.772.772 0 00.77-.646z"/>
+</svg>

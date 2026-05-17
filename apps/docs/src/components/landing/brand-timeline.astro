@@ -1,0 +1,88 @@
+---
+import SecNum from '@/components/sec-num.astro';
+import { brands, type IconBrand } from '@brand-icons/core';
+
+const firefox = (brands as Record<string, IconBrand>).firefox;
+if (!firefox) throw new Error('Missing brand module for slug: firefox');
+
+const ERA_LABELS: Record<string, string> = {
+  '2002': 'Phoenix',
+  '2004': 'Hicks',
+  '2013': 'Flat',
+  '2017': 'Photon',
+  '2019': 'Quantum',
+};
+
+const namespaceSvgIds = ({ raw, prefix }: { raw: string; prefix: string }): string => {
+  const ids = new Set<string>();
+  const idPattern = /\sid="([^"]+)"/g;
+  let match: RegExpExecArray | null;
+  match = idPattern.exec(raw);
+  while (match !== null) {
+    if (match[1]) ids.add(match[1]);
+    match = idPattern.exec(raw);
+  }
+  let out = raw;
+  for (const id of ids) {
+    const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`\\sid="${escaped}"`, 'g'), ` id="${prefix}-${id}"`);
+    out = out.replace(new RegExp(`url\\(#${escaped}\\)`, 'g'), `url(#${prefix}-${id})`);
+    out = out.replace(new RegExp(`href="#${escaped}"`, 'g'), `href="#${prefix}-${id}"`);
+    out = out.replace(new RegExp(`xlink:href="#${escaped}"`, 'g'), `xlink:href="#${prefix}-${id}"`);
+  }
+  return out;
+};
+
+const firefoxEras = Object.entries(firefox.years)
+  .map(([year, data]) => ({
+    year,
+    label: ERA_LABELS[year] ?? year,
+    color: namespaceSvgIds({ raw: data.color, prefix: `ff-${year}` }),
+  }))
+  .sort((a, b) => a.year.localeCompare(b.year));
+---
+
+<section class="border-t border-ink bg-paper-warm py-18">
+  <div class="container mx-auto px-10">
+    <SecNum kicker="Historical timeline" label="The same logo, five eras."/>
+
+    <div class="grid grid-cols-[1fr_3fr] gap-9">
+      <p class="m-0 max-w-80 text-base leading-normal text-ink-soft-2">
+        Every brand evolves. Its identity shifts, but its older forms still matter — for the
+        press, archives, retrospectives. <strong>Brand Icons</strong> keeps them all, available
+        through a single <span class="bg-paper-alt px-1.5 font-mono">year</span> prop.
+      </p>
+
+      <div>
+        <div class="relative h-px bg-ink"></div>
+        <div class="grid grid-cols-5 border-l border-ink">
+          {
+            firefoxEras.map((era, i) => {
+              const isLast = i === firefoxEras.length - 1;
+              return (
+                <article class="relative flex flex-col items-start gap-3.5 border-r border-b border-ink bg-paper px-4 py-5 pb-5.5">
+                  <header class="flex w-full items-baseline justify-between font-mono text-mono-sm font-bold tracking-segment">
+                    <span class={isLast ? 'text-accent' : 'text-ink-soft'}>{era.year}</span>
+                    <span class={['uppercase', isLast ? 'text-accent' : 'text-ink-soft'].join(' ')}>{era.label}</span>
+                  </header>
+
+                  <div class="timeline-icon h-24 w-24" aria-hidden="true" set:html={era.color} />
+
+                  <p class="font-mono text-mono-sm text-ink-soft">year={era.year}</p>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

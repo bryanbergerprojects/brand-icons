@@ -29,8 +29,9 @@ const buildCoreInput = (input: IconInput, yearFilter: string | undefined): CoreI
     if (!raw) {
       throw new Error(`[${input.slug}/${entry.year}] raw SVGs missing`);
     }
-    const color = optimize(raw.color, 'color');
-    const mono = optimize(raw.mono, 'mono');
+    const prefix = `${input.slug}-${entry.year}-`;
+    const color = optimize({ svg: raw.color, variant: 'color', prefix });
+    const mono = optimize({ svg: raw.mono, variant: 'mono', prefix });
     const extracted = extractPalette(color);
     const palette = extracted.length > 0 ? extracted : [...entry.palette];
     const diff = comparePalettes(entry.palette, extracted);

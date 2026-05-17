@@ -2,7 +2,13 @@ import type { Config } from 'svgo';
 import { optimize as svgoOptimize } from 'svgo';
 import type { Variant } from './schema';
 
-const baseConfig = (variant: Variant): Config => ({
+type OptimizeInput = {
+  svg: string;
+  variant: Variant;
+  prefix: string;
+};
+
+const baseConfig = (input: OptimizeInput): Config => ({
   multipass: true,
   plugins: [
     {
@@ -10,8 +16,16 @@ const baseConfig = (variant: Variant): Config => ({
       params: {
         overrides: {
           removeViewBox: false,
-          convertColors: variant === 'mono' ? { currentColor: true } : false,
+          convertColors: input.variant === 'mono' ? { currentColor: true } : false,
         },
+      },
+    },
+    {
+      name: 'prefixIds',
+      params: {
+        prefix: input.prefix,
+        prefixIds: true,
+        prefixClassNames: false,
       },
     },
     'removeDimensions',
@@ -20,15 +34,16 @@ const baseConfig = (variant: Variant): Config => ({
 
 /**
  * Optimize a raw SVG string. Preserves the `0 0 24 24` viewBox; strips
- * width/height; for `color`, keeps official hex values; for `mono`, rewrites
- * every fill/stroke to `currentColor`.
+ * width/height; namespaces every internal id/url reference under `prefix`
+ * so gradients don't collide when multiple icons are inlined in the same
+ * DOM; for `color`, keeps official hex values; for `mono`, rewrites every
+ * fill/stroke to `currentColor`.
  *
- * @param svg raw SVG markup
- * @param variant `'color'` or `'mono'`
+ * @param input svg markup, variant, and per-icon id prefix
  * @returns optimized SVG markup
  */
-export const optimize = (svg: string, variant: Variant): string => {
-  const result = svgoOptimize(svg, baseConfig(variant));
+export const optimize = (input: OptimizeInput): string => {
+  const result = svgoOptimize(input.svg, baseConfig(input));
   if ('error' in result && result.error !== undefined) {
     throw new Error(`SVGO failed: ${result.error}`);
   }

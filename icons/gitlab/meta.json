@@ -27,9 +27,9 @@
       "year": "2022",
       "palette": ["#E24329", "#FC6D26", "#FCA326"],
       "source": "https://about.gitlab.com/images/press/gitlab-logo-500-rgb.svg",
-      "notes": "Tanuki refresh — <g transform> wrapper retained (baked at build via SVGO convertTransform)."
+      "notes": "Tanuki refresh — <g transform> wrapper retained (baked at build via SVGO convertTransform). Scale + translate fitted to actual path bbox so the mark fills the 24x24 viewBox in line with 2014/2015."
     }
   ],
   "addedAt": "2026-05-16",
-  "updatedAt": "2026-05-16"
+  "updatedAt": "2026-05-17"
 }

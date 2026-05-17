@@ -1,0 +1,28 @@
+{
+  "slug": "jetbrains",
+  "name": "JetBrains",
+  "category": "dev-tools",
+  "description": "Czech software company producing IDEs and developer tools including IntelliJ IDEA, WebStorm, PyCharm, Rider, and the Kotlin programming language.",
+  "tags": ["ide", "developer-tools", "intellij", "kotlin", "jvm", "code-editor", "tooling"],
+  "brandColor": "#FF021D",
+  "url": "https://www.jetbrains.com",
+  "repository": "https://github.com/JetBrains/logos",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#FE2857", "#FDB60D", "#FF318C", "#FCF84A", "#293896", "#000000", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/en/0/08/JetBrains_beam_logo.svg",
+      "notes": "Beam logo introduced with the 2016 Pajama-led rebrand. Four colored beams radiating from a central black JB square."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF021D", "#FF9419", "#E600FF", "#000000", "#FFFFFF"],
+      "source": "https://raw.githubusercontent.com/JetBrains/logos/master/web/jetbrains/icon.svg",
+      "notes": "Current curved-cut square mark with orange-red-magenta gradient. Mark-only variant from the official JetBrains/logos repository."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

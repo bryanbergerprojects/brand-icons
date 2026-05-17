@@ -46,8 +46,20 @@ const CommandPalette = ({ icons, docs }: CommandPaletteProps) => {
         setOpen((prev) => !prev);
       }
     };
+    const handleClick = (event: MouseEvent): void => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('[data-open-command-palette]')) {
+        event.preventDefault();
+        setOpen(true);
+      }
+    };
     window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    document.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      document.removeEventListener('click', handleClick);
+    };
   }, []);
 
   useEffect(() => {

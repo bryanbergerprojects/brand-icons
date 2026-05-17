@@ -1,0 +1,22 @@
+{
+  "slug": "linear",
+  "name": "Linear",
+  "category": "productivity",
+  "description": "Linear is an issue tracking and project management tool for software teams, with planning, cycles, roadmaps, and Git integrations.",
+  "tags": ["issue-tracker", "project-management", "product-development", "roadmap", "sprints", "saas"],
+  "brandColor": "#5E6AD2",
+  "url": "https://linear.app",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["linear-app"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2022",
+      "palette": ["#5E6AD2"],
+      "source": "https://static.linear.app/design-assets/Linear-Brand-Assets.zip?v=3",
+      "notes": "Logomark from the official Linear brand assets package (logo-light.svg/logo-dark.svg, dated 2022-11-28). Color variant uses Linear's signature purple #5E6AD2; mono uses currentColor."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}
