@@ -1,5 +1,6 @@
 ---
 import ResourcesMenu from '@/components/resources-menu';
+import { CORE_VERSION } from '@/lib/version';
 
 type NavLink = { href: string; label: string };
 
@@ -8,7 +9,7 @@ const PRIMARY_LINKS: readonly NavLink[] = [
   { href: '/docs', label: 'Docs' },
 ];
 
-const VERSION = '2.4.0';
+const VERSION = CORE_VERSION;
 const GITHUB_URL = 'https://github.com/bryanbergerprojects/brand-icons';
 
 const currentPath = Astro.url.pathname;

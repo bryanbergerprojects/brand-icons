@@ -4,10 +4,13 @@ import { Input } from '@/components/ui/input';
 import Playground, { type PlaygroundYear } from '@/features/playground/playground';
 import LiveCounter from '@/features/landing/live-counter';
 import TimelineBackdrop from '@/features/landing/timeline-backdrop';
-import { brands, type IconBrand } from '@brand-icons/core';
+import { brands, type IconBrand, manifest } from '@brand-icons/core';
+import { CORE_VERSION } from '@/lib/version';
 
 const apple = (brands as Record<string, IconBrand>).apple;
 if (!apple) throw new Error('Missing brand module for slug: apple');
+
+const iconCount = manifest.length;
 
 const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
   .map(([year, data]) => ({
@@ -57,7 +60,7 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
               placeholder="Search an icon… (e.g. arrow, lock, bell)"
               aria-label="Search an icon"
             />
-            <span class="px-3 font-mono text-mono font-semibold text-ink-soft">⌘ K</span>
+            <span class="px-3 font-mono text-mono font-semibold text-no-wrap whitespace-nowrap text-ink-soft">⌘ K</span>
           </div>
           <Button type="submit" variant="accent" size="cta" className="rounded-none">
             Browse library →
@@ -65,9 +68,9 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
         </form>
 
         <div class="mt-9 flex flex-wrap items-center gap-6">
-          <LiveCounter client:visible />
+          <LiveCounter client:visible count={iconCount} />
           <span class="text-xs font-medium text-ink-soft">
-            <span class="font-bold text-accent">●</span> Open source · MIT · 4.2 kB gzip
+            <span class="font-bold text-accent">●</span> Open source · MIT · v{CORE_VERSION}
           </span>
         </div>
       </div>
