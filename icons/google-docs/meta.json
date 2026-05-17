@@ -1,0 +1,28 @@
+{
+  "slug": "google-docs",
+  "name": "Google Docs",
+  "category": "productivity",
+  "description": "Google's collaborative online word processor for creating, editing, and sharing text documents in real time.",
+  "tags": ["word-processor", "document-editor", "collaboration", "google-workspace", "productivity-suite", "cloud-office", "real-time-editing"],
+  "brandColor": "#3086F6",
+  "url": "https://docs.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["docs"],
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#4285F4", "#A1C2FA", "#F1F1F1", "#1A237E"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Docs_logo_(2014-2020).svg",
+      "notes": "Refined rounded version of the blue document mark with folded top-right corner and four text lines. Used 2014-2020. Redrawn into a 24×24 viewBox via transform=scale(0.36923) over the native 47×65 source; intermediate masks collapsed to a single clip-path on the body silhouette."
+    },
+    {
+      "year": "2020",
+      "palette": ["#3086F6", "#0C67D6", "#FDFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Docs_2020_Logo.svg",
+      "notes": "Current Workspace-era mark introduced October 6, 2020. Three-line layout with the folded corner depicted as a separate darker-blue triangular flap. Redrawn into a 24×24 viewBox via transform=scale(0.27273) over the native 64×88 source."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}
