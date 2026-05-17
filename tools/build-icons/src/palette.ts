@@ -2,13 +2,7 @@ type RGB = { r: number; g: number; b: number };
 
 type ColorWeight = { hex: string; weight: number };
 
-const NEUTRAL_FILLS = new Set([
-  'none',
-  'transparent',
-  'inherit',
-  'currentColor',
-  'currentcolor',
-]);
+const NEUTRAL_FILLS = new Set(['none', 'transparent', 'inherit', 'currentColor', 'currentcolor']);
 
 const SHORT_HEX = /^#([0-9a-fA-F]{3})$/;
 const LONG_HEX = /^#([0-9a-fA-F]{6})$/;
@@ -83,7 +77,7 @@ const distance = (a: RGB, b: RGB): number => {
 const numAttr = (tag: string, attr: string): number => {
   const re = new RegExp(`\\b${attr}="([^"]+)"`);
   const m = re.exec(tag);
-  if (!m || !m[1]) return Number.NaN;
+  if (!m?.[1]) return Number.NaN;
   return Number.parseFloat(m[1]);
 };
 
@@ -109,7 +103,7 @@ const elementWeight = (tag: string, kind: string): number => {
   }
   if (kind === 'path') {
     const d = /\bd="([^"]+)"/.exec(tag);
-    if (!d || !d[1]) return 100;
+    if (!d?.[1]) return 100;
     const nums = d[1].match(/-?\d*\.?\d+/g);
     if (!nums || nums.length < 4) return 100;
     const xs: number[] = [];
@@ -128,32 +122,30 @@ const elementWeight = (tag: string, kind: string): number => {
   return 100;
 };
 
-const collectGradientStops = (
-  svg: string,
-): Map<string, ColorWeight[]> => {
+const collectGradientStops = (svg: string): Map<string, ColorWeight[]> => {
   const stops = new Map<string, ColorWeight[]>();
-  const re = /<(linearGradient|radialGradient)\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/(?:linearGradient|radialGradient)>/g;
-  let match: RegExpExecArray | null;
-  while ((match = re.exec(svg)) !== null) {
+  const re =
+    /<(linearGradient|radialGradient)\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/(?:linearGradient|radialGradient)>/g;
+  for (let match: RegExpExecArray | null = re.exec(svg); match !== null; match = re.exec(svg)) {
     const id = match[2];
     const body = match[3];
     if (!id || !body) continue;
     const collected: ColorWeight[] = [];
     const stopRe = /<stop\b([^/>]*)\/?>/g;
-    let stop: RegExpExecArray | null;
-    while ((stop = stopRe.exec(body)) !== null) {
+    for (
+      let stop: RegExpExecArray | null = stopRe.exec(body);
+      stop !== null;
+      stop = stopRe.exec(body)
+    ) {
       const attrs = stop[1] ?? '';
       const colorMatch =
-        /\bstop-color="([^"]+)"/.exec(attrs) ??
-        /\bstop-color:\s*([^;"']+)/.exec(attrs);
+        /\bstop-color="([^"]+)"/.exec(attrs) ?? /\bstop-color:\s*([^;"']+)/.exec(attrs);
       const opacityMatch =
-        /\bstop-opacity="([^"]+)"/.exec(attrs) ??
-        /\bstop-opacity:\s*([^;"']+)/.exec(attrs);
-      if (!colorMatch || !colorMatch[1]) continue;
+        /\bstop-opacity="([^"]+)"/.exec(attrs) ?? /\bstop-opacity:\s*([^;"']+)/.exec(attrs);
+      if (!colorMatch?.[1]) continue;
       const hex = parseColor(colorMatch[1]);
       if (!hex) continue;
-      const opacity =
-        opacityMatch && opacityMatch[1] ? Number.parseFloat(opacityMatch[1]) : 1;
+      const opacity = opacityMatch?.[1] ? Number.parseFloat(opacityMatch[1]) : 1;
       collected.push({ hex, weight: Number.isFinite(opacity) ? opacity : 1 });
     }
     stops.set(id, collected);
@@ -163,10 +155,7 @@ const collectGradientStops = (
 
 const URL_REF = /^url\(#([^)]+)\)$/;
 
-const resolveFill = (
-  value: string,
-  gradients: Map<string, ColorWeight[]>,
-): ColorWeight[] => {
+const resolveFill = (value: string, gradients: Map<string, ColorWeight[]>): ColorWeight[] => {
   const trimmed = value.trim();
   const refMatch = URL_REF.exec(trimmed);
   if (refMatch) {
@@ -206,15 +195,7 @@ const stripDefs = (svg: string): string =>
     .replace(/<mask\b[\s\S]*?<\/mask>/g, '')
     .replace(/<symbol\b[\s\S]*?<\/symbol>/g, '');
 
-const PAINTABLE = new Set([
-  'rect',
-  'circle',
-  'ellipse',
-  'path',
-  'polygon',
-  'polyline',
-  'line',
-]);
+const PAINTABLE = new Set(['rect', 'circle', 'ellipse', 'path', 'polygon', 'polyline', 'line']);
 
 /**
  * Extract the dominant colors of a `color.svg` string.
@@ -235,8 +216,11 @@ export const extractPalette = (svg: string): string[] => {
   const groupStack: { fill: string | undefined; stroke: string | undefined }[] = [];
 
   const tokenRe = /<\/g\s*>|<(g|rect|circle|ellipse|path|polygon|polyline|line)\b([^>]*?)(\/?)>/g;
-  let match: RegExpExecArray | null;
-  while ((match = tokenRe.exec(body)) !== null) {
+  for (
+    let match: RegExpExecArray | null = tokenRe.exec(body);
+    match !== null;
+    match = tokenRe.exec(body)
+  ) {
     const token = match[0];
     if (token === '</g>' || /^<\/g\s*>$/.test(token)) {
       groupStack.pop();
@@ -247,8 +231,7 @@ export const extractPalette = (svg: string): string[] => {
     const selfClose = match[3] === '/';
     if (!kind || attrs === undefined) continue;
 
-    const fillAttr =
-      /\bfill="([^"]+)"/.exec(attrs)?.[1] ?? /\bfill:\s*([^;"']+)/.exec(attrs)?.[1];
+    const fillAttr = /\bfill="([^"]+)"/.exec(attrs)?.[1] ?? /\bfill:\s*([^;"']+)/.exec(attrs)?.[1];
     const strokeAttr =
       /\bstroke="([^"]+)"/.exec(attrs)?.[1] ?? /\bstroke:\s*([^;"']+)/.exec(attrs)?.[1];
 
@@ -280,8 +263,7 @@ export const extractPalette = (svg: string): string[] => {
 
     const opacityMatch =
       /\bfill-opacity="([^"]+)"/.exec(attrs) ?? /\bopacity="([^"]+)"/.exec(attrs);
-    const opacity =
-      opacityMatch && opacityMatch[1] ? Number.parseFloat(opacityMatch[1]) : 1;
+    const opacity = opacityMatch?.[1] ? Number.parseFloat(opacityMatch[1]) : 1;
     const effectiveOpacity = Number.isFinite(opacity) ? opacity : 1;
     const w = elementWeight(token, kind) * effectiveOpacity;
 

@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react';
 import type { BrandIconProps, IconBrandYearRender } from '@brand-icons/core';
-import { parseSize } from './utils/parse-size';
-import { parseBackground } from './utils/parse-bg';
+import type { ReactElement } from 'react';
 import { resolveColorMode } from './utils/color-mode';
+import { parseBackground } from './utils/parse-bg';
+import { parseSize } from './utils/parse-size';
 
 type RenderIconInput = {
   data: IconBrandYearRender;
@@ -29,15 +29,7 @@ const extractInner = (svgString: string): string => {
  */
 export const renderIcon = (input: RenderIconInput): ReactElement => {
   const { data, props } = input;
-  const {
-    size,
-    color,
-    variant = 'color',
-    mode = 'as-is',
-    background,
-    title,
-    className,
-  } = props;
+  const { size, color, variant = 'color', mode = 'as-is', background, title, className } = props;
 
   const { variant: activeVariant, style } = resolveColorMode({
     mode,
@@ -65,9 +57,8 @@ export const renderIcon = (input: RenderIconInput): ReactElement => {
       style={style}
     >
       {title !== undefined ? <title>{title}</title> : null}
-      {bgFill !== undefined ? (
-        <rect fill={bgFill} x="0" y="0" width="24" height="24" />
-      ) : null}
+      {bgFill !== undefined ? <rect fill={bgFill} x="0" y="0" width="24" height="24" /> : null}
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: inner SVG comes from build-time bundled icon sources, never user input */}
       <g dangerouslySetInnerHTML={{ __html: inner }} />
     </svg>
   );

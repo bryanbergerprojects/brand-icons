@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react';
 import type { ColorMode, Variant } from '@brand-icons/core';
+import type { CSSProperties } from 'react';
 
 export type ColorModeResolution = {
   variant: Variant;
@@ -22,9 +22,7 @@ type ResolveColorModeInput = {
  * - `mono`: forces the `mono` variant and sets `style.color` so every
  *   `fill="currentColor"` in the SVG adopts the target color.
  */
-export const resolveColorMode = (
-  input: ResolveColorModeInput,
-): ColorModeResolution => {
+export const resolveColorMode = (input: ResolveColorModeInput): ColorModeResolution => {
   const { mode, variant, color } = input;
 
   switch (mode) {
@@ -37,7 +35,6 @@ export const resolveColorMode = (
         variant: 'mono',
         style: { color: color ?? 'currentColor' },
       };
-    case 'as-is':
     default:
       return { variant, style: undefined };
   }

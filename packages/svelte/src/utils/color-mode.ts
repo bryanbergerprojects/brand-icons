@@ -23,9 +23,7 @@ type ResolveColorModeInput = {
  * - `mono`: forces the `mono` variant and sets `color` so every
  *   `fill="currentColor"` in the SVG adopts the target color.
  */
-export const resolveColorMode = (
-  input: ResolveColorModeInput,
-): ColorModeResolution => {
+export const resolveColorMode = (input: ResolveColorModeInput): ColorModeResolution => {
   const { mode, variant, color } = input;
 
   switch (mode) {
@@ -38,7 +36,6 @@ export const resolveColorMode = (
         variant: 'mono',
         styleString: `color: ${color ?? 'currentColor'}`,
       };
-    case 'as-is':
     default:
       return { variant, styleString: undefined };
   }
