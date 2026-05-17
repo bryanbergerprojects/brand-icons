@@ -3,13 +3,5 @@
     "extends": ".markdownlint.json"
   },
   "globs": ["**/*.md"],
-  "ignores": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/.astro/**",
-    "**/.turbo/**",
-    "**/coverage/**",
-    "**/CHANGELOG.md",
-    ".changeset/**"
-  ]
+  "ignores": ["**/node_modules/**", "**/dist/**", "**/.astro/**", "**/.turbo/**", "**/coverage/**", "**/CHANGELOG.md", ".changeset/**"]
 }
