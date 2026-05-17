@@ -3,6 +3,16 @@ import { useState } from 'react';
 import CopyButton from '@/features/docs/copy-button';
 import { cn } from '@/lib/utils';
 
+const FRAMEWORKS = ['react', 'vue', 'svelte', 'wc'] as const;
+type Framework = (typeof FRAMEWORKS)[number];
+
+const FRAMEWORK_LABEL: Record<Framework, string> = {
+  react: 'React',
+  vue: 'Vue',
+  svelte: 'Svelte',
+  wc: 'Web Components',
+};
+
 const MANAGERS = ['npm', 'pnpm', 'yarn', 'bun'] as const;
 type Manager = (typeof MANAGERS)[number];
 
@@ -12,33 +22,56 @@ export type InstallCommand = {
 };
 
 export type InstallTabsProps = {
-  commands: Record<Manager, InstallCommand>;
+  commands: Record<Framework, Record<Manager, InstallCommand>>;
 };
 
 const InstallTabs = ({ commands }: InstallTabsProps) => {
+  const [framework, setFramework] = useState<Framework>('react');
   const [manager, setManager] = useState<Manager>('pnpm');
-  const current = commands[manager];
+  const current = commands[framework][manager];
 
   return (
     <div className="flex flex-col gap-3.5">
-      <div className="flex">
-        {MANAGERS.map((m) => {
-          const active = m === manager;
-          return (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setManager(m)}
-              className={cn(
-                'border border-ink px-2.5 py-1 font-mono text-mono font-semibold uppercase tracking-mono -ml-px first:ml-0 transition-colors',
-                active ? 'bg-ink text-paper' : 'bg-paper text-ink hover:bg-paper-alt'
-              )}
-              aria-pressed={active}
-            >
-              {m}
-            </button>
-          );
-        })}
+      <div className="flex justify-between items-center">
+        <div className="flex flex-wrap gap-y-2">
+          {FRAMEWORKS.map((f) => {
+            const active = f === framework;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFramework(f)}
+                className={cn(
+                  'border border-ink px-2.5 py-1 font-mono text-mono font-semibold uppercase tracking-mono -ml-px first:ml-0 transition-colors',
+                  active ? 'bg-accent text-paper' : 'bg-paper text-ink hover:bg-paper-alt'
+                )}
+                aria-pressed={active}
+              >
+                {FRAMEWORK_LABEL[f]}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex">
+          {MANAGERS.map((m) => {
+            const active = m === manager;
+            return (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setManager(m)}
+                className={cn(
+                  'border border-ink px-2.5 py-1 font-mono text-mono font-semibold uppercase tracking-mono -ml-px first:ml-0 transition-colors',
+                  active ? 'bg-ink text-paper' : 'bg-paper text-ink hover:bg-paper-alt'
+                )}
+                aria-pressed={active}
+              >
+                {m}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="relative border border-ink bg-ink text-paper">

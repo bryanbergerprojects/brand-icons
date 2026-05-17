@@ -1,39 +1,57 @@
 ---
 import { codeToHtml } from 'shiki';
-import CodeBlock from '@/components/docs/code-block.astro';
 import H from '@/components/docs/section-heading.astro';
 import InstallTabs, { type InstallCommand } from '@/features/docs/install-tabs';
 
-const COMMANDS = {
-  npm: '$ npm i @brand/icons-react',
-  pnpm: '$ pnpm add @brand/icons-react',
-  yarn: '$ yarn add @brand/icons-react',
-  bun: '$ bun add @brand/icons-react',
-} as const;
+const FRAMEWORKS = ['react', 'vue', 'svelte', 'wc'] as const;
+type Framework = (typeof FRAMEWORKS)[number];
 
-type Manager = keyof typeof COMMANDS;
+const PACKAGES: Record<Framework, string> = {
+  react: '@brand-icons/react',
+  vue: '@brand-icons/vue',
+  svelte: '@brand-icons/svelte',
+  wc: '@brand-icons/wc',
+};
 
-const entries = await Promise.all(
-  (Object.keys(COMMANDS) as Manager[]).map(async (key) => {
-    const source = COMMANDS[key];
-    const html = await codeToHtml(source, { lang: 'bash', theme: 'github-dark' });
-    return [key, { source, html } satisfies InstallCommand] as const;
+const MANAGERS = ['npm', 'pnpm', 'yarn', 'bun'] as const;
+type Manager = (typeof MANAGERS)[number];
+
+const MANAGER_PREFIX: Record<Manager, string> = {
+  npm: 'npm i',
+  pnpm: 'pnpm add',
+  yarn: 'yarn add',
+  bun: 'bun add',
+};
+
+const buildCommand = (manager: Manager, pkg: string): string =>
+  `${MANAGER_PREFIX[manager]} ${pkg}`;
+
+const commandEntries = await Promise.all(
+  FRAMEWORKS.map(async (framework) => {
+    const pkg = PACKAGES[framework];
+    const managerEntries = await Promise.all(
+      MANAGERS.map(async (manager) => {
+        const source = buildCommand(manager, pkg);
+        const html = await codeToHtml(`$ ${source}`, { lang: 'bash', theme: 'github-dark' });
+        return [manager, { source, html } satisfies InstallCommand] as const;
+      })
+    );
+    return [framework, Object.fromEntries(managerEntries) as Record<Manager, InstallCommand>] as const;
   })
 );
-const commands = Object.fromEntries(entries) as Record<Manager, InstallCommand>;
 
-const CDN_SOURCE = `<script type="module">
-  import { ArrowRight }
-    from 'https://esm.brandicons.dev/icons@2.4.0'
-</script>`;
+const commands = Object.fromEntries(commandEntries) as Record<
+  Framework,
+  Record<Manager, InstallCommand>
+>;
 ---
 
 <section class="pb-18">
-  <H id="install" num="01" kicker="Install" title="One command. Any runtime." />
+  <H id="install" num="01" kicker="Install" title="One command. Any framework." />
 
   <p class="text-base text-ink-soft-2">
-    Brand Icons ships as ESM-only, one component per icon. Pick your package manager — the CLI
-    flags are identical.
+    Brand Icons ships as ESM-only npm packages, one component per icon. Pick your framework, pick
+    your package manager — the CLI flags are identical.
   </p>
 
   <div class="mt-6">
@@ -46,14 +64,22 @@ const CDN_SOURCE = `<script type="module">
         Requirements
       </p>
       <ul class="mt-2 flex flex-col gap-1.5 text-13 text-ink">
-        <li>React 18+ (or Vue 3.4+ via <code class="bg-paper-alt px-1.5 py-px font-mono">@brand/icons-vue</code>)</li>
+        <li>React 19+, Vue 3.5+, Svelte 5+, or modern browser (Web Components)</li>
         <li>Node 18+ for bundlers</li>
         <li>ES Modules — no CJS fallback shipped</li>
       </ul>
     </div>
 
-    <div>
-      <CodeBlock lang="html" label="CDN" source={CDN_SOURCE} />
+    <div class="border border-paper-alt bg-paper p-4.5 px-5">
+      <p class="mb-2 font-mono text-mono-sm font-bold uppercase tracking-mono text-accent">
+        Packages
+      </p>
+      <ul class="mt-2 flex flex-col gap-1.5 text-13 text-ink">
+        <li><code class="bg-paper-alt px-1.5 py-px font-mono">@brand-icons/react</code> — React 19 components</li>
+        <li><code class="bg-paper-alt px-1.5 py-px font-mono">@brand-icons/vue</code> — Vue 3.5 components</li>
+        <li><code class="bg-paper-alt px-1.5 py-px font-mono">@brand-icons/svelte</code> — Svelte 5 components</li>
+        <li><code class="bg-paper-alt px-1.5 py-px font-mono">@brand-icons/wc</code> — framework-agnostic Web Components</li>
+      </ul>
     </div>
   </div>
 </section>

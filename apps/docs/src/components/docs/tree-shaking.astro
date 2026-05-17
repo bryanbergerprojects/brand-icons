@@ -11,10 +11,10 @@ const STATS: readonly Stat[] = [
   { num: '04.', count: '1,248', label: 'all icons', size: '248 kB' },
 ];
 
-const GOOD_SOURCE = `import { Bell, Lock } from '@brand/icons-react'
+const GOOD_SOURCE = `import { GitHubLatestIcon, NotionLatestIcon } from '@brand-icons/react'
 // tree-shakes to ~496 B`;
 
-const AVOID_SOURCE = `import * as Icons from '@brand/icons-react'
+const AVOID_SOURCE = `import * as Icons from '@brand-icons/react'
 // ships the full 248 kB bundle`;
 ---
 

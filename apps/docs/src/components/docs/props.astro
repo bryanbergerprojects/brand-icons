@@ -9,33 +9,43 @@ type PropRow = {
 };
 
 const ROWS: readonly PropRow[] = [
-  { name: 'size', type: 'number | string', default: '24', desc: 'Outer width and height in px.' },
   {
-    name: 'weight',
-    type: '"outline" | "solid" | "duotone" | "sketch"',
-    default: '"outline"',
-    desc: 'Stroke / fill style.',
+    name: 'size',
+    type: 'number | string',
+    default: '"1em"',
+    desc: 'Width and height. Number → px, string → any CSS length.',
   },
   {
-    name: 'year',
-    type: 'number',
-    default: 'current',
-    desc: 'Pin a specific era. Falls back to the closest available year.',
+    name: 'variant',
+    type: '"color" | "mono"',
+    default: '"color"',
+    desc: 'Render the official multi-color or monochrome variant.',
   },
-  { name: 'stroke', type: 'CSSColor', default: 'currentColor', desc: 'Stroke colour.' },
   {
-    name: 'strokeWidth',
-    type: 'number',
-    default: '1.5',
-    desc: 'Line thickness in pt. Range 1 → 2.5.',
+    name: 'color',
+    type: 'string',
+    default: 'undefined',
+    desc: 'Override currentColor on mono fills when mode="mono".',
+  },
+  {
+    name: 'mode',
+    type: '"as-is" | "bw" | "wb" | "mono"',
+    default: '"as-is"',
+    desc: 'Color transform — bw: grayscale, wb: inverted, mono: force mono variant.',
+  },
+  {
+    name: 'background',
+    type: 'boolean | string',
+    default: 'undefined',
+    desc: 'Paint a rect behind the icon. true → brand color, string → any CSS color.',
   },
   {
     name: 'title',
     type: 'string',
     default: 'undefined',
-    desc: 'Sets <title> and role="img".',
+    desc: 'Sets <title> and role="img" on the <svg> root.',
   },
-  { name: 'className', type: 'string', default: '""', desc: 'Forwarded to the <svg> root.' },
+  { name: 'className', type: 'string', default: 'undefined', desc: 'Forwarded to the <svg> root.' },
 ];
 
 const HEADER_CELL =
@@ -47,9 +57,11 @@ const BODY_BASE = 'border-t border-paper-alt border-r border-paper-alt px-3.5 py
   <H id="props" num="03" kicker="Props" title="Seven props. No surprises." />
 
   <p class="text-base text-ink-soft-2">
-    Every icon component accepts the same flat prop set. Forward the rest to the
-    <code class="bg-paper-alt px-1.5 py-px font-mono">{'<svg>'}</code> root via
-    <code class="bg-paper-alt px-1.5 py-px font-mono">className</code>.
+    Every icon component accepts the same flat prop set. The historical millésime is encoded in the
+    component name itself — e.g.
+    <code class="bg-paper-alt px-1.5 py-px font-mono">{'<Apple1976Icon />'}</code> vs
+    <code class="bg-paper-alt px-1.5 py-px font-mono">{'<Apple1998Icon />'}</code> — not a runtime
+    prop, so unused millésimes tree-shake away.
   </p>
 
   <div class="mt-6 grid grid-cols-[180px_280px_140px_1fr] border border-ink text-13">

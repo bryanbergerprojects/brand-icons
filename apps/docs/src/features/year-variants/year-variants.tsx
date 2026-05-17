@@ -46,10 +46,10 @@ const buildSnippets = ({
   year: string;
   colorSvg: string;
 }): Record<Framework, string> => ({
-  React: `import { ${componentName}${year}Icon } from '@brand-icons/react';\n\n<${componentName}${year}Icon size={${size}} variant="color" />`,
-  Vue: `<script setup>\nimport { ${componentName}${year}Icon } from '@brand-icons/vue';\n</script>\n\n<${componentName}${year}Icon :size="${size}" variant="color" />`,
-  Svelte: `<script>\n  import { ${componentName}${year}Icon } from '@brand-icons/svelte';\n</script>\n\n<${componentName}${year}Icon size={${size}} variant="color" />`,
-  WebC: `<brand-icon-${slug}-${year} size="${size}" variant="color"></brand-icon-${slug}-${year}>`,
+  React: `<${componentName}${year}Icon size={${size}} variant="color" />`,
+  Vue: `<${componentName}${year}Icon :size="${size}" variant="color" />`,
+  Svelte: `<${componentName}${year}Icon size={${size}} variant="color" />`,
+  WebC: `<brand-icon name="${slug}" year="${year}" size="${size}" variant="color"></brand-icon>`,
   SVG: sizedSvg({ raw: colorSvg, size }),
 });
 

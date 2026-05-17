@@ -3,38 +3,86 @@ import CodeBlock from '@/components/docs/code-block.astro';
 import Eyebrow from '@/components/docs/eyebrow.astro';
 import H from '@/components/docs/section-heading.astro';
 
-const USAGE_SOURCE = `import { ArrowRight, Bell, Lock } from '@brand/icons-react'
+const REACT_SOURCE = `import { GitHubLatestIcon, NotionLatestIcon, LinearLatestIcon } from '@brand-icons/react';
 
-export function Toolbar () {
-  return (
-    <nav className="toolbar">
-      <ArrowRight size={20} />
-      <Bell       size={20} />
-      <Lock       size={20} weight="solid" />
-    </nav>
-  )
-}`;
+export const Stack = () => (
+  <div className="stack">
+    <GitHubLatestIcon size={20} />
+    <NotionLatestIcon size={20} />
+    <LinearLatestIcon size={20} variant="mono" />
+  </div>
+);`;
 
-const THEMING_SOURCE = `.toolbar       { color: var(--ink); }
-.toolbar:hover { color: var(--accent); }
-/* every icon follows currentColor */`;
+const VUE_SOURCE = `<script setup>
+import { GitHubLatestIcon, NotionLatestIcon, LinearLatestIcon } from '@brand-icons/vue';
+</script>
 
-const A11Y_SOURCE = `<Bell size={20}
-  title="3 new notifications"
-  role="img" />`;
+<template>
+  <div class="stack">
+    <GitHubLatestIcon :size="20" />
+    <NotionLatestIcon :size="20" />
+    <LinearLatestIcon :size="20" variant="mono" />
+  </div>
+</template>`;
+
+const SVELTE_SOURCE = `<script>
+  import { GitHubLatestIcon, NotionLatestIcon, LinearLatestIcon } from '@brand-icons/svelte';
+</script>
+
+<div class="stack">
+  <GitHubLatestIcon size={20} />
+  <NotionLatestIcon size={20} />
+  <LinearLatestIcon size={20} variant="mono" />
+</div>`;
+
+const WC_SOURCE = `<script type="module">
+  import '@brand-icons/wc';
+</script>
+
+<div class="stack">
+  <brand-icon name="github" size="20"></brand-icon>
+  <brand-icon name="notion" size="20"></brand-icon>
+  <brand-icon name="linear" size="20" variant="mono"></brand-icon>
+</div>`;
+
+const THEMING_SOURCE = `.stack       { color: var(--ink); }
+.stack:hover { color: var(--accent); }
+/* every mono icon follows currentColor */`;
+
+const A11Y_SOURCE = `<GitHubLatestIcon size={20} title="Open on GitHub" />
+// title sets <title> and role="img" on the <svg>`;
 ---
 
 <section class="border-t border-ink pt-18 pb-18">
   <H id="usage" num="02" kicker="Usage" title="Import. Place. Style." />
 
   <p class="text-base text-ink-soft-2">
-    Every icon is a stateless React component that paints in
-    <code class="bg-paper-alt px-1.5 py-px font-mono">currentColor</code> and sizes from a single
-    <code class="bg-paper-alt px-1.5 py-px font-mono">size</code> prop. No CSS to load.
+    Every icon ships as a per-framework component with identical props — <code
+      class="bg-paper-alt px-1.5 py-px font-mono">size</code
+    >, <code class="bg-paper-alt px-1.5 py-px font-mono">variant</code> (color · mono), and an
+    optional <code class="bg-paper-alt px-1.5 py-px font-mono">year</code> to pin a historical
+    millésime. Icons paint in
+    <code class="bg-paper-alt px-1.5 py-px font-mono">currentColor</code> when
+    <code class="bg-paper-alt px-1.5 py-px font-mono">variant="mono"</code>. No CSS to load.
   </p>
 
-  <div class="mt-6">
-    <CodeBlock lang="react" source={USAGE_SOURCE} />
+  <div class="mt-6 grid grid-cols-2 gap-5">
+    <div>
+      <Eyebrow label="React" />
+      <CodeBlock lang="react" source={REACT_SOURCE} />
+    </div>
+    <div>
+      <Eyebrow label="Vue" />
+      <CodeBlock lang="vue" source={VUE_SOURCE} />
+    </div>
+    <div>
+      <Eyebrow label="Svelte" />
+      <CodeBlock lang="svelte" source={SVELTE_SOURCE} />
+    </div>
+    <div>
+      <Eyebrow label="Web Components" />
+      <CodeBlock lang="html" source={WC_SOURCE} />
+    </div>
   </div>
 
   <div class="mt-6 grid grid-cols-2 gap-5">

@@ -66,10 +66,10 @@ const buildSnippets = ({
   const variantProp = mode === 'official' ? 'color' : 'mono';
   const raw = mode === 'official' ? colorSvg : monoSvg;
   return {
-    React: `import { ${componentName}${year}Icon } from '@brand-icons/react';\n\n<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
-    Vue: `<script setup>\nimport { ${componentName}${year}Icon } from '@brand-icons/vue';\n</script>\n\n<${componentName}${year}Icon :size="${size}" variant="${variantProp}" />`,
-    Svelte: `<script>\n  import { ${componentName}${year}Icon } from '@brand-icons/svelte';\n</script>\n\n<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
-    WebC: `<brand-icon-${slug}-${year} size="${size}" variant="${variantProp}"></brand-icon-${slug}-${year}>`,
+    React: `<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
+    Vue: `<${componentName}${year}Icon :size="${size}" variant="${variantProp}" />`,
+    Svelte: `<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
+    WebC: `<brand-icon name="${slug}" year="${year}" size="${size}" variant="${variantProp}"></brand-icon>`,
     SVG: sizedSvg({ raw, size }),
   };
 };
