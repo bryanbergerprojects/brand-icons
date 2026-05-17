@@ -34,15 +34,18 @@ const resourcesActive = currentPath.startsWith('/resources');
     <nav class="flex items-center gap-7">
       {
         PRIMARY_LINKS.map((link) => (
-          <a
+          <div class="relative">
+            <a
             href={link.href}
             class:list={[
               'text-13 font-medium',
-              isActive(link.href) ? 'border-b-2 border-accent pb-1 text-accent' : 'text-ink',
+              isActive(link.href) ? 'text-accent' : 'text-ink',
             ]}
           >
             {link.label}
           </a>
+          {isActive(link.href) ? <span class="absolute -bottom-1 left-0 h-0.5 w-full bg-accent" /> : null}
+          </div>
         ))
       }
       <ResourcesMenu active={resourcesActive} client:idle />

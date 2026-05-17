@@ -1,6 +1,5 @@
 ---
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { buttonVariants } from '@/components/ui/button';
 import Playground, { type PlaygroundYear } from '@/features/playground/playground';
 import LiveCounter from '@/features/landing/live-counter';
 import TimelineBackdrop from '@/features/landing/timeline-backdrop';
@@ -36,8 +35,13 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
           From Apple's 1977 logo to yesterday's rebrand. In one line of code.
         </p>
 
-        <form action="/library" method="get" class="mt-9 flex h-11 items-stretch gap-3.5">
-          <div class="flex flex-1 items-center gap-3.5 border-thin border-ink bg-paper pl-4.5 pr-1 py-1">
+        <div class="mt-9 flex h-11 items-stretch gap-3.5">
+          <button
+            type="button"
+            data-open-command-palette
+            aria-label="Search an icon"
+            class="group flex flex-1 items-center gap-3.5 border-thin border-ink bg-paper pl-4.5 pr-1 py-1 text-left outline-none transition-colors hover:bg-paper-alt focus-visible:ring-2 focus-visible:ring-accent"
+          >
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -53,19 +57,15 @@ const appleYears: readonly PlaygroundYear[] = Object.entries(apple.years)
               <circle cx="11" cy="11" r="7"></circle>
               <path d="m20 20-3.5-3.5"></path>
             </svg>
-            <Input
-              type="search"
-              name="q"
-              variant="bare"
-              placeholder="Search an icon… (e.g. arrow, lock, bell)"
-              aria-label="Search an icon"
-            />
-            <span class="px-3 font-mono text-mono font-semibold text-no-wrap whitespace-nowrap text-ink-soft">⌘ K</span>
-          </div>
-          <Button type="submit" variant="accent" size="cta" className="rounded-none">
+            <span class="flex-1 text-base font-normal text-ink-soft">
+              Search an icon… (e.g. arrow, lock, bell)
+            </span>
+            <span class="px-3 font-mono text-mono font-semibold whitespace-nowrap text-ink-soft">⌘ K</span>
+          </button>
+          <a href="/library" class={buttonVariants({ variant: 'accent', size: 'cta', className: 'rounded-none' })}>
             Browse library →
-          </Button>
-        </form>
+          </a>
+        </div>
 
         <div class="mt-9 flex flex-wrap items-center gap-6">
           <LiveCounter client:visible count={iconCount} />

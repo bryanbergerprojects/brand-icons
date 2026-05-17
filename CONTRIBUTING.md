@@ -31,7 +31,7 @@ The agent will:
 2. Generate the `mono.svg` variant.
 3. Create `meta.json` with brand metadata.
 4. Validate against the build pipeline.
-5. Create a branch, commit, and changeset.
+5. Create a branch and commit the changes.
 
 ### Option B — Manual
 
@@ -45,8 +45,7 @@ The agent will:
    - See full schema in [`.claude/rules/meta.md`](./.claude/rules/meta.md).
 4. Add additional millésimes by repeating step 2 with new `<year>/` subdirs and pushing entries into `meta.years[]`.
 5. Run `pnpm build:icons --icon=<slug>` to validate.
-6. Run `pnpm changeset` and select the affected packages.
-7. Open a PR.
+6. Open a PR targeting the `canary` branch and assign it to [@BryanBerger98](https://github.com/BryanBerger98).
 
 ## Icon design guidelines
 
@@ -64,7 +63,7 @@ Conventional Commits:
 - `fix(<pkg>): ...` — bug fix.
 - `docs: ...`, `chore: ...`, `refactor: ...`.
 
-## Releases
+## Pull requests
 
-We use [Changesets](https://github.com/changesets/changesets). Run `pnpm changeset`
-after your change and follow the prompts.
+- Target the `canary` branch.
+- Assign the PR to [@BryanBerger98](https://github.com/BryanBerger98) for review.

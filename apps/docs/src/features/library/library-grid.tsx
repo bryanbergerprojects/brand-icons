@@ -234,10 +234,6 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
               })}
             </ul>
           </div>
-
-          <pre className="mt-6 whitespace-pre font-mono text-mono-sm leading-mono-relaxed text-ink-soft">{`// ⌘K focus search
-// ⌫ to clear filters
-// ↵ to open icon`}</pre>
         </aside>
 
         <div className="bg-paper-warm">
