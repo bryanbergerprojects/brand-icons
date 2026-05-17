@@ -1,8 +1,11 @@
 ---
+import { CORE_VERSION } from '@/lib/version';
+import { manifest } from '@brand-icons/core';
+
 type FooterLink = { href: string; label: string; external?: boolean };
 
-const VERSION = '2.4.0';
-const BRAND_COUNT = 247;
+const VERSION = CORE_VERSION;
+const BRAND_COUNT = manifest.length;
 const GITHUB_URL = 'https://github.com/bryanbergerprojects/brand-icons';
 
 const PRODUCT_LINKS: readonly FooterLink[] = [

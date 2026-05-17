@@ -1,5 +1,6 @@
 ---
 import Playground, { type PlaygroundYear } from '@/features/playground/playground';
+import YearVariants, { type YearVariantEntry } from '@/features/year-variants/year-variants';
 import BaseLayout from '@/layouts/base.astro';
 import { brands, type IconBrand, manifest, type ManifestEntry } from '@brand-icons/core';
 
@@ -69,6 +70,16 @@ const namespaceSvgIds = ({ raw, prefix }: { raw: string; prefix: string }): stri
   }
   return out;
 };
+
+const yearVariantEntries: readonly YearVariantEntry[] = playgroundYears.map((entry) => {
+  const summary = icon.years.find((y) => y.year === entry.year);
+  return {
+    year: entry.year,
+    colorSvg: namespaceSvgIds({ raw: entry.color, prefix: `yv-${icon.slug}-${entry.year}` }),
+    palette: entry.palette,
+    ...(summary?.notes ? { notes: summary.notes } : {}),
+  };
+});
 
 type RelatedCard = {
   readonly slug: string;
@@ -152,10 +163,23 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
     </div>
   </section>
 
+  {yearVariantEntries.length > 0 ? (
+    <section class="border-b border-ink px-10 py-14">
+      <div class="max-w-245 mx-auto">
+        <YearVariants
+          client:visible
+          iconName={icon.name}
+          slug={icon.slug}
+          componentName={componentName}
+          entries={yearVariantEntries}
+        />
+      </div>
+    </section>
+  ) : null}
+
   <section class="border-b border-ink bg-paper-warm px-10 py-14">
     <p class="mb-6 flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
       <span class="text-accent">—</span>
-      <span>·</span>
       <span>Related</span>
       <span>·</span>
       <span>Same category</span>
@@ -167,22 +191,24 @@ const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(
     {related.length === 0 ? (
       <p class="mt-8 text-ink-soft">No siblings in this category yet.</p>
     ) : (
-      <div class="mt-8 grid grid-cols-1 border border-ink bg-paper md:grid-cols-5 lg:grid-cols-5">
-        {related.map((entry, i) => (
-          <a
-            href={`/icon/${entry.slug}`}
-            class:list={[
-              'group related-card relative flex min-h-32 flex-col items-center gap-2.5 border-r border-b border-ink bg-paper px-2 pt-5.5 pb-3.5 text-ink transition-colors hover:bg-paper-alt',
-              i >= 5 && i < 10 && 'hidden md:flex',
-              i >= 10 && 'hidden lg:flex',
-            ]}
-          >
-            <span class="absolute left-2.5 top-2.5 font-mono text-mono-xs text-ink-soft">#{entry.index}</span>
-            <span class="absolute right-2.5 top-2.5 font-mono text-mono-sm text-ink-soft">→</span>
-            <span class="related-icon flex h-10 w-10 flex-1 items-center justify-center" set:html={entry.color} />
-            <span class="mt-auto font-mono text-mono font-semibold">{entry.name}</span>
-          </a>
-        ))}
+      <div class="mt-8 overflow-hidden border border-ink bg-paper">
+        <div class="-mr-px -mb-px grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5">
+          {related.map((entry, i) => (
+            <a
+              href={`/icon/${entry.slug}`}
+              class:list={[
+                'group related-card relative flex min-h-32 flex-col items-center gap-2.5 border-r border-b border-ink bg-paper px-2 pt-5.5 pb-3.5 text-ink transition-colors hover:bg-paper-alt',
+                i >= 5 && i < 10 && 'hidden md:flex',
+                i >= 10 && 'hidden lg:flex',
+              ]}
+            >
+              <span class="absolute left-2.5 top-2.5 font-mono text-mono-xs text-ink-soft">#{entry.index}</span>
+              <span class="absolute right-2.5 top-2.5 font-mono text-mono-sm text-ink-soft">→</span>
+              <span class="related-icon flex h-10 w-10 flex-1 items-center justify-center" set:html={entry.color} />
+              <span class="mt-auto font-mono text-mono font-semibold">{entry.name}</span>
+            </a>
+          ))}
+        </div>
       </div>
     )}
 
