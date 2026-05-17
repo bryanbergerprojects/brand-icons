@@ -4,8 +4,33 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-      "inputs": ["src/**", "package.json", "tsconfig.json", "tsup.config.ts"]
+      "outputs": ["dist/**", ".astro/**", "!.astro/types.d.ts"],
+      "inputs": [
+        "src/**",
+        "public/**",
+        "package.json",
+        "tsconfig.json",
+        "tsup.config.ts",
+        "astro.config.*",
+        "components.json"
+      ]
+    },
+    "@brand-icons/build-icons#build": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**",
+        "templates/**",
+        "package.json",
+        "tsconfig.json",
+        "tsup.config.ts",
+        "../../icons/**"
+      ],
+      "outputs": [
+        "dist/**",
+        "../../packages/core/src/icons/**",
+        "../../packages/core/src/manifest.ts",
+        "../../packages/react/src/icons/**"
+      ]
     },
     "dev": {
       "cache": false,
