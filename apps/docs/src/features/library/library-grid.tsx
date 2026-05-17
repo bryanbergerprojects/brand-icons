@@ -146,11 +146,11 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
       {sorted.length === 0 ? (
         <p className="mt-12 font-mono text-xs uppercase tracking-widest text-ink-muted">No icon matches the current filters.</p>
       ) : (
-        <ul className="mt-10 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-2 border-t border-l border-ink/10 sm:grid-cols-3 lg:grid-cols-4">
           {sorted.map((icon) => {
             const Icon = latestIconBySlug[icon.slug];
             return (
-              <li key={icon.slug} className="bg-paper">
+              <li key={icon.slug} className="border-r border-b border-ink/10 bg-paper">
                 <a href={`/icon/${icon.slug}`} className="group flex h-full flex-col gap-4 p-6 transition-colors hover:bg-surface-muted">
                   <div className="flex h-16 items-center justify-start">
                     {Icon ? <Icon size={48} /> : <span className="text-ink-muted">{icon.name}</span>}
