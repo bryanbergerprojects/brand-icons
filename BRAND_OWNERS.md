@@ -19,7 +19,7 @@ please contact the maintainer through one of the channels below.
 
 ### Option 1 — Email (preferred for legal requests)
 
-Send a message to **contact+brand-icons@bryanberger.dev** with subject:
+Send a message to **<contact+brand-icons@bryanberger.dev>** with subject:
 
 ```
 [Brand Icons Removal] <Brand Name>
@@ -45,4 +45,4 @@ verification.
 
 ## Maintainer
 
-Bryan Berger — contact@bryanberger.dev
+Bryan Berger — <contact@bryanberger.dev>

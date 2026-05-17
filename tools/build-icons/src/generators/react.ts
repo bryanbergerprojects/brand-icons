@@ -39,10 +39,7 @@ const brandPascal = (name: string): string => brandYearFile({ name, year: '' });
 const aliasComponent = (name: string): string => `${brandPascal(name)}LatestIcon`;
 const aliasFile = (name: string): string => `${brandPascal(name)}Latest`;
 
-const renderYearComponent = (
-  input: IconInput,
-  year: string,
-): { content: string; spec: ComponentSpec } => {
+const renderYearComponent = (input: IconInput, year: string): { content: string; spec: ComponentSpec } => {
   const componentName = brandYearComponent({ name: input.meta.name, year });
   const fileName = brandYearFile({ name: input.meta.name, year });
   const yearSegment = year.replace(/[^a-zA-Z0-9]/g, '');

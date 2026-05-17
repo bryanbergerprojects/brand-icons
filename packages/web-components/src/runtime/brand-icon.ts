@@ -36,17 +36,7 @@ const readMode = (attr: string | null): ColorMode => {
  * brand color behind the icon; any other CSS color value is used verbatim.
  */
 export class BrandIcon extends HTMLElement {
-  static readonly observedAttributes = [
-    'name',
-    'year',
-    'size',
-    'variant',
-    'mode',
-    'color',
-    'background',
-    'title',
-    'class',
-  ] as const;
+  static readonly observedAttributes = ['name', 'year', 'size', 'variant', 'mode', 'color', 'background', 'title', 'class'] as const;
 
   connectedCallback(): void {
     this.render();

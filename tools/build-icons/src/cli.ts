@@ -26,7 +26,7 @@ const main = async (): Promise<void> => {
         '  --watch         Re-run on icons/ changes',
         '  -h, --help      Show this message',
         '',
-      ].join('\n'),
+      ].join('\n')
     );
     return;
   }

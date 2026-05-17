@@ -2,8 +2,7 @@
  * Convert a kebab-case slug to camelCase — used for `@brand-icons/core`
  * export names (e.g. `google-meet` → `googleMeet`).
  */
-export const slugToCamel = (slug: string): string =>
-  slug.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
+export const slugToCamel = (slug: string): string => slug.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
 
 /**
  * Convert a kebab-case slug to PascalCase — used for framework component

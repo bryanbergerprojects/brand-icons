@@ -20,14 +20,15 @@
       "!**/*.mdx",
       "!**/*.yml",
       "!**/*.yaml",
-      "!**/*.astro"
+      "!**/*.astro",
+      "!pnpm-lock.yaml"
     ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 100,
+    "lineWidth": 140,
     "lineEnding": "lf"
   },
   "linter": {
@@ -47,9 +48,11 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "trailingCommas": "all",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "es5",
       "semicolons": "always",
-      "arrowParentheses": "always"
+      "arrowParentheses": "always",
+      "bracketSpacing": true
     }
   },
   "json": {

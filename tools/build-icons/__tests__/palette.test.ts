@@ -13,9 +13,7 @@ describe('extractPalette', () => {
     </svg>`;
     const palette = extractPalette(svg);
     expect(palette).toHaveLength(6);
-    expect(palette).toEqual(
-      expect.arrayContaining(['#75BD21', '#FFC728', '#FF661C', '#CF0F2B', '#B01CAB', '#00A1DE']),
-    );
+    expect(palette).toEqual(expect.arrayContaining(['#75BD21', '#FFC728', '#FF661C', '#CF0F2B', '#B01CAB', '#00A1DE']));
   });
 
   it('extracts a single color', () => {

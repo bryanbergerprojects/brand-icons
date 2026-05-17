@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  brandYearComponent,
-  brandYearFile,
-  nameToPascal,
-  slugToCamel,
-  slugToPascal,
-} from '../src/naming';
+import { brandYearComponent, brandYearFile, nameToPascal, slugToCamel, slugToPascal } from '../src/naming';
 
 describe('slugToCamel', () => {
   it.each([

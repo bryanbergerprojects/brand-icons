@@ -85,9 +85,7 @@ describe('title prop', () => {
 
 describe('className prop', () => {
   it('forwards className onto the root svg', () => {
-    expect(render(<Apple2017Icon className="size-6 text-red-500" />)).toContain(
-      'class="size-6 text-red-500"',
-    );
+    expect(render(<Apple2017Icon className="size-6 text-red-500" />)).toContain('class="size-6 text-red-500"');
   });
 });
 

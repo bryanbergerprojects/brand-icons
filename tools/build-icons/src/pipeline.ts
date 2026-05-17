@@ -20,10 +20,7 @@ export type PipelineOptions = {
 
 const buildCoreInput = (input: IconInput, yearFilter: string | undefined): CoreIconInput => {
   if (yearFilter !== undefined && !input.meta.years.some((y) => y.year === yearFilter)) {
-    throw new Error(
-      `[${input.slug}] --year=${yearFilter} not in meta.years (` +
-        `${input.meta.years.map((y) => y.year).join(', ')})`,
-    );
+    throw new Error(`[${input.slug}] --year=${yearFilter} not in meta.years (` + `${input.meta.years.map((y) => y.year).join(', ')})`);
   }
 
   const perYearOptimized: Record<string, { color: string; mono: string; palette: string[] }> = {};
@@ -41,7 +38,7 @@ const buildCoreInput = (input: IconInput, yearFilter: string | undefined): CoreI
     if (focused && diff.divergence > 1) {
       process.stderr.write(
         `[${input.slug}/${entry.year}] palette divergence ${diff.divergence}: ` +
-          `declared=[${diff.declared.join(', ')}] extracted=[${diff.extracted.join(', ')}]\n`,
+          `declared=[${diff.declared.join(', ')}] extracted=[${diff.extracted.join(', ')}]\n`
       );
     }
     perYearOptimized[entry.year] = { color, mono, palette };
@@ -78,25 +75,15 @@ const runOnce = async (options: PipelineOptions): Promise<void> => {
 
   process.stdout.write(`build-icons: optimizing ${coreInputs.length} brand(s)…\n`);
   await generateCore(coreInputs);
-  process.stdout.write(
-    `build-icons: generated packages/core/src/icons/*.ts + manifest.ts (${coreInputs.length} brand(s))\n`,
-  );
+  process.stdout.write(`build-icons: generated packages/core/src/icons/*.ts + manifest.ts (${coreInputs.length} brand(s))\n`);
   await generateReact(inputs);
-  process.stdout.write(
-    `build-icons: generated packages/react/src/icons/*.tsx (${coreInputs.length} brand(s))\n`,
-  );
+  process.stdout.write(`build-icons: generated packages/react/src/icons/*.tsx (${coreInputs.length} brand(s))\n`);
   await generateVue(inputs);
-  process.stdout.write(
-    `build-icons: generated packages/vue/src/icons/*.vue (${coreInputs.length} brand(s))\n`,
-  );
+  process.stdout.write(`build-icons: generated packages/vue/src/icons/*.vue (${coreInputs.length} brand(s))\n`);
   await generateSvelte(inputs);
-  process.stdout.write(
-    `build-icons: generated packages/svelte/src/icons/*.svelte (${coreInputs.length} brand(s))\n`,
-  );
+  process.stdout.write(`build-icons: generated packages/svelte/src/icons/*.svelte (${coreInputs.length} brand(s))\n`);
   await generateWc(inputs);
-  process.stdout.write(
-    `build-icons: generated packages/web-components/src/icons/data.ts (${coreInputs.length} brand(s))\n`,
-  );
+  process.stdout.write(`build-icons: generated packages/web-components/src/icons/data.ts (${coreInputs.length} brand(s))\n`);
 };
 
 const watchPipeline = async (options: PipelineOptions): Promise<void> => {

@@ -80,10 +80,7 @@ export const readMeta = async (slug: string): Promise<IconMeta> => {
  * @param meta already-validated meta describing the years to read
  * @returns map from year to `{ color, mono }` raw SVG strings
  */
-const readPerYear = async (
-  slug: string,
-  meta: IconMeta,
-): Promise<Record<string, { color: string; mono: string }>> => {
+const readPerYear = async (slug: string, meta: IconMeta): Promise<Record<string, { color: string; mono: string }>> => {
   const perYear: Record<string, { color: string; mono: string }> = {};
   for (const entry of meta.years) {
     const dir = yearDir(slug, entry.year);
@@ -98,10 +95,7 @@ const readPerYear = async (
     if (!(await isFile(monoPath))) {
       throw new Error(`[${slug}/${entry.year}] missing ${monoPath}`);
     }
-    const [color, mono] = await Promise.all([
-      readFile(colorPath, 'utf8'),
-      readFile(monoPath, 'utf8'),
-    ]);
+    const [color, mono] = await Promise.all([readFile(colorPath, 'utf8'), readFile(monoPath, 'utf8')]);
     perYear[entry.year] = { color, mono };
   }
   return perYear;

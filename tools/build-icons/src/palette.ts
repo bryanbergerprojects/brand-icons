@@ -124,24 +124,17 @@ const elementWeight = (tag: string, kind: string): number => {
 
 const collectGradientStops = (svg: string): Map<string, ColorWeight[]> => {
   const stops = new Map<string, ColorWeight[]>();
-  const re =
-    /<(linearGradient|radialGradient)\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/(?:linearGradient|radialGradient)>/g;
+  const re = /<(linearGradient|radialGradient)\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/(?:linearGradient|radialGradient)>/g;
   for (let match: RegExpExecArray | null = re.exec(svg); match !== null; match = re.exec(svg)) {
     const id = match[2];
     const body = match[3];
     if (!id || !body) continue;
     const collected: ColorWeight[] = [];
     const stopRe = /<stop\b([^/>]*)\/?>/g;
-    for (
-      let stop: RegExpExecArray | null = stopRe.exec(body);
-      stop !== null;
-      stop = stopRe.exec(body)
-    ) {
+    for (let stop: RegExpExecArray | null = stopRe.exec(body); stop !== null; stop = stopRe.exec(body)) {
       const attrs = stop[1] ?? '';
-      const colorMatch =
-        /\bstop-color="([^"]+)"/.exec(attrs) ?? /\bstop-color:\s*([^;"']+)/.exec(attrs);
-      const opacityMatch =
-        /\bstop-opacity="([^"]+)"/.exec(attrs) ?? /\bstop-opacity:\s*([^;"']+)/.exec(attrs);
+      const colorMatch = /\bstop-color="([^"]+)"/.exec(attrs) ?? /\bstop-color:\s*([^;"']+)/.exec(attrs);
+      const opacityMatch = /\bstop-opacity="([^"]+)"/.exec(attrs) ?? /\bstop-opacity:\s*([^;"']+)/.exec(attrs);
       if (!colorMatch?.[1]) continue;
       const hex = parseColor(colorMatch[1]);
       if (!hex) continue;
@@ -183,9 +176,7 @@ const cluster = (weighted: ColorWeight[]): ColorWeight[] => {
     }
     if (!merged) clusters.push({ rgb, hex: item.hex, weight: item.weight });
   }
-  return clusters
-    .sort((a, b) => b.weight - a.weight)
-    .map((c) => ({ hex: c.hex, weight: c.weight }));
+  return clusters.sort((a, b) => b.weight - a.weight).map((c) => ({ hex: c.hex, weight: c.weight }));
 };
 
 const stripDefs = (svg: string): string =>
@@ -216,11 +207,7 @@ export const extractPalette = (svg: string): string[] => {
   const groupStack: { fill: string | undefined; stroke: string | undefined }[] = [];
 
   const tokenRe = /<\/g\s*>|<(g|rect|circle|ellipse|path|polygon|polyline|line)\b([^>]*?)(\/?)>/g;
-  for (
-    let match: RegExpExecArray | null = tokenRe.exec(body);
-    match !== null;
-    match = tokenRe.exec(body)
-  ) {
+  for (let match: RegExpExecArray | null = tokenRe.exec(body); match !== null; match = tokenRe.exec(body)) {
     const token = match[0];
     if (token === '</g>' || /^<\/g\s*>$/.test(token)) {
       groupStack.pop();
@@ -232,8 +219,7 @@ export const extractPalette = (svg: string): string[] => {
     if (!kind || attrs === undefined) continue;
 
     const fillAttr = /\bfill="([^"]+)"/.exec(attrs)?.[1] ?? /\bfill:\s*([^;"']+)/.exec(attrs)?.[1];
-    const strokeAttr =
-      /\bstroke="([^"]+)"/.exec(attrs)?.[1] ?? /\bstroke:\s*([^;"']+)/.exec(attrs)?.[1];
+    const strokeAttr = /\bstroke="([^"]+)"/.exec(attrs)?.[1] ?? /\bstroke:\s*([^;"']+)/.exec(attrs)?.[1];
 
     if (kind === 'g') {
       if (!selfClose) {
@@ -261,8 +247,7 @@ export const extractPalette = (svg: string): string[] => {
       return undefined;
     })();
 
-    const opacityMatch =
-      /\bfill-opacity="([^"]+)"/.exec(attrs) ?? /\bopacity="([^"]+)"/.exec(attrs);
+    const opacityMatch = /\bfill-opacity="([^"]+)"/.exec(attrs) ?? /\bopacity="([^"]+)"/.exec(attrs);
     const opacity = opacityMatch?.[1] ? Number.parseFloat(opacityMatch[1]) : 1;
     const effectiveOpacity = Number.isFinite(opacity) ? opacity : 1;
     const w = elementWeight(token, kind) * effectiveOpacity;
@@ -310,10 +295,7 @@ export type PaletteDivergence = {
  * @param extracted palette computed by extractPalette
  * @returns divergence summary — `divergence` is what the build checks against
  */
-export const comparePalettes = (
-  declared: readonly string[],
-  extracted: readonly string[],
-): PaletteDivergence => {
+export const comparePalettes = (declared: readonly string[], extracted: readonly string[]): PaletteDivergence => {
   const declaredSet = new Set(declared.map((h) => h.toUpperCase()));
   const extractedSet = new Set(extracted.map((h) => h.toUpperCase()));
   const missingFromExtracted = [...declaredSet].filter((h) => !extractedSet.has(h));

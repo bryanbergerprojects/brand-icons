@@ -43,10 +43,7 @@ export type BrandIconRender = {
  * @param data the per-year render payload from `@brand-icons/core`
  * @param props the SFC's reactive `BrandIconProps`
  */
-export const useBrandIcon = (
-  data: IconBrandYearRender,
-  props: BrandIconRuntimeInput,
-): ComputedRef<BrandIconRender> => {
+export const useBrandIcon = (data: IconBrandYearRender, props: BrandIconRuntimeInput): ComputedRef<BrandIconRender> => {
   return computed<BrandIconRender>(() => {
     const { variant: activeVariant, style } = resolveColorMode({
       mode: props.mode ?? 'as-is',
