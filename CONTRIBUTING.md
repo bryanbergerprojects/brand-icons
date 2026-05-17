@@ -4,7 +4,7 @@ Thanks for your interest in contributing to Brand Icons!
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - pnpm 10+
 
 ## Setup
