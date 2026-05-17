@@ -1,0 +1,155 @@
+#cloud-config
+#
+# Cloud-init for the brand-icons.com docs host.
+#
+# Target: Scaleway Instance STARDUST1-S, Ubuntu 24.04 LTS, fr-par-1, IPv4 reserved.
+#
+# What it does:
+#   - Installs Docker Engine + Compose plugin from the official Docker apt repo
+#     (https://docs.docker.com/engine/install/ubuntu/).
+#   - Drops a `docker compose` stack at /srv/brand-icons that runs caddy:2-alpine
+#     with bind mounts for Caddyfile + ./www (served read-only).
+#   - Creates a `deploy` user (member of `docker`) used by the GitHub Actions
+#     workflow to rsync the built site into /srv/brand-icons/www over SSH.
+#   - Locks SSH down (no password auth, no root login).
+#   - Opens only 22 / 80 / 443 in UFW.
+#   - Enables unattended-upgrades for security patches.
+#
+# Before pasting into Scaleway console:
+#   Replace `__DEPLOY_SSH_PUBLIC_KEY__` with the SSH public key whose private
+#   half is stored as a GitHub Actions secret (e.g. `id_ed25519.pub`).
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - rsync
+  - ufw
+  - unattended-upgrades
+
+users:
+  - name: ubuntu
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+  - name: deploy
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - __DEPLOY_SSH_PUBLIC_KEY__
+
+write_files:
+  - path: /srv/brand-icons/docker-compose.yml
+    permissions: '0644'
+    content: |
+      services:
+        caddy:
+          image: caddy:2-alpine
+          container_name: caddy
+          restart: unless-stopped
+          ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+          volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - ./www:/srv/www:ro
+            - caddy_data:/data
+            - caddy_config:/config
+
+      volumes:
+        caddy_data:
+        caddy_config:
+
+  - path: /srv/brand-icons/Caddyfile
+    permissions: '0644'
+    content: |
+      {
+        email contact@bryanberger.dev
+      }
+
+      www.brand-icons.com {
+        redir https://brand-icons.com{uri} permanent
+      }
+
+      brand-icons.com {
+        root * /srv/www
+        encode zstd gzip
+        file_server
+
+        @immutable path /_astro/*
+        header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+        @html path *.html /
+        header @html Cache-Control "public, max-age=300, must-revalidate"
+
+        @favicon path /favicon*
+        header @favicon Cache-Control "public, max-age=86400"
+
+        handle_errors {
+          @404 expression `{err.status_code} == 404`
+          rewrite @404 /404.html
+          file_server
+        }
+
+        log {
+          output stdout
+        }
+      }
+
+  - path: /srv/brand-icons/www/index.html
+    permissions: '0644'
+    content: |
+      <!doctype html>
+      <meta charset="utf-8">
+      <title>brand-icons.com</title>
+      <p>Provisioning — site will be deployed by CI shortly.</p>
+
+  - path: /etc/ssh/sshd_config.d/99-hardening.conf
+    permissions: '0644'
+    content: |
+      PasswordAuthentication no
+      PermitRootLogin no
+      KbdInteractiveAuthentication no
+      UsePAM yes
+
+  - path: /etc/apt/apt.conf.d/52unattended-upgrades-local
+    permissions: '0644'
+    content: |
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+
+runcmd:
+  # 1. Add Docker's official GPG key and repository.
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - |
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list
+  - apt-get update
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  # 2. Let `deploy` run docker (group `docker` is created by docker-ce).
+  - usermod -aG docker deploy
+  # 3. Ownership for the deploy webroot. Container reads :ro.
+  - chown -R deploy:deploy /srv/brand-icons/www
+  - chmod -R u+rwX,go+rX /srv/brand-icons/www
+  # 4. Firewall: SSH + HTTP + HTTPS. Docker bypasses ufw for the published
+  #    container ports (80/443), which is the desired behavior; ufw still
+  #    governs SSH (22) on the host.
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow 22/tcp
+  - ufw allow 80/tcp
+  - ufw allow 443/tcp
+  - ufw --force enable
+  # 5. Activate unattended security upgrades.
+  - dpkg-reconfigure -f noninteractive unattended-upgrades
+  - systemctl enable --now unattended-upgrades
+  # 6. Apply SSH hardening.
+  - systemctl reload ssh
+  # 7. Bring up the Caddy stack.
+  - docker compose -f /srv/brand-icons/docker-compose.yml pull
+  - docker compose -f /srv/brand-icons/docker-compose.yml up -d

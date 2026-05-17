@@ -9,7 +9,7 @@ Multi-variant, multi-framework brand icons library. Monorepo pnpm + Turborepo.
 - **Lint/format**: Biome (single tool, no ESLint + Prettier)
 - **Frameworks shipped**: React 19, Vue 3.5, Svelte 5, Web Components
 - **Docs site** (`apps/docs`): Astro 5 (static output) + React 19 Islands + Tailwind v4 + shadcn/ui v4 + lucide-react + MDX (content collections) + Fuse.js + Shiki + `next-themes` swap (`@astrojs/react` + theme via class strategy)
-- **Hosting docs**: Scaleway Serverless Containers (region `fr-par`) — static `dist/` served behind a tiny adapter (or pure static CDN if no SSR needed)
+- **Hosting docs**: Scaleway Instance (STARDUST1-S, region `fr-par-1`) running a Docker Compose stack at `/srv/brand-icons` — `caddy:2-alpine` with `file_server` bind-mounted on `./www`. Let's Encrypt managed by Caddy for `brand-icons.com` (apex) and `www.brand-icons.com` (301 → apex). Provisioning script: `infra/cloud-init.yaml`. Deploys via `.github/workflows/deploy-docs.yml` — rsync over SSH into `/srv/brand-icons/www/` (no reload needed; Caddy picks up new files on the next request).
 - **Node**: ≥ 22
 
 ## Repo layout
