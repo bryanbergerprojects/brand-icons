@@ -15,7 +15,11 @@ const SECTIONS: readonly Section[] = [
 const SCROLL_OFFSET = 120;
 const GITHUB_EDIT_URL = 'https://github.com/bryanbergerprojects/brand-icons/edit/main/apps/docs/src/pages/docs/index.astro';
 
-const Toc = () => {
+export type TocProps = {
+  readonly version: string;
+};
+
+const Toc = ({ version }: TocProps) => {
   const [activeId, setActiveId] = useState<string>(SECTIONS[0]?.id ?? '');
 
   useEffect(() => {
@@ -69,7 +73,7 @@ const Toc = () => {
         </ul>
       </nav>
       <div className="mt-9 flex flex-col gap-1 font-mono text-mono-sm text-ink-soft">
-        <span>{'// v2.4.0 · MIT'}</span>
+        <span>{`// v${version} · MIT`}</span>
         <span>{'// last edited 16 May 2026'}</span>
         <span>
           {'// edit on '}

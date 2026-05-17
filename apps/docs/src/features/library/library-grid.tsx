@@ -167,7 +167,6 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
       <section className="border-b border-ink px-10 py-14">
         <div className="flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
           <span className="text-accent">—</span>
-          <span>·</span>
           <span>Catalog</span>
           <span>·</span>
           <span>{icons.length.toLocaleString('en-US')} icons</span>
@@ -235,10 +234,6 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
               })}
             </ul>
           </div>
-
-          <pre className="mt-6 whitespace-pre font-mono text-mono-sm leading-mono-relaxed text-ink-soft">{`// ⌘K focus search
-// ⌫ to clear filters
-// ↵ to open icon`}</pre>
         </aside>
 
         <div className="bg-paper-warm">

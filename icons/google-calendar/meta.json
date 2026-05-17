@@ -1,0 +1,28 @@
+{
+  "slug": "google-calendar",
+  "name": "Google Calendar",
+  "category": "productivity",
+  "description": "Time-management and scheduling calendar service developed by Google as part of Google Workspace.",
+  "tags": ["calendar", "scheduling", "time-management", "google-workspace", "saas", "events", "agenda"],
+  "brandColor": "#4285F4",
+  "url": "https://calendar.google.com",
+  "aliases": ["gcal"],
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#4285F4", "#FFFFFF", "#3367D6", "#EEEEEE"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Calendar_icon_(2015-2020).svg",
+      "notes": "Material Design redesign rolled out with Android 5.0 Lollipop. Single-hue blue calendar page with a large white '31', two binding rings on top. Source viewBox 696.53x678.67 wrapped in a scale group; clip-paths, gradients and shadow overlays from the original were simplified out (baked at build via SVGO convertTransform)."
+    },
+    {
+      "year": "2020",
+      "palette": ["#4285F4", "#34A853", "#FBBC04", "#FFFFFF", "#1A73E8", "#EA4335", "#1967D2", "#188038"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Calendar_icon_(2020).svg",
+      "notes": "Workspace four-color refresh unveiled on 6 October 2020 alongside the rename of G Suite to Google Workspace. White tile bearing the blue '31', framed by Google's four brand colors with three rounded corners and one diagonal cut at the bottom-right. Source viewBox 0 0 200 200 with internal +3.75 translate baked into a single matrix transform."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

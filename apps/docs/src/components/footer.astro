@@ -1,14 +1,16 @@
 ---
+import { CORE_VERSION } from '@/lib/version';
+import { manifest } from '@brand-icons/core';
+
 type FooterLink = { href: string; label: string; external?: boolean };
 
-const VERSION = '2.4.0';
-const BRAND_COUNT = 247;
+const VERSION = CORE_VERSION;
+const BRAND_COUNT = manifest.length;
 const GITHUB_URL = 'https://github.com/bryanbergerprojects/brand-icons';
 
 const PRODUCT_LINKS: readonly FooterLink[] = [
   { href: '/library', label: 'Library' },
   { href: '/docs', label: 'Documentation' },
-  { href: '/changelog', label: 'Changelog' },
   { href: GITHUB_URL, label: 'GitHub', external: true },
 ];
 
@@ -82,7 +84,7 @@ const currentYear = new Date().getFullYear();
     <div
       class="mt-14 flex items-center justify-between border-t border-white/20 pt-6 font-mono text-mono tracking-wider text-white/50"
     >
-      <p>© {currentYear} Brand Icons Contributors</p>
+      <p>© {currentYear} Bryan Berger</p>
       <a href="/resources/license" class="transition-colors hover:text-paper">Terms</a>
     </div>
   </div>

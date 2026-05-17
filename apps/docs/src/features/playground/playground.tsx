@@ -347,7 +347,7 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent variant="bureau-dark" side="top" align="start" className="w-(--radix-dropdown-menu-trigger-width)">
-                {FRAMEWORKS.map((framework, index) => (
+                {FRAMEWORKS.map((framework) => (
                   <DropdownMenuItem
                     key={framework}
                     variant="bureau-dark"
@@ -358,7 +358,6 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
                     <span>
                       Copy for <strong className="font-semibold">{framework}</strong>
                     </span>
-                    <span className="font-mono text-mono text-white/50">⌘ {index + 1}</span>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
