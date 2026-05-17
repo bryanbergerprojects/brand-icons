@@ -39,7 +39,7 @@ chore(release): version packages
 Match a package, app, or area:
 
 ```
-icons · core · react · vue · svelte · wc · docs · build-icons ·
+icons · core · react · vue · svelte · wc · docs · astro · build-icons ·
 agents · rules · ci · release · plan · readme · biome · turbo · changeset
 ```
 
