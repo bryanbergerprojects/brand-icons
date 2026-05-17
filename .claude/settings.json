@@ -1,0 +1,15 @@
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+  },
+  "worktree": {
+    "baseRef": "fresh",
+    "symlinkDirectories": [".claude", ".vscode", ".husky", "node_modules"]
+  },
+  "enabledPlugins": {
+    "claude-mem@thedotmack": true
+  },
+  "autoCompactEnabled": true
+}
