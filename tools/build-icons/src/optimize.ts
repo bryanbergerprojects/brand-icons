@@ -1,5 +1,5 @@
-import { optimize as svgoOptimize } from 'svgo';
 import type { Config } from 'svgo';
+import { optimize as svgoOptimize } from 'svgo';
 import type { Variant } from './schema';
 
 const baseConfig = (variant: Variant): Config => ({
@@ -10,10 +10,7 @@ const baseConfig = (variant: Variant): Config => ({
       params: {
         overrides: {
           removeViewBox: false,
-          convertColors:
-            variant === 'mono'
-              ? { currentColor: true }
-              : false,
+          convertColors: variant === 'mono' ? { currentColor: true } : false,
         },
       },
     },

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { extractPalette, comparePalettes } from '../src/palette';
+import { comparePalettes, extractPalette } from '../src/palette';
 
 describe('extractPalette', () => {
   it('extracts 6 colors from horizontal stripes', () => {
@@ -14,14 +14,7 @@ describe('extractPalette', () => {
     const palette = extractPalette(svg);
     expect(palette).toHaveLength(6);
     expect(palette).toEqual(
-      expect.arrayContaining([
-        '#75BD21',
-        '#FFC728',
-        '#FF661C',
-        '#CF0F2B',
-        '#B01CAB',
-        '#00A1DE',
-      ]),
+      expect.arrayContaining(['#75BD21', '#FFC728', '#FF661C', '#CF0F2B', '#B01CAB', '#00A1DE']),
     );
   });
 

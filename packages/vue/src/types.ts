@@ -1,8 +1,8 @@
 export type {
   BrandIconProps,
   ColorMode,
-  Variant,
   IconBrand,
   IconBrandYear,
   IconBrandYearRender,
+  Variant,
 } from '@brand-icons/core';

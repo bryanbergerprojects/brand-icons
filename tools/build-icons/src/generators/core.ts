@@ -1,9 +1,9 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { Eta } from 'eta';
-import { packageSrc } from '../paths';
 import { slugToCamel } from '../naming';
+import { packageSrc } from '../paths';
 import type { IconInput } from '../schema';
 
 const here = path.dirname(fileURLToPath(import.meta.url));

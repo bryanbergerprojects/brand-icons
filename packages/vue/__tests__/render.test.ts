@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { describe, expect, it } from 'vitest';
 import {
   Apple1976Icon,
   Apple1998Icon,

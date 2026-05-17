@@ -11,9 +11,7 @@ type ParseBackgroundInput = {
  *
  * @returns the fill color to paint behind the icon, or `undefined` to skip
  */
-export const parseBackground = (
-  input: ParseBackgroundInput,
-): string | undefined => {
+export const parseBackground = (input: ParseBackgroundInput): string | undefined => {
   const { background, brandColor } = input;
   if (background === null) return undefined;
   if (background === '' || background === 'true') return brandColor;

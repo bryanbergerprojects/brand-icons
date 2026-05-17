@@ -1,17 +1,11 @@
 import { z } from 'zod';
 import { Category } from './category';
 
-const hexValidation = z
-  .string()
-  .regex(/^#[0-9A-F]{6}$/, 'must be uppercase #RRGGBB hex');
+const hexValidation = z.string().regex(/^#[0-9A-F]{6}$/, 'must be uppercase #RRGGBB hex');
 
-const slugValidation = z
-  .string()
-  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'must be kebab-case ASCII');
+const slugValidation = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'must be kebab-case ASCII');
 
-const isoDateValidation = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, 'must be ISO YYYY-MM-DD');
+const isoDateValidation = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'must be ISO YYYY-MM-DD');
 
 const yearStringValidation = z.string().regex(/^\d{4}$/, 'year must be 4 digits');
 
@@ -39,11 +33,7 @@ export const metaValidation = z
     slug: slugValidation,
     name: z.string().min(1),
     category: z.nativeEnum(Category),
-    description: z
-      .string()
-      .min(20)
-      .max(200)
-      .regex(/\.$/, 'description must end with a period'),
+    description: z.string().min(20).max(200).regex(/\.$/, 'description must end with a period'),
     tags: z
       .array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
       .min(5)
@@ -154,9 +144,7 @@ export type ParentValidationIssue = {
  * @param metas all validated metas keyed by slug
  * @returns array of issues — empty when batch is consistent
  */
-export const validateParents = (
-  metas: ReadonlyMap<string, IconMeta>,
-): ParentValidationIssue[] => {
+export const validateParents = (metas: ReadonlyMap<string, IconMeta>): ParentValidationIssue[] => {
   const issues: ParentValidationIssue[] = [];
   for (const [slug, meta] of metas) {
     if (meta.parent === undefined) continue;

@@ -1,13 +1,13 @@
+export { manifest } from './manifest';
 export type {
+  BrandIconProps,
   Category,
-  Variant,
   ColorMode,
   IconBrand,
   IconBrandYear,
   IconBrandYearRender,
   ManifestEntry,
   ManifestYearSummary,
-  BrandIconProps,
+  Variant,
 } from './types';
 export { CATEGORIES } from './types';
-export { manifest } from './manifest';

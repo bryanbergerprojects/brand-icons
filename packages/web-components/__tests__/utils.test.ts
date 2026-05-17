@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { parseSize } from '../src/utils/parse-size';
-import { parseBackground } from '../src/utils/parse-bg';
 import { resolveColorMode } from '../src/utils/color-mode';
+import { parseBackground } from '../src/utils/parse-bg';
+import { parseSize } from '../src/utils/parse-size';
 
 describe('parseSize', () => {
   it('defaults to 1em when null', () => {

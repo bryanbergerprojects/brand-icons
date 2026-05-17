@@ -1,9 +1,9 @@
+import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { Eta } from 'eta';
-import { packageSrc } from '../paths';
 import { brandYearFile, slugToCamel } from '../naming';
+import { packageSrc } from '../paths';
 import type { IconInput } from '../schema';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -36,10 +36,7 @@ type BarrelEntry = {
 
 const brandPascal = (name: string): string => brandYearFile({ name, year: '' });
 
-const renderYearSfc = (
-  input: IconInput,
-  year: string,
-): { content: string; file: string } => {
+const renderYearSfc = (input: IconInput, year: string): { content: string; file: string } => {
   const fileName = brandYearFile({ name: input.meta.name, year });
   const yearSegment = year.replace(/[^a-zA-Z0-9]/g, '');
   const data = {
@@ -55,9 +52,7 @@ const renderYearSfc = (
 };
 
 const renderBarrel = (entries: readonly BarrelEntry[]): string => {
-  const sorted = [...entries].sort((a, b) =>
-    a.exportName.localeCompare(b.exportName),
-  );
+  const sorted = [...entries].sort((a, b) => a.exportName.localeCompare(b.exportName));
   const rendered = eta.render('./index', { files: sorted });
   if (typeof rendered !== 'string') {
     throw new Error('vue/index template returned non-string');
@@ -65,10 +60,7 @@ const renderBarrel = (entries: readonly BarrelEntry[]): string => {
   return rendered;
 };
 
-const pruneStaleFiles = async (
-  iconsDir: string,
-  keep: ReadonlySet<string>,
-): Promise<void> => {
+const pruneStaleFiles = async (iconsDir: string, keep: ReadonlySet<string>): Promise<void> => {
   let entries: string[];
   try {
     entries = await readdir(iconsDir);

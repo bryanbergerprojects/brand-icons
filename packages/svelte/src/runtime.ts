@@ -1,11 +1,7 @@
-import type {
-  ColorMode,
-  IconBrandYearRender,
-  Variant,
-} from '@brand-icons/core';
-import { parseSize } from './utils/parse-size';
-import { parseBackground } from './utils/parse-bg';
+import type { ColorMode, IconBrandYearRender, Variant } from '@brand-icons/core';
 import { resolveColorMode } from './utils/color-mode';
+import { parseBackground } from './utils/parse-bg';
+import { parseSize } from './utils/parse-size';
 
 const SVG_INNER = /<svg[^>]*>([\s\S]*)<\/svg>/;
 

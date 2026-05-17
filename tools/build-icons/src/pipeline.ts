@@ -1,16 +1,16 @@
 import { watch } from 'node:fs';
-import { iconsRoot } from './paths';
 import { listIconSlugs, readIconDir } from './fs';
-import { optimize } from './optimize';
-import { extractPalette, comparePalettes } from './palette';
-import { validateParents } from './schema';
-import { generateCore } from './generators/core';
 import type { CoreIconInput } from './generators/core';
+import { generateCore } from './generators/core';
 import { generateReact } from './generators/react';
-import { generateVue } from './generators/vue';
 import { generateSvelte } from './generators/svelte';
+import { generateVue } from './generators/vue';
 import { generateWc } from './generators/wc';
+import { optimize } from './optimize';
+import { comparePalettes, extractPalette } from './palette';
+import { iconsRoot } from './paths';
 import type { IconInput, IconMeta } from './schema';
+import { validateParents } from './schema';
 
 export type PipelineOptions = {
   iconFilter: string | undefined;
@@ -18,10 +18,7 @@ export type PipelineOptions = {
   watch: boolean;
 };
 
-const buildCoreInput = (
-  input: IconInput,
-  yearFilter: string | undefined,
-): CoreIconInput => {
+const buildCoreInput = (input: IconInput, yearFilter: string | undefined): CoreIconInput => {
   if (yearFilter !== undefined && !input.meta.years.some((y) => y.year === yearFilter)) {
     throw new Error(
       `[${input.slug}] --year=${yearFilter} not in meta.years (` +
@@ -29,10 +26,7 @@ const buildCoreInput = (
     );
   }
 
-  const perYearOptimized: Record<
-    string,
-    { color: string; mono: string; palette: string[] }
-  > = {};
+  const perYearOptimized: Record<string, { color: string; mono: string; palette: string[] }> = {};
   for (const entry of input.meta.years) {
     const raw = input.perYear[entry.year];
     if (!raw) {
@@ -63,10 +57,7 @@ const runOnce = async (options: PipelineOptions): Promise<void> => {
   }
 
   const allSlugs = await listIconSlugs();
-  const slugs =
-    iconFilter !== undefined
-      ? allSlugs.filter((s) => s === iconFilter)
-      : allSlugs;
+  const slugs = iconFilter !== undefined ? allSlugs.filter((s) => s === iconFilter) : allSlugs;
   if (iconFilter !== undefined && slugs.length === 0) {
     throw new Error(`unknown icon "${iconFilter}"`);
   }

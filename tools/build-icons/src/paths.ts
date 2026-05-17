@@ -13,13 +13,10 @@ export const iconsRoot = path.join(repoRoot, 'icons');
 export const brandDir = (slug: string): string => path.join(iconsRoot, slug);
 
 /** Absolute path to a single year directory inside a brand. */
-export const yearDir = (slug: string, year: string): string =>
-  path.join(iconsRoot, slug, year);
+export const yearDir = (slug: string, year: string): string => path.join(iconsRoot, slug, year);
 
 /** Absolute path to a brand's meta.json. */
-export const metaFile = (slug: string): string =>
-  path.join(iconsRoot, slug, 'meta.json');
+export const metaFile = (slug: string): string => path.join(iconsRoot, slug, 'meta.json');
 
 /** Absolute path to a generated package's source root. */
-export const packageSrc = (pkg: string): string =>
-  path.join(repoRoot, 'packages', pkg, 'src');
+export const packageSrc = (pkg: string): string => path.join(repoRoot, 'packages', pkg, 'src');

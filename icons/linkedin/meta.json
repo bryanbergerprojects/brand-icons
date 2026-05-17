@@ -3,7 +3,15 @@
   "name": "LinkedIn",
   "category": "social",
   "description": "LinkedIn is a professional networking platform for career development, recruiting, and business connections.",
-  "tags": ["professional", "networking", "jobs", "recruiting", "social-network", "business", "career"],
+  "tags": [
+    "professional",
+    "networking",
+    "jobs",
+    "recruiting",
+    "social-network",
+    "business",
+    "career"
+  ],
   "brandColor": "#0A66C2",
   "url": "https://www.linkedin.com",
   "license": "Trademark — usage for identification (fair use)",

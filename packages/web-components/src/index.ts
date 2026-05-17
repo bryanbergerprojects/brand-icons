@@ -1,3 +1,4 @@
+export { BrandIcon, registerBrandIcon } from './runtime/brand-icon';
 export type {
   ColorMode,
   IconBrand,
@@ -5,7 +6,6 @@ export type {
   IconBrandYearRender,
   Variant,
 } from './types';
-export { BrandIcon, registerBrandIcon } from './runtime/brand-icon';
 
 import { registerBrandIcon } from './runtime/brand-icon';
 

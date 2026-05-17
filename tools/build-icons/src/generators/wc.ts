@@ -1,9 +1,9 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { Eta } from 'eta';
-import { packageSrc } from '../paths';
 import { slugToCamel } from '../naming';
+import { packageSrc } from '../paths';
 import type { IconInput } from '../schema';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -46,9 +46,7 @@ type Brand = {
  * file that imports every per-year core export and exposes `lookupIcon` +
  * `resolveYear` for the `<brand-icon>` custom element runtime.
  */
-export const generateWc = async (
-  inputs: readonly IconInput[],
-): Promise<void> => {
+export const generateWc = async (inputs: readonly IconInput[]): Promise<void> => {
   const wcSrc = packageSrc('web-components');
   const iconsDir = path.join(wcSrc, 'icons');
   await mkdir(iconsDir, { recursive: true });

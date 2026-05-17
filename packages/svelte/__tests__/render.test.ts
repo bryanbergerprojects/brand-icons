@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { mount, unmount } from 'svelte';
+import { describe, expect, it } from 'vitest';
 import {
   Apple1976Icon,
   Apple1998Icon,

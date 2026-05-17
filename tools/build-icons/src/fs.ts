@@ -1,8 +1,8 @@
-import { readFile, readdir, stat } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
-import { iconsRoot, brandDir, yearDir, metaFile } from './paths';
-import { iconInputValidation, metaValidation } from './schema';
+import { brandDir, iconsRoot, metaFile, yearDir } from './paths';
 import type { IconInput, IconMeta } from './schema';
+import { iconInputValidation, metaValidation } from './schema';
 
 const isDir = async (p: string): Promise<boolean> => {
   try {
@@ -63,15 +63,11 @@ export const readMeta = async (slug: string): Promise<IconMeta> => {
   }
   const result = metaValidation.safeParse(parsed);
   if (!result.success) {
-    const lines = result.error.issues.map(
-      (i) => `  • ${i.path.join('.')}: ${i.message}`,
-    );
+    const lines = result.error.issues.map((i) => `  • ${i.path.join('.')}: ${i.message}`);
     throw new Error(`[${slug}] meta.json validation failed:\n${lines.join('\n')}`);
   }
   if (result.data.slug !== slug) {
-    throw new Error(
-      `[${slug}] meta.slug "${result.data.slug}" does not match directory name`,
-    );
+    throw new Error(`[${slug}] meta.slug "${result.data.slug}" does not match directory name`);
   }
   return result.data;
 };
@@ -127,9 +123,7 @@ export const readIconDir = async (slug: string): Promise<IconInput> => {
   const perYear = await readPerYear(slug, meta);
   const result = iconInputValidation.safeParse({ slug, meta, perYear });
   if (!result.success) {
-    const lines = result.error.issues.map(
-      (i) => `  • ${i.path.join('.')}: ${i.message}`,
-    );
+    const lines = result.error.issues.map((i) => `  • ${i.path.join('.')}: ${i.message}`);
     throw new Error(`[${slug}] icon input validation failed:\n${lines.join('\n')}`);
   }
   return result.data;

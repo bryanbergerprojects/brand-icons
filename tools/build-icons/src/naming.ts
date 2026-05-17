@@ -31,10 +31,7 @@ export const nameToPascal = (name: string): string =>
  * (e.g. `Apple` + `1976` → `Apple1976Icon`). Year is sanitized to keep the
  * identifier valid even if a future `meta.years` entry uses punctuation.
  */
-export const brandYearComponent = (input: {
-  name: string;
-  year: string;
-}): string => {
+export const brandYearComponent = (input: { name: string; year: string }): string => {
   const pascal = nameToPascal(input.name);
   const yearSegment = input.year.replace(/[^a-zA-Z0-9]/g, '');
   return `${pascal}${yearSegment}Icon`;
@@ -43,10 +40,7 @@ export const brandYearComponent = (input: {
 /**
  * Build the canonical filename (without extension) for a brand + year.
  */
-export const brandYearFile = (input: {
-  name: string;
-  year: string;
-}): string => {
+export const brandYearFile = (input: { name: string; year: string }): string => {
   const pascal = nameToPascal(input.name);
   const yearSegment = input.year.replace(/[^a-zA-Z0-9]/g, '');
   return `${pascal}${yearSegment}`;

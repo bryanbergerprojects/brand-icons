@@ -1,14 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
-import {
-  Apple1976Icon,
-  Apple1998Icon,
-  Apple2017Icon,
-  AppleLatestIcon,
-} from '../src/icons';
+import { describe, expect, it } from 'vitest';
+import { Apple1976Icon, Apple1998Icon, Apple2017Icon, AppleLatestIcon } from '../src/icons';
 
-const render = (element: React.ReactElement): string =>
-  renderToStaticMarkup(element);
+const render = (element: React.ReactElement): string => renderToStaticMarkup(element);
 
 describe('AppleLatestIcon', () => {
   it('is the same reference as Apple2017Icon (latest alias)', () => {
@@ -99,15 +93,11 @@ describe('className prop', () => {
 
 describe('mode prop', () => {
   it('mode=bw applies grayscale filter', () => {
-    expect(render(<Apple2017Icon mode="bw" />)).toContain(
-      'style="filter:grayscale(1)"',
-    );
+    expect(render(<Apple2017Icon mode="bw" />)).toContain('style="filter:grayscale(1)"');
   });
 
   it('mode=wb applies grayscale + invert filter', () => {
-    expect(render(<Apple2017Icon mode="wb" />)).toContain(
-      'style="filter:grayscale(1) invert(1)"',
-    );
+    expect(render(<Apple2017Icon mode="wb" />)).toContain('style="filter:grayscale(1) invert(1)"');
   });
 
   it('mode=mono forces mono variant + style.color', () => {

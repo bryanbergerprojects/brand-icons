@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import {
-  metaValidation,
-  validateParents,
-  iconInputValidation,
-} from '../src/schema';
 import type { IconMeta } from '../src/schema';
+import { iconInputValidation, metaValidation, validateParents } from '../src/schema';
 
 const baseMeta = {
   slug: 'apple',
@@ -50,10 +46,7 @@ describe('metaValidation', () => {
   it('rejects unsorted years', () => {
     const result = metaValidation.safeParse({
       ...baseMeta,
-      years: [
-        baseMeta.years[1],
-        baseMeta.years[0],
-      ],
+      years: [baseMeta.years[1], baseMeta.years[0]],
     });
     expect(result.success).toBe(false);
   });

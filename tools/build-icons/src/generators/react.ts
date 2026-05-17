@@ -1,9 +1,9 @@
+import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { Eta } from 'eta';
-import { packageSrc } from '../paths';
 import { brandYearComponent, brandYearFile, slugToCamel } from '../naming';
+import { packageSrc } from '../paths';
 import type { IconInput } from '../schema';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -34,8 +34,7 @@ type ComponentSpec = {
   fileName: string;
 };
 
-const brandPascal = (name: string): string =>
-  brandYearFile({ name, year: '' });
+const brandPascal = (name: string): string => brandYearFile({ name, year: '' });
 
 const aliasComponent = (name: string): string => `${brandPascal(name)}LatestIcon`;
 const aliasFile = (name: string): string => `${brandPascal(name)}Latest`;
@@ -86,9 +85,7 @@ const renderLatestAlias = (input: IconInput): { content: string; spec: Component
 };
 
 const renderBarrel = (entries: readonly ComponentSpec[]): string => {
-  const sorted = [...entries].sort((a, b) =>
-    a.fileName.localeCompare(b.fileName),
-  );
+  const sorted = [...entries].sort((a, b) => a.fileName.localeCompare(b.fileName));
   const files = sorted.map((entry) => ({
     exportName: entry.componentName,
     from: entry.fileName,
@@ -104,10 +101,7 @@ const renderBarrel = (entries: readonly ComponentSpec[]): string => {
  * Sweep generated icon files that no longer correspond to any brand/year
  * — keeps `src/icons/` in sync after an icon is renamed or removed.
  */
-const pruneStaleFiles = async (
-  iconsDir: string,
-  keep: ReadonlySet<string>,
-): Promise<void> => {
+const pruneStaleFiles = async (iconsDir: string, keep: ReadonlySet<string>): Promise<void> => {
   let entries: string[];
   try {
     entries = await readdir(iconsDir);

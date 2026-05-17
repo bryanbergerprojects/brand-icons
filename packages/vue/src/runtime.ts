@@ -1,12 +1,8 @@
-import { computed, type ComputedRef } from 'vue';
-import type {
-  ColorMode,
-  IconBrandYearRender,
-  Variant,
-} from '@brand-icons/core';
-import { parseSize } from './utils/parse-size';
-import { parseBackground } from './utils/parse-bg';
+import type { ColorMode, IconBrandYearRender, Variant } from '@brand-icons/core';
+import { type ComputedRef, computed } from 'vue';
 import { resolveColorMode, type StyleMap } from './utils/color-mode';
+import { parseBackground } from './utils/parse-bg';
+import { parseSize } from './utils/parse-size';
 
 /**
  * Variant of `BrandIconProps` widened to accept explicit `undefined`,

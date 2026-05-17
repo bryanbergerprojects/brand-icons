@@ -3,7 +3,16 @@
   "name": "Meta",
   "category": "social",
   "description": "Meta is the parent company behind Facebook, Instagram, WhatsApp, and Reality Labs, building social platforms and virtual reality products.",
-  "tags": ["facebook", "instagram", "whatsapp", "social-network", "metaverse", "vr", "reality-labs", "messenger"],
+  "tags": [
+    "facebook",
+    "instagram",
+    "whatsapp",
+    "social-network",
+    "metaverse",
+    "vr",
+    "reality-labs",
+    "messenger"
+  ],
   "brandColor": "#0064E0",
   "url": "https://about.meta.com",
   "repository": "https://github.com/facebook",
