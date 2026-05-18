@@ -1,0 +1,23 @@
+{
+  "slug": "google-classroom",
+  "name": "Google Classroom",
+  "category": "productivity",
+  "description": "Google's free education service for managing classes, assignments, grading, and student-teacher collaboration, part of Google Workspace for Education.",
+  "tags": ["education", "edtech", "workspace-for-education", "lms", "assignments", "collaboration", "k12", "saas"],
+  "brandColor": "#0F9D58",
+  "url": "https://classroom.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["classroom"],
+  "parent": "google",
+  "latest": "2016",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#0F9D58", "#F4B400", "#57BB8A", "#F7F7F7", "#F1F1F1", "#BF360C"],
+      "source": "https://www.gstatic.com/classroom/logo_square_rounded.svg",
+      "notes": "Material Design refresh that has remained the canonical Classroom mark from 2016 through the 2020 Workspace rebrand and the 2026 gradient-icon refresh (which skipped Classroom). Normalized from the official 108x108 gstatic asset to a 24x24 viewBox via scale(0.222222); decorative low-opacity overlays (radial highlight, dotted texture pattern, edge accents) were dropped to keep the silhouette readable."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
