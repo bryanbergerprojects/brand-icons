@@ -3,11 +3,43 @@ import BrandTimeline from '@/components/landing/brand-timeline.astro';
 import BrowseBrands from '@/components/landing/browse-brands.astro';
 import Hero from '@/components/landing/hero.astro';
 import BaseLayout from '@/layouts/base.astro';
+import { manifest } from '@brand-icons/core';
+
+const site = Astro.site ?? new URL('https://brand-icons.com');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': new URL('/#website', site).toString(),
+      url: site.toString(),
+      name: 'Brand Icons',
+      description: `Multi-variant, multi-framework brand icons library — ${manifest.length}+ versioned brand icons.`,
+      inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: new URL('/library?q={search_term_string}', site).toString() },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      '@id': new URL('/#sourcecode', site).toString(),
+      name: 'Brand Icons',
+      codeRepository: 'https://github.com/BryanBerger98/brand-icons',
+      programmingLanguage: ['TypeScript', 'JavaScript', 'SVG'],
+      runtimePlatform: ['React', 'Vue', 'Svelte', 'Web Components'],
+      license: 'https://opensource.org/licenses/MIT',
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="Brand Icons — One library for every brand, every era"
-  description="From Apple's 1977 logo to yesterday's rebrand. 1,248 versioned icons. Copy as React, Vue, Svelte, WebC, SVG."
+  description={`From Apple's 1977 logo to yesterday's rebrand. ${manifest.length} versioned icons. Copy as React, Vue, Svelte, WebC, SVG.`}
+  jsonLd={jsonLd}
 >
   <Hero />
   <BrandTimeline />

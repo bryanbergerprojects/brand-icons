@@ -22,11 +22,11 @@
   /* ink */
   --color-ink: #111111;
   --color-ink-muted: #4a4a4a;
-  --color-ink-soft: #7a7768;
+  --color-ink-soft: #6a6758;
   --color-ink-soft-2: #4a4a40;
 
   /* signal */
-  --color-accent: #d7361a;
+  --color-accent: #cc321a;
   --color-accent-foreground: #f5f4f1;
 
   /* playground palette */
