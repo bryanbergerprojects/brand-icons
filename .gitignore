@@ -20,6 +20,9 @@ packages/vue/src/icons/
 packages/svelte/src/icons/
 packages/web-components/src/icons/
 
+# Generated docs data (built from package CHANGELOG.md files)
+apps/docs/src/generated/
+
 # Tests
 coverage/
 .vitest/

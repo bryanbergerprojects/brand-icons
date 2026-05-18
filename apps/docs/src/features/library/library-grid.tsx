@@ -1,8 +1,9 @@
 import type { Category, ManifestEntry } from '@brand-icons/core';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { SearchIcon } from 'lucide-react';
+import { SearchIcon, SlidersHorizontalIcon } from 'lucide-react';
 import { type ChangeEvent, type KeyboardEvent, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { latestIconBySlug } from '@/lib/all-icons';
 import { useUrlParam } from '@/lib/use-url-param';
@@ -26,17 +27,43 @@ type GridGeometry = {
   readonly rowHeight: number;
 };
 
+type Breakpoint = 'mobile' | 'sm' | 'md' | 'lg';
+
 const SIZE_OPTIONS: readonly IconSize[] = [24, 32, 48];
 const SORT_OPTIONS: readonly { value: SortMode; label: string }[] = [
   { value: 'alpha', label: 'A→Z' },
   { value: 'family', label: 'CATEGORY' },
 ];
 
-const GEOMETRY: Readonly<Record<IconSize, GridGeometry>> = {
-  24: { cols: 12, rowHeight: 92 },
-  32: { cols: 10, rowHeight: 108 },
-  48: { cols: 8, rowHeight: 132 },
+const ROW_HEIGHT: Readonly<Record<IconSize, number>> = {
+  24: 92,
+  32: 108,
+  48: 132,
 };
+
+const DESKTOP_COLS: Readonly<Record<IconSize, number>> = {
+  24: 12,
+  32: 10,
+  48: 8,
+};
+
+const BREAKPOINT_COLS: Readonly<Record<Exclude<Breakpoint, 'lg'>, number>> = {
+  mobile: 2,
+  sm: 4,
+  md: 8,
+};
+
+const resolveBreakpoint = (width: number): Breakpoint => {
+  if (width >= 1024) return 'lg';
+  if (width >= 768) return 'md';
+  if (width >= 640) return 'sm';
+  return 'mobile';
+};
+
+const resolveGeometry = ({ breakpoint, size }: { breakpoint: Breakpoint; size: IconSize }): GridGeometry => ({
+  cols: breakpoint === 'lg' ? DESKTOP_COLS[size] : BREAKPOINT_COLS[breakpoint],
+  rowHeight: ROW_HEIGHT[size],
+});
 
 const isSize = (value: string): value is `${IconSize}` => value === '24' || value === '32' || value === '48';
 const isSort = (value: string): value is SortMode => value === 'alpha' || value === 'family';
@@ -58,6 +85,14 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [scrollMargin, setScrollMargin] = useState(0);
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>('lg');
+
+  useEffect(() => {
+    const sync = (): void => setBreakpoint(resolveBreakpoint(window.innerWidth));
+    sync();
+    window.addEventListener('resize', sync);
+    return () => window.removeEventListener('resize', sync);
+  }, []);
 
   const categories: readonly CategoryRow[] = useMemo(() => {
     const counts = new Map<Category, number>();
@@ -79,7 +114,7 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
       : [...filtered].sort((a, b) => a.name.localeCompare(b.name));
 
   const activeFilters = families.size + (query !== '' ? 1 : 0);
-  const { cols, rowHeight } = GEOMETRY[size];
+  const { cols, rowHeight } = resolveGeometry({ breakpoint, size });
   const rowCount = Math.ceil(sorted.length / cols);
 
   const virtualizer = useWindowVirtualizer({
@@ -162,51 +197,100 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
   const virtualRows = virtualizer.getVirtualItems();
   const totalSize = virtualizer.getTotalSize();
 
+  const categoryList = (
+    <ul className="flex flex-col gap-2">
+      {categories.map((cat) => {
+        const checked = families.has(cat.value);
+        return (
+          <li key={cat.value}>
+            <label className="group flex w-full cursor-pointer items-center justify-between py-1 text-left text-13 font-medium text-ink hover:text-accent">
+              <span className="flex items-center gap-2.5">
+                <input type="checkbox" checked={checked} onChange={() => handleToggleFamily(cat.value)} className="sr-only" />
+                <span aria-hidden className={cn('border-thin size-3.5 border-ink transition-colors', checked ? 'bg-accent' : 'bg-paper')} />
+                {cat.label}
+              </span>
+              <span className="font-mono text-mono-sm text-ink-soft">{cat.count}</span>
+            </label>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
   return (
     <>
-      <section className="border-b border-ink px-10 py-14">
-        <div className="flex items-center gap-3 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
+      <section className="border-b border-ink px-4 py-10 sm:px-6 sm:py-12 md:px-8 lg:px-10 lg:py-14">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-mono font-bold uppercase tracking-meta text-ink-soft">
           <span className="text-accent">—</span>
-          <span>·</span>
           <span>Catalog</span>
           <span>·</span>
           <span>{icons.length.toLocaleString('en-US')} icons</span>
           <span>·</span>
           <span>{categories.length} categories</span>
         </div>
-        <h1 className="m-0 mt-6 text-h1-xl font-extrabold tracking-display">
+        <h1 className="m-0 mt-5 text-stat font-extrabold tracking-display-sm sm:mt-6 sm:text-h3 md:text-h2 lg:text-h1">
           The full <span className="text-accent">library</span>.
         </h1>
 
-        <div className="mt-8 flex flex-wrap items-stretch gap-4">
-          <label className="border-thin h-14.5 max-w-230 flex flex-1 items-center gap-3.5 border-ink bg-paper px-4.5">
-            <SearchIcon className="size-5 text-ink-soft" aria-hidden />
+        <div className="mt-7 flex flex-wrap items-stretch gap-3 sm:gap-4 lg:mt-8">
+          <label className="border-thin h-12 max-w-230 flex flex-1 items-center gap-3 border-ink bg-paper px-3.5 sm:h-14.5 sm:gap-3.5 sm:px-4.5">
+            <SearchIcon className="size-4 shrink-0 text-ink-soft sm:size-5" aria-hidden />
             <input
               ref={inputRef}
               value={query}
               onChange={handleQuery}
               onKeyDown={handleInputKey}
-              placeholder="Search by name or category…"
+              placeholder="Search…"
               aria-label="Search icons by name or family"
-              className="flex-1 bg-transparent text-base font-medium tracking-tight text-ink outline-none placeholder:text-ink-soft"
+              className="min-w-0 flex-1 bg-transparent text-sm font-medium tracking-tight text-ink outline-none placeholder:text-ink-soft sm:text-base"
             />
-            <kbd className="font-mono text-mono uppercase tracking-mono text-ink-soft">⌘ K</kbd>
+            <kbd className="hidden font-mono text-mono uppercase tracking-mono text-ink-soft sm:inline">⌘ K</kbd>
           </label>
+
+          <Drawer>
+            <DrawerTrigger
+              aria-label="Open category filters"
+              className="border-thin inline-flex h-12 items-center justify-center gap-2 border-ink bg-paper px-4 text-13 font-medium uppercase tracking-pill text-ink transition-colors hover:bg-paper-alt focus-visible:outline-2 focus-visible:outline-accent sm:h-14.5 sm:px-5 lg:hidden"
+            >
+              <SlidersHorizontalIcon className="size-4" aria-hidden />
+              <span className="hidden sm:inline">Filters</span>
+              {families.size > 0 ? (
+                <span className="bg-accent text-paper inline-flex h-5 min-w-5 items-center justify-center px-1 font-mono text-mono-sm font-bold">
+                  {families.size}
+                </span>
+              ) : null}
+            </DrawerTrigger>
+            <DrawerContent className="border-t-thin border-ink bg-paper">
+              <DrawerHeader className="flex-row items-center justify-between border-b border-ink/30 text-left">
+                <DrawerTitle className="font-mono text-mono-sm font-bold uppercase tracking-uppercase text-ink-soft">
+                  Categories ({families.size}/{categories.length})
+                </DrawerTitle>
+              </DrawerHeader>
+              <div className="flex-1 overflow-y-auto px-5 py-5">{categoryList}</div>
+              {families.size > 0 ? (
+                <div className="border-t border-ink/30 p-4">
+                  <Button variant="outline" className="w-full" onClick={() => startTransition(() => setFamilies(new Set()))}>
+                    Clear {families.size} {families.size === 1 ? 'filter' : 'filters'}
+                  </Button>
+                </div>
+              ) : null}
+            </DrawerContent>
+          </Drawer>
 
           {activeFilters > 0 ? (
             <button
               type="button"
               onClick={clearAll}
-              className="border-thin tracking-pill px-5.5 border-ink bg-transparent text-xs font-semibold uppercase text-ink hover:bg-ink hover:text-paper"
+              className="border-thin tracking-pill h-12 border-ink bg-transparent px-4 text-xs font-semibold uppercase text-ink hover:bg-ink hover:text-paper sm:h-14.5 sm:px-5.5"
             >
-              Clear {activeFilters} {activeFilters === 1 ? 'filter' : 'filters'} ×
+              Clear {activeFilters} ×
             </button>
           ) : null}
         </div>
       </section>
 
-      <section className="grid grid-cols-[260px_1fr] border-b border-ink">
-        <aside className="w-65 border-r border-ink px-7 py-8 pb-15">
+      <section className="border-b border-ink lg:grid lg:grid-cols-[260px_1fr]">
+        <aside className="hidden border-r border-ink px-7 py-8 pb-15 lg:block">
           <div className="border-b border-paper-alt pb-4">
             <div className="flex items-center justify-between">
               <span className="font-mono text-mono-sm font-bold uppercase tracking-mono text-ink-soft">Category</span>
@@ -214,47 +298,27 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
                 {families.size}/{categories.length}
               </span>
             </div>
-            <ul className="mt-3.5 flex flex-col gap-2">
-              {categories.map((cat) => {
-                const checked = families.has(cat.value);
-                return (
-                  <li key={cat.value}>
-                    <label className="group flex w-full cursor-pointer items-center justify-between py-1 text-left text-13 font-medium text-ink hover:text-accent">
-                      <span className="flex items-center gap-2.5">
-                        <input type="checkbox" checked={checked} onChange={() => handleToggleFamily(cat.value)} className="sr-only" />
-                        <span
-                          aria-hidden
-                          className={cn('border-thin size-3.5 border-ink transition-colors', checked ? 'bg-accent' : 'bg-paper')}
-                        />
-                        {cat.label}
-                      </span>
-                      <span className="font-mono text-mono-sm text-ink-soft">{cat.count}</span>
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="mt-3.5">{categoryList}</div>
           </div>
-
-          <pre className="mt-6 whitespace-pre font-mono text-mono-sm leading-mono-relaxed text-ink-soft">{`// ⌘K focus search
-// ⌫ to clear filters
-// ↵ to open icon`}</pre>
         </aside>
 
         <div className="bg-paper-warm">
-          <div className="sticky top-12 z-10 flex items-center justify-between border-b border-ink bg-paper-warm px-8 py-3.5">
-            <p aria-live="polite" className="font-mono text-mono text-ink">
+          <div className="sticky top-12 z-10 flex items-center justify-between gap-4 border-b border-ink bg-paper-warm px-4 py-3 sm:px-6 sm:py-3.5 md:px-8">
+            <p aria-live="polite" className="truncate font-mono text-mono text-ink">
               <span className="mr-2 text-accent">●</span>
-              {sorted.length} icons · filtered from {icons.length}
+              <span className="hidden sm:inline">
+                {sorted.length} icons · filtered from {icons.length}
+              </span>
+              <span className="sm:hidden">{sorted.length} icons</span>
             </p>
-            <div className="flex items-center gap-5">
+            <div className="flex shrink-0 items-center gap-3 sm:gap-5">
               <ToggleGroup
                 type="single"
                 value={String(size)}
                 onValueChange={handleSizeChange}
                 variant="segment"
                 aria-label="Icon size"
-                className="rounded-none"
+                className="hidden rounded-none md:flex"
               >
                 {SIZE_OPTIONS.map((option) => (
                   <ToggleGroupItem key={option} value={String(option)} className="h-7 min-w-9 px-2.5 py-1">
@@ -280,8 +344,8 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
           </div>
 
           {sorted.length === 0 ? (
-            <div className="px-10 py-30 text-center">
-              <p className="text-h2 font-extrabold tracking-display-sm text-ink">No match.</p>
+            <div className="px-6 py-20 text-center sm:px-10 sm:py-30">
+              <p className="text-h3 font-extrabold tracking-display-sm text-ink sm:text-h2">No match.</p>
               <p className="mx-auto mt-4 max-w-100 text-13 text-ink-soft-2">Try clearing one of the filters, or type fewer characters.</p>
               <Button variant="accent" size="cta" onClick={clearAll} className="mt-7 rounded-none">
                 Clear all filters
@@ -335,7 +399,7 @@ const LibraryGrid = ({ icons }: LibraryGridProps) => {
           )}
 
           {sorted.length > 0 ? (
-            <div className="flex items-center justify-between border-r border-ink bg-paper px-8 py-5">
+            <div className="flex items-center justify-between border-r border-ink bg-paper px-4 py-4 sm:px-6 sm:py-5 md:px-8">
               <p className="font-mono text-mono text-ink-soft">
                 {sorted.length} of {icons.length} icons rendered on demand
               </p>

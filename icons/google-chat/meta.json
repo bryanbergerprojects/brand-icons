@@ -1,0 +1,34 @@
+{
+  "slug": "google-chat",
+  "name": "Google Chat",
+  "category": "communication",
+  "description": "Team messaging and collaboration service from Google Workspace for direct messages, spaces, and threaded conversations.",
+  "tags": ["messaging", "team-chat", "workspace", "collaboration", "spaces", "saas"],
+  "brandColor": "#00AC47",
+  "url": "https://workspace.google.com/products/chat/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["hangouts-chat"],
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#00897B", "#F5F5F5"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chat_logo_(2017-2020).svg",
+      "notes": "Hangouts Chat launch icon (2017-2020): teal speech bubble with near-white '@' glyph. Bubble + '@' geometry isolated verbatim from the official Wikimedia 'Google Chat logo (2017-2020).svg' wordmark file (the launcher mark beside the 'Chat' wordmark); decorative drop-shadow/highlight overlays stripped. Native 25.333x29.333 canvas rescaled to 24x24 viewBox (scale 24/29.333) and centered horizontally. Bubble fill #00897B = Material Design Teal 600; glyph fill #F5F5F5 = Material Grey 100."
+    },
+    {
+      "year": "2020",
+      "palette": ["#00AC47", "#5BB974", "#00832D"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chat_icon_(2020).svg",
+      "notes": "Workspace rebrand: two overlapping green message bubbles. All-green palette retained as homage to Hangouts (Chat did not adopt the four-color treatment until 2023). Source viewBox 0 0 479.4 500 fit into 24x24 via scale(0.048) and centered horizontally."
+    },
+    {
+      "year": "2023",
+      "palette": ["#00AC47", "#2684FC", "#FBBC04", "#EA4335", "#0066DA", "#00832D"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Chat_icon_(2023).svg",
+      "notes": "Four-color speech bubble joining the rest of the Workspace suite. Uses Google's brand palette (green, blue, yellow, red) with the green bubble outline as the primary mark. Source viewBox 0 0 311 320 fit into 24x24 via scale(0.075) and centered horizontally; non-rendering trace guideline strokes stripped."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-18"
+}
