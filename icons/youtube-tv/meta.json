@@ -1,0 +1,29 @@
+{
+  "slug": "youtube-tv",
+  "name": "YouTube TV",
+  "category": "media",
+  "description": "Live TV streaming service from Google offering broadcast and cable channels, cloud DVR, and on-demand content.",
+  "tags": ["streaming", "live-tv", "google", "cord-cutting", "cloud-dvr", "video-on-demand", "subscription"],
+  "brandColor": "#FF0000",
+  "url": "https://tv.youtube.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#FF0000", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_TV_logo.svg",
+      "notes": "Mark introduced August 2017 after the four-month launch logo was retired; lockup combines the YouTube play-button glyph with a custom 'YouTubeTV' wordmark (no space). Glyph extracted from the wordmark and normalized to 24×24."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF0000", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_TV_logo_2024.svg",
+      "notes": "Current logo (2024 refresh) aligning the wordmark with YouTube's 2024 typography update; the play-button glyph keeps the canonical YouTube red. Glyph geometry unchanged from 2017."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18",
+  "notes": "Source lockups are wordmark+glyph; the icon library extracts the canonical YouTube play-button glyph (identical across the 2017 and 2024 millésimes) and normalizes to a 24×24 viewBox. Both millésimes are tracked because the wordmark refresh is the brand-relevant change, but the icon itself is the play-button glyph shared with the youtube brand. Parent set to 'google' (not 'youtube') because the meta schema forbids transitive parents — youtube itself parents under google, so youtube-tv attaches one level up directly."
+}
