@@ -30,7 +30,20 @@
     },
     {
       "year": "2026",
-      "palette": ["#FF4540", "#3086FF", "#0CBA65", "#FFCD0A", "#FB4E5A", "#FF8C18", "#FF5138", "#FF6C29", "#FF9F13", "#09B479", "#08AD93", "#0AA6A9"],
+      "palette": [
+        "#FF4540",
+        "#3086FF",
+        "#0CBA65",
+        "#FFCD0A",
+        "#FB4E5A",
+        "#FF8C18",
+        "#FF5138",
+        "#FF6C29",
+        "#FF9F13",
+        "#09B479",
+        "#08AD93",
+        "#0AA6A9"
+      ],
       "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
       "notes": "2026 Google Workspace 'gradient G' refresh — the flat Product Sans G adopts a vibrant multi-color gradient sweep (green→blue→red→yellow) following the Gemini visual language. Geometry transcribed from the community Figma file 'New Google Workspace Icons 2026' (file key 446OrenfzC4cgNBW8IglnZ), exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; six radial gradients preserved verbatim."
     }
