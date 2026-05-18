@@ -34,7 +34,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
       - name: Upgrade npm for Trusted Publishing (OIDC)
         run: |
@@ -82,7 +81,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
       - name: Upgrade npm for Trusted Publishing (OIDC)
         run: |
