@@ -1,0 +1,29 @@
+{
+  "slug": "google-vids",
+  "name": "Google Vids",
+  "category": "productivity",
+  "description": "AI-powered video creation app in Google Workspace for producing work videos with templates, voiceovers and stock assets.",
+  "tags": ["video-creation", "google-workspace", "ai-video", "presentations", "collaboration", "saas", "storytelling"],
+  "brandColor": "#7372FE",
+  "url": "https://workspace.google.com/products/vids/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["vids"],
+  "parent": "google",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#A142F4", "#7627BB", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Vids_2024_Logo.svg",
+      "notes": "Launch-era Workspace product icon (announced April 2024, GA November 2024). Purple document silhouette with darker folded corner and white play triangle, matching the Google Workspace standard product-icon system. Redrawn into a 24×24 viewBox (scale(0.125) from the native 192×192 source)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#7372FE", "#B8C0FF", "#D0D9FF", "#65ACFF", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — three stacked rounded rectangles (light→mid→deep indigo/purple) with a horizontal cyan-blue gradient overlay and a vertical top+bottom indigo fade strip, plus a centered white play triangle. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026' (node 19:10), exported via the Figma Desktop Bridge as SVG_STRING. Mono simplifies to the frontmost rounded card with the play triangle carved out (evenodd), the back stacked layers omitted to keep a single-color silhouette readable."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
