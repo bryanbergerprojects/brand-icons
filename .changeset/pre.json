@@ -11,12 +11,5 @@
     "@brand-icons/build-icons": "0.0.0",
     "@brand-icons/render-svg": "0.0.0"
   },
-  "changesets": [
-    "add-gmail",
-    "add-google-calendar",
-    "add-google-chat",
-    "add-google-drive",
-    "add-google-sheets",
-    "add-telegram"
-  ]
+  "changesets": ["add-gmail", "add-google-calendar", "add-google-chat", "add-google-drive", "add-google-sheets", "add-telegram"]
 }

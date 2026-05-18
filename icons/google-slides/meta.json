@@ -1,0 +1,28 @@
+{
+  "slug": "google-slides",
+  "name": "Google Slides",
+  "category": "productivity",
+  "description": "Google's collaborative online presentation editor for creating and sharing slide decks in real time.",
+  "tags": ["presentation", "slides", "google-workspace", "collaboration", "productivity-suite", "cloud-office", "real-time-editing"],
+  "brandColor": "#F8BF08",
+  "url": "https://www.google.com/slides/about/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["slides"],
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#F4B400", "#F1F1F1", "#FADA80"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Slides_logo_(2014-2020).svg",
+      "notes": "Skeuomorphic yellow presentation page with folded top-right corner and a white slide frame containing horizontal text bars (2014–2020). Redrawn into a 24×24 viewBox (translate(3.2727 0) scale(0.36364) from the native 48×66 source); decorative gradients and bottom-edge shadow overlays from the upstream Sketch export were dropped for clarity at icon size."
+    },
+    {
+      "year": "2020",
+      "palette": ["#F8BF08", "#F59307", "#FDFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Slides_2020_Logo.svg",
+      "notes": "Current Workspace-era mark introduced October 6, 2020. Flat geometric yellow page with a separate orange folded-corner flap and an off-white slide frame containing a single horizontal text bar. Redrawn into a 24×24 viewBox (translate(3.2727 0) scale(0.27273) from the native 64×88 source)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}
