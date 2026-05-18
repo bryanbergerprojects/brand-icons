@@ -4,11 +4,12 @@
   "category": "productivity",
   "description": "Google's collaborative online spreadsheet editor in the Google Workspace suite for real-time data analysis.",
   "tags": ["spreadsheet", "data-analysis", "google-workspace", "collaboration", "cloud-office", "office-suite", "real-time-editing"],
-  "brandColor": "#34A853",
+  "brandColor": "#029853",
   "url": "https://www.google.com/sheets/about/",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["sheets"],
-  "latest": "2020",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2014",
@@ -21,8 +22,14 @@
       "palette": ["#34A853", "#188038", "#FFFFFF"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Sheets_2020_Logo.svg",
       "notes": "Flat Material rebrand introduced with Google Workspace on October 6, 2020. Brighter green body, dark-green folded corner, plain white grid. Redrawn into a 24×24 viewBox via transform=scale(0.27273) over the native 64×88 source."
+    },
+    {
+      "year": "2026",
+      "palette": ["#029853", "#11BC5C", "#7BC8FE", "#14BA61", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — flat green body with a left-side darker green tab and a cyan→green gradient overlay. The corner-fold motif is dropped in favor of an inline white plus-grid mark. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }

@@ -4,12 +4,12 @@
   "category": "communication",
   "description": "Google's video-conferencing service for one-on-one calls and group meetings, part of Google Workspace.",
   "tags": ["video-conferencing", "video-calls", "meetings", "workspace", "webinar", "collaboration", "saas"],
-  "brandColor": "#00AC47",
+  "brandColor": "#FADE13",
   "url": "https://meet.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["hangouts-meet", "meet"],
   "parent": "google",
-  "latest": "2020",
+  "latest": "2026",
   "years": [
     {
       "year": "2017",
@@ -22,6 +22,12 @@
       "palette": ["#00AC47", "#00832D", "#FFBA00", "#E94235", "#2684FC", "#0066DA"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Meet_icon_(2020).svg",
       "notes": "October 2020 Google Workspace rebrand — stylised camcorder in the four Google brand colours (green, yellow, red, blue) with darker green/blue shades for the lens and corner. Source viewBox 0 0 87.5 72 letter-boxed into 24x24 via a scale(0.27429) group with a 2.1257 vertical translation (baked at build via SVGO convertTransform)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#FADE13", "#FCCA03", "#F9AC02", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — Meet drops the four-color treatment entirely for a flat yellow camcorder body (#FADE13→#FCCA03 gradient) with an amber lens triangle (#F9AC02) and a single white record-dot. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; the diamond-overlay highlight from the Figma source was dropped (no consumer-grade SVG diamond gradient primitive)."
     }
   ],
   "addedAt": "2026-05-17",

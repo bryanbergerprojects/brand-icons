@@ -4,11 +4,11 @@
   "category": "platforms",
   "description": "Google is a technology company providing search, advertising, cloud computing, Android, Workspace, and consumer hardware.",
   "tags": ["search", "cloud", "android", "workspace", "ads", "maps", "chrome", "platform"],
-  "brandColor": "#4285F4",
+  "brandColor": "#3086FF",
   "url": "https://www.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": [],
-  "latest": "2015",
+  "latest": "2026",
   "years": [
     {
       "year": "2010",
@@ -27,9 +27,15 @@
       "palette": ["#4285F4", "#EA4335", "#FBBC05", "#34A853"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg",
       "notes": "Sans-serif 'G' (Product Sans rebrand, 2015)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#FF4540", "#3086FF", "#0CBA65", "#FFCD0A", "#FB4E5A", "#FF8C18", "#FF5138", "#FF6C29", "#FF9F13", "#09B479", "#08AD93", "#0AA6A9"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Google Workspace 'gradient G' refresh — the flat Product Sans G adopts a vibrant multi-color gradient sweep (green→blue→red→yellow) following the Gemini visual language. Geometry transcribed from the community Figma file 'New Google Workspace Icons 2026' (file key 446OrenfzC4cgNBW8IglnZ), exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; six radial gradients preserved verbatim."
     }
   ],
   "addedAt": "2026-05-16",
-  "updatedAt": "2026-05-16",
+  "updatedAt": "2026-05-18",
   "notes": "Pre-2010 wordmarks (1998 Baskerville 'Google!' by Sergey Brin, 1999 Ruth Kedar Catull serif) were not added: no authoritative true-vector SVG exists on Wikimedia Commons, Logopedia, or archive.org — only raster PNGs (and SVG containers wrapping embedded PNGs from third-party logo sites, which do not qualify as true vectors). Per the no-invent rule, these millésimes were skipped."
 }

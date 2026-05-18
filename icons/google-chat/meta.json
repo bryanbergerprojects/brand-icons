@@ -4,11 +4,12 @@
   "category": "communication",
   "description": "Team messaging and collaboration service from Google Workspace for direct messages, spaces, and threaded conversations.",
   "tags": ["messaging", "team-chat", "workspace", "collaboration", "spaces", "saas"],
-  "brandColor": "#00AC47",
+  "brandColor": "#01AF59",
   "url": "https://workspace.google.com/products/chat/",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["hangouts-chat"],
-  "latest": "2023",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2017",
@@ -27,6 +28,12 @@
       "palette": ["#00AC47", "#2684FC", "#FBBC04", "#EA4335", "#0066DA", "#00832D"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Chat_icon_(2023).svg",
       "notes": "Four-color speech bubble joining the rest of the Workspace suite. Uses Google's brand palette (green, blue, yellow, red) with the green bubble outline as the primary mark. Source viewBox 0 0 311 320 fit into 24x24 via scale(0.075) and centered horizontally; non-rendering trace guideline strokes stripped."
+    },
+    {
+      "year": "2026",
+      "palette": ["#01AF59", "#0EBB5E", "#7FCCFD", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — Chat returns to a single bubble: a solid green pill in the background with an overlaid larger bubble carrying a cyan→green gradient and a white smile stroke. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; two linear gradients preserved."
     }
   ],
   "addedAt": "2026-05-17",

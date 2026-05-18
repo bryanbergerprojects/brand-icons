@@ -12,11 +12,12 @@
     "cloud-office",
     "real-time-editing"
   ],
-  "brandColor": "#3086F6",
+  "brandColor": "#3186FF",
   "url": "https://docs.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["docs"],
-  "latest": "2020",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2014",
@@ -29,6 +30,12 @@
       "palette": ["#3086F6", "#0C67D6", "#FDFFFF"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Docs_2020_Logo.svg",
       "notes": "Current Workspace-era mark introduced October 6, 2020. Three-line layout with the folded corner depicted as a separate darker-blue triangular flap. Redrawn into a 24×24 viewBox via transform=scale(0.27273) over the native 64×88 source."
+    },
+    {
+      "year": "2026",
+      "palette": ["#3186FF", "#77BBFF", "#ACAAFF", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — flat blue document body softened with a lavender→blue gradient and a lighter sky-blue corner fold. White text lines replace the 2020 sketched marks. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING."
     }
   ],
   "addedAt": "2026-05-17",
