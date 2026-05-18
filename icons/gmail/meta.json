@@ -4,12 +4,12 @@
   "category": "productivity",
   "description": "Free web-based email service from Google, part of Google Workspace.",
   "tags": ["email", "webmail", "google-workspace", "communication", "inbox", "messaging", "smtp", "imap"],
-  "brandColor": "#EA4335",
+  "brandColor": "#FB413B",
   "url": "https://mail.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["google-mail"],
   "parent": "google",
-  "latest": "2020",
+  "latest": "2026",
   "years": [
     {
       "year": "2013",
@@ -22,8 +22,14 @@
       "palette": ["#EA4335", "#FBBC04", "#34A853", "#4285F4", "#C5221F"],
       "source": "https://commons.wikimedia.org/wiki/File:Gmail_icon_(2020).svg",
       "notes": "October 2020 rebrand introduced with Google Workspace. The envelope is reduced to a stylized 'M' assembled from five colored facets using the four Google brand colors plus a dark red (#C5221F) overlap shadow. Source viewBox 52 42 88 66 wrapped in a 24x24 scale group (baked at build via SVGO convertTransform)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#FB413B", "#FAD917", "#F74B47", "#FF64A0", "#3AC566", "#338BFD"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — envelope re-imagined as two solid side panels (red left, green→blue gradient right) bridged by an M-shaped flap stroked with a yellow→red→pink linear gradient. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; two linear gradients preserved."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }

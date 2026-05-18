@@ -4,11 +4,12 @@
   "category": "productivity",
   "description": "Time-management and scheduling calendar service developed by Google as part of Google Workspace.",
   "tags": ["calendar", "scheduling", "time-management", "google-workspace", "saas", "events", "agenda"],
-  "brandColor": "#4285F4",
+  "brandColor": "#3F92FF",
   "url": "https://calendar.google.com",
   "aliases": ["gcal"],
   "license": "Trademark — usage for identification (fair use)",
-  "latest": "2020",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2015",
@@ -21,8 +22,14 @@
       "palette": ["#4285F4", "#34A853", "#FBBC04", "#FFFFFF", "#1A73E8", "#EA4335", "#1967D2", "#188038"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Calendar_icon_(2020).svg",
       "notes": "Workspace four-color refresh unveiled on 6 October 2020 alongside the rename of G Suite to Google Workspace. White tile bearing the blue '31', framed by Google's four brand colors with three rounded corners and one diagonal cut at the bottom-right. Source viewBox 0 0 200 200 with internal +3.75 translate baked into a single matrix transform."
+    },
+    {
+      "year": "2026",
+      "palette": ["#3F92FF", "#3B90FB", "#489CFD", "#308BFE", "#A5A7FE", "#BBE2FE", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — Calendar drops the four-color frame for an all-blue page: a light-blue tab band on top, a lavender→blue gradient header carrying the white '31', and a brighter blue body. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; three linear gradients preserved."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }

@@ -4,12 +4,12 @@
   "category": "storage-cloud",
   "description": "Cloud storage and file synchronization service by Google for personal and collaborative file management.",
   "tags": ["cloud-storage", "file-sync", "collaboration", "workspace", "saas", "file-sharing", "backup"],
-  "brandColor": "#0066DA",
+  "brandColor": "#3185FF",
   "url": "https://drive.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["gdrive"],
   "parent": "google",
-  "latest": "2020",
+  "latest": "2026",
   "years": [
     {
       "year": "2012",
@@ -28,8 +28,14 @@
       "palette": ["#0066DA", "#00AC47", "#FFBA00", "#EA4335", "#2684FC", "#00832D"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Drive_icon_(2020).svg",
       "notes": "October 2020 Google Workspace rebrand. Adds a red facet (#EA4335) to align with the four-colour Workspace family; softened angles, flat fills, no shadows. Recentred from native 87.3×78 viewBox via translate(0 1.2784) scale(0.27491)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#3185FF", "#16BC66", "#FECA06", "#FFE31F", "#A8A8FE", "#78C9FF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — three soft-gradient triangles (yellow→amber, blue→lavender, green→cyan) replacing the flat 2020 facets. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING; three linear gradients preserved."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }
