@@ -1,0 +1,29 @@
+{
+  "slug": "google-meet",
+  "name": "Google Meet",
+  "category": "communication",
+  "description": "Google's video-conferencing service for one-on-one calls and group meetings, part of Google Workspace.",
+  "tags": ["video-conferencing", "video-calls", "meetings", "workspace", "webinar", "collaboration", "saas"],
+  "brandColor": "#00AC47",
+  "url": "https://meet.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["hangouts-meet", "meet"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#00897B", "#F5F5F5", "#E0E0E0"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Meet_text_logo_dark_(2017-2020).svg",
+      "notes": "Original Hangouts Meet app icon (March 2017 – October 2020). Material Teal 600 (#00897B) speech-bubble with a white camcorder. Geometry transcribed verbatim from the official Wikimedia wordmark SVG `Google_Meet_text_logo_dark_(2017-2020).svg` (icon embedded at viewBox 0 0 140 140), rescaled to 0 0 24 24 (scale 24/140). Three paths: teal bubble + tail (single closed path), light-grey lid band (#E0E0E0) overlaying the upper portion of the body and lens, and the white (#F5F5F5) camcorder body + right-pointing lens triangle. Drop-shadow and radial highlight from the source were intentionally dropped for a flat-rendered icon."
+    },
+    {
+      "year": "2020",
+      "palette": ["#00AC47", "#00832D", "#FFBA00", "#E94235", "#2684FC", "#0066DA"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Meet_icon_(2020).svg",
+      "notes": "October 2020 Google Workspace rebrand — stylised camcorder in the four Google brand colours (green, yellow, red, blue) with darker green/blue shades for the lens and corner. Source viewBox 0 0 87.5 72 letter-boxed into 24x24 via a scale(0.27429) group with a 2.1257 vertical translation (baked at build via SVGO convertTransform)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-18"
+}
