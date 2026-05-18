@@ -9,7 +9,7 @@
     "url": "git+https://github.com/bryanbergerprojects/brand-icons.git",
     "directory": "packages/web-components"
   },
-  "homepage": "https://github.com/bryanbergerprojects/brand-icons/tree/main/packages/web-components",
+  "homepage": "https://brand-icons.com",
   "bugs": {
     "url": "https://github.com/bryanbergerprojects/brand-icons/issues"
   },
