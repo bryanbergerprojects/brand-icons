@@ -1,0 +1,140 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+
+const TITLE = 'Terms';
+const DESCRIPTION =
+  'Legal notice for the brand-icons documentation site: publisher, hosting, intellectual property, data and applicable law.';
+
+const lastUpdated = '2026-05-17';
+---
+
+<BaseLayout title={`${TITLE} — Brand Icons`} description={DESCRIPTION}>
+  <article class="mx-auto max-w-3xl px-6 py-16">
+    <a
+      href="/"
+      class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
+    >
+      ← Home
+    </a>
+    <header class="mt-8 border-b border-ink/10 pb-8">
+      <p class="font-mono text-xs uppercase tracking-widest text-ink-muted">Legal</p>
+      <h1 class="mt-3 text-4xl font-medium tracking-tight sm:text-5xl">{TITLE}</h1>
+      <p class="mt-4 text-lg text-ink-muted">{DESCRIPTION}</p>
+      <p class="mt-3 font-mono text-xs uppercase tracking-widest text-ink-muted">
+        Last updated · {lastUpdated}
+      </p>
+    </header>
+
+    <div class="prose prose-neutral mt-10 max-w-none font-sans text-ink">
+      <h2>1. Site publisher</h2>
+      <p>
+        This website (the <em>“Site”</em>) is published by Bryan Berger, self-employed under
+        French <em>micro-entrepreneur</em> status, registered with SIREN <code>838 388 205</code>.
+      </p>
+      <ul>
+        <li><strong>Publication director:</strong> Bryan Berger</li>
+        <li><strong>Data protection officer:</strong> Bryan Berger</li>
+        <li>
+          <strong>Contact:</strong>
+          <a href="mailto:contact@bryanberger.dev">contact@bryanberger.dev</a>
+        </li>
+      </ul>
+
+      <h2>2. Hosting</h2>
+      <p>
+        The Site is hosted by <strong>Scaleway SAS</strong>, a French company with registered
+        office at 8 rue de la Ville l'Évêque, 75008 Paris, France — <a
+          href="https://www.scaleway.com"
+          target="_blank"
+          rel="noopener">scaleway.com</a
+        >. Static assets are served from Scaleway infrastructure in the European Union
+        (region <code>fr-par</code>).
+      </p>
+
+      <h2>3. Intellectual property</h2>
+      <h3>3.1 Source code</h3>
+      <p>
+        The source code of the <code>brand-icons</code> project (library, tooling and this
+        documentation site) is released under the
+        <a href="/resources/license">MIT license</a>. Users are granted permission to use,
+        copy, modify, merge, publish, distribute, sublicense, and sell copies of the
+        software, subject to the conditions stated in that license. The software is
+        provided <em>“as is”</em>, without warranty of any kind.
+      </p>
+
+      <h3>3.2 Brand assets</h3>
+      <p>
+        The brand icons, logos, names and trademarks shown on the Site or distributed
+        through the library remain the exclusive property of their respective owners.
+        Their inclusion is intended for purposes of identification and reference
+        (<em>nominative fair use</em>) and does not imply any endorsement, sponsorship or
+        affiliation. Brand owners may refer to
+        <a href="/resources/brand-owners">Brand owners</a> for the takedown procedure.
+      </p>
+
+      <h2>4. Liability</h2>
+      <p>
+        Bryan Berger makes reasonable efforts to keep information published on the Site
+        accurate and up to date but offers no guarantee as to its completeness or
+        availability, and disclaims responsibility for:
+      </p>
+      <ul>
+        <li>direct or indirect damage to hardware or software resulting from access to the Site;</li>
+        <li>any misuse of information published on the Site;</li>
+        <li>content imported or referenced by third parties without authorization.</li>
+      </ul>
+      <p>
+        The publisher reserves the right to remove, at any time and without prior notice,
+        any content that violates applicable French law, and to pursue civil or criminal
+        action against any person posting illegal, defamatory or infringing material.
+      </p>
+
+      <h2>5. Personal data</h2>
+      <p>
+        The Site is a static documentation website. It <strong>does not collect any
+        personal data</strong>, does not require an account, and does not run any
+        analytics, tracking or fingerprinting solution. No personal data is stored,
+        processed or transmitted to third parties by the Site itself.
+      </p>
+      <p>
+        Requests sent by email (e.g. to <a href="mailto:contact@bryanberger.dev"
+          >contact@bryanberger.dev</a
+        >) are processed solely to respond to the sender and are not used for any other
+        purpose. Under the French
+        <em>Loi Informatique et Libertés</em> and the EU <em>GDPR</em>, you may at any
+        time request access to, rectification or deletion of any personal data you have
+        sent by email, by writing to the same address.
+      </p>
+
+      <h2>6. Cookies</h2>
+      <p>
+        The Site does <strong>not</strong> install any cookie, local storage or similar
+        tracking technology for advertising or analytics purposes. The only client-side
+        storage used is a single key persisting the user's theme preference (light /
+        dark), set locally by the browser and never transmitted to any server.
+      </p>
+
+      <h2>7. External links</h2>
+      <p>
+        The Site may contain hyperlinks to third-party websites (brand owners' websites,
+        GitHub, package registries, etc.). Bryan Berger has no control over those sites
+        and accepts no responsibility for their content, privacy practices or
+        availability.
+      </p>
+
+      <h2>8. Governing law and jurisdiction</h2>
+      <p>
+        These terms are governed by French law. Any dispute relating to the Site or to
+        these terms shall fall under the exclusive jurisdiction of the competent courts
+        of Paris, France, subject to any mandatory rule of consumer protection law
+        applicable to the user.
+      </p>
+
+      <h2>9. Contact</h2>
+      <p>
+        For any question relating to this notice, write to
+        <a href="mailto:contact@bryanberger.dev">contact@bryanberger.dev</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

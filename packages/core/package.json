@@ -1,6 +1,6 @@
 {
   "name": "@brand-icons/core",
-  "version": "0.0.0",
+  "version": "0.1.0-canary.0",
   "description": "Core SVG strings, manifest, and types for Brand Icons.",
   "license": "MIT",
   "author": "Bryan Berger <contact@bryanberger.dev>",
@@ -28,7 +28,8 @@
     "./icons/*": {
       "types": "./dist/icons/*.d.ts",
       "import": "./dist/icons/*.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsup",

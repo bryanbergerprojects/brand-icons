@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g transform="scale(1.5)">
+    <defs>
+      <linearGradient id="tg13-c" gradientUnits="userSpaceOnUse" gradientTransform="translate(-.38352 -2.3011)" x1="8.958" y1="12.33" x2="12.157" y2="7.1827">
+        <stop offset="0" stop-color="#D9ECF8"/>
+        <stop offset="1" stop-color="#F8FEED"/>
+      </linearGradient>
+      <linearGradient id="tg13-b" gradientUnits="userSpaceOnUse" gradientTransform="translate(-.38352 -2.3011)" x1="5.9589" y1="12.46" x2="9.6838" y2="9.2405">
+        <stop offset="0" stop-color="#BDD9EF"/>
+        <stop offset="1" stop-color="#B3BCC0"/>
+      </linearGradient>
+      <linearGradient id="tg13-a" gradientUnits="userSpaceOnUse" gradientTransform="translate(-.38352 -2.3011)" x1="6.7977" y1="14.339" x2="7.8421" y2="12.458">
+        <stop offset="0" stop-color="#7C9BBE"/>
+        <stop offset="1" stop-color="#788B9B"/>
+      </linearGradient>
+    </defs>
+    <rect fill="#416390" width="16" height="16"/>
+    <path fill="url(#tg13-c)" d="m2.2945 7.8742 3.2329 0.89484 0.88674 3.2689 1.6677-1.585 3.0291 2.2029 2.2115-9.0888z"/>
+    <path fill="url(#tg13-b)" d="m6.8784 9.4268-0.46428 2.6111-0.88674-3.2689 6.2462-3.8874z"/>
+    <path fill="url(#tg13-a)" d="m6.4141 12.038 0.46428-2.6111 1.2034 1.0261z"/>
+  </g>
+</svg>
