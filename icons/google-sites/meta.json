@@ -12,6 +12,18 @@
   "latest": "2026",
   "years": [
     {
+      "year": "2014",
+      "palette": ["#3F51B5", "#F1F1F1", "#9FA8DA"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Sites_(2014-2020).svg",
+      "notes": "First Material Design product icon for Google Sites (in use 2014–2020). Indigo file silhouette with a lighter-indigo folded corner and white wireframe page glyph (header bar + two content blocks). Subtle Material shading dropped to match project conventions; silhouette transcribed verbatim from Wikimedia Commons SVG."
+    },
+    {
+      "year": "2020",
+      "palette": ["#4758B5", "#FFFFFF", "#354287"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Sites_2020_Logo.svg",
+      "notes": "2020 Workspace refresh paired with the G Suite → Google Workspace rebrand. Brighter indigo body (#4758B5), darker folded corner (#354287), white page-layout glyph. Sites kept the file-silhouette language rather than adopting the four-color outline used by Gmail/Calendar/Drive. Transcribed from Wikimedia Commons SVG (originally 64×88) into a 24×24 viewBox."
+    },
+    {
       "year": "2026",
       "palette": ["#3186FF", "#50A0FF", "#9ED1FF", "#A9A9FD", "#FFFFFF"],
       "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
