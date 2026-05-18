@@ -37,7 +37,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Upgrade npm for Trusted Publishing (OIDC)
-        run: npm install -g npm@latest
+        run: npm install --force -g npm@latest
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -83,7 +83,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Upgrade npm for Trusted Publishing (OIDC)
-        run: npm install -g npm@latest
+        run: npm install --force -g npm@latest
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
