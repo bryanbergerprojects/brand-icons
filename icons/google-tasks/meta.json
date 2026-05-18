@@ -1,0 +1,22 @@
+{
+  "slug": "google-tasks",
+  "name": "Google Tasks",
+  "category": "productivity",
+  "description": "Task management app from Google integrated with Gmail, Calendar, and Workspace for creating and tracking to-do lists.",
+  "tags": ["task-management", "todo", "google-workspace", "checklist", "productivity-app", "gmail-integration"],
+  "brandColor": "#2684FC",
+  "url": "https://tasks.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2021",
+      "palette": ["#2684FC", "#0066DA"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Tasks_2021.svg",
+      "notes": "Current Workspace-aligned logo introduced September 2021 (announced 2021-09-15, rollout starting 2021-09-23). Replaces the original 2018 blue circle with yellow dot + white pill checkmark. Two-tone blue: light blue (#2684FC) ring and checkmark, darker blue (#0066DA) pill overlay where the checkmark crosses the ring. Source viewBox 0 0 527.1 500 fitted into 0 0 24 24 via a single translate+scale wrapper group baked at build via SVGO convertTransform."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
