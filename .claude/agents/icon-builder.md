@@ -27,10 +27,24 @@ produced — never re-fetch from the web.
 
 ## Execution environment
 
-You are invoked with `isolation: "worktree"`. That means:
+You MUST be invoked with `isolation: "worktree"`. **First action of every
+run** — verify you are actually inside a worktree, not the main checkout:
 
-- You are already inside a temporary worktree of the repo. Confirm with
-  `git rev-parse --show-toplevel` and `git status` before doing anything.
+```bash
+GIT_DIR=$(git rev-parse --git-dir)
+GIT_COMMON_DIR=$(git rev-parse --git-common-dir)
+if [ "$GIT_DIR" = "$GIT_COMMON_DIR" ]; then
+  echo "FATAL: builder running in main checkout, not a worktree." >&2
+  echo "Caller must spawn the Agent with isolation: \"worktree\"." >&2
+  exit 1
+fi
+git rev-parse --show-toplevel              # log the worktree path
+git status --porcelain                     # must be clean
+```
+
+Hard-stop on that check — never write a single file from the main
+checkout. Then:
+
 - Multiple builders run in parallel; **never touch files outside your
   worktree** and never reference `/tmp/brand-icons-fetch/<other-slug>/`.
 - The worktree is destroyed if you commit nothing — so the act of
@@ -100,16 +114,14 @@ Parse the JSON. Verify:
 If any check fails, abort with a clear message; the reviewer will catch
 the error if you continue silently.
 
-### 2. Confirm worktree state and rebase onto `origin/canary`
+### 2. Rebase onto `origin/canary`
+
+The execution-environment worktree check above already confirmed you are
+inside an isolated worktree with a clean tree. Capture the base commit:
 
 ```bash
-git rev-parse --show-toplevel              # should be inside a worktree
-git status --porcelain                     # should be clean
 git log -1 --format='%H %s'                # capture base commit
 ```
-
-If the worktree is dirty, hard-stop — something is wrong with the
-orchestrator's setup.
 
 The harness spawns the worktree from whatever local ref happened to be
 HEAD (often a stale `canary` or `main`). **Always rebase your worktree

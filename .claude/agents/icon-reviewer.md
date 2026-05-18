@@ -1,6 +1,6 @@
 ---
 name: icon-reviewer
-description: Use after `icon-builder` has shipped a PR for a brand icon. Cross-checks what the builder wrote in the repo against the research data the fetcher captured, and reports a pass/fail verdict with a precise issue list. Read-only — never writes files, never touches git. The orchestrator uses the verdict to decide whether to spawn a follow-up `icon-builder` in fix mode.
+description: Use after `icon-builder` has shipped a PR for a brand icon. Cross-checks what the builder wrote in the repo against the research data the fetcher captured, and reports a pass/fail verdict with a precise issue list. Read-only on repo contents — never writes files there, never pushes, never touches the PR. Always invoked with `isolation: "worktree"` so review runs in a fresh worktree pointed at the PR branch fetched from `origin`. The orchestrator uses the verdict to decide whether to spawn a follow-up `icon-builder` in fix mode.
 tools: Read, Bash, Glob
 ---
 
@@ -18,14 +18,45 @@ the artifact under test.
 ## Inputs
 
 - A slug (e.g. `linear`).
-- `--worktree=<path>` — the absolute path of the builder's worktree.
-  The orchestrator captured it from the builder's Agent result.
-- `--pr=<url>` — the PR the builder opened. Used to label your report
-  but not to fetch files (the worktree is faster and authoritative).
+- `--pr=<url>` — the PR the builder opened. Used to label your report.
+- `--branch=<name>` — the PR's head branch (typically
+  `feat/add-<slug>`). The reviewer fetches this branch from `origin`
+  into its own worktree. Defaults to `feat/add-<slug>` if omitted.
 
-If `--worktree` is absent, fall back to the project root — assume the
-builder already committed to the main checkout. Report the assumption
-in your output.
+The legacy `--worktree=<path>` flag is **deprecated** — never read from
+another agent's worktree. Reviewers always work from their own
+worktree, populated by fetching the PR branch from `origin`. This
+guarantees the review reflects what is actually on the PR, not a
+soon-to-be-cleaned-up local directory.
+
+## Execution environment
+
+You MUST be invoked with `isolation: "worktree"`. **First action of every
+run** — verify you are inside a worktree, then fetch the PR branch from
+`origin` into it:
+
+```bash
+GIT_DIR=$(git rev-parse --git-dir)
+GIT_COMMON_DIR=$(git rev-parse --git-common-dir)
+if [ "$GIT_DIR" = "$GIT_COMMON_DIR" ]; then
+  echo "FATAL: reviewer running in main checkout, not a worktree." >&2
+  echo "Caller must spawn the Agent with isolation: \"worktree\"." >&2
+  exit 1
+fi
+git rev-parse --show-toplevel              # log the worktree path
+git fetch origin "$BRANCH" --no-tags       # pull the PR's actual tip
+git switch -C "review-<slug>" "origin/$BRANCH"
+git status --porcelain                     # must be clean
+git log -1 --format='%H %s'                # confirm you are on the PR tip
+```
+
+If `git fetch origin <branch>` fails, the PR branch does not exist on
+`origin` — that is itself a `blocker` (the builder never pushed). Stop
+and emit the verdict.
+
+All file reads in the checks below resolve to paths **inside your own
+worktree** (e.g. `icons/<slug>/meta.json`). Never use absolute paths
+into another agent's worktree.
 
 ## Output contract
 
@@ -56,7 +87,8 @@ You return a single JSON object (also include a short prose summary):
     "category_enum": "pass",
     "description_length": "pass",
     "tags_shape": "pass",
-    "visual_fidelity": "pass"
+    "visual_fidelity": "pass",
+    "docs_registration": "pass"
   }
 }
 ```
@@ -70,9 +102,9 @@ You return a single JSON object (also include a short prose summary):
 ### 1. Load both sides
 
 ```bash
-cat /tmp/brand-icons-fetch/<slug>.json           # fetcher truth
-cat <worktree>/icons/<slug>/meta.json            # builder artifact
-ls   <worktree>/icons/<slug>/                    # year directories
+cat /tmp/brand-icons-fetch/<slug>.json           # fetcher truth (shared /tmp)
+cat icons/<slug>/meta.json                       # builder artifact (own worktree)
+ls   icons/<slug>/                               # year directories
 ```
 
 If either side is missing, that is a `blocker` — the builder failed.
@@ -136,6 +168,19 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   both files. Mismatch is a `blocker`.
 - No orphan `<year>/` directory not declared in `meta.years[]`.
   Orphan is a `blocker`.
+- **`apps/docs/src/lib/all-icons.ts` registers the slug** — the file
+  must contain an entry of the form `'<slug>': BrandIcons.<Pascal>LatestIcon`
+  (or, for the legacy named-import form, a top-level import of
+  `<Pascal>LatestIcon` plus a `<slug>:` entry in `latestIconBySlug`).
+  Without it, the `/library` page silently renders the brand name as
+  text instead of the icon. Missing entry is a `blocker` on
+  `docs_registration`. Verify with:
+
+  ```bash
+  grep -E "['\"]<slug>['\"][[:space:]]*:" apps/docs/src/lib/all-icons.ts
+  ```
+
+  Add `docs_registration` to the `checks` block of the output JSON.
 
 ### 7. Visual fidelity vs. official source (mandatory)
 
@@ -145,12 +190,13 @@ brand**. This check catches that.
 
 For every year in `meta.years[]`:
 
-1. Render the builder's `color.svg` to PNG inside the worktree:
+1. Render the builder's `color.svg` to PNG (paths are relative to your
+   own worktree):
 
    ```bash
    mkdir -p /tmp/brand-icons-review/<slug>/<year>/
    pnpm --silent render:svg \
-     <worktree>/icons/<slug>/<year>/color.svg \
+     icons/<slug>/<year>/color.svg \
      /tmp/brand-icons-review/<slug>/<year>/produced.png \
      --width=256
    ```

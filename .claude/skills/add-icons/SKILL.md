@@ -135,15 +135,24 @@ and continue. Do not auto-spawn another builder for that brand — the
 fetcher's source asset is likely the root cause and a fresh build will
 keep failing the same way.
 
-## Phase 3 — Review (parallel, ≤ 10)
+## Phase 3 — Review (parallel, ≤ 10, isolated worktrees)
 
 For every successfully built PR, spawn **one `icon-reviewer` Agent per
 brand in a single message**:
 
 - `subagent_type: "icon-reviewer"`.
 - `description`: `"Review <Brand> PR"`.
-- `prompt`: includes `--worktree=<path>` (from the builder result) and
-  `--pr=<url>`. The reviewer is read-only — no `isolation` needed.
+- `isolation: "worktree"` — **mandatory**. The reviewer must work in
+  its own worktree and fetch the PR's branch from `origin` so it
+  reviews the artifact that is actually on the PR, not a local
+  directory that may already be cleaned up.
+- `prompt`: includes the slug, `--pr=<url>`, and
+  `--branch=feat/add-<slug>`. Do **not** pass `--worktree=<path>` —
+  that flag is deprecated; the reviewer fetches `origin/<branch>` into
+  its own worktree.
+
+Capture the reviewer's worktree path from the Agent result so Phase 5
+can clean it up.
 
 Collect each reviewer's JSON verdict.
 
@@ -180,11 +189,13 @@ source asset (fetcher) or a brand that requires hand crafting.
 
 ## Phase 5 — Cleanup (always, before the final report)
 
-Once every PR exists on `origin`, remove every worktree spawned by the
-builders. The PR carries the work — the local worktree is disposable.
+Once every PR exists on `origin`, remove every worktree spawned during
+the run — builders (Phase 2 + Phase 4) **and** reviewers (Phase 3 +
+post-fix review). The PR carries the work; every worktree is
+disposable.
 
-For each worktree path collected from Phase 2 / Phase 4 builder
-results, run:
+For each worktree path collected from Phase 2, Phase 3, Phase 4, and
+the post-fix review, run:
 
 ```bash
 git worktree unlock <path> 2>/dev/null || true
@@ -240,9 +251,12 @@ user can copy them directly.
 - **Cap at 10 per phase.** Token explosion grows linearly with N
   parallel agents; 10 is the sweet spot where review still surfaces
   patterns without blowing the budget.
-- **Worktrees only for builders.** Fetchers write to `/tmp/`, reviewers
-  read only — neither needs isolation. Adding `isolation` where it is
-  not needed wastes ~5s of worktree setup per agent.
+- **Worktrees for builders AND reviewers.** Fetchers write to `/tmp/`
+  and never touch the repo — no isolation. Builders mutate `icons/`,
+  reviewers run `pnpm` and need a clean checkout of the PR branch —
+  both require `isolation: "worktree"`. The ~5s setup is worth it to
+  prevent collisions and to guarantee the reviewer sees what is
+  actually on `origin/<branch>`.
 - **Never re-spawn a phase mid-run.** If a fetcher times out, mark it
   failed and continue with the rest. The pipeline is best-effort across
   brands, not all-or-nothing.
