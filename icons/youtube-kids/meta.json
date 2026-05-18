@@ -1,0 +1,34 @@
+{
+  "slug": "youtube-kids",
+  "name": "YouTube Kids",
+  "category": "media",
+  "description": "Google's video streaming service for children with curated content, parental controls, and age-appropriate filtering.",
+  "tags": ["video", "streaming", "children", "kids", "google-service", "parental-controls", "family"],
+  "brandColor": "#FF0033",
+  "url": "https://www.youtubekids.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#E52D27", "#BF171D", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/f/fe/YouTube_Kids_logo_2015-2017.png",
+      "notes": "Launch wordmark (Feb 2015 – 2017). Reusing the contemporary YouTube 2013-2017 play-button mark (red rounded-rectangle 'tube' with gradient and white triangle) as the era-equivalent standalone icon — the YouTube Kids 2015 wordmark embeds this same red 'Tube' container, but library convention (matching simple-icons, font-awesome) is to use the standalone play-button at icon scale. Path data sourced from the YouTube 2013 icon (placed centred in the 24×24 viewBox with 3.55 unit vertical padding)."
+    },
+    {
+      "year": "2019",
+      "palette": ["#FF0000", "#282828", "#FFFFFF", "#FF8983"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/f/fb/YouTube_Kids_LogoVector.svg",
+      "notes": "Square 'wonky' play-button icon introduced with the 2018-2019 rebrand, used through 2024. Hand-drawn dark grey (#282828) outline, classic YouTube red (#FF0000) body, white triangle, pink/coral (#FF8983) highlight on top. Native artwork is 833×673.7; placed centred in the 24×24 viewBox with 2.296 unit vertical padding."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF0033", "#000000", "#FFFFFF"],
+      "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/38/4e/a7/384ea75e-13cb-7e8f-4c9b-f7493b3d8775/logo_youtube_kids_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/1024x1024bb.png",
+      "notes": "Q4 2024 rebrand (Oct 22, 2024) aligning with the global YouTube refresh: pinker red (#FF0033) replacing the previous #FF0000, pure black (#000000) outline replacing #282828, and the pink/coral highlight on top has been dropped. Geometry kept from the 2019 mark; only fills and the highlight layer changed. Sourced from the App Store iTunes Lookup API (1024×1024 PNG); filename in the URL ('logo_youtube_kids_2024_q4_color') confirms the millesime."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18",
+  "notes": "Parent relationship dropped — meta.json schema enforces single-level parents and 'youtube' already has parent 'google'. The accurate product hierarchy would be youtube-kids → youtube → google; documenting it here since the manifest can only express one level."
+}
