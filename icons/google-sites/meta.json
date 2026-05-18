@@ -1,0 +1,23 @@
+{
+  "slug": "google-sites",
+  "name": "Google Sites",
+  "category": "productivity",
+  "description": "Google's website-building tool for creating simple internal and public sites without code, part of Google Workspace.",
+  "tags": ["website-builder", "workspace", "no-code", "intranet", "collaboration", "saas"],
+  "brandColor": "#3186FF",
+  "url": "https://sites.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["sites"],
+  "parent": "google",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2026",
+      "palette": ["#3186FF", "#50A0FF", "#9ED1FF", "#A9A9FD", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — Google Sites mark debuts a binder/document silhouette in saturated Workspace blues (#3186FF body, #50A0FF lower fill, #9ED1FF left binder strip) with a vertical gradient binder ring (#3186FF→#A9A9FD) and a white pill detail on the right. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as a 24×24 SVG_STRING."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
