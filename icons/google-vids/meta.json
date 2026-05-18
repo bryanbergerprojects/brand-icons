@@ -21,7 +21,7 @@
       "year": "2026",
       "palette": ["#7372FE", "#B8C0FF", "#D0D9FF", "#65ACFF", "#FFFFFF"],
       "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
-      "notes": "2026 Workspace refresh — three stacked rounded rectangles (light→mid→deep indigo/purple) with a horizontal cyan-blue gradient overlay and a vertical top+bottom indigo fade strip, plus a centered white play triangle. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026' (node 19:10), exported via the Figma Desktop Bridge as SVG_STRING. Mono simplifies to the frontmost rounded card with the play triangle carved out (evenodd), the back stacked layers omitted to keep a single-color silhouette readable."
+      "notes": "2026 Workspace refresh — three stacked rounded rectangles (light→mid→deep indigo/purple) with a horizontal cyan-blue gradient overlay and a vertical top+bottom indigo fade strip, plus a centered white play triangle. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026' (node 19:10), exported via the Figma Desktop Bridge as SVG_STRING. Mono preserves the full stack: front rounded card with the play triangle carved out (evenodd), mid layer at opacity 0.55, back layer at opacity 0.3 — same fade pattern used by google-docs 2026 mono."
     }
   ],
   "addedAt": "2026-05-18",
