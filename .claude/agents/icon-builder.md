@@ -209,18 +209,47 @@ not recognize as the brand.
 
 ### 5. Derive `<year>/mono.svg`
 
+**Mono must scrupulously follow the silhouette of `color.svg`.**
+Geometry-preserving transform only — no re-authoring of path data, no
+shifting of coordinates, no recentering of sub-shapes. If you find
+yourself typing a number that does not appear verbatim in `color.svg`,
+stop: you are rewriting, not deriving.
+
 From the cleaned `color.svg`:
 
+- **Default path = literal copy.** Start by copying each `<path>` from
+  `color.svg` verbatim into `mono.svg` and swap fills. Keep every
+  coordinate, every command, every sub-path order identical.
 - Remove `<linearGradient>` / `<radialGradient>` / `<pattern>`; replace
-  fills that referenced them with a single solid fill.
+  fills that referenced them with `fill="currentColor"`.
 - Replace every `fill="#..."` and named-color fill with
   `fill="currentColor"`. Leave `fill="none"` untouched.
 - Remove `stroke` unless inherently stroked; if kept, set
   `stroke="currentColor"`.
+- **Holes in the silhouette** (shapes painted in `color.svg` with the
+  background or contrasting color — e.g. white dots/lines on a colored
+  body): preserve their geometry exactly by concatenating them as
+  additional sub-paths inside the outer path under
+  `fill-rule="evenodd"`. Sub-path coordinates MUST equal the originals
+  in `color.svg`; the only thing that changes is how the cursor reaches
+  each sub-path start (relative `m` deltas may be recomputed for
+  compactness, but absolute landing points stay identical).
+- **Combining overlapping outer shapes** (e.g. a body + a folded-corner
+  triangle that together form one mark): allowed only when the union's
+  boundary is reconstructible from coordinates already present in
+  `color.svg`. Use the existing vertices as line segments — do not
+  invent intermediate points.
 - Do not merge shapes unless silhouette recognizability survives.
 
 Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule: when
 a parent sets `color: red`, the mark must render red.
+
+**Self-check before §4.5 visual compare:** open `color.svg` and
+`mono.svg` side by side. Every dot center, every line rect, every
+corner from `color.svg` must appear at the same coordinates in
+`mono.svg`. If any sub-shape has drifted (different center, different
+size, missing folded corner, etc.), redo it — the §4.5 PNG compare is
+the last gate, not the first.
 
 ### 6. Recompute palette per year
 
