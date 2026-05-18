@@ -1,0 +1,28 @@
+{
+  "slug": "google-earth",
+  "name": "Google Earth",
+  "category": "productivity",
+  "description": "Virtual globe and geospatial exploration platform that renders Earth from satellite imagery, aerial photography and 3D terrain.",
+  "tags": ["maps", "geospatial", "satellite-imagery", "globe", "3d-terrain", "geography", "navigation", "google-workspace"],
+  "brandColor": "#4285F4",
+  "url": "https://earth.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#4376CE", "#5390F5", "#4277D0", "#F8F8F0", "#CBC9BF", "#0000FF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Earth_logo_2013.svg",
+      "notes": "Web/Android era globe icon introduced late 2013 (used through 2017). Stylized cream continents over a blue globe with a diagonal lighter-blue highlight band. Redrawn to a 24x24 viewBox via scale(0.0005886) over the native 40777x40777 CorelDRAW source; stray off-canvas rects and duplicate polygons dropped."
+    },
+    {
+      "year": "2017",
+      "palette": ["#4285F4", "#255FDB", "#91BFFF", "#C4E1FF", "#F5F5F5"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Earth_icon.svg",
+      "notes": "Current crescent globe mark introduced 18 April 2017 with Google Earth 9 (web + mobile rebrand). Stacked blue wave bands form a globe with a white crescent shadow. Redrawn to a 24x24 viewBox via scale(0.005356) over the native 4481x4482 source; decorative radial-gradient inner glow and ±20% white/dark bezel overlays were dropped as they are imperceptible at icon scale."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
