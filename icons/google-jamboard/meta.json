@@ -1,0 +1,29 @@
+{
+  "slug": "google-jamboard",
+  "name": "Google Jamboard",
+  "category": "productivity",
+  "description": "Discontinued Google collaborative digital whiteboard for in-room and remote teams, integrated with Google Workspace.",
+  "tags": ["whiteboard", "collaboration", "google-workspace", "education", "remote-work", "digital-canvas", "discontinued"],
+  "brandColor": "#FFD80A",
+  "url": "https://workspace.google.com/products/jamboard/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["jamboard"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#FDD837", "#FAA629", "#F47C20"],
+      "source": "https://web.archive.org/web/20170101120806im_/https://gsuite.google.com/jamboard/images/logo.svg",
+      "notes": "Launch-era logomark cropped from the original gsuite.google.com 197x66 lockup (logomark left, 'Jamboard' wordmark right). Three flush opaque shapes forming a J: dark-orange top square, mid-orange middle square, yellow bottom circle. Normalized to a 24x24 viewBox via translate(3.8165 -0.1101) scale(0.367) over the native 44x66 logomark bounds; the gray wordmark was dropped."
+    },
+    {
+      "year": "2020",
+      "palette": ["#FFD80A", "#F7810A", "#F9AE33"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Jamboard_logomark.svg",
+      "notes": "Workspace-era refresh adopting Google's translucent-overlay product-icon language: yellow circle body, dark-orange top square, lighter-orange middle overlay simulating the J. Identical mark was live on gstatic.com from early 2018 through the December 2024 shutdown. Wikimedia source 102x150 normalized to 24x24 via translate(3.84 0) scale(0.16)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
