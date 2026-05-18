@@ -1,0 +1,40 @@
+{
+  "slug": "google-voice",
+  "name": "Google Voice",
+  "category": "communication",
+  "description": "Google's telephony service providing a US phone number for calls, texts, and voicemail across devices.",
+  "tags": ["telephony", "voip", "voicemail", "sms", "google-workspace", "calling", "messaging"],
+  "brandColor": "#194FC8",
+  "url": "https://voice.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2009",
+      "palette": ["#194FC8", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_voice_(2009-2012).svg",
+      "notes": "Initial Google Voice launch mark (March 2009). Blue rounded-square tile containing a white speech bubble with bottom-left tail and a blue handset glyph inside. Reconstructed at 24x24 from the Open Icon Library SVG on Wikimedia Commons (public domain); used as the recognizable mark across the 2009-2012 period before Google's icon system was unified."
+    },
+    {
+      "year": "2018",
+      "palette": ["#00897B", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Voice_icon_(2018-2020).svg",
+      "notes": "August 2018 redesign aligning Google Voice with the Hangouts icon family. Material Design product-icon style: teal circular badge with a downward speech-bubble tail and a white handset glyph centered. Material drop shadow simplified to match project conventions. Used 2018-2020."
+    },
+    {
+      "year": "2020",
+      "palette": ["#34A853", "#00832D"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Voice_icon_(2020).svg",
+      "notes": "October 2020 Google Workspace rebrand. The dark green Hangouts-style speech bubble was dropped in favor of an open landline-phone glyph with signal waves built from two greens. Notably skipped the four-color Workspace rule and stayed on a single-hue palette."
+    },
+    {
+      "year": "2026",
+      "palette": ["#03AE55", "#7ACAFF", "#60D675", "#30BA99", "#76C6EC"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Google Workspace gradient refresh. Cyan-to-green linear-gradient stack matching the wider Workspace 2026 system: a handset path with a cyan-to-green sweep and a quarter-circle speech-bubble panel with a green-to-cyan sweep. Geometry transcribed verbatim from the authoritative Figma community file 'New Google Workspace Icons 2026'."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
