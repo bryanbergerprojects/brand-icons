@@ -13,7 +13,7 @@
   "years": [
     {
       "year": "2019",
-      "palette": ["#FFC107", "#F79022", "#CDCDCD", "#139F5A", "#F5F5F5", "#EEEEEE"],
+      "palette": ["#139F5A", "#FFC107", "#F79022", "#CDCDCD", "#EEEEEE", "#F5F5F5"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Street_View_icon.svg",
       "notes": "Material-design pegman icon used by the standalone Google Street View mobile app from late 2019 until its discontinuation on 21 March 2023. Pegman head circle overlaps the top-right of a rounded green panel bearing the white Google 'G'; an orange body with a yellow chevron sits over a gray perspective road. Redrawn to a 24x24 viewBox via scale(0.0067055) over the native 3579x3581 Wikimedia source; decorative shadow overlays and radial highlights were dropped to keep the silhouette crisp at 16px."
     }
