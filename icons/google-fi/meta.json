@@ -13,7 +13,7 @@
   "years": [
     {
       "year": "2015",
-      "palette": ["#00A365", "#00B7D5", "#F0B21C", "#FEFEFE", "#008555", "#0095AA"],
+      "palette": ["#00A365", "#00B7D5", "#F0B21C", "#FFFFFF", "#008555", "#0095AA"],
       "source": "https://web.archive.org/web/20170106185104if_/https://fi.google.com/about/static/images/fi_logo.svg",
       "notes": "Original Project Fi mark at launch. Stylized lowercase 'fi' built from overlapping pills: green vertical stem (#00A365), cyan horizontal crossbar (#00B7D5), yellow body of 'i' (#F0B21C) and a white tittle disc on the crossbar. Cropped out of the full 'Project Fi' lockup SVG (Wayback Machine, Jan 2017 snapshot of fi.google.com)."
     },
