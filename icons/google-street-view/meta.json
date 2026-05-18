@@ -1,0 +1,23 @@
+{
+  "slug": "google-street-view",
+  "name": "Google Street View",
+  "category": "media",
+  "description": "Google service providing interactive 360-degree panoramic imagery of streets, landmarks, and indoor spaces worldwide.",
+  "tags": ["maps", "panorama", "360-degree", "navigation", "geospatial", "pegman", "google-maps", "imagery"],
+  "brandColor": "#139F5A",
+  "url": "https://www.google.com/streetview/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["street-view", "streetview"],
+  "parent": "google",
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#FFC107", "#F79022", "#CDCDCD", "#139F5A", "#F5F5F5", "#EEEEEE"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Street_View_icon.svg",
+      "notes": "Material-design pegman icon used by the standalone Google Street View mobile app from late 2019 until its discontinuation on 21 March 2023. Pegman head circle overlaps the top-right of a rounded green panel bearing the white Google 'G'; an orange body with a yellow chevron sits over a gray perspective road. Redrawn to a 24x24 viewBox via scale(0.0067055) over the native 3579x3581 Wikimedia source; decorative shadow overlays and radial highlights were dropped to keep the silhouette crisp at 16px."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
