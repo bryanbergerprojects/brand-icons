@@ -8,6 +8,9 @@ type OptimizeInput = {
   prefix: string;
 };
 
+const ROOT_SVG_OPEN = /<svg\b([^>]*)>/;
+const ROOT_FILL_ATTR = /\bfill\s*=\s*"([^"]*)"/;
+
 const baseConfig = (input: OptimizeInput): Config => ({
   multipass: true,
   plugins: [
@@ -32,6 +35,21 @@ const baseConfig = (input: OptimizeInput): Config => ({
   ],
 });
 
+const readRootFill = (svg: string): string | undefined => {
+  const openMatch = ROOT_SVG_OPEN.exec(svg);
+  if (openMatch === null) return undefined;
+  const fillMatch = ROOT_FILL_ATTR.exec(openMatch[1] ?? '');
+  return fillMatch?.[1];
+};
+
+const ensureRootFill = (optimized: string, sourceFill: string): string => {
+  const openMatch = ROOT_SVG_OPEN.exec(optimized);
+  if (openMatch === null) return optimized;
+  if (ROOT_FILL_ATTR.test(openMatch[1] ?? '')) return optimized;
+  const replacement = `<svg${openMatch[1] ?? ''} fill="${sourceFill}">`;
+  return optimized.replace(openMatch[0], replacement);
+};
+
 /**
  * Optimize a raw SVG string. Preserves the `0 0 24 24` viewBox; strips
  * width/height; namespaces every internal id/url reference under `prefix`
@@ -47,5 +65,7 @@ export const optimize = (input: OptimizeInput): string => {
   if ('error' in result && result.error !== undefined) {
     throw new Error(`SVGO failed: ${result.error}`);
   }
-  return result.data;
+  const sourceFill = readRootFill(input.svg);
+  if (sourceFill === undefined) return result.data;
+  return ensureRootFill(result.data, sourceFill);
 };

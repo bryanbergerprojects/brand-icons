@@ -9,11 +9,19 @@ type RenderIconInput = {
   props: BrandIconProps;
 };
 
-const SVG_INNER = /<svg[^>]*>([\s\S]*)<\/svg>/;
+const SVG_OPEN = /<svg([^>]*)>([\s\S]*)<\/svg>/;
+const ROOT_FILL = /\bfill\s*=\s*"([^"]*)"/;
 
-const extractInner = (svgString: string): string => {
-  const match = SVG_INNER.exec(svgString);
-  return match?.[1] ?? '';
+type ExtractedSvg = {
+  inner: string;
+  rootFill: string | undefined;
+};
+
+const extractSvg = (svgString: string): ExtractedSvg => {
+  const match = SVG_OPEN.exec(svgString);
+  if (match === null) return { inner: '', rootFill: undefined };
+  const fillMatch = ROOT_FILL.exec(match[1] ?? '');
+  return { inner: match[2] ?? '', rootFill: fillMatch?.[1] };
 };
 
 /**
@@ -38,7 +46,7 @@ export const renderIcon = (input: RenderIconInput): ReactElement => {
   });
 
   const svgString = activeVariant === 'mono' ? data.mono : data.color;
-  const inner = extractInner(svgString);
+  const { inner, rootFill } = extractSvg(svgString);
   const dimension = parseSize(size);
   const bgFill = parseBackground({
     background,
@@ -51,6 +59,7 @@ export const renderIcon = (input: RenderIconInput): ReactElement => {
       viewBox="0 0 24 24"
       width={dimension}
       height={dimension}
+      fill={rootFill}
       role={title !== undefined ? 'img' : undefined}
       aria-label={title}
       className={className}
