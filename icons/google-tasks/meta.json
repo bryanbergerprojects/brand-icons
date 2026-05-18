@@ -4,7 +4,7 @@
   "category": "productivity",
   "description": "Task management app from Google integrated with Gmail, Calendar, and Workspace for creating and tracking to-do lists.",
   "tags": ["task-management", "todo", "google-workspace", "checklist", "productivity-app", "gmail-integration"],
-  "brandColor": "#2D86FB",
+  "brandColor": "#3186FF",
   "url": "https://tasks.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "parent": "google",
@@ -18,9 +18,9 @@
     },
     {
       "year": "2026",
-      "palette": ["#2D86FB", "#3A87FA", "#648FFA", "#9B9DFD", "#BADCFE", "#FFFFFF"],
-      "source": "https://blog.cgfrog.com/wp-content/uploads/2026/04/Google-Tasks-Redesign-2026-vs-Old-icon-comparison-showing-solid-blue-gradient-circle-with-glow.png",
-      "notes": "2026 Workspace-wide gradient redesign (rollout began May 2026 ahead of Google I/O 2026). Solid blue 3D 'button' disc with a vertical gradient (#2D86FB top through #3A87FA / #648FFA to #9B9DFD purple bottom), a bold white checkmark, and a light-blue (#BADCFE) underside glow suggesting a pressable button. Part of Google's broader move away from the four-color mandate. Vectorized from a 500x500 PNG cropped from a CGfrog side-by-side comparison; no official SVG released by Google yet."
+      "palette": ["#3186FF", "#949DFF", "#BBE2FE", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/new-google-workspace-icons-2026",
+      "notes": "2026 Workspace-wide redesign (rollout began May 2026 ahead of Google I/O 2026). Horizontally-elongated rounded pill with a vertical gradient (#3186FF top through #949DFF purple bottom), a stroked white checkmark, and a light-blue (#BBE2FE) shadow pill underneath suggesting depth. Geometry sourced verbatim from the official Figma community file 'New Google Workspace Icons 2026'."
     }
   ],
   "addedAt": "2026-05-18",

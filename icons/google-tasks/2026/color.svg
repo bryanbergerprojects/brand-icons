@@ -1,17 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <defs>
-    <linearGradient id="gt26-disc" x1="12" y1="2" x2="12" y2="20.4" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2D86FB"/>
-      <stop offset="0.45" stop-color="#3A87FA"/>
-      <stop offset="0.78" stop-color="#648FFA"/>
-      <stop offset="1" stop-color="#9B9DFD"/>
-    </linearGradient>
-    <linearGradient id="gt26-under" x1="12" y1="20.6" x2="12" y2="22.6" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#BADCFE" stop-opacity="0.95"/>
-      <stop offset="1" stop-color="#BADCFE" stop-opacity="0"/>
+    <linearGradient id="gt26-pill" x1="12" y1="2.5" x2="12" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0.446176" stop-color="#3186FF"/>
+      <stop offset="1" stop-color="#949DFF"/>
     </linearGradient>
   </defs>
-  <ellipse cx="12" cy="21.4" rx="7.2" ry="1.5" fill="url(#gt26-under)"/>
-  <circle cx="12" cy="11.2" r="9.4" fill="url(#gt26-disc)"/>
-  <path fill="#FFFFFF" d="M10.78 15.4a1.55 1.55 0 0 1-1.1-.46l-3.06-3.07a1.05 1.05 0 0 1 0-1.48l.86-.86a1.05 1.05 0 0 1 1.48 0l1.82 1.82 4.6-4.6a1.05 1.05 0 0 1 1.48 0l.86.86a1.05 1.05 0 0 1 0 1.48l-5.84 5.85a1.55 1.55 0 0 1-1.1.46z"/>
+  <path fill="#BBE2FE" d="M2.5 13.75C2.5 9.19365 6.19365 5.5 10.75 5.5H13.25C17.8063 5.5 21.5 9.19365 21.5 13.75C21.5 18.3063 17.8063 22 13.25 22H10.75C6.19365 22 2.5 18.3063 2.5 13.75Z"/>
+  <path fill="url(#gt26-pill)" d="M2 11.25C2 6.41751 5.91751 2.5 10.75 2.5H13.25C18.0825 2.5 22 6.41751 22 11.25C22 16.0825 18.0825 20 13.25 20H10.75C5.91751 20 2 16.0825 2 11.25Z"/>
+  <path fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 11.5L10.2098 13.9107C10.5024 14.2299 11.0038 14.2357 11.3037 13.9233L16.75 8.25"/>
 </svg>
