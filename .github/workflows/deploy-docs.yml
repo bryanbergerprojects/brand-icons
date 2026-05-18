@@ -63,7 +63,7 @@ jobs:
         run: pnpm build:icons
 
       - name: Build docs
-        run: pnpm --filter docs build
+        run: pnpm turbo run build --filter=docs
 
       - name: Configure SSH
         env:
