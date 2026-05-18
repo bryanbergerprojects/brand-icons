@@ -4,11 +4,12 @@
   "category": "productivity",
   "description": "Note-taking service from Google for capturing text, lists, images, and audio across devices.",
   "tags": ["note-taking", "google-workspace", "notes", "reminders", "saas", "collaboration", "checklist"],
-  "brandColor": "#FBBC04",
+  "brandColor": "#FEC001",
   "url": "https://keep.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["keep"],
-  "latest": "2020",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2013",
@@ -21,8 +22,14 @@
       "palette": ["#FBBC04", "#FFFFFF", "#F29900"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Keep_2020_Logo.svg",
       "notes": "Workspace-era refresh introduced October 6, 2020. Filled white bulb on yellow body with dog-eared corner moved to the top-right. Native 64x88 source is non-square; redrawn to a 24x24 viewBox via translate(3.2727 0) scale(0.272727), centering horizontally so the full 88-unit height fits the icon canvas."
+    },
+    {
+      "year": "2026",
+      "palette": ["#FEC001", "#FEF03C", "#F7A200", "#FFB7E7", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — Keep returns to a bulb silhouette: a yellow→orange radial-gradient circle body with a darker orange rounded base and a small white filament stroke at the centre, plus a soft pink inner-glow blur. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026', exported via the Figma Desktop Bridge as SVG_STRING."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }
