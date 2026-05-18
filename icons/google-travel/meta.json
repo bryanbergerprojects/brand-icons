@@ -1,0 +1,29 @@
+{
+  "slug": "google-travel",
+  "name": "Google Travel",
+  "category": "productivity",
+  "description": "Google's trip planning service unifying Flights, Hotels and itineraries on the web, formerly the Google Trips mobile app.",
+  "tags": ["travel-planning", "trip-planner", "flights", "hotels", "itinerary", "google", "maps", "saas"],
+  "brandColor": "#4285F4",
+  "url": "https://www.google.com/travel/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-trips"],
+  "parent": "google",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#14C2D8", "#17B3C7", "#EFEFEF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Trips_Logo.svg",
+      "notes": "Original Google Trips mobile app icon (launched 19 Sep 2016, mobile app discontinued 5 Aug 2019). Teal circular badge with an off-white briefcase silhouette and a long-shadow sweep characteristic of the 2016-era Material badge style. Kept as historic millésime under the google-travel slug since the service rebranded to Google Travel in May 2019."
+    },
+    {
+      "year": "2024",
+      "palette": ["#4285F4", "#EA4335", "#FBBC04", "#34A853", "#1967D2", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Travel_logo.svg",
+      "notes": "Current Google Travel mark introduced with the May 2019 rebrand: rolling suitcase silhouette quartered in the four Google brand colors (red, yellow, green, blue) with the white Google G centered and a dark-blue (Google Blue 700) handle and wheels. Native 320x512 source redrawn into the 24x24 canvas via translate(0.027 0) scale(0.046875), centered horizontally so the full suitcase height fits the icon."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
