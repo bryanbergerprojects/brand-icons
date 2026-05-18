@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="gt26-disc" x1="12" y1="2" x2="12" y2="20.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2D86FB"/>
+      <stop offset="0.45" stop-color="#3A87FA"/>
+      <stop offset="0.78" stop-color="#648FFA"/>
+      <stop offset="1" stop-color="#9B9DFD"/>
+    </linearGradient>
+    <linearGradient id="gt26-under" x1="12" y1="20.6" x2="12" y2="22.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#BADCFE" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#BADCFE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="12" cy="21.4" rx="7.2" ry="1.5" fill="url(#gt26-under)"/>
+  <circle cx="12" cy="11.2" r="9.4" fill="url(#gt26-disc)"/>
+  <path fill="#FFFFFF" d="M10.78 15.4a1.55 1.55 0 0 1-1.1-.46l-3.06-3.07a1.05 1.05 0 0 1 0-1.48l.86-.86a1.05 1.05 0 0 1 1.48 0l1.82 1.82 4.6-4.6a1.05 1.05 0 0 1 1.48 0l.86.86a1.05 1.05 0 0 1 0 1.48l-5.84 5.85a1.55 1.55 0 0 1-1.1.46z"/>
+</svg>
