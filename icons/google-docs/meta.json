@@ -3,7 +3,15 @@
   "name": "Google Docs",
   "category": "productivity",
   "description": "Google's collaborative online word processor for creating, editing, and sharing text documents in real time.",
-  "tags": ["word-processor", "document-editor", "collaboration", "google-workspace", "productivity-suite", "cloud-office", "real-time-editing"],
+  "tags": [
+    "word-processor",
+    "document-editor",
+    "collaboration",
+    "google-workspace",
+    "productivity-suite",
+    "cloud-office",
+    "real-time-editing"
+  ],
   "brandColor": "#3086F6",
   "url": "https://docs.google.com",
   "license": "Trademark — usage for identification (fair use)",
