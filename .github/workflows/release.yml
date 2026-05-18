@@ -45,16 +45,34 @@ jobs:
         run: pnpm build
 
       - name: Create Release PR or Publish
+        id: changesets
         uses: changesets/action@v1
         with:
           publish: pnpm release
           version: pnpm run version
           commit: 'chore(release): version packages'
           title: 'chore(release): version packages'
-          createGithubReleases: true
+          createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+      - name: Create aggregate GitHub Release
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISHED: ${{ steps.changesets.outputs.publishedPackages }}
+        run: |
+          version=$(echo "$PUBLISHED" | jq -r '.[0].version')
+          tag="v$version"
+          notes=$(echo "$PUBLISHED" | jq -r '.[] | "- `\(.name)@\(.version)`"')
+          git tag -a "$tag" -m "Release $tag"
+          git push origin "$tag"
+          gh release create "$tag" \
+            --title "v$version" \
+            --notes "Published packages:
+
+          $notes"
 
   canary:
     name: Release Canary
@@ -106,24 +124,26 @@ jobs:
           fi
 
       - name: Publish to npm (canary tag)
-        run: pnpm release
+        id: publish
+        run: |
+          pnpm release
+          version=$(node -p "require('./packages/core/package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
         env:
           NPM_CONFIG_PROVENANCE: true
 
-      - name: Push git tags
-        run: git push --follow-tags
-
-      - name: Create GitHub Releases for canary tags
+      - name: Create aggregate GitHub Release for canary
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.publish.outputs.version }}
         run: |
-          for tag in $(git tag --points-at HEAD); do
-            if gh release view "$tag" >/dev/null 2>&1; then
-              echo "Release $tag already exists, skipping"
-              continue
-            fi
-            gh release create "$tag" \
-              --title "$tag" \
-              --generate-notes \
-              --prerelease
-          done
+          tag="v$VERSION"
+          notes=$(git tag --points-at HEAD | sed 's/^/- `/;s/$/`/')
+          git tag -a "$tag" -m "Release $tag"
+          git push --follow-tags
+          gh release create "$tag" \
+            --title "v$VERSION" \
+            --notes "Published canary packages:
+
+          $notes" \
+            --prerelease
