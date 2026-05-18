@@ -19,15 +19,24 @@ export type BrandIconRuntimeInput = {
   readonly className?: string | undefined;
 };
 
-const SVG_INNER = /<svg[^>]*>([\s\S]*)<\/svg>/;
+const SVG_OPEN = /<svg([^>]*)>([\s\S]*)<\/svg>/;
+const ROOT_FILL = /\bfill\s*=\s*"([^"]*)"/;
 
-const extractInner = (svgString: string): string => {
-  const match = SVG_INNER.exec(svgString);
-  return match?.[1] ?? '';
+type ExtractedSvg = {
+  inner: string;
+  rootFill: string | undefined;
+};
+
+const extractSvg = (svgString: string): ExtractedSvg => {
+  const match = SVG_OPEN.exec(svgString);
+  if (match === null) return { inner: '', rootFill: undefined };
+  const fillMatch = ROOT_FILL.exec(match[1] ?? '');
+  return { inner: match[2] ?? '', rootFill: fillMatch?.[1] };
 };
 
 export type BrandIconRender = {
   svgInner: string;
+  rootFill: string | undefined;
   bgColor: string | undefined;
   style: StyleMap | undefined;
   dim: string;
@@ -51,8 +60,10 @@ export const useBrandIcon = (data: IconBrandYearRender, props: BrandIconRuntimeI
       color: props.color,
     });
     const svgString = activeVariant === 'mono' ? data.mono : data.color;
+    const { inner, rootFill } = extractSvg(svgString);
     return {
-      svgInner: extractInner(svgString),
+      svgInner: inner,
+      rootFill,
       bgColor: parseBackground({
         background: props.background,
         brandColor: data.brandColor,

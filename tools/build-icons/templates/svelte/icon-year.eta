@@ -29,6 +29,7 @@
   viewBox="0 0 24 24"
   width={out.dim}
   height={out.dim}
+  fill={out.rootFill}
   class={className}
   style={out.styleString}
   role={title !== undefined ? 'img' : undefined}

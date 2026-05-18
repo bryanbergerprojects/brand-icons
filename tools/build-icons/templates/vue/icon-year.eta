@@ -20,6 +20,7 @@ const computed = useBrandIcon(data, props);
     viewBox="0 0 24 24"
     :width="computed.dim"
     :height="computed.dim"
+    :fill="computed.rootFill"
     :class="props.className"
     :style="computed.style"
     :role="props.title !== undefined ? 'img' : undefined"
