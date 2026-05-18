@@ -15,7 +15,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=20",
+    "node": ">=22",
     "pnpm": ">=10"
   },
   "packageManager": "pnpm@10.33.0",
@@ -31,6 +31,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
+    "render:svg": "node tools/render-svg/render.mjs",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
     "changeset": "changeset",
     "version": "changeset version",

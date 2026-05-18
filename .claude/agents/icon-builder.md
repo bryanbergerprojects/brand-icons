@@ -15,8 +15,10 @@ produced — never re-fetch from the web.
 - A slug (e.g. `linear`). You read everything else from
   `/tmp/brand-icons-fetch/<slug>.json` and the raw assets in
   `/tmp/brand-icons-fetch/<slug>/<year>/`.
-- Optional: a base commit SHA. Default: the current `HEAD` of your worktree
-  (the orchestrator spawns the worktree from `main`).
+- Optional: a base commit SHA. Default: `origin/canary`. The harness
+  spawns the worktree from local HEAD, so you must `git fetch origin
+  canary` + `git switch -C feat/add-<slug> origin/canary` yourself —
+  see workflow step 2.
 - Optional flag `--fix=<pr-url>` — you are correcting an existing PR. In
   that case, fetch the PR's branch from `origin` into your worktree and
   push fixup commits to it (regular push, no force).
@@ -33,6 +35,27 @@ You are invoked with `isolation: "worktree"`. That means:
   worktree** and never reference `/tmp/brand-icons-fetch/<other-slug>/`.
 - The worktree is destroyed if you commit nothing — so the act of
   committing is what persists your work for the orchestrator.
+
+## Success criteria — fidelity (highest priority)
+
+A structurally-valid SVG that does **not** look like the official mark is
+a failure, not a near-miss. Before committing, every produced
+`color.svg` MUST pass a visual self-check against the fetcher's
+`/tmp/brand-icons-fetch/<slug>/<year>/preview.png`:
+
+- **Silhouette identical.** Same path count (modulo SVGO merging),
+  same hole topology, same corner sharpness, same orientation. No
+  mirrored or rotated marks. No missing or added shapes.
+- **Dominant color matches.** Each top-3 palette entry of the produced
+  `color.svg` is within ΔE < 10 of the matching entry sampled from
+  `preview.png`. Gradients keep direction and stop count.
+- **`mono.svg` silhouette equals `color.svg` silhouette**, with every
+  fill resolved to `currentColor`.
+
+These are checked in §4.5 below — fail the check, fix the SVG, re-render,
+recheck. Cap the visual fix loop at **3 attempts per year**; on the
+third failure, hard-stop and surface the year as `visual_mismatch` so
+the orchestrator can flag it `needs_human`.
 
 ## Output contract
 
@@ -53,7 +76,7 @@ When you finish, all of these are true:
 6. Exactly one commit: `feat(icons): add <Brand Name>` (or
    `fix(icons): <summary>` when invoked with `--fix=...`).
 7. Branch `feat/add-<slug>` is pushed to `origin`.
-8. A PR is opened against `main` (or the fix is pushed to the existing
+8. A PR is opened against `canary` (or the fix is pushed to the existing
    PR's branch when `--fix=...`).
 
 You return the PR URL.
@@ -77,7 +100,7 @@ Parse the JSON. Verify:
 If any check fails, abort with a clear message; the reviewer will catch
 the error if you continue silently.
 
-### 2. Confirm worktree state
+### 2. Confirm worktree state and rebase onto `origin/canary`
 
 ```bash
 git rev-parse --show-toplevel              # should be inside a worktree
@@ -88,11 +111,27 @@ git log -1 --format='%H %s'                # capture base commit
 If the worktree is dirty, hard-stop — something is wrong with the
 orchestrator's setup.
 
-**On `--fix` invocations**, before doing anything else, fetch and check
-out the PR's branch into your worktree:
+The harness spawns the worktree from whatever local ref happened to be
+HEAD (often a stale `canary` or `main`). **Always rebase your worktree
+onto the remote `canary` tip before doing anything else** — feature
+work in this repo branches from `canary`, never from a local tracking
+branch that may have diverged.
 
 ```bash
-git fetch origin feat/add-<slug>
+git fetch origin canary --no-tags                       # pull the authoritative tip
+git switch -C feat/add-<slug> origin/canary             # branch from remote canary
+git status --porcelain                                  # confirm clean
+```
+
+After this, `git log -1` must point at the current `origin/canary`
+SHA. If `git fetch origin canary` fails (no network, missing remote
+ref), hard-stop — the orchestrator's pre-flight should have caught it.
+
+**On `--fix` invocations**, skip the `origin/canary` step and instead
+check out the PR's existing branch into your worktree:
+
+```bash
+git fetch origin feat/add-<slug> --no-tags
 git switch -C feat/add-<slug> origin/feat/add-<slug>
 ```
 
@@ -135,20 +174,82 @@ For every `year` in `years[]`:
 
 Validate every produced SVG against `.claude/rules/svg.md` §1.
 
+### 4.5 Visual self-check (mandatory)
+
+For every year, render the produced `color.svg` to PNG and `Read` it
+**alongside the fetcher's `preview.png`**. The model performs the
+side-by-side visual comparison — this is the step that catches "looks
+plausible but wrong silhouette / wrong color" bugs that the structural
+checks miss.
+
+```bash
+mkdir -p /tmp/brand-icons-build/<slug>/<year>/
+pnpm --silent render:svg \
+  icons/<slug>/<year>/color.svg \
+  /tmp/brand-icons-build/<slug>/<year>/produced.png \
+  --width=256
+```
+
+Then in the same turn:
+
+1. `Read` `/tmp/brand-icons-build/<slug>/<year>/produced.png`.
+2. `Read` `/tmp/brand-icons-fetch/<slug>/<year>/preview.png`.
+3. Compare against the **Success criteria — fidelity** block above.
+4. If any criterion fails, edit `icons/<slug>/<year>/color.svg`,
+   re-render, re-read, re-compare. Up to **3 visual attempts per year**.
+5. After `color.svg` passes, derive `mono.svg` (§5), then repeat the
+   render-read-compare on `mono.svg` against the **same**
+   `preview.png` — silhouette must still match (color obviously
+   differs, that is expected).
+
+If a year exhausts the 3 attempts, abort the run for that brand and
+emit `visual_mismatch: <year>` in the final report so the orchestrator
+can mark it `needs_human`. Do not push a PR that the model itself does
+not recognize as the brand.
+
 ### 5. Derive `<year>/mono.svg`
+
+**Mono must scrupulously follow the silhouette of `color.svg`.**
+Geometry-preserving transform only — no re-authoring of path data, no
+shifting of coordinates, no recentering of sub-shapes. If you find
+yourself typing a number that does not appear verbatim in `color.svg`,
+stop: you are rewriting, not deriving.
 
 From the cleaned `color.svg`:
 
+- **Default path = literal copy.** Start by copying each `<path>` from
+  `color.svg` verbatim into `mono.svg` and swap fills. Keep every
+  coordinate, every command, every sub-path order identical.
 - Remove `<linearGradient>` / `<radialGradient>` / `<pattern>`; replace
-  fills that referenced them with a single solid fill.
+  fills that referenced them with `fill="currentColor"`.
 - Replace every `fill="#..."` and named-color fill with
   `fill="currentColor"`. Leave `fill="none"` untouched.
 - Remove `stroke` unless inherently stroked; if kept, set
   `stroke="currentColor"`.
+- **Holes in the silhouette** (shapes painted in `color.svg` with the
+  background or contrasting color — e.g. white dots/lines on a colored
+  body): preserve their geometry exactly by concatenating them as
+  additional sub-paths inside the outer path under
+  `fill-rule="evenodd"`. Sub-path coordinates MUST equal the originals
+  in `color.svg`; the only thing that changes is how the cursor reaches
+  each sub-path start (relative `m` deltas may be recomputed for
+  compactness, but absolute landing points stay identical).
+- **Combining overlapping outer shapes** (e.g. a body + a folded-corner
+  triangle that together form one mark): allowed only when the union's
+  boundary is reconstructible from coordinates already present in
+  `color.svg`. Use the existing vertices as line segments — do not
+  invent intermediate points.
 - Do not merge shapes unless silhouette recognizability survives.
 
 Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule: when
 a parent sets `color: red`, the mark must render red.
+
+**Self-check before §4.5 visual compare:** open `color.svg` and
+`mono.svg` side by side. Every dot center, every line rect, every
+corner from `color.svg` must appear at the same coordinates in
+`mono.svg`. If any sub-shape has drifted (different center, different
+size, missing folded corner, etc.), redo it — the §4.5 PNG compare is
+the last gate, not the first.
 
 ### 6. Recompute palette per year
 
@@ -239,8 +340,7 @@ public manifest; otherwise skip.
 ### 11. Commit, push, open PR
 
 ```bash
-# First-time creation:
-git checkout -b feat/add-<slug>
+# First-time creation — branch was already created from origin/canary in step 2:
 git add icons/<slug>/ apps/docs/src/lib/all-icons.ts .changeset/
 git commit -m "feat(icons): add <Brand Name>"
 git push -u origin HEAD:feat/add-<slug>
@@ -251,11 +351,13 @@ git commit -m "fix(icons): <one-line summary of the reviewer issues>"
 git push origin feat/add-<slug>
 ```
 
-Then open the PR (skip on `--fix`, just push to the existing branch):
+Then open the PR (skip on `--fix`, just push to the existing branch).
+PRs target `canary` — feature branches land on canary, which is later
+promoted to `main` via the release flow.
 
 ```bash
 gh pr create \
-  --base main \
+  --base canary \
   --head feat/add-<slug> \
   --title "feat(icons): add <Brand Name>" \
   --body "$(cat <<'BODY'
@@ -289,6 +391,9 @@ Capture the PR URL from `gh pr create`'s stdout.
 - **Refuse** if `/tmp/brand-icons-fetch/<slug>.json` is missing or invalid.
 - **Refuse** if `pnpm build:icons` fails after 3 attempts — surface the
   error and stop so the orchestrator can decide.
+- **Refuse to push** a PR if any year ended the visual self-check
+  (§4.5) in `visual_mismatch`. Report and stop — the orchestrator
+  routes to `needs_human`.
 - **Do not** depend on any other builder's worktree or branch.
 
 ## Final report
@@ -300,6 +405,12 @@ Return:
 - Commit SHA.
 - Number of files written.
 - Per-year palette as written (preview).
+- Per-year **visual self-check verdict** (`pass`, `pass-after-N-retries`,
+  or `visual_mismatch` — last attempt's mismatch reason quoted).
 - Any divergence from the fetcher's data (palette refinement, vectorization, …).
+
+If any year ended in `visual_mismatch`, surface it explicitly at the top
+of the report and **do not** open the PR — the orchestrator will route
+to `needs_human`.
 
 Keep the report under ~25 lines.

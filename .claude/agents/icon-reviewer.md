@@ -55,7 +55,8 @@ You return a single JSON object (also include a short prose summary):
     "mono_uses_currentcolor": "pass",
     "category_enum": "pass",
     "description_length": "pass",
-    "tags_shape": "pass"
+    "tags_shape": "pass",
+    "visual_fidelity": "pass"
   }
 }
 ```
@@ -136,7 +137,44 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
 - No orphan `<year>/` directory not declared in `meta.years[]`.
   Orphan is a `blocker`.
 
-### 7. Sanity checks on the builder's PR
+### 7. Visual fidelity vs. official source (mandatory)
+
+Structural conformance is necessary but not sufficient. A builder can
+ship a clean, well-formed SVG that simply does **not look like the
+brand**. This check catches that.
+
+For every year in `meta.years[]`:
+
+1. Render the builder's `color.svg` to PNG inside the worktree:
+
+   ```bash
+   mkdir -p /tmp/brand-icons-review/<slug>/<year>/
+   pnpm --silent render:svg \
+     <worktree>/icons/<slug>/<year>/color.svg \
+     /tmp/brand-icons-review/<slug>/<year>/produced.png \
+     --width=256
+   ```
+
+2. `Read` `/tmp/brand-icons-review/<slug>/<year>/produced.png`.
+3. `Read` `/tmp/brand-icons-fetch/<slug>/<year>/preview.png` (the
+   fetcher's canonical visual reference).
+4. Compare side by side. Promote any of the following to a `blocker`
+   on `visual_fidelity`:
+    - Different silhouette (paths, holes, orientation, mirror).
+    - Missing or extra elements vs the official preview.
+    - Dominant color hue mismatch (ΔE ≳ 10 on the top entry).
+    - Wrong canvas centering / clipping vs the preview.
+5. Subtle anti-aliasing, hinting, or 1–2 px positional drift is a
+   `warning`, not a blocker.
+
+Repeat with `mono.svg` rendered to PNG — silhouette must still match
+`preview.png` (the color difference is expected and ignored).
+
+If the render command fails or `preview.png` is missing, that is itself
+a `blocker` on `visual_fidelity` (the fetcher did not honor its
+contract — surface so the orchestrator can re-run it).
+
+### 8. Sanity checks on the builder's PR
 
 - The branch is named `feat/add-<slug>`.
 - The commit message starts with `feat(icons):` or `fix(icons):`.

@@ -1,0 +1,29 @@
+{
+  "slug": "gmail",
+  "name": "Gmail",
+  "category": "productivity",
+  "description": "Free web-based email service from Google, part of Google Workspace.",
+  "tags": ["email", "webmail", "google-workspace", "communication", "inbox", "messaging", "smtp", "imap"],
+  "brandColor": "#EA4335",
+  "url": "https://mail.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-mail"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#EAEAEA", "#CECECE", "#DB4437", "#C53929", "#F1F1F1", "#B0473E"],
+      "source": "https://commons.wikimedia.org/wiki/File:Gmail_Icon_(2013-2020).svg",
+      "notes": "Flat red envelope mark introduced with Gmail's 2013 refresh, used through October 2020. Front face in Google red (#DB4437), inner liner in light gray, with subtle gradient highlights on the back paper. Source viewBox 0 0 12031.384 8750.098 wrapped in a 24x24 scale group (baked at build via SVGO convertTransform). Decorative drop-shadow blur and dark overlay layers stripped."
+    },
+    {
+      "year": "2020",
+      "palette": ["#EA4335", "#FBBC04", "#34A853", "#4285F4", "#C5221F"],
+      "source": "https://commons.wikimedia.org/wiki/File:Gmail_icon_(2020).svg",
+      "notes": "October 2020 rebrand introduced with Google Workspace. The envelope is reduced to a stylized 'M' assembled from five colored facets using the four Google brand colors plus a dark red (#C5221F) overlap shadow. Source viewBox 52 42 88 66 wrapped in a 24x24 scale group (baked at build via SVGO convertTransform)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

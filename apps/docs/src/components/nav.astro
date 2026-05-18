@@ -1,5 +1,7 @@
 ---
+import MobileNav from '@/components/mobile-nav';
 import ResourcesMenu from '@/components/resources-menu';
+import { CORE_VERSION } from '@/lib/version';
 
 type NavLink = { href: string; label: string };
 
@@ -8,7 +10,14 @@ const PRIMARY_LINKS: readonly NavLink[] = [
   { href: '/docs', label: 'Docs' },
 ];
 
-const VERSION = '2.4.0';
+const RESOURCE_LINKS: readonly NavLink[] = [
+  { href: '/resources/license', label: 'License' },
+  { href: '/resources/code-of-conduct', label: 'Code of conduct' },
+  { href: '/resources/contributing', label: 'Contributing' },
+  { href: '/resources/brand-owners', label: 'Brand owners' },
+];
+
+const VERSION = CORE_VERSION;
 const GITHUB_URL = 'https://github.com/bryanbergerprojects/brand-icons';
 
 const currentPath = Astro.url.pathname;
@@ -20,38 +29,41 @@ const resourcesActive = currentPath.startsWith('/resources');
 ---
 
 <header class="sticky top-0 z-20 border-b border-ink bg-paper">
-  <div class="flex items-center justify-between px-10 py-3.5">
-    <a href="/" class="flex items-baseline gap-3.5">
-      <span class="text-2xl font-extrabold tracking-tight text-ink">
+  <div class="flex items-center justify-between gap-4 px-4 py-3 sm:px-6 md:px-8 md:py-3.5 lg:px-10">
+    <a href="/" class="flex items-baseline gap-2 sm:gap-3.5">
+      <span class="text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
         Brand<span class="text-accent">·</span>Icons
       </span>
-      <span class="font-mono text-mono font-medium uppercase tracking-uppercase text-ink-soft">
-        v {VERSION}
+      <span class="font-mono text-mono font-medium tracking-uppercase text-ink-soft">
+        v{VERSION}
       </span>
     </a>
 
-    <nav class="flex items-center gap-7">
+    <nav class="hidden items-center gap-7 md:flex">
       {
         PRIMARY_LINKS.map((link) => (
-          <a
+          <div class="relative">
+            <a
             href={link.href}
             class:list={[
               'text-13 font-medium',
-              isActive(link.href) ? 'border-b-2 border-accent pb-1 text-accent' : 'text-ink',
+              isActive(link.href) ? 'text-accent' : 'text-ink',
             ]}
           >
             {link.label}
           </a>
+          {isActive(link.href) ? <span class="absolute -bottom-1 left-0 h-0.5 w-full bg-accent" /> : null}
+          </div>
         ))
       }
       <ResourcesMenu active={resourcesActive} client:idle />
     </nav>
 
-    <div class="flex items-center gap-3.5">
+    <div class="flex items-center gap-2.5 sm:gap-3.5">
       <button
         type="button"
         data-open-command-palette
-        class="flex items-center gap-2 border border-ink px-3 py-1.5 text-xs text-ink-soft transition-colors hover:bg-paper-alt"
+        class="hidden items-center gap-2 border border-ink px-3 py-1.5 text-xs text-ink-soft transition-colors hover:bg-paper-alt md:flex"
       >
         <span>Quick find</span>
         <span class="font-mono font-semibold">⌘K</span>
@@ -60,7 +72,8 @@ const resourcesActive = currentPath.startsWith('/resources');
         href={GITHUB_URL}
         target="_blank"
         rel="noopener"
-        class="flex items-center gap-2 bg-ink px-3.5 py-2 text-xs font-semibold text-paper transition-colors hover:bg-ink/90"
+        aria-label="GitHub"
+        class="flex h-9 items-center gap-2 bg-ink px-3 text-xs font-semibold text-paper transition-colors hover:bg-ink/90 sm:px-3.5 md:h-auto md:py-2"
       >
         <svg
           aria-hidden="true"
@@ -73,8 +86,16 @@ const resourcesActive = currentPath.startsWith('/resources');
             d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.26 5.68.42.37.8 1.09.8 2.2v3.27c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
           ></path>
         </svg>
-        GitHub
+        <span class="hidden sm:inline">GitHub</span>
       </a>
+      <div class="md:hidden">
+        <MobileNav
+          client:idle
+          primaryLinks={PRIMARY_LINKS}
+          resources={RESOURCE_LINKS}
+          currentPath={currentPath}
+        />
+      </div>
     </div>
   </div>
 </header>
