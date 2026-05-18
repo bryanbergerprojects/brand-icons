@@ -42,6 +42,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'google-sites': BrandIcons.GoogleSitesLatestIcon,
   'google-slides': BrandIcons.GoogleSlidesLatestIcon,
   'google-tasks': BrandIcons.GoogleTasksLatestIcon,
+  'google-vids': BrandIcons.GoogleVidsLatestIcon,
   jetbrains: BrandIcons.JetBrainsLatestIcon,
   jira: BrandIcons.JiraLatestIcon,
   linear: BrandIcons.LinearLatestIcon,
@@ -60,5 +61,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   vscode: BrandIcons.VSCodeLatestIcon,
   'vscode-insiders': BrandIcons.VSCodeInsidersLatestIcon,
   youtube: BrandIcons.YouTubeLatestIcon,
+  'youtube-kids': BrandIcons.YouTubeKidsLatestIcon,
+  'youtube-shorts': BrandIcons.YouTubeShortsLatestIcon,
   'youtube-studio': BrandIcons.YouTubeStudioLatestIcon,
 };

@@ -1,0 +1,23 @@
+{
+  "slug": "youtube-shorts",
+  "name": "YouTube Shorts",
+  "category": "media",
+  "description": "Short-form vertical video product from YouTube, launched in 2020 as a TikTok-style mobile-first format.",
+  "tags": ["short-form-video", "vertical-video", "google", "mobile-video", "video-sharing", "social-video", "creator-tools"],
+  "brandColor": "#F40407",
+  "url": "https://www.youtube.com/shorts",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["shorts", "yt-shorts"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2020",
+      "palette": ["#F40407", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Youtube_shorts_icon.svg",
+      "notes": "YouTube Shorts launched in beta in India on September 15, 2020 with this stylized red S mark containing a white play triangle. The visual identity has remained essentially unchanged since launch (global rollout July 2021). Source viewBox 0 0 98.94 122.88 wrapped in a 24x24 scale group centered horizontally (baked at build via SVGO convertTransform)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
