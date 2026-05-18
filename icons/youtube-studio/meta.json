@@ -1,0 +1,24 @@
+{
+  "slug": "youtube-studio",
+  "name": "YouTube Studio",
+  "category": "media",
+  "description": "Creator dashboard for managing YouTube channels, videos, analytics, monetization, comments and content settings.",
+  "tags": ["creator-tools", "video-analytics", "channel-management", "dashboard", "google", "creators", "shorts"],
+  "brandColor": "#FF0033",
+  "url": "https://studio.youtube.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["yt-studio", "youtube-creator-studio"],
+  "parent": "google",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#FF0033", "#FFFFFF"],
+      "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d6/14/e0/d614e059-25be-e53c-20ed-fb41659aceb0/logo_youtube_studio_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/1024x1024bb.png",
+      "notes": "Q4 2024 brand refresh — red rounded hexagon (#FF0033) with concentric white inner hexagon outline and central white play triangle. Vectorized from the App Store CDN raster ('logo_youtube_studio_2024_q4_color'); same #FF0033 red as the parent YouTube 2024 mark."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18",
+  "notes": "Single millésime. Parent is `google` (not `youtube`) because the meta schema permits only one parent level and `youtube` itself sets `parent: \"google\"`. YouTube Studio is grouped alongside YouTube under the Google product family. Earlier YouTube Studio marks (2015–2021 red gear / 2021–2024 first hexagon) skipped — no authoritative standalone vector source available per the fetcher (Wikimedia Commons hosts only the wordmark-with-2024-icon; Fandom mirrors block automated fetches). 2024 SVG is hand-drawn from clean geometric primitives (regular pointy-top hexagon, concentric outline ring, centered play triangle); not traced from the raster."
+}
