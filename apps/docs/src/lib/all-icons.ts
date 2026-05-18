@@ -36,6 +36,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'google-docs': BrandIcons.GoogleDocsLatestIcon,
   'google-drive': BrandIcons.GoogleDriveLatestIcon,
   'google-forms': BrandIcons.GoogleFormsLatestIcon,
+  'google-jamboard': BrandIcons.GoogleJamboardLatestIcon,
   'google-keep': BrandIcons.GoogleKeepLatestIcon,
   'google-meet': BrandIcons.GoogleMeetLatestIcon,
   'google-sheets': BrandIcons.GoogleSheetsLatestIcon,
