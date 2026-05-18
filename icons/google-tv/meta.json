@@ -1,0 +1,35 @@
+{
+  "slug": "google-tv",
+  "name": "Google TV",
+  "category": "media",
+  "description": "Google's smart TV interface and streaming app that aggregates movies and shows from across services on Android TV and Chromecast.",
+  "tags": ["streaming", "smart-tv", "video", "chromecast", "android-tv", "entertainment", "vod"],
+  "brandColor": "#4285F4",
+  "url": "https://tv.google",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-play-movies-tv"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2010",
+      "palette": ["#6E6B6E", "#FFFFFF", "#1770C2", "#02A650", "#80CD3D", "#FDDD03", "#F68A12", "#ED1C24"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_tv_logo_(2010-2014).svg",
+      "notes": "Original Google TV platform mark (2010–2014), discontinued in June 2014 when the platform was succeeded by Android TV. Grey TV silhouette with V-antennas and a 3×3 multicolor grid screen (Google-palette tiles). The original Wikimedia SVG also carries a 'Google TV' wordmark below the mark, dropped here because it is illegible at 24×24 and not part of the standalone icon usage. Red sampled from the SVG's brightest red gradient stop (rgb(92.9%,11.0%,14.1%) → #ED1C24); other colors taken from the fetcher palette."
+    },
+    {
+      "year": "2016",
+      "palette": ["#811E56", "#DD2231", "#C7223E", "#C81F44", "#BC1F45", "#FBFCFE"],
+      "source": "https://cdnlogo.com/logo/google-play-movies-amp-tv_41857.html",
+      "notes": "Google Play Movies & TV app icon refreshed in April 2016 as part of the Play family redesign (play-button triangle with film-strip overlay). Used 2016 through 2020 until the app was rebranded as Google TV. Deep magenta Play triangle with two red-gradient film strips and seven white sprocket holes; geometry transcribed verbatim from the upstream SVG into a 24×24 viewBox via a single scale+translate transform."
+    },
+    {
+      "year": "2020",
+      "palette": ["#4285F4", "#34A853", "#FBBC04", "#EA4335", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_TV_Icon.svg",
+      "notes": "Current Google TV mark introduced September 30, 2020 alongside the relaunch of Google TV as a Chromecast/Android TV interface and the rebrand of the Google Play Movies & TV app. Rounded TV frame split into four Google brand colors (blue top, green left, yellow bottom, red right) around a white screen. Geometry transcribed verbatim from the Wikimedia Commons SVG (548.3×400) into a 24×24 viewBox; mark sits in a 24×17.5 region with vertical padding (translate(0,3.25) scale(0.04377))."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}

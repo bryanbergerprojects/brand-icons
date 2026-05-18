@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path fill="#6E6B6E" d="M3 5.5h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z"/>
+  <path fill="#6E6B6E" d="M11.55 5.7 6.4 1.55a.7.7 0 1 0-.88 1.1l5.16 4.15a.7.7 0 1 0 .87-1.1Zm.9 0L17.6 1.55a.7.7 0 1 1 .88 1.1l-5.16 4.15a.7.7 0 1 1-.87-1.1Z"/>
+  <rect x="3" y="7.5" width="18" height="12" rx="1" fill="#FFFFFF"/>
+  <rect x="4.5" y="9" width="4" height="2.6" rx="0.4" fill="#FDDD03"/>
+  <rect x="10" y="9" width="4" height="2.6" rx="0.4" fill="#80CD3D"/>
+  <rect x="15.5" y="9" width="4" height="2.6" rx="0.4" fill="#1770C2"/>
+  <rect x="4.5" y="12.2" width="4" height="2.6" rx="0.4" fill="#02A650"/>
+  <rect x="10" y="12.2" width="4" height="2.6" rx="0.4" fill="#33BCF2"/>
+  <rect x="15.5" y="12.2" width="4" height="2.6" rx="0.4" fill="#ED1C24"/>
+  <rect x="4.5" y="15.4" width="4" height="2.6" rx="0.4" fill="#ED1C24"/>
+  <rect x="10" y="15.4" width="4" height="2.6" rx="0.4" fill="#F68A12"/>
+  <rect x="15.5" y="15.4" width="4" height="2.6" rx="0.4" fill="#80CD3D"/>
+</svg>
