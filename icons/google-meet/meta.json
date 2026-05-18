@@ -8,13 +8,14 @@
   "url": "https://meet.google.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["hangouts-meet", "meet"],
+  "parent": "google",
   "latest": "2020",
   "years": [
     {
       "year": "2017",
-      "palette": ["#0F8F82", "#FFFFFF", "#E8EAED"],
-      "source": "https://commons.wikimedia.org/wiki/File:Google_Hangouts_Meet_icon_(2017-2020).png",
-      "notes": "Original Hangouts Meet app icon (March 2017 – October 2020). Teal speech-bubble background with a white camcorder mark and a thin gray lens divider. Hand-traced to a 24x24 viewBox from a 1024x1024 PNG (no authoritative SVG was located); raster was not embedded."
+      "palette": ["#00897B", "#F5F5F5", "#E0E0E0"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Meet_text_logo_dark_(2017-2020).svg",
+      "notes": "Original Hangouts Meet app icon (March 2017 – October 2020). Material Teal 600 (#00897B) speech-bubble with a white camcorder. Geometry transcribed verbatim from the official Wikimedia wordmark SVG `Google_Meet_text_logo_dark_(2017-2020).svg` (icon embedded at viewBox 0 0 140 140), rescaled to 0 0 24 24 (scale 24/140). Three paths: teal bubble + tail (single closed path), light-grey lid band (#E0E0E0) overlaying the upper portion of the body and lens, and the white (#F5F5F5) camcorder body + right-pointing lens triangle. Drop-shadow and radial highlight from the source were intentionally dropped for a flat-rendered icon."
     },
     {
       "year": "2020",
@@ -24,5 +25,5 @@
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }
