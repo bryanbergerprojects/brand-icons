@@ -4,11 +4,12 @@
   "category": "productivity",
   "description": "Google's collaborative online presentation editor for creating and sharing slide decks in real time.",
   "tags": ["presentation", "slides", "google-workspace", "collaboration", "productivity-suite", "cloud-office", "real-time-editing"],
-  "brandColor": "#F8BF08",
+  "brandColor": "#FEBD02",
   "url": "https://www.google.com/slides/about/",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["slides"],
-  "latest": "2020",
+  "parent": "google",
+  "latest": "2026",
   "years": [
     {
       "year": "2014",
@@ -21,8 +22,14 @@
       "palette": ["#F8BF08", "#F59307", "#FDFFFF"],
       "source": "https://commons.wikimedia.org/wiki/File:Google_Slides_2020_Logo.svg",
       "notes": "Current Workspace-era mark introduced October 6, 2020. Flat geometric yellow page with a separate orange folded-corner flap and an off-white slide frame containing a single horizontal text bar. Redrawn into a 24×24 viewBox (translate(3.2727 0) scale(0.27273) from the native 64×88 source)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#FEBD02", "#FFF447", "#FFDC12", "#FFBD08", "#FBABE6", "#FFFFFF"],
+      "source": "https://www.figma.com/community/file/446OrenfzC4cgNBW8IglnZ",
+      "notes": "2026 Workspace refresh — rounded landscape page with a vertical yellow→light-yellow body gradient, a top yellow stack-edge tab and a soft yellow→pink shadow strip beneath, plus a centered white slide frame stroke. Geometry transcribed verbatim from the community Figma file 'New Google Workspace Icons 2026' (node 1:241), exported via the Figma Desktop Bridge as SVG_STRING."
     }
   ],
   "addedAt": "2026-05-17",
-  "updatedAt": "2026-05-17"
+  "updatedAt": "2026-05-18"
 }
