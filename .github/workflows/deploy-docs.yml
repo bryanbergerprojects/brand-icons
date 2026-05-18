@@ -18,6 +18,15 @@ name: Deploy docs
 #                             on the next request)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/docs/**'
+      - 'icons/**'
+      - 'packages/**'
+      - 'tools/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-docs.yml'
   workflow_dispatch:
 
 concurrency:
