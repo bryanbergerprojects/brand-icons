@@ -1,0 +1,29 @@
+{
+  "slug": "google-currents",
+  "name": "Google Currents",
+  "category": "communication",
+  "description": "Discontinued Google application name used first for a social magazine reader (2011-2013) and later for an enterprise communication tool that replaced Google+ (2019-2023).",
+  "tags": ["google-workspace", "enterprise-social", "magazine-reader", "discontinued", "g-suite", "collaboration"],
+  "brandColor": "#4285F4",
+  "url": "https://workspace.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["currents", "google-plus-for-g-suite"],
+  "parent": "google",
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#0C53A5", "#5AE9C1"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Currents_2013_Logo.svg",
+      "notes": "Original Google Currents social magazine reader (2011-2013), discontinued November 2013 in favor of Google Play Newsstand. Circular swirl built from four overlapping gradient wedges flowing from teal (#5AE9C1) to deep blue (#0C53A5). Geometry transcribed verbatim from the Wikimedia SVG (viewBox 0 0 2496.86 2496.42), rescaled to 0 0 24 24 via a single scale(0.009612) group."
+    },
+    {
+      "year": "2019",
+      "palette": ["#4285F4", "#174EA6"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Currents_2019_Logo.svg",
+      "notes": "Enterprise Google Currents that replaced Google+ for G Suite (announced April 2019, public release July 2020, shut down July 5 2023). Stylized two-tone blue waveform — light Google blue (#4285F4) strokes with darker blue (#174EA6) diamond intersections. Geometry transcribed verbatim from the Wikimedia SVG (viewBox 0 0 277.5 283.1), centered into 24x24 via a translate(0.235 0) scale(0.0848) group."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}

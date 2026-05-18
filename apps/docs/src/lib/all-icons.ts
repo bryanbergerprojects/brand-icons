@@ -33,6 +33,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'google-chat': BrandIcons.GoogleChatLatestIcon,
   'google-cloud': BrandIcons.GoogleCloudLatestIcon,
   'google-contacts': BrandIcons.GoogleContactsLatestIcon,
+  'google-currents': BrandIcons.GoogleCurrentsLatestIcon,
   'google-docs': BrandIcons.GoogleDocsLatestIcon,
   'google-drive': BrandIcons.GoogleDriveLatestIcon,
   'google-forms': BrandIcons.GoogleFormsLatestIcon,
