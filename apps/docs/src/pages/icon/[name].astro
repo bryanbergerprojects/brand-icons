@@ -109,11 +109,30 @@ const allCategories = [...new Set(sortedManifest.map((entry) => entry.category))
 const peerCategories = allCategories.filter((cat) => cat !== icon.category);
 
 const categoryQuery = (cat: string): string => `/library?q=${encodeURIComponent(cat)}`;
+
+const site = Astro.site ?? new URL('https://brand-icons.com');
+const iconUrl = new URL(`/icon/${icon.slug}`, site).toString();
+const ogImage = `/og/${icon.slug}.png`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageObject',
+  '@id': `${iconUrl}#image`,
+  name: `${icon.name} icon`,
+  description: `Official ${icon.name} brand mark — ${familyLabel} category. Available as React, Vue, Svelte, Web Component, and raw SVG. ${playgroundYears.length} historic millésime${playgroundYears.length > 1 ? 's' : ''}.`,
+  url: iconUrl,
+  contentUrl: new URL(ogImage, site).toString(),
+  encodingFormat: 'image/svg+xml',
+  isPartOf: new URL('/#website', site).toString(),
+};
 ---
 
 <BaseLayout
   title={`${icon.name} icon — Brand Icons`}
   description={`${icon.name} icon · ${familyLabel} category · ${sortedManifest.length} icons in Brand Icons library. Copy code for React, Vue, Svelte, SVG.`}
+  ogImage={ogImage}
+  ogType="article"
+  jsonLd={jsonLd}
 >
   <section class="border-b border-ink px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
     <nav aria-label="Breadcrumb" class="mb-4.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-mono font-semibold uppercase tracking-uppercase text-ink-soft">

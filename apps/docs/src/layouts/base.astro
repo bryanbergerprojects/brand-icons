@@ -8,9 +8,25 @@ import '@/styles/global.css';
 type Props = {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: unknown;
 };
 
-const { title, description = 'Multi-variant, multi-framework brand icons library.' } = Astro.props;
+const {
+  title,
+  description = 'Multi-variant, multi-framework brand icons library — 1,200+ versioned brand icons. Copy code for React, Vue, Svelte, Web Components, and raw SVG.',
+  ogImage = '/og.png',
+  ogType = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://brand-icons.com');
+const canonical = new URL(Astro.url.pathname, site).toString();
+const ogImageUrl = new URL(ogImage, site).toString();
+const siteName = 'Brand Icons';
 
 const sortedIcons = [...manifest].sort((a, b) => a.name.localeCompare(b.name));
 
@@ -32,11 +48,41 @@ const docLinks: readonly DocLink[] = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large" />
+    )}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f5f1" media="(prefers-color-scheme: light)" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-    <title>{title}</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {jsonLd ? <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} /> : null}
   </head>
   <body class="flex min-h-screen flex-col bg-paper text-ink font-sans antialiased">
     <Nav />
