@@ -55,10 +55,17 @@ spawning anything. Do not stop in the middle of the pipeline to ask.
 git rev-parse --abbrev-ref HEAD                    # confirm we know the base branch
 gh auth status                                     # need gh for PR creation
 test -d .changeset                                 # need changesets configured
+git fetch origin canary --no-tags                  # refresh the authoritative base tip
+git rev-parse origin/canary                        # must resolve — builders branch from here
 ```
 
 If any pre-flight fails, surface it and stop — the builders will not
 recover.
+
+`git fetch origin canary` is mandatory. Every builder worktree resets
+to `origin/canary` before creating its `feat/add-<slug>` branch — if
+the local copy of `origin/canary` is stale, every PR will diverge from
+the remote tip. Refresh it here, once, before fanning out.
 
 Also Glob `icons/<slug>/` for every requested brand. If any already
 exists, ask the user up-front: skip / `--update` / cancel. Do not let
@@ -104,7 +111,12 @@ Agent per brand in a single message**. Each call:
 - `prompt`: tells the builder its slug and the absolute path to the
   fetcher JSON. Remind it that the JSON references raw assets under
   `/tmp/brand-icons-fetch/<slug>/<year>/` which are accessible from
-  inside the worktree (they live outside the repo).
+  inside the worktree (they live outside the repo). **Explicitly
+  instruct the builder to base its branch on `origin/canary`** — the
+  harness spawns the worktree from local HEAD (which may be stale), so
+  the builder must `git fetch origin canary --no-tags` then
+  `git switch -C feat/add-<slug> origin/canary` before any file write.
+  PRs target `canary`, not `main`.
 
 Capture from each builder's result:
 
@@ -115,6 +127,13 @@ Capture from each builder's result:
 
 If a builder failed before pushing, mark the slug as `failed_build`
 and continue — the others should still ship.
+
+If a builder reported `visual_mismatch` on one or more years (its
+self-check could not converge in 3 attempts), it will not have opened a
+PR. Mark the slug as `needs_human` with the list of mismatched years
+and continue. Do not auto-spawn another builder for that brand — the
+fetcher's source asset is likely the root cause and a fresh build will
+keep failing the same way.
 
 ## Phase 3 — Review (parallel, ≤ 10)
 
@@ -153,6 +172,11 @@ After fix builders return, run **one more round** of `icon-reviewer`
 for the fixed PRs only. If a PR fails twice, stop fixing — surface it
 as a `needs_human` item in the final report. A third spawn would burn
 tokens with diminishing returns.
+
+A `visual_fidelity` blocker that survives the fix round always graduates
+to `needs_human` — never spawn a third builder for it. Visual drift
+that the model cannot self-correct in two passes signals either a bad
+source asset (fetcher) or a brand that requires hand crafting.
 
 ## Phase 5 — Cleanup (always, before the final report)
 

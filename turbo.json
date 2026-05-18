@@ -12,6 +12,20 @@
       "inputs": ["src/**", "templates/**", "package.json", "tsconfig.json", "tsup.config.ts", "../../icons/**"],
       "outputs": ["dist/**", "../../packages/core/src/icons/**", "../../packages/core/src/manifest.ts", "../../packages/react/src/icons/**"]
     },
+    "docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".astro/**", "!.astro/types.d.ts", "src/generated/**"],
+      "inputs": [
+        "src/**",
+        "public/**",
+        "scripts/**",
+        "package.json",
+        "tsconfig.json",
+        "astro.config.*",
+        "components.json",
+        "../../packages/*/CHANGELOG.md"
+      ]
+    },
     "dev": {
       "cache": false,
       "persistent": true

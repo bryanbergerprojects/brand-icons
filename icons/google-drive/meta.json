@@ -1,0 +1,35 @@
+{
+  "slug": "google-drive",
+  "name": "Google Drive",
+  "category": "storage-cloud",
+  "description": "Cloud storage and file synchronization service by Google for personal and collaborative file management.",
+  "tags": ["cloud-storage", "file-sync", "collaboration", "workspace", "saas", "file-sharing", "backup"],
+  "brandColor": "#0066DA",
+  "url": "https://drive.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["gdrive"],
+  "parent": "google",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2012",
+      "palette": ["#3D81F7", "#FED14F", "#0EA760", "#3573DE", "#E3BB43", "#0A9255"],
+      "source": "https://commons.wikimedia.org/wiki/File:Logo_of_Google_Drive_(2012-2014).svg",
+      "notes": "Original launch logo (April 24, 2012). Triangular prism mark with skeuomorphic shadowed facets in blue, yellow, and green. Recentred from native 600×525 viewBox into 24×24 via translate(0 1.5) scale(0.04)."
+    },
+    {
+      "year": "2014",
+      "palette": ["#4285F4", "#0F9D58", "#FFCD40"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Drive_logo_(2014-2020).svg",
+      "notes": "Material Design flat refresh: three solid triangles (blue, green, yellow). Stripped the upstream clip-path, gradient and white/dark shadow overlays — palette is the three canonical Material brand colours only. Recentred from native 287.5×250 viewBox via translate(0 1.5652) scale(0.083478)."
+    },
+    {
+      "year": "2020",
+      "palette": ["#0066DA", "#00AC47", "#FFBA00", "#EA4335", "#2684FC", "#00832D"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Drive_icon_(2020).svg",
+      "notes": "October 2020 Google Workspace rebrand. Adds a red facet (#EA4335) to align with the four-colour Workspace family; softened angles, flat fills, no shadows. Recentred from native 87.3×78 viewBox via translate(0 1.2784) scale(0.27491)."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

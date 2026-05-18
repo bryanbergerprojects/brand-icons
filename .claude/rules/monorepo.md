@@ -116,4 +116,4 @@ pnpm --filter './packages/*' typecheck
 
 ### 2.5 Node engine
 
-`"engines": { "node": ">=20", "pnpm": ">=10" }` everywhere. CI uses `.nvmrc` (`20`).
+`"engines": { "node": ">=22", "pnpm": ">=10" }` everywhere. CI uses `.nvmrc` (`22`).

@@ -1,0 +1,90 @@
+name: Deploy docs
+
+# Deploys apps/docs to the brand-icons.com Scaleway Instance running the
+# Docker Compose Caddy stack at /srv/brand-icons (caddy:2-alpine).
+#
+# Required GitHub Actions secrets:
+#   DEPLOY_SSH_PRIVATE_KEY    Private key whose public half is in cloud-init
+#                             (the `deploy` user's ~/.ssh/authorized_keys).
+#   DEPLOY_SSH_KNOWN_HOSTS    Output of `ssh-keyscan brand-icons.com` taken
+#                             once after provisioning the host.
+#
+# Required GitHub Actions variables:
+#   DEPLOY_HOST               e.g. brand-icons.com
+#   DEPLOY_USER               e.g. deploy
+#   DEPLOY_PATH               e.g. /srv/brand-icons/www
+#                             (the Caddy container reads this dir read-only;
+#                             no reload needed — file_server picks up changes
+#                             on the next request)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/docs/**'
+      - 'icons/**'
+      - 'packages/**'
+      - 'tools/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-docs-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://brand-icons.com
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build icons (generated package sources)
+        run: pnpm build:icons
+
+      - name: Build docs
+        run: pnpm turbo run build --filter=docs
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Rsync dist to server
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+        run: |
+          rsync -avz --delete \
+            --human-readable \
+            --chmod=D755,F644 \
+            apps/docs/dist/ \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/"

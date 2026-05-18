@@ -1,0 +1,28 @@
+{
+  "slug": "google-sheets",
+  "name": "Google Sheets",
+  "category": "productivity",
+  "description": "Google's collaborative online spreadsheet editor in the Google Workspace suite for real-time data analysis.",
+  "tags": ["spreadsheet", "data-analysis", "google-workspace", "collaboration", "cloud-office", "office-suite", "real-time-editing"],
+  "brandColor": "#34A853",
+  "url": "https://www.google.com/sheets/about/",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["sheets"],
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#0F9D58", "#F1F1F1", "#87CEAC"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Sheets_logo_(2014-2020).svg",
+      "notes": "Skeuomorphic dark-green spreadsheet mark with folded corner and table grid. Used from the 2014 refinement of the original 2012 logo through the October 2020 Workspace rebrand. Redrawn into a 24×24 viewBox via transform=scale(0.36923) over the native 47.333×65.083 source; intermediate masks and 1-pixel-scale gradient highlights were dropped."
+    },
+    {
+      "year": "2020",
+      "palette": ["#34A853", "#188038", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Sheets_2020_Logo.svg",
+      "notes": "Flat Material rebrand introduced with Google Workspace on October 6, 2020. Brighter green body, dark-green folded corner, plain white grid. Redrawn into a 24×24 viewBox via transform=scale(0.27273) over the native 64×88 source."
+    }
+  ],
+  "addedAt": "2026-05-17",
+  "updatedAt": "2026-05-17"
+}

@@ -6,7 +6,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://brand-icons.bryanberger.dev',
+  site: 'https://brand-icons.com',
   integrations: [react(), mdx()],
   vite: {
     plugins: [tailwindcss()],

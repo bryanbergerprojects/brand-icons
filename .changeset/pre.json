@@ -1,0 +1,15 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "docs": "0.0.0",
+    "@brand-icons/core": "0.0.0",
+    "@brand-icons/react": "0.0.0",
+    "@brand-icons/svelte": "0.0.0",
+    "@brand-icons/vue": "0.0.0",
+    "@brand-icons/wc": "0.0.0",
+    "@brand-icons/build-icons": "0.0.0",
+    "@brand-icons/render-svg": "0.0.0"
+  },
+  "changesets": ["add-gmail", "add-google-calendar", "add-google-chat", "add-google-drive", "add-google-sheets", "add-telegram"]
+}
