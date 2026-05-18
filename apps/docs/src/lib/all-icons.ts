@@ -64,4 +64,5 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   youtube: BrandIcons.YouTubeLatestIcon,
   'youtube-kids': BrandIcons.YouTubeKidsLatestIcon,
   'youtube-shorts': BrandIcons.YouTubeShortsLatestIcon,
+  'youtube-studio': BrandIcons.YouTubeStudioLatestIcon,
 };
