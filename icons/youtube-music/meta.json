@@ -1,0 +1,35 @@
+{
+  "slug": "youtube-music",
+  "name": "YouTube Music",
+  "category": "media",
+  "description": "Music streaming service from YouTube offering ad-supported and premium listening, music videos, and personalized recommendations.",
+  "tags": ["music-streaming", "streaming", "audio", "music-videos", "google", "subscription", "playlists", "podcasts"],
+  "brandColor": "#FF0033",
+  "url": "https://music.youtube.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["yt-music", "ytm"],
+  "parent": "google",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#333333", "#454545", "#E62117", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_Music_(2015-2017).png",
+      "notes": "Original launch icon — dark vinyl record (#333333) with a diagonal sheen (#454545), a softer red center label (#E62117) and a white play triangle. Vectorized from the 300×300 PNG distributed on Wikimedia Commons; no official vector form was released by Google for this millésime."
+    },
+    {
+      "year": "2017",
+      "palette": ["#FF0000", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Youtube_Music_icon.svg",
+      "notes": "October 2017 redesign aligned with YouTube's broader rebrand — flat red circle (#FF0000), white inner ring, white play triangle. This icon shape remained the standard until the 2024 refresh tweaked the red shade."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF0033", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:YouTube_Music_2024.svg",
+      "notes": "2024 brand refresh — same circular icon construction but the red shifts from pure #FF0000 to a pinker #FF0033, matching YouTube's parent-brand color update."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
