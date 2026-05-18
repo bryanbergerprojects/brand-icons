@@ -1,0 +1,28 @@
+{
+  "slug": "google-contacts",
+  "name": "Google Contacts",
+  "category": "productivity",
+  "description": "Contact management service from Google that syncs people, phone numbers and email addresses across Google Workspace and Android.",
+  "tags": ["contacts", "address-book", "google-workspace", "people", "sync", "android", "saas"],
+  "brandColor": "#0057CC",
+  "url": "https://contacts.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "google",
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2018",
+      "palette": ["#1A73E8", "#FFFFFF", "#185ABC"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Contacts_icon.svg",
+      "notes": "Material Design solid-fill icon used by the standalone Google Contacts Android/web app from circa 2015 launch through the late-2022 redesign. Wikimedia file first uploaded December 2018; the SVG carries the internal Google asset id 'logo_x5F_contacts_x5F_192px_1_'. Source viewBox 0 0 500 500 rescaled into 0 0 24 24 via a single scale(0.048) wrapper group baked at build via SVGO convertTransform."
+    },
+    {
+      "year": "2022",
+      "palette": ["#0057CC", "#86A9FF", "#578CFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Contacts_icon_(2022).svg",
+      "notes": "Current multi-tone blue 'G-style' silhouette adopted in November 2022 as part of Google's product icon refresh (alongside Messages and Phone). Three-tone blue stack with no background; person shape composed of a deep-blue head and a tri-tone body torso. Source viewBox 0 0 500 500 rescaled into 0 0 24 24 via a single scale(0.048) wrapper group baked at build via SVGO convertTransform."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
