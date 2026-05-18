@@ -1,0 +1,29 @@
+{
+  "slug": "google-hotels",
+  "name": "Google Hotels",
+  "category": "search-web",
+  "description": "Google service for searching, comparing and booking hotels, integrated into Google Travel since 2019.",
+  "tags": ["travel", "hotel-search", "booking", "hotel-ads", "metasearch", "google-travel", "trips"],
+  "brandColor": "#4285F4",
+  "url": "https://www.google.com/travel/hotels",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["google-hotel-finder", "google-hotel-ads", "hotel-finder", "hotel-ads"],
+  "parent": "google",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#D94338", "#9E3028", "#F4B400", "#FFE168"],
+      "source": "https://worldvectorlogo.com/logo/google-hotel-ads",
+      "notes": "Google Hotel Ads mark — stylized red house silhouette with a 3x3 grid of windows in two tones (gold #F4B400 and light yellow #FFE168) plus dark-red accent windows. Used as the dedicated Google Hotel Ads / Hotel Center brand mark circa 2017-2022. Native viewBox '45 0 421.647 512' is non-square (taller than wide); transcribed verbatim and letterboxed to the 24x24 canvas via translate(2.1164 0) scale(0.046875) translate(-45 0)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#4285F4", "#EA4335", "#FBBC04", "#34A853", "#1967D2", "#FFFFFF"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Travel_logo.svg",
+      "notes": "Current Google Hotels surface mark — since the product was folded into Google Travel in 2019, the live page (https://www.google.com/travel/hotels) ships the Google Travel suitcase favicon as its product mark. Rounded-square body with the four-color Google quadrants (#EA4335 red, #FBBC04 yellow, #34A853 green, #4285F4 blue), darker blue handle and wheels (#1967D2), and the white Product Sans G centered on a blue circle. Native viewBox '95 0 320.808 512' is non-square; letterboxed to 24x24 via translate(4.4806 0) scale(0.046875) translate(-95 0)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
