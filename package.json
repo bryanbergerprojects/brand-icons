@@ -36,6 +36,9 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "turbo run build --filter='./packages/*' && changeset publish",
+    "release:canary": "gh workflow run release.yml --ref canary",
+    "deploy:docs": "gh workflow run deploy-docs.yml --ref main",
+    "deploy:docs:canary": "gh workflow run deploy-docs.yml --ref canary",
     "prepare": "husky"
   },
   "devDependencies": {

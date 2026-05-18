@@ -51,6 +51,7 @@ jobs:
           version: pnpm run version
           commit: 'chore(release): version packages'
           title: 'chore(release): version packages'
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
@@ -111,3 +112,18 @@ jobs:
 
       - name: Push git tags
         run: git push --follow-tags
+
+      - name: Create GitHub Releases for canary tags
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for tag in $(git tag --points-at HEAD); do
+            if gh release view "$tag" >/dev/null 2>&1; then
+              echo "Release $tag already exists, skipping"
+              continue
+            fi
+            gh release create "$tag" \
+              --title "$tag" \
+              --generate-notes \
+              --prerelease
+          done
