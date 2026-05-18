@@ -81,25 +81,25 @@ const featured: readonly FeaturedBrand[] = FEATURED_SLUGS.map((slug, i) => {
 const moreCount = totalBrands - featured.length;
 ---
 
-<section id="brands" class="border-t border-ink py-18">
-  <div class="container mx-auto px-10">
-    <SecNum kicker="Browse by brand" label={`${totalBrands} brands · ${featured.length} shown.`} />
+<section id="brands" class="border-t border-ink py-12 sm:py-14 lg:py-18">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10">
+    <SecNum
+      kicker="Browse by brand"
+      label={`${totalBrands} brands · ${featured.length} shown.`}
+      labelClass="text-stat sm:text-h3 md:text-h2 lg:text-h1"
+    />
 
-    <div class="grid grid-cols-4 border border-ink bg-paper">
+    <div class="grid grid-cols-2 border-t border-l border-ink bg-paper sm:grid-cols-3 lg:grid-cols-4">
       {
         featured.map((brand, i) => {
           const inverted = i === INVERTED_INDEX;
-          const col = i % 4;
-          const isLastCol = col === 3;
-          const totalRows = Math.ceil(featured.length / 4);
-          const isLastRow = Math.floor(i / 4) === totalRows - 1;
+          const hideOnMobile = i >= 8;
           return (
             <a
               href={`/icon/${brand.slug}`}
               class:list={[
-                'group flex min-h-44 flex-col justify-between p-6 pt-6 pb-5 transition-colors',
-                !isLastCol && 'border-r border-ink',
-                !isLastRow && 'border-b border-ink',
+                'group min-h-44 flex-col justify-between border-r border-b border-ink p-6 pt-6 pb-5 transition-colors',
+                hideOnMobile ? 'hidden sm:flex' : 'flex',
                 inverted ? 'bg-ink text-paper hover:bg-ink/90' : 'bg-paper hover:bg-paper-warm',
               ]}
             >
@@ -142,7 +142,7 @@ const moreCount = totalBrands - featured.length;
       }
     </div>
 
-    <div class="mt-5 flex items-center justify-between border border-ink bg-paper-warm px-6 py-4">
+    <div class="mt-5 flex flex-col items-start gap-4 border border-ink bg-paper-warm px-6 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
       <div>
         <p class="font-mono text-mono font-bold uppercase tracking-mono text-ink-soft">
           … and {moreCount} more

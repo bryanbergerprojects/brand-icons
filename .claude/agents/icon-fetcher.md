@@ -30,8 +30,14 @@ When you finish, this layout must exist:
 /tmp/brand-icons-fetch/<slug>/
 └── <year>/
     ├── raw.<ext>         # original asset (svg | png | jpg | webp)
+    ├── preview.png       # 256px PNG rasterized from raw (visual reference)
     └── source.txt        # URL the asset came from
 ```
+
+`preview.png` is the canonical **visual reference** consumed by
+`icon-builder` (self-check) and `icon-reviewer` (visual fidelity verdict).
+It is mandatory — without it, downstream agents cannot compare shapes
+and colors against the official source.
 
 The JSON has this shape (the builder validates it):
 
@@ -138,6 +144,29 @@ For each millésime to capture:
 job — you preserve the original so the builder can compare and the
 reviewer can audit.
 
+### 3.5 Render the visual reference PNG
+
+For every saved asset, produce a 256px PNG sibling at
+`/tmp/brand-icons-fetch/<slug>/<year>/preview.png`. This is the image
+the builder and reviewer will `Read` to verify visual fidelity.
+
+```bash
+pnpm --silent render:svg \
+  /tmp/brand-icons-fetch/<slug>/<year>/raw.<ext> \
+  /tmp/brand-icons-fetch/<slug>/<year>/preview.png \
+  --width=256
+```
+
+Behavior of the helper (`tools/render-svg/render.mjs`):
+
+- `.svg` input → rasterized to PNG at the given width via `@resvg/resvg-js`.
+- `.png` / `.jpg` / `.jpeg` / `.webp` / `.gif` input → copied verbatim
+  to `preview.png` (raster sources are already pixel data — no render).
+
+If the render exits non-zero, treat the year as failed: drop the year
+from `years[]` (or skip it with a clear `notes` entry); do not leave a
+half-built scratch dir for the builder.
+
 ### 4. Extract palette per year
 
 For each saved asset, derive `palette`:
@@ -169,7 +198,9 @@ orchestrator handles confirmation.
 ### 6. Write the JSON
 
 `mkdir -p /tmp/brand-icons-fetch/` then write `/tmp/brand-icons-fetch/<slug>.json`.
-Validate locally: every `years[i].asset.path` exists on disk; `latest`
+Validate locally: every `years[i].asset.path` exists on disk; every
+`years[i]` has a sibling `preview.png` (use
+`test -f /tmp/brand-icons-fetch/<slug>/<year>/preview.png`); `latest`
 appears in `years[].year`; palette arrays are non-empty.
 
 ## Guardrails

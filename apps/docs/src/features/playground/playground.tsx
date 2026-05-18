@@ -66,10 +66,10 @@ const buildSnippets = ({
   const variantProp = mode === 'official' ? 'color' : 'mono';
   const raw = mode === 'official' ? colorSvg : monoSvg;
   return {
-    React: `import { ${componentName}${year}Icon } from '@brand-icons/react';\n\n<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
-    Vue: `<script setup>\nimport { ${componentName}${year}Icon } from '@brand-icons/vue';\n</script>\n\n<${componentName}${year}Icon :size="${size}" variant="${variantProp}" />`,
-    Svelte: `<script>\n  import { ${componentName}${year}Icon } from '@brand-icons/svelte';\n</script>\n\n<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
-    WebC: `<brand-icon-${slug}-${year} size="${size}" variant="${variantProp}"></brand-icon-${slug}-${year}>`,
+    React: `<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
+    Vue: `<${componentName}${year}Icon :size="${size}" variant="${variantProp}" />`,
+    Svelte: `<${componentName}${year}Icon size={${size}} variant="${variantProp}" />`,
+    WebC: `<brand-icon name="${slug}" year="${year}" size="${size}" variant="${variantProp}"></brand-icon>`,
     SVG: sizedSvg({ raw, size }),
   };
 };
@@ -219,7 +219,7 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-7 gap-y-5 border-t border-ink p-4">
+      <div className="grid grid-cols-1 gap-x-7 gap-y-5 border-t border-ink p-4 sm:grid-cols-2">
         <div>
           <p className="mb-2 font-mono text-mono-sm font-bold uppercase tracking-uppercase text-ink-soft">Year</p>
           <ToggleGroup
@@ -347,7 +347,7 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent variant="bureau-dark" side="top" align="start" className="w-(--radix-dropdown-menu-trigger-width)">
-                {FRAMEWORKS.map((framework, index) => (
+                {FRAMEWORKS.map((framework) => (
                   <DropdownMenuItem
                     key={framework}
                     variant="bureau-dark"
@@ -358,7 +358,6 @@ const Playground = ({ iconName, slug, componentName, brandColor, years, defaultY
                     <span>
                       Copy for <strong className="font-semibold">{framework}</strong>
                     </span>
-                    <span className="font-mono text-mono text-white/50">⌘ {index + 1}</span>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
