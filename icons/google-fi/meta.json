@@ -1,0 +1,30 @@
+{
+  "slug": "google-fi",
+  "name": "Google Fi",
+  "category": "communication",
+  "description": "Mobile virtual network operator from Google offering cellular plans, eSIM activation, international data and smartwatch connectivity.",
+  "tags": ["mobile-carrier", "mvno", "wireless", "esim", "cellular", "telephony", "5g"],
+  "brandColor": "#4285F4",
+  "url": "https://fi.google.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["project-fi", "google-fi-wireless"],
+  "parent": "google",
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2015",
+      "palette": ["#00A365", "#00B7D5", "#F0B21C", "#FEFEFE", "#008555", "#0095AA"],
+      "source": "https://web.archive.org/web/20170106185104if_/https://fi.google.com/about/static/images/fi_logo.svg",
+      "notes": "Original Project Fi mark at launch. Stylized lowercase 'fi' built from overlapping pills: green vertical stem (#00A365), cyan horizontal crossbar (#00B7D5), yellow body of 'i' (#F0B21C) and a white tittle disc on the crossbar. Cropped out of the full 'Project Fi' lockup SVG (Wayback Machine, Jan 2017 snapshot of fi.google.com)."
+    },
+    {
+      "year": "2023",
+      "palette": ["#4285F4", "#185ABC", "#34A853", "#137333", "#FBBC04", "#EA8600", "#EA4335"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Fi_Wireless_-_Logo,_Text_(2023).svg",
+      "notes": "Google Fi Wireless rebrand (Apr 19, 2023). Inverted-staircase 'F' icon: four horizontal pills (blue, green, yellow, red) stacked top-to-bottom with descending lengths, each terminated by an overlapping darker-shade circle, evoking signal bars. Cropped out of the full 'Google Fi Wireless' wordmark SVG (Wikimedia Commons)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18",
+  "notes": "2018 'Google Fi' (post-'Project Fi') millésime intentionally omitted: only a 512×512 raster of the icon-only mark could be located and no `raster-to-svg` vectorizer is available in this repo. Defer until an official SVG or trustworthy vectorization is sourced."
+}
