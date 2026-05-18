@@ -1,0 +1,34 @@
+{
+  "slug": "waze",
+  "name": "Waze",
+  "category": "platforms",
+  "description": "Community-driven GPS navigation app providing real-time traffic and routing, owned by Google.",
+  "tags": ["navigation", "maps", "gps", "traffic", "driving", "mobile-app", "community", "google"],
+  "brandColor": "#05C8F7",
+  "url": "https://www.waze.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2009",
+      "palette": ["#FBFBFB", "#2B2B2B", "#96979B"],
+      "source": "https://fr.wikipedia.org/wiki/Fichier:Waze-logo-2009.svg",
+      "notes": "Original 2009–2012 hand-drawn doodle Wazer with sound waves, eyes, U-shaped smile and two wheels. Source asset is a non-square composed scene (455×326); the Wazer character is cropped and centered into the 24×24 viewBox. The yellow accent dot from the source scene is dropped to keep the icon focused on the Wazer mark."
+    },
+    {
+      "year": "2012",
+      "palette": ["#3D3D3D", "#FFFFFF", "#515252", "#2B5860"],
+      "source": "https://fr.wikipedia.org/wiki/Fichier:Waze_logo-2012.svg",
+      "notes": "Polished 2012–2020 Wazer mark (pre-Pentagram era). The source body uses a subtle radial gradient flattened to solid white for the brand icon; dark gray face, eyes, smile and wheels with lighter wheel hubs and tiny teal shadow ovals are preserved."
+    },
+    {
+      "year": "2020",
+      "palette": ["#05C8F7", "#FFFFFF"],
+      "source": "https://fr.wikipedia.org/wiki/Fichier:Waze-icon-2020.svg",
+      "notes": "Pentagram redesign: simplified rounder speech-bubble Wazer with eyes, smile and two wheels. Source asset is a monochrome silhouette; minted in Waze's signature cyan (#05C8F7) with white eyes and smile as used on the app tile."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18",
+  "notes": "2009 source is intrinsically non-square (455×326) — Wazer character centered inside the 24×24 viewBox per svg.md §1.1. 2009 yellow accent dot from the source scene is intentionally dropped to focus on the Wazer mark. 2012 radial-gradient body flattened to solid white. 2020 raw is a pure monochrome silhouette; cyan is the documented Waze brand identity color."
+}
