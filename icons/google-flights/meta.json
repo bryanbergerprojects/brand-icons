@@ -1,0 +1,23 @@
+{
+  "slug": "google-flights",
+  "name": "Google Flights",
+  "category": "platforms",
+  "description": "Google's flight search service for comparing fares, schedules, and routes across airlines worldwide.",
+  "tags": ["flight-search", "travel", "google-travel", "fare-tracker", "airlines", "trip-planning", "saas"],
+  "brandColor": "#0E9CE7",
+  "url": "https://www.google.com/travel/flights",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["flights"],
+  "parent": "google",
+  "latest": "2016",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#0E9CE7", "#1A88C8", "#2BB6F2", "#0B7AB0", "#FFFFFF"],
+      "source": "https://www.gstatic.com/images/branding/product/2x/travel_flights_512dp.png",
+      "notes": "Vectorized from the 1024x1024 raster served by gstatic.com (referenced from the <link rel=\"icon\"> on https://www.google.com/travel/flights). Google Flights kept the 2016 Material long-shadow product icon through the 2020 Workspace refresh — light-blue circle with a darker diagonal top-right band, light-cyan rim along the bottom, and a white Material 'flight' airplane glyph rotated 30 degrees clockwise with a soft drop shadow."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
