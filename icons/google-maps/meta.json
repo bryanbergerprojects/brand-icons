@@ -1,0 +1,41 @@
+{
+  "slug": "google-maps",
+  "name": "Google Maps",
+  "category": "platforms",
+  "description": "Web mapping platform by Google offering satellite imagery, street maps, real-time traffic, and turn-by-turn navigation.",
+  "tags": ["mapping", "navigation", "geolocation", "street-view", "directions", "places", "workspace", "saas"],
+  "brandColor": "#EA4335",
+  "url": "https://www.google.com/maps",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["gmaps", "maps"],
+  "parent": "google",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#0F9D58", "#DB4437", "#FFEB3B", "#4285F4", "#F1F1F1", "#E1E1E1", "#C2C2C2", "#7B231E"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Maps_icon_(2014-2015).svg",
+      "notes": "Pre-Material refresh app icon (Nov 2014 → Sep 2015). Tilted card with intersecting roads, prominent red pin and white 'g' watermark. Reframed from native 96×96 viewBox via scale(0.25); dropped drop-shadow, gradient overlays and the inner image highlight from the upstream Wikimedia file."
+    },
+    {
+      "year": "2015",
+      "palette": ["#0F9D58", "#DB4437", "#FFDE48", "#4285F4", "#F1F1F1", "#D2D2D2", "#EEEEEE", "#7B231E"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Maps_icon_(2015-2020).svg",
+      "notes": "Material Design refresh (Sep 2015 → Feb 2020). Flat tilted card with white 'G' watermark, intersecting green/yellow/blue roads and a flat red teardrop pin. Reframed from native 5644×5644 viewBox via scale(0.004252); dropped the Gaussian-blur drop shadow and the clip-path used only by the filter."
+    },
+    {
+      "year": "2020",
+      "palette": ["#34A853", "#EA4335", "#FBBC04", "#4285F4", "#1A73E8"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Maps_icon_(2020).svg",
+      "notes": "Feb 6, 2020 — 15th-anniversary redesign. Dropped the card metaphor entirely and returned to a pure teardrop pin built from five Google-coloured wedges around a white center hole. Reframed from native 92.3×132.3 viewBox via translate(3.6253 0) scale(0.18141) (inscribed vertically into the 24×24 grid)."
+    },
+    {
+      "year": "2026",
+      "palette": ["#EA4335", "#FBBC04", "#34A853", "#4285F4", "#A142F4"],
+      "source": "https://commons.wikimedia.org/wiki/File:Google_Maps_icon_(2026).svg",
+      "notes": "2026 Google Workspace refresh — teardrop pin filled with a multi-hue gradient sweeping red → yellow → green → blue → magenta around the white center hole. Upstream ships the gradient as a 4 MB PNG clipped by the pin silhouette; re-vectorized here as five overlapping radial gradients layered inside a clipPath of the pin path (same approach as google-drive 2026)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
