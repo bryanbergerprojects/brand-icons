@@ -1,0 +1,21 @@
+{
+  "slug": "dashlane",
+  "name": "Dashlane",
+  "category": "productivity",
+  "description": "Password manager and digital wallet for credentials, payments, and personal data across devices.",
+  "tags": ["password-manager", "credentials", "digital-wallet", "autofill", "security", "privacy", "saas"],
+  "brandColor": "#0E353D",
+  "url": "https://www.dashlane.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2020",
+      "palette": ["#0E353D"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/dashlane.svg",
+      "notes": "Pentagram-designed D logomark made of 'AroundRects' shapes — current mark since the January 2020 rebrand. Brand color #0E353D taken from Dashlane's official partner brand kit (Brandfolder)."
+    }
+  ],
+  "addedAt": "2026-05-18",
+  "updatedAt": "2026-05-18"
+}
