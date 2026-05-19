@@ -1,0 +1,38 @@
+{
+  "slug": "ecosia",
+  "name": "Ecosia",
+  "category": "search-web",
+  "description": "Privacy-conscious search engine that uses its ad revenue to fund tree-planting projects worldwide.",
+  "tags": [
+    "search-engine",
+    "tree-planting",
+    "reforestation",
+    "sustainability",
+    "green-tech",
+    "browser",
+    "privacy",
+    "nonprofit",
+    "carbon-neutral"
+  ],
+  "brandColor": "#D7EB80",
+  "url": "https://www.ecosia.org",
+  "repository": "https://github.com/ecosia",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2018",
+      "palette": ["#E65000", "#0097A6", "#CADB3A", "#BED640", "#7EC262"],
+      "source": "https://img.icons8.com/color/512/ecosia.png",
+      "notes": "Globe symbol with orange ring and teal sun-ray leaves; introduced circa 2018 with Ecosia's flat icon refresh. Vectorized from 512×512 PNG raster."
+    },
+    {
+      "year": "2022",
+      "palette": ["#D7EB80", "#000000"],
+      "source": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ecosia.svg",
+      "notes": "2022 Koto rebrand: tree silhouette with 'E' monogram cut through the trunk on a lime-green rounded-square background."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}

@@ -22,6 +22,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   deezer: BrandIcons.DeezerLatestIcon,
   discord: BrandIcons.DiscordLatestIcon,
   'disney-plus': BrandIcons.DisneyLatestIcon,
+  ecosia: BrandIcons.EcosiaLatestIcon,
   edge: BrandIcons.MicrosoftEdgeLatestIcon,
   facebook: BrandIcons.FacebookLatestIcon,
   figma: BrandIcons.FigmaLatestIcon,
