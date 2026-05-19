@@ -1,0 +1,23 @@
+{
+  "slug": "arc",
+  "name": "Arc",
+  "category": "dev-tools",
+  "description": "Arc is a Chromium-based web browser by The Browser Company featuring a sidebar-first interface with Spaces, Boosts, and built-in AI tools.",
+  "tags": ["browser", "chromium", "web-browser", "productivity-browser", "sidebar", "spaces", "macos", "ai-browser"],
+  "brandColor": "#FF536A",
+  "url": "https://arc.net",
+  "repository": "https://github.com/thebrowsercompany",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["arc-browser", "the-browser-company"],
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2023",
+      "palette": ["#FF536A", "#002DC8", "#FF9396", "#1A007F", "#4E000A", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/3/37/Arc_%28browser%29_logo.svg",
+      "notes": "Official icon mark as publicly launched July 2023. Stylized letter-A symbol with coral-red arc and blue swoosh. Source viewBox 0 0 82 68, fitted to 24x24 via translate(0 2.0488) scale(0.2927)."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
