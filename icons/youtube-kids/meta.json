@@ -11,9 +11,9 @@
   "years": [
     {
       "year": "2015",
-      "palette": ["#E52D27", "#BF171D", "#FFFFFF"],
+      "palette": ["#CD201F", "#333333", "#FFFFFF"],
       "source": "https://upload.wikimedia.org/wikipedia/commons/f/fe/YouTube_Kids_logo_2015-2017.png",
-      "notes": "Launch wordmark (Feb 2015 – 2017). Reusing the contemporary YouTube 2013-2017 play-button mark (red rounded-rectangle 'tube' with gradient and white triangle) as the era-equivalent standalone icon — the YouTube Kids 2015 wordmark embeds this same red 'Tube' container, but library convention (matching simple-icons, font-awesome) is to use the standalone play-button at icon scale. Path data sourced from the YouTube 2013 icon (placed centred in the 24×24 viewBox with 3.55 unit vertical padding)."
+      "notes": "Launch wordmark (Feb 2015 – 2017): YouTube TV-screen mark with 'You' (dark grey) + red 'Tube' container with white lettering, above the chunky dark-grey 'KIDS' wordmark. Vectorised from the 711×432 Wikimedia raster (via potrace on per-colour masks). Non-square; fit into the 24×24 viewBox with vertical padding."
     },
     {
       "year": "2019",
@@ -25,7 +25,7 @@
       "year": "2024",
       "palette": ["#FF0033", "#000000", "#FFFFFF"],
       "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/38/4e/a7/384ea75e-13cb-7e8f-4c9b-f7493b3d8775/logo_youtube_kids_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/1024x1024bb.png",
-      "notes": "Q4 2024 rebrand (Oct 22, 2024) aligning with the global YouTube refresh: pinker red (#FF0033) replacing the previous #FF0000, pure black (#000000) outline replacing #282828, and the pink/coral highlight on top has been dropped. Geometry kept from the 2019 mark; only fills and the highlight layer changed. Sourced from the App Store iTunes Lookup API (1024×1024 PNG); filename in the URL ('logo_youtube_kids_2024_q4_color') confirms the millesime."
+      "notes": "Q4 2024 rebrand (Oct 22, 2024) aligning with the global YouTube refresh: pinker red (#FF0033), pure black outline, and the pink/coral highlight on top has been dropped. Re-vectorised directly from the 1024×1024 PNG (via potrace on per-colour masks) — the silhouette is smoother and more rounded than the 2019 hand-drawn version, with the play triangle recentred. Sourced from the App Store iTunes Lookup API; filename in the URL ('logo_youtube_kids_2024_q4_color') confirms the millesime."
     }
   ],
   "addedAt": "2026-05-18",
