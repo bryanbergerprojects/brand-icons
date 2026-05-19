@@ -1,0 +1,38 @@
+{
+  "slug": "proton-mail",
+  "name": "Proton Mail",
+  "category": "communication",
+  "description": "End-to-end encrypted email service developed by Proton AG, headquartered in Geneva, Switzerland.",
+  "tags": [
+    "email",
+    "encrypted-email",
+    "privacy",
+    "end-to-end-encryption",
+    "secure-messaging",
+    "open-source",
+    "swiss-made",
+    "zero-knowledge"
+  ],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/mail",
+  "repository": "https://github.com/ProtonMail",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["protonmail"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#000000"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/521c96fd04b0ea93034db8715eda5a4de27a58bb/icons/protonmail.svg",
+      "notes": "Original ProtonMail shield+envelope+padlock mark used from 2014 launch until the 2022 Proton unified rebrand. Single-path, no explicit fill."
+    },
+    {
+      "year": "2022",
+      "palette": ["#6D4AFF", "#7341FF", "#AA8EFF", "#E3D9FF", "#FFFFFF"],
+      "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/mail/src/icon-maskable.svg",
+      "notes": "Post-rebrand Proton Mail envelope mark introduced May 2022 as part of the unified Proton identity. Purple gradient palette."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
