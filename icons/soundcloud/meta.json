@@ -1,0 +1,28 @@
+{
+  "slug": "soundcloud",
+  "name": "SoundCloud",
+  "category": "media",
+  "description": "Audio streaming and music distribution platform where creators upload and share original sounds.",
+  "tags": ["music-streaming", "audio", "podcast", "creator-platform", "music-discovery", "social-audio", "distribution"],
+  "brandColor": "#FF5500",
+  "url": "https://soundcloud.com",
+  "repository": "https://github.com/soundcloud",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#FF5500"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/521c96fd/icons/soundcloud.svg",
+      "notes": "8-bar ellipse cloudmark introduced in 2014 redesign, replacing the original 13-bar design. Monochromatic mark (no wordmark). Used until the 7-bar redesign in 2024. SVG sourced from simple-icons which tracked the official SoundCloud website mark."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FF5500"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/soundcloud.svg",
+      "notes": "Current 7-bar cloudmark. Official symbol per SoundCloud media kit: 'The 7 Bar Cloudmark is the official symbol of SoundCloud. Please do not use the previous 13 bar horizontal logo, or the legacy orange logo.' SVG taken from SoundCloud website header per simple-icons PR #11000 (merged 2024-05-29). Brand color #FF5500 confirmed by media kit."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
