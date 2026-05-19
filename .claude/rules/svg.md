@@ -14,7 +14,7 @@ paths:
 
 ### 1.1 viewBox is `0 0 24 24`
 
-Unless the official mark is intrinsically non-square (rare). Document the exception in `meta.notes` and `BRAND_OWNERS.md` review queue.
+Unless the official mark is intrinsically non-square (rare). Document the exception in `meta.notes` only.
 
 ```xml
 <!-- ✅ Good -->
