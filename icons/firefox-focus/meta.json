@@ -1,7 +1,7 @@
 {
   "slug": "firefox-focus",
   "name": "Firefox Focus",
-  "category": "dev-tools",
+  "category": "platforms",
   "description": "Privacy-focused mobile browser by Mozilla with automatic tracker blocking and one-tap browsing history erasure.",
   "tags": ["browser", "privacy", "mobile", "tracker-blocking", "mozilla", "ios", "android", "open-source"],
   "brandColor": "#9658F9",
