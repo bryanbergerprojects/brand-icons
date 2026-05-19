@@ -8,6 +8,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   affine: BrandIcons.AFFiNELatestIcon,
   amazon: BrandIcons.AmazonLatestIcon,
   apple: BrandIcons.AppleLatestIcon,
+  arc: BrandIcons.ArcLatestIcon,
   atlassian: BrandIcons.AtlassianLatestIcon,
   aws: BrandIcons.AWSLatestIcon,
   azure: BrandIcons.AzureLatestIcon,
