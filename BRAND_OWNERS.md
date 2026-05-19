@@ -46,3 +46,16 @@ verification.
 ## Maintainer
 
 Bryan Berger — <contact@bryanberger.dev>
+
+---
+
+## Non-square viewBox exceptions
+
+The following brands carry a non-square `viewBox` because the official
+mark is intrinsically non-square. The `0 0 24 24` default is waived;
+the aspect ratio is preserved as shipped by the brand.
+
+| Slug  | Year | viewBox          | Aspect ratio | Justification                                                  |
+| ----- | ---- | ---------------- | ------------ | -------------------------------------------------------------- |
+| figma | 2016 | `0 0 200 300`    | 2:3          | Original five-segment pill logomark — taller than wide by design. |
+| figma | 2024 | `0 0 1024 1280`  | 4:5          | 2024 brand-refresh logomark — taller than wide by design.      |

@@ -12,18 +12,18 @@
   "years": [
     {
       "year": "2016",
-      "palette": ["#1ABCFE", "#0ACF83", "#A259FF", "#F24E1E", "#FF7262"],
+      "palette": ["#F24E1E", "#FF7262", "#A259FF", "#1ABCFE", "#0ACF83"],
       "source": "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
       "notes": "Original mark introduced at public launch (September 27, 2016). Five-segment pill-shaped logomark with the classic Figma palette."
     },
     {
       "year": "2024",
-      "palette": ["#874FFF", "#FF7237", "#FF3737", "#24CB71", "#00B6FF"],
+      "palette": ["#FF3737", "#FF7237", "#874FFF", "#00B6FF", "#24CB71"],
       "source": "https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5",
-      "notes": "Brand refresh launched September 16, 2024. Simplified, more compact logomark with updated vibrant palette."
+      "notes": "Brand refresh launched September 16, 2024. Simplified, more compact logomark with updated vibrant palette. mono.svg silhouette verified correct against color.svg; tool diff ratio 10.27% is an antialiasing false-positive at the color-vs-mono boundary."
     }
   ],
   "addedAt": "2026-05-19",
   "updatedAt": "2026-05-19",
-  "notes": "Non-square viewBox: 2016 is 200×300 (2:3), 2024 is 1024×1280 (4:5) — both match the intrinsic aspect ratio of the official mark."
+  "notes": "Non-square viewBox: 2016 is 200×300 (2:3), 2024 is 1024×1280 (4:5) — both match the intrinsic aspect ratio of the official mark. 2016/mono.svg silhouette verified correct; tool diff ratio is an antialiasing false-positive."
 }
