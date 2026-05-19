@@ -1,0 +1,11 @@
+# Load the project Node version (.nvmrc) — git may run hooks with a different Node on PATH.
+[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" && nvm use --silent
+
+# Auto-fix staged files (Biome 2 `--staged` scopes to git-staged paths).
+pnpm exec biome check --staged --write --no-errors-on-unmatched || exit 1
+
+# Re-stage any safe fixes Biome just wrote so the commit reflects them.
+git update-index --again
+
+# Workspace-wide typecheck — Turbo cache keeps no-op runs ~instant.
+pnpm typecheck || exit 1
