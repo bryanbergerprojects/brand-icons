@@ -1,0 +1,21 @@
+{
+  "slug": "proton-sheets",
+  "name": "Proton Sheets",
+  "category": "productivity",
+  "description": "End-to-end encrypted online spreadsheet editor by Proton AG, integrated into Proton Drive.",
+  "tags": ["spreadsheet", "encrypted", "privacy", "collaboration", "saas", "proton", "office-suite", "cloud-storage"],
+  "brandColor": "#1B854C",
+  "url": "https://proton.me/drive/sheets",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#1B854C", "#26DA79", "#FFFFFF"],
+      "source": "https://pmecdn.protonweb.com/image-transformation/?s=c&image=image%2Fupload%2Fv1776940263%2Fstatic%2Flogos%2Fsheets%2Fsheets-badge.svg",
+      "notes": "Launched December 4, 2025. Icon-only badge mark sourced from official Proton CDN. Green radial gradient (#1B854C → #26DA79) on white rounded-rect background with spreadsheet plus/cross symbol."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
