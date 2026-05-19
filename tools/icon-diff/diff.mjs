@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { compare as odiffCompare } from 'odiff-bin';
-import { PNG } from 'pngjs';
-import pixelmatch from 'pixelmatch';
 import Color from 'colorjs.io';
+import { compare as odiffCompare } from 'odiff-bin';
+import pixelmatch from 'pixelmatch';
+import { PNG } from 'pngjs';
 
 const HELP = `Icon visual diff — deterministic pixel + palette check.
 
@@ -33,7 +33,7 @@ const parseArgs = (argv) => {
     threshold: 0.05,
     variant: 'color',
     deltaE: 10,
-    silhouetteBlocker: 0.10,
+    silhouetteBlocker: 0.1,
     silhouetteWarning: 0.03,
     paletteSize: 5,
     quiet: false,
@@ -152,13 +152,7 @@ const main = async () => {
   const producedPng = loadPng(producedPath);
   const referencePng = loadPng(referencePath);
 
-  const targetSize = Math.max(
-    producedPng.width,
-    producedPng.height,
-    referencePng.width,
-    referencePng.height,
-    256,
-  );
+  const targetSize = Math.max(producedPng.width, producedPng.height, referencePng.width, referencePng.height, 256);
   const producedSquare = padToSquare(producedPng, targetSize);
   const referenceSquare = padToSquare(referencePng, targetSize);
 
@@ -175,14 +169,11 @@ const main = async () => {
 
   const totalPixels = targetSize * targetSize;
   const diffBuf = new PNG({ width: targetSize, height: targetSize });
-  const diffCount = pixelmatch(
-    producedSquare.data,
-    referenceSquare.data,
-    diffBuf.data,
-    targetSize,
-    targetSize,
-    { threshold: opts.threshold, alpha: 0.3, includeAA: false },
-  );
+  const diffCount = pixelmatch(producedSquare.data, referenceSquare.data, diffBuf.data, targetSize, targetSize, {
+    threshold: opts.threshold,
+    alpha: 0.3,
+    includeAA: false,
+  });
   const diffRatio = diffCount / totalPixels;
 
   const producedPalette = extractPalette(producedSquare, opts.paletteSize);
@@ -239,8 +230,7 @@ const main = async () => {
       odiff: {
         match: odiffResult.match === true,
         reason: odiffResult.match === true ? null : (odiffResult.reason ?? null),
-        diffPercentage:
-          typeof odiffResult.diffPercentage === 'number' ? odiffResult.diffPercentage : null,
+        diffPercentage: typeof odiffResult.diffPercentage === 'number' ? odiffResult.diffPercentage : null,
         diffCount: typeof odiffResult.diffCount === 'number' ? odiffResult.diffCount : null,
       },
       pixelmatch: {

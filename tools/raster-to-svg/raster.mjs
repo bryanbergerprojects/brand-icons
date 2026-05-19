@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import {
-  ColorMode,
-  Hierarchical,
-  PathSimplifyMode,
-  vectorize,
-} from '@neplex/vectorizer';
+import { ColorMode, Hierarchical, PathSimplifyMode, vectorize } from '@neplex/vectorizer';
 
 const HELP = `Raster → SVG vectorizer (VTracer via @neplex/vectorizer).
 
@@ -116,8 +111,7 @@ const fitTo24 = (box) => {
   return `translate(${fmt(tx)} ${fmt(ty)}) scale(${fmt(scale)})`;
 };
 
-const rewriteToCurrentColor = (svg) =>
-  svg.replace(FILL_HEX_ATTR, 'fill="currentColor"').replace(STROKE_HEX_ATTR, 'stroke="currentColor"');
+const rewriteToCurrentColor = (svg) => svg.replace(FILL_HEX_ATTR, 'fill="currentColor"').replace(STROKE_HEX_ATTR, 'stroke="currentColor"');
 
 const main = async () => {
   const opts = parseArgs(process.argv.slice(2));
@@ -153,9 +147,7 @@ const main = async () => {
 
   await writeFile(outputPath, out, 'utf8');
   if (!opts.quiet) {
-    process.stdout.write(
-      `${outputPath} — ${opts.variant} variant, source ${box.w}×${box.h} → fit ${transform}\n`,
-    );
+    process.stdout.write(`${outputPath} — ${opts.variant} variant, source ${box.w}×${box.h} → fit ${transform}\n`);
   }
   return 0;
 };
