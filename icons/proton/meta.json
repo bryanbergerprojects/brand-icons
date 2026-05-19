@@ -1,0 +1,39 @@
+{
+  "slug": "proton",
+  "name": "Proton",
+  "category": "platforms",
+  "description": "Swiss privacy company offering end-to-end encrypted email, VPN, cloud storage, password manager, and calendar services.",
+  "tags": [
+    "privacy",
+    "encryption",
+    "secure-email",
+    "vpn",
+    "cloud-storage",
+    "open-source",
+    "swiss",
+    "end-to-end-encryption",
+    "zero-knowledge"
+  ],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me",
+  "repository": "https://github.com/ProtonMail",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["protonmail", "protonvpn"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2014",
+      "palette": ["#000000"],
+      "source": "https://web.archive.org/web/20160731193600im_/https://protonmail.com/images/pm-logo.svg",
+      "notes": "Original ProtonMail shield-and-envelope mark used from the 2014 launch through the May 2022 rebrand."
+    },
+    {
+      "year": "2022",
+      "palette": ["#6D4AFF", "#A995FF", "#6652F5", "#1C0554"],
+      "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/account/src/icon-maskable.svg",
+      "notes": "New Proton umbrella brand introduced May 2022. Stylized P-mark with purple gradient."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
