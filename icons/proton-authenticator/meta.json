@@ -12,7 +12,7 @@
   "years": [
     {
       "year": "2025",
-      "palette": ["#6D4AFF", "#FFFFFF", "#E6AD32", "#F2FB00", "#E6E6E6", "#BE3232", "#8F69FF", "#000000"],
+      "palette": ["#6D4AFF", "#8F69FF", "#E6AD32", "#F2FB00", "#BE3232", "#E6E6E6"],
       "source": "https://pmecdn.protonweb.com/image-transformation/?s=a&image=proton_Authenticator_logo_0758eb52af.svg",
       "notes": "Launch year (July 31, 2025). Icon-only mark: Proton O-mark (stylized circle) with keyhole/lock symbol, purple-to-gold gradient, on a white rounded square background."
     }
