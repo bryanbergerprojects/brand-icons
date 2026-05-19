@@ -4,7 +4,7 @@
   "category": "dev-tools",
   "description": "AI-powered web browser by The Browser Company (an Atlassian subsidiary), successor to Arc, built on Chromium.",
   "tags": ["browser", "ai-browser", "chromium", "productivity", "mac", "web-browser", "atlassian", "arc-successor"],
-  "brandColor": "#000000",
+  "brandColor": "#010101",
   "url": "https://www.diabrowser.com",
   "license": "Trademark — usage for identification (fair use)",
   "aliases": ["diabrowser", "the-browser-company-dia"],
@@ -12,7 +12,7 @@
   "years": [
     {
       "year": "2024",
-      "palette": ["#FEFEFE", "#2F2A2B"],
+      "palette": ["#2B2627", "#FFFFFF", "#CCCCCC"],
       "source": "http://web.archive.org/web/20241225053910/https://www.diabrowser.com/apple-touch-icon.png",
       "notes": "Pre-launch / beta era icon. Dark charcoal rounded figure shape on white background. Vectorized from 180x180 PNG raster."
     },
