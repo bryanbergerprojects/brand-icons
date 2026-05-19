@@ -1,0 +1,40 @@
+{
+  "slug": "spotify",
+  "name": "Spotify",
+  "category": "media",
+  "description": "Audio streaming and media services platform offering music, podcasts, and audiobooks.",
+  "tags": ["music-streaming", "audio", "podcasts", "streaming", "saas", "subscription", "entertainment"],
+  "brandColor": "#1ED760",
+  "url": "https://www.spotify.com",
+  "repository": "https://github.com/spotify",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2008",
+      "palette": ["#84B82D", "#5E9536", "#538434", "#467232", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Spotify_logo_2008%E2%80%932012.svg",
+      "notes": "Original launch mark: avocado-green rounded square badge with serif 'Spotify' wordmark and three sound-wave arcs above the 'o'. Used 2008–2012."
+    },
+    {
+      "year": "2013",
+      "palette": ["#1ED760", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+      "notes": "2013 redesign: dropped the square badge and serif font, introduced the standalone circular icon with three white arcs on a bright green circle. Used 2013–2015."
+    },
+    {
+      "year": "2015",
+      "palette": ["#1ED760", "#FFFFFF"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/spotify.svg",
+      "notes": "2015 update: brightened the green to the vibrant #1ED760 and switched the wordmark to a clean sans-serif. The icon shape is unchanged from 2013. Used 2015–2024."
+    },
+    {
+      "year": "2024",
+      "palette": ["#1ED760", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/5/54/2024_Spotify_logo_without_text.svg",
+      "notes": "May 2024 brand refresh: arcs adjusted to point marginally more to the right, new 'Spotify Mix' typeface for wordmark. Core green (#1ED760) unchanged."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}

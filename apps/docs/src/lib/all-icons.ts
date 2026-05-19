@@ -59,6 +59,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   safari: BrandIcons.SafariLatestIcon,
   snapchat: BrandIcons.SnapchatLatestIcon,
   sora: BrandIcons.SoraLatestIcon,
+  spotify: BrandIcons.SpotifyLatestIcon,
   telegram: BrandIcons.TelegramLatestIcon,
   twitter: BrandIcons.TwitterXLatestIcon,
   'visual-studio': BrandIcons.VisualStudioLatestIcon,
