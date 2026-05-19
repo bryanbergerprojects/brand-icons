@@ -19,6 +19,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   codex: BrandIcons.CodexLatestIcon,
   cursor: BrandIcons.CursorLatestIcon,
   dashlane: BrandIcons.DashlaneLatestIcon,
+  deezer: BrandIcons.DeezerLatestIcon,
   discord: BrandIcons.DiscordLatestIcon,
   'disney-plus': BrandIcons.DisneyLatestIcon,
   edge: BrandIcons.MicrosoftEdgeLatestIcon,

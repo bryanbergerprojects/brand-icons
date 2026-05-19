@@ -1,0 +1,33 @@
+{
+  "slug": "deezer",
+  "name": "Deezer",
+  "category": "media",
+  "description": "Music streaming service offering on-demand audio and podcast content with personalized discovery features.",
+  "tags": ["music-streaming", "audio", "podcasts", "music-discovery", "subscription", "playlist", "saas", "entertainment"],
+  "brandColor": "#A238FF",
+  "url": "https://www.deezer.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2007",
+      "palette": ["#231F20", "#B2E6FA", "#F680C5", "#ED1C24", "#FFF200", "#EC008C", "#B2DB18", "#59CAF5", "#F6836C", "#D9ED84"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Deezer_logo_2007.svg",
+      "notes": "Original Deezer logo (2007–2019). Equalizer icon with five colorful columns (red, yellow, pink, green, sky blue) in flat solid colors alongside uppercase wordmark. Used until the 2019 redesign."
+    },
+    {
+      "year": "2019",
+      "palette": ["#000000", "#CC1953", "#FF8000", "#40AB5D", "#222B90", "#241284", "#FFD100", "#FF9900", "#3559A6", "#358C7B", "#33A65E", "#367B99"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Deezer_logo_2019.svg",
+      "notes": "2019 redesign (2019–2023). Equalizer icon refined with gradient-filled bars (orange to blue spectrum) and lowercase wordmark. Viewbox 1000×191."
+    },
+    {
+      "year": "2023",
+      "palette": ["#A238FF", "#0F0D13"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/7/75/Deezer_logo%2C_2023.svg",
+      "notes": "2023 rebrand by Koto, launched November 7 2023. Heart-shaped waveform icon in Deezer Purple (#A238FF) with bold uppercase wordmark in near-black. Replaces the equalizer bars identity used since 2007."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
