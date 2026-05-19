@@ -1,0 +1,28 @@
+{
+  "slug": "waze",
+  "name": "Waze",
+  "category": "platforms",
+  "description": "Community-based navigation app providing real-time traffic and road information via crowdsourced driver reports.",
+  "tags": ["navigation", "maps", "gps", "traffic", "crowdsourced", "driving", "routing", "mobile-app"],
+  "brandColor": "#93C4D3",
+  "url": "https://www.waze.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": [],
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#3E3F3E", "#E5E5E5", "#505151", "#D2D2D2", "#ADAEAD", "#C5C5C5", "#838383", "#8B8C8B"],
+      "source": "https://pngimg.com/uploads/waze/waze_PNG3.png",
+      "notes": "Pre-Pentagram Wazer character — gradient white/gray body with dark outline. Era 2012–2020. Vectorized from a 1170×1102 raster; the source gradient is flattened to a layered solid-fill approximation."
+    },
+    {
+      "year": "2020",
+      "palette": ["#93C4D3", "#FFFFFF"],
+      "source": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/waze.svg",
+      "notes": "Pentagram redesign (July 2020, designer Natasha Jen). Flat white Wazer on light-blue (#93C4D3) circle. Mono variant strips the background circle to keep the mark legible at small sizes — same convention as Chrome / Firefox / Edge / Brave."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}

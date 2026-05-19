@@ -68,6 +68,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'visual-studio': BrandIcons.VisualStudioLatestIcon,
   vscode: BrandIcons.VSCodeLatestIcon,
   'vscode-insiders': BrandIcons.VSCodeInsidersLatestIcon,
+  waze: BrandIcons.WazeLatestIcon,
   youtube: BrandIcons.YouTubeLatestIcon,
   'youtube-kids': BrandIcons.YouTubeKidsLatestIcon,
   'youtube-shorts': BrandIcons.YouTubeShortsLatestIcon,
