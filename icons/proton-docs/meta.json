@@ -1,0 +1,32 @@
+{
+  "slug": "proton-docs",
+  "name": "Proton Docs",
+  "category": "productivity",
+  "description": "End-to-end encrypted, real-time collaborative document editor integrated within Proton Drive, launched July 2024.",
+  "tags": [
+    "e2e-encrypted",
+    "document-editor",
+    "collaboration",
+    "privacy",
+    "proton",
+    "open-source",
+    "saas",
+    "cloud",
+    "google-docs-alternative"
+  ],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/docs",
+  "repository": "https://github.com/ProtonMail/WebClients",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#6D4AFF", "#34B8EE", "#85D4F5", "#D6F1FC", "#FFFFFF"],
+      "source": "https://docs.proton.me/assets/static/favicon.40633466c4eb6e41d336.svg",
+      "notes": "Initial release icon, launched July 3 2024 alongside Proton Docs product launch. Official favicon SVG from docs.proton.me."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
