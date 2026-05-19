@@ -3,7 +3,7 @@
   "name": "Arc",
   "category": "dev-tools",
   "description": "Arc is a Chromium-based web browser by The Browser Company featuring a sidebar-first interface with Spaces, Boosts, and built-in AI tools.",
-  "tags": ["browser", "chromium", "web-browser", "productivity-browser", "sidebar", "spaces", "macos", "ai-browser"],
+  "tags": ["browser", "chromium", "web-browser", "productivity-browser", "sidebar", "spaces", "macos", "swift", "ai-browser"],
   "brandColor": "#FF536A",
   "url": "https://arc.net",
   "repository": "https://github.com/thebrowsercompany",
