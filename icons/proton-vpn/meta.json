@@ -1,0 +1,29 @@
+{
+  "slug": "proton-vpn",
+  "name": "Proton VPN",
+  "category": "other",
+  "description": "Privacy-focused VPN service developed by Proton AG, offering encrypted tunneling with a no-logs policy and Secure Core architecture.",
+  "tags": ["vpn", "privacy", "encryption", "cybersecurity", "swiss", "no-logs", "secure-core", "open-source"],
+  "brandColor": "#66DEB1",
+  "url": "https://protonvpn.com",
+  "repository": "https://github.com/ProtonVPN",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["protonvpn"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#5FB364", "#2B2C34"],
+      "source": "https://web.archive.org/web/20190610im_/https://protonvpn.com/assets/img/protonvpn-pinned-logo.svg",
+      "notes": "Pre-2022 ProtonVPN (single word) mark. Triangle symbol with three nodes representing Iceland, Sweden, and Switzerland Secure Core countries. Brand green #5FB364 from site theme-color; SVG fill is neutral grey (mask-icon variant). Color.svg uses brand green #5FB364 per brand color; shape verified pixel-perfect against reference."
+    },
+    {
+      "year": "2022",
+      "palette": ["#66DEB1"],
+      "source": "https://proton.me/media/kit",
+      "notes": "Post-2022 rebrand. Proton VPN renamed (two words). Updated shield/triangle mark. Official brand color #66DEB1 from proton.me/media/kit via simple-icons."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
