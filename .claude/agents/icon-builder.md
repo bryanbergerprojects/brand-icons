@@ -154,6 +154,40 @@ test ! -d "icons/<slug>" || { echo "icons/<slug> already exists"; exit 1; }
 When `--fix=<pr-url>` is set, expect the directory to exist — the worktree
 should already be checked out on the existing branch.
 
+### 3.5 Aspect-ratio sanity gate (icon-only enforcement)
+
+Defense in depth — the fetcher (§2.5 in `.claude/agents/icon-fetcher.md`)
+already gated wordmarks before saving. Re-check here against the
+fetcher's `preview.png` so a stale or human-patched scratch tree cannot
+slip a wordmark through. Cheap: zero render, just parse PNG header.
+
+For every year in `years[]`:
+
+```bash
+NOTES=$(jq -r ".years[] | select(.year==\"<year>\") | .notes // \"\"" \
+         ${SCRATCH_DIR}/brand-icons-fetch/<slug>.json)
+if echo "$NOTES" | grep -q "wide_mark_intentional"; then
+  echo "skip aspect gate for <year> — human override"
+else
+  DIMS=$(file ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
+         | grep -oE '[0-9]+ x [0-9]+' | head -1)
+  W=$(echo "$DIMS" | awk '{print $1}')
+  H=$(echo "$DIMS" | awk '{print $3}')
+  if [ "$(echo "$W/$H > 2.0 || $H/$W > 2.0" | bc -l)" = "1" ]; then
+    echo "wordmark_rejected: <year> aspect $W x $H out of [0.5, 2.0]"
+    exit 1   # surface as wordmark_rejected; orchestrator routes to needs_human
+  fi
+fi
+```
+
+The orchestrator (`add-icons` skill) treats `wordmark_rejected` the
+same way as `visual_mismatch`: do not push a PR, surface the year and
+the offending aspect to the final report under `needs_human`.
+
+Human override: if the operator has hand-edited the fetcher JSON to
+add `wide_mark_intentional` to `years[<i>].notes`, skip this gate for
+that year only. Reviewer honors the same override.
+
 ### 4. Clean and write the SVGs
 
 For every `year` in `years[]`:
@@ -164,10 +198,40 @@ For every `year` in `years[]`:
 2. Strip `<title>`, `<desc>`, comments, editor metadata
    (`<sodipodi:*>`, `<inkscape:*>`, `<metadata>`), fixed `width`/`height`,
    stray `class`/`id`, and `style` attributes that don't carry a role.
-3. Ensure `viewBox="0 0 24 24"`. If the original is square but not 24×24,
-   wrap in a single `<g transform="scale(s)">` then bake via SVGO's
-   `convertTransform`.
-4. Preserve the `fill` attributes — this is the **color** variant.
+3. **Force `viewBox="0 0 24 24"`** — non-negotiable, see
+   `.claude/rules/svg.md` §1.1. The framework runtimes inject the inner
+   markup into a hardcoded `<svg viewBox="0 0 24 24">`; any other
+   canvas means the icon renders invisible at every call site. Never
+   rewrite path coordinates — geometry stays verbatim and is fitted via
+   a wrapping transform:
+
+   - **Source viewBox already `0 0 24 24`** → use as-is.
+   - **Source viewBox is square but different size** (e.g. `0 0 200 200`,
+     `0 0 64 64`): wrap the entire content in
+     `<g transform="scale(24/<W>)">` where `W` is the source width. No
+     translate needed.
+   - **Source viewBox is non-square** (e.g. Figma 2016 `0 0 200 300`,
+     a tall logotype `0 0 100 200`): identify the **tight content
+     bounding box** `[x y w h]` — usually the SVG's declared viewBox,
+     but if the source canvas has whitespace padding (e.g. Figma 2024
+     `0 0 1024 1280` with content only in `[312 340 400 600]`), crop
+     to the tight box. Then compute:
+
+     ```
+     scale = 24 / max(w, h)
+     fitW  = w * scale
+     fitH  = h * scale
+     tx    = (24 - fitW) / 2 - x * scale
+     ty    = (24 - fitH) / 2 - y * scale
+     ```
+
+     Wrap every visible child in a single
+     `<g transform="translate(tx ty) scale(scale)">`. Format `tx`, `ty`,
+     `scale` with at most 4 decimals.
+   - **Root attributes**: keep `fill="none"` on the `<svg>` root if the
+     source had it (some marks rely on it). Drop everything else from
+     the original `<svg>` open tag.
+4. Preserve the `fill` attributes on inner paths — this is the **color** variant.
 5. Write to `icons/<slug>/<year>/color.svg`.
 
 **If `asset.kind` is a raster:**
@@ -192,6 +256,11 @@ Validate every produced SVG against `.claude/rules/svg.md` §1.
 Deterministic tool-first pipeline. The LLM only inspects PNGs when the
 tool flags a blocker — and then only to describe the mismatch, never to
 override the verdict.
+
+The aspect gate from §3.5 already filtered wordmarks; this stage
+verifies the produced SVG visually matches the (icon-only) reference.
+The `wide_mark_intentional` override flag does NOT apply here — visual
+fidelity is enforced regardless.
 
 For every year:
 
@@ -395,6 +464,9 @@ Capture the PR URL from `gh pr create`'s stdout.
 - **Refuse to push** a PR if any year ended the visual self-check
   (§4.5) in `visual_mismatch`. Report and stop — the orchestrator
   routes to `needs_human`.
+- **Refuse to push** a PR if §3.5 emitted `wordmark_rejected` on any
+  year (and no `wide_mark_intentional` override is set). Same routing
+  as `visual_mismatch`.
 - **Do not** depend on any other builder's worktree or branch.
 
 ## Final report
@@ -408,10 +480,12 @@ Return:
 - Per-year palette as written (preview).
 - Per-year **visual self-check verdict** (`pass`, `pass-after-N-retries`,
   or `visual_mismatch` — last attempt's mismatch reason quoted).
+- Per-year **aspect gate verdict** (`pass`, `wordmark_rejected: <WxH>`,
+  or `pass-with-override` when `wide_mark_intentional` was set).
 - Any divergence from the fetcher's data (palette refinement, vectorization, …).
 
-If any year ended in `visual_mismatch`, surface it explicitly at the top
-of the report and **do not** open the PR — the orchestrator will route
-to `needs_human`.
+If any year ended in `visual_mismatch` or `wordmark_rejected`, surface
+it explicitly at the top of the report and **do not** open the PR —
+the orchestrator will route to `needs_human`.
 
 Keep the report under ~25 lines.

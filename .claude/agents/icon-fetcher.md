@@ -129,13 +129,23 @@ builder will refuse anyway and we want to fail fast.
 
 ### 2. Find official sources
 
-For the **current** logo (always required):
+For the **current** logo (always required) — icon-only mark, never the
+full wordmark (icon + brand text). Prefer search terms that surface
+the symbol/logomark:
 
-1. WebSearch: `"<brand> brand assets svg"`, `"<brand> press kit logo"`,
-   `"<brand> brand guidelines"`.
-2. Official sites: `<brand>.com/{press,brand,about,brand-assets}`.
-3. GitHub orgs: `github.com/<brand>` → `logos/`, `.github/`, `brand/`.
-4. Last resort: well-known mirrors (simple-icons, brand-resources).
+1. WebSearch: `"<brand> logomark svg"`, `"<brand> symbol svg"`,
+   `"<brand> icon svg"`, `"<brand> app icon"`,
+   `"<brand> monogram"`, `"<brand> favicon"`. Avoid bare `"<brand>
+   logo"` — frequently returns the horizontal wordmark.
+2. Official sites: `<brand>.com/{press,brand,about,brand-assets}` — read
+   the page; pick the asset labeled "symbol", "icon", "mark",
+   "logomark", "app icon", not "logotype" / "horizontal" / "wordmark".
+3. GitHub orgs: `github.com/<brand>` → `logos/`, `.github/`, `brand/`
+   — prefer files named `icon.svg`, `symbol.svg`, `mark.svg`,
+   `logomark.svg`; skip `wordmark.svg`, `*-horizontal.svg`.
+4. Fallback: `<brand>.com/apple-touch-icon.png` (180×180),
+   `<brand>.com/favicon.ico`, PWA manifest icons (`512×512` preferred).
+5. Last resort: well-known mirrors (simple-icons, brand-resources).
 
 For **historic millésimes** (optional, encouraged):
 
@@ -145,6 +155,57 @@ For **historic millésimes** (optional, encouraged):
 4. Logopedia / Wikipedia infobox historic logos.
 
 `web.archive.org/wayback/...` is acceptable when the original asset is gone.
+
+### 2.5 Asset shape gate: icon-only, never wordmark
+
+Every captured asset must be the **symbol-only** mark. Reject anything
+that combines the symbol with the brand text (e.g. Deezer's smile glyph
++ "DEEZER" wordmark). A wordmark capture poisons every downstream
+stage — the builder's visual diff and the reviewer's fidelity check
+both use `preview.png` as truth, so a wordmark `preview.png` makes the
+pipeline ship a wordmark and call it correct.
+
+**Gate (deterministic, post-render):** after `preview.png` exists for a
+year, parse its dimensions and reject if the aspect ratio is outside
+`[0.5, 2.0]`:
+
+```bash
+DIMS=$(file ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
+       | grep -oE '[0-9]+ x [0-9]+' | head -1)
+W=$(echo "$DIMS" | awk '{print $1}')
+H=$(echo "$DIMS" | awk '{print $3}')
+# Reject if W/H > 2.0 or H/W > 2.0 (wordmark or vertical stack).
+if [ "$(echo "$W/$H > 2.0 || $H/$W > 2.0" | bc -l)" = "1" ]; then
+  echo "wordmark/asymmetric mark detected for $year ($W x $H)"
+  # fallback waterfall — see below
+fi
+```
+
+**Also reject** SVG sources that contain a `<text>` element
+(`grep -q '<text' raw.svg`) or whose filename matches
+`wordmark|horizontal|with-text|logotype` (case-insensitive).
+
+**Fallback waterfall** on gate failure, in order — re-attempt and
+re-render after each step:
+
+1. Re-search with explicit symbol qualifier: `"<brand> symbol only"`,
+   `"<brand> logomark transparent"`, `"<brand> app icon high res"`.
+2. Try `<brand>.com/apple-touch-icon.png` (always 180×180, always
+   square, always icon-only).
+3. Try `<brand>.com/favicon.ico` (extract 32×32 or 64×64 frame).
+4. Try PWA manifest: fetch `<brand>.com/manifest.json` and grab the
+   `512×512` icon.
+5. If still failing: drop the year from `years[]` and record in the
+   fetcher report under "Skipped years" with reason
+   `icon_only_unavailable`. Never invent or crop a wordmark to fake an
+   icon-only mark.
+
+**Human override**: when a brand's official symbol legitimately has a
+non-square footprint (rare — e.g. Cisco bridge, AT&T globe-on-wide),
+the operator can set `years[<i>].notes` to include the literal token
+`wide_mark_intentional`. Builder and reviewer respect that flag and
+skip the aspect gate. The fetcher itself NEVER auto-sets this — only a
+human knows when a wide mark is correct.
 
 ### 3. Download raw assets
 
@@ -157,6 +218,9 @@ For each millésime to capture:
 5. Refuse rasters smaller than 256×256 — record the year as skipped and
    document why in the JSON `notes` of the affected year (or omit the year
    entirely if no acceptable asset exists).
+6. Run the §2.5 asset-shape gate on every saved asset. On failure,
+   walk the fallback waterfall; on exhaustion, skip the year with
+   `notes: "icon_only_unavailable"` and continue with the others.
 
 **Do not clean, optimize, or re-scale the SVG.** That is the builder's
 job — you preserve the original so the builder can compare and the
@@ -249,5 +313,7 @@ Return a short report:
 - Sources per year (URL list).
 - Suggested category + brand color.
 - Any ambiguities (category alt, year not found, raster fallback used).
+- Skipped years with `icon_only_unavailable` and which fallback steps
+  were attempted.
 
 Keep the report under ~25 lines — the orchestrator reads it directly.

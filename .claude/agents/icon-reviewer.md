@@ -155,7 +155,12 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
 
 - File exists.
 - Root `<svg>` carries `viewBox="0 0 24 24"`. Any other viewBox is a
-  `blocker`.
+  `blocker` — the framework runtimes
+  (`packages/react/src/runtime.tsx` and its Vue / Svelte / WC siblings)
+  inject the inner markup into a hardcoded 24×24 shell, so a different
+  canvas renders invisible at every call site. Non-square source marks
+  must be fitted via a wrapping `<g transform>` (see `svg.md` §1.1 and
+  `icon-builder.md` §4 step 3) — never by mutating coordinates.
 - No `<title>`, `<desc>`, `<metadata>`, `sodipodi:*`, or `inkscape:*`
   leftovers.
 - No fixed `width=`/`height=` on the root `<svg>`.
