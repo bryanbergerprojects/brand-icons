@@ -1,0 +1,29 @@
+{
+  "slug": "figma",
+  "name": "Figma",
+  "category": "design",
+  "description": "Collaborative web-based interface design and prototyping tool used by product teams worldwide.",
+  "tags": ["ui-design", "prototyping", "vector-editor", "collaboration", "design-system", "web-based", "saas"],
+  "brandColor": "#FF3737",
+  "url": "https://www.figma.com",
+  "repository": "https://github.com/figma",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#1ABCFE", "#0ACF83", "#A259FF", "#F24E1E", "#FF7262"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
+      "notes": "Original mark introduced at public launch (September 27, 2016). Five-segment pill-shaped logomark with the classic Figma palette."
+    },
+    {
+      "year": "2024",
+      "palette": ["#874FFF", "#FF7237", "#FF3737", "#24CB71", "#00B6FF"],
+      "source": "https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5",
+      "notes": "Brand refresh launched September 16, 2024. Simplified, more compact logomark with updated vibrant palette."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19",
+  "notes": "Non-square viewBox: 2016 is 200×300 (2:3), 2024 is 1024×1280 (4:5) — both match the intrinsic aspect ratio of the official mark."
+}
