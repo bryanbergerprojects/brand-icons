@@ -1,0 +1,21 @@
+{
+  "slug": "proton-meet",
+  "name": "Proton Meet",
+  "category": "communication",
+  "description": "End-to-end encrypted video conferencing service by Proton AG, launched in 2026.",
+  "tags": ["video-conferencing", "encrypted", "privacy", "e2ee", "saas", "collaboration", "open-source", "secure-communication"],
+  "brandColor": "#6E45E2",
+  "url": "https://proton.me/meet",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2026",
+      "palette": ["#6E45E2", "#45E1CC", "#82F8E1", "#FFFFFF"],
+      "source": "https://pmecdn.protonweb.com/image-transformation/?s=c&image=image%2Fupload%2Fv1776940263%2Fstatic%2Flogos%2Fmeet%2Fmeet-badge.svg",
+      "notes": "Official icon-only badge mark sourced from Proton media kit (proton.me/media/kit). Proton Meet launched March 31, 2026. Purple-to-teal gradient video camera symbol on white rounded-square background."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
