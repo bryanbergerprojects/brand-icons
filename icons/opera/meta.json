@@ -1,0 +1,47 @@
+{
+  "slug": "opera",
+  "name": "Opera",
+  "category": "platforms",
+  "description": "Opera is a web browser developed by Opera Software, known for its speed, built-in VPN, and ad blocker.",
+  "tags": ["web-browser", "browser", "internet", "vpn", "ad-blocker", "chromium", "cross-platform", "privacy"],
+  "brandColor": "#FF1B2D",
+  "url": "https://www.opera.com",
+  "repository": "https://github.com/operasoftware",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2015",
+  "years": [
+    {
+      "year": "2009",
+      "palette": [
+        "#E8000F",
+        "#B80000",
+        "#990000",
+        "#8A0202",
+        "#C02825",
+        "#FF8C8F",
+        "#F21818",
+        "#E51515",
+        "#C20E0E",
+        "#FFFFFF",
+        "#E60000",
+        "#DC0B0A"
+      ],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Opera_O.svg",
+      "notes": "3D glossy red 'O' with gradient and drop shadow. Represents the 2009-2013 era logo introduced with Opera 10."
+    },
+    {
+      "year": "2013",
+      "palette": ["#A81E22", "#D02026", "#E51E26"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Opera_browser_logo_2013_vector.svg",
+      "notes": "Flat, minimalist red 'O' with subtle gradient but no 3D shadow. Used from 2013-2015."
+    },
+    {
+      "year": "2015",
+      "palette": ["#FF1B2D", "#FF4B4B", "#A70014", "#9C0000"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg",
+      "notes": "Complete rebrand introducing a ring-shaped 'O' with three-dimensional half-turn placement. Designed in-house with Anti and DixonBaxi. This design remains Opera's current mark as of 2026."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
