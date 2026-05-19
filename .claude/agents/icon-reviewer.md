@@ -2,6 +2,7 @@
 name: icon-reviewer
 description: Use after `icon-builder` has shipped a PR for a brand icon. Cross-checks what the builder wrote in the repo against the research data the fetcher captured, and reports a pass/fail verdict with a precise issue list. Read-only on repo contents — never writes files there, never pushes, never touches the PR. Always invoked with `isolation: "worktree"` so review runs in a fresh worktree pointed at the PR branch fetched from `origin`. The orchestrator uses the verdict to decide whether to spawn a follow-up `icon-builder` in fix mode.
 tools: Read, Bash, Glob
+model: sonnet
 ---
 
 # Icon reviewer
@@ -23,11 +24,8 @@ the artifact under test.
   `feat/add-<slug>`). The reviewer fetches this branch from `origin`
   into its own worktree. Defaults to `feat/add-<slug>` if omitted.
 
-The legacy `--worktree=<path>` flag is **deprecated** — never read from
-another agent's worktree. Reviewers always work from their own
-worktree, populated by fetching the PR branch from `origin`. This
-guarantees the review reflects what is actually on the PR, not a
-soon-to-be-cleaned-up local directory.
+Do not accept `--worktree=` — always fetch the PR branch into your own
+worktree.
 
 ## Execution environment
 
@@ -48,6 +46,12 @@ git fetch origin "$BRANCH" --no-tags       # pull the PR's actual tip
 git switch -C "review-<slug>" "origin/$BRANCH"
 git status --porcelain                     # must be clean
 git log -1 --format='%H %s'                # confirm you are on the PR tip
+
+# Compute the shared scratch dir (main repo's .claude/.tmp/).
+# Resolves to the SAME absolute path the fetcher wrote to.
+SCRATCH_DIR="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")/.claude/.tmp"
+export SCRATCH_DIR
+mkdir -p "$SCRATCH_DIR/brand-icons-review"
 ```
 
 If `git fetch origin <branch>` fails, the PR branch does not exist on
@@ -102,7 +106,7 @@ You return a single JSON object (also include a short prose summary):
 ### 1. Load both sides
 
 ```bash
-cat /tmp/brand-icons-fetch/<slug>.json           # fetcher truth (shared /tmp)
+cat ${SCRATCH_DIR}/brand-icons-fetch/<slug>.json           # fetcher truth (shared /tmp)
 cat icons/<slug>/meta.json                       # builder artifact (own worktree)
 ls   icons/<slug>/                               # year directories
 ```
@@ -170,11 +174,9 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   Orphan is a `blocker`.
 - **`apps/docs/src/lib/all-icons.ts` registers the slug** — the file
   must contain an entry of the form `'<slug>': BrandIcons.<Pascal>LatestIcon`
-  (or, for the legacy named-import form, a top-level import of
-  `<Pascal>LatestIcon` plus a `<slug>:` entry in `latestIconBySlug`).
-  Without it, the `/library` page silently renders the brand name as
-  text instead of the icon. Missing entry is a `blocker` on
-  `docs_registration`. Verify with:
+  inside `latestIconBySlug`. Without it, the `/library` page silently
+  renders the brand name as text instead of the icon. Missing entry is
+  a `blocker` on `docs_registration`. Verify with:
 
   ```bash
   grep -E "['\"]<slug>['\"][[:space:]]*:" apps/docs/src/lib/all-icons.ts
@@ -188,33 +190,67 @@ Structural conformance is necessary but not sufficient. A builder can
 ship a clean, well-formed SVG that simply does **not look like the
 brand**. This check catches that.
 
-For every year in `meta.years[]`:
+Use the same deterministic visual diff pipeline as the builder (§4.5).
+Apply `.claude/rules/icon-fidelity.md` §1.1–§1.2 and §1.4 against every
+year in `meta.years[]`:
 
-1. Render the builder's `color.svg` to PNG (paths are relative to your
-   own worktree):
+```bash
+mkdir -p ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/
 
-   ```bash
-   mkdir -p /tmp/brand-icons-review/<slug>/<year>/
-   pnpm --silent render:svg \
-     icons/<slug>/<year>/color.svg \
-     /tmp/brand-icons-review/<slug>/<year>/produced.png \
-     --width=256
-   ```
+# 1. Render the produced color.svg.
+pnpm --silent render:svg \
+  icons/<slug>/<year>/color.svg \
+  ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.color.png \
+  --width=256
 
-2. `Read` `/tmp/brand-icons-review/<slug>/<year>/produced.png`.
-3. `Read` `/tmp/brand-icons-fetch/<slug>/<year>/preview.png` (the
-   fetcher's canonical visual reference).
-4. Compare side by side. Promote any of the following to a `blocker`
-   on `visual_fidelity`:
-    - Different silhouette (paths, holes, orientation, mirror).
-    - Missing or extra elements vs the official preview.
-    - Dominant color hue mismatch (ΔE ≳ 10 on the top entry).
-    - Wrong canvas centering / clipping vs the preview.
-5. Subtle anti-aliasing, hinting, or 1–2 px positional drift is a
-   `warning`, not a blocker.
+# 2. Run deterministic visual diff against the fetcher's preview.
+pnpm --silent icon:diff \
+  --produced=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.color.png \
+  --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
+  --output-dir=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/color/ \
+  --variant=color \
+  --quiet
+COLOR_EXIT=$?
+COLOR_VERDICT=$(cat ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/color/verdict.json)
 
-Repeat with `mono.svg` rendered to PNG — silhouette must still match
-`preview.png` (the color difference is expected and ignored).
+# 3. Repeat for mono.svg (silhouette-only — palette ΔE skipped).
+pnpm --silent render:svg \
+  icons/<slug>/<year>/mono.svg \
+  ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.mono.png \
+  --width=256
+
+pnpm --silent icon:diff \
+  --produced=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.mono.png \
+  --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
+  --output-dir=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/mono/ \
+  --variant=mono \
+  --quiet
+MONO_EXIT=$?
+MONO_VERDICT=$(cat ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/mono/verdict.json)
+```
+
+Translate exit codes into the reviewer's `checks.visual_fidelity` and
+issue list:
+
+- `0` → `pass`.
+- `2` → `warning` per issue (`issues[]` from verdict JSON, mapped 1:1).
+- `1` → `blocker` per issue. `Read` `produced.<variant>.png`,
+  `preview.png`, and `diff.png` (under `<variant>/diff.png`) only to
+  enrich the `issues[].where`/`fix` strings with a one-line
+  description of *what* is off — never to override the tool's verdict.
+- `3` → tool error. Emit a `blocker` on `visual_fidelity` quoting
+  stderr.
+
+Map `verdict.issues[].code` to the reviewer's output:
+
+- `silhouette_diff` → `blocker`, `where: icons/<slug>/<year>/<variant>.svg`,
+  `fix: rebuild from fetcher source — silhouette diverges by <ratio>%`.
+- `silhouette_drift` → `warning`, `fix: minor shape drift, verify
+  against brand guidelines`.
+- `hue_mismatch` → `blocker`, `where: icons/<slug>/<year>/color.svg`,
+  `fix: restore brand colors — ΔE2000=<value> on top entry`.
+- `hue_drift` → `warning`, `fix: hue verification against brand
+  guidelines recommended`.
 
 If the render command fails or `preview.png` is missing, that is itself
 a `blocker` on `visual_fidelity` (the fetcher did not honor its
@@ -232,7 +268,7 @@ You can derive these from the worktree (`git log -1`, `git branch
 ## Guardrails
 
 - **Read-only.** Never write to disk except your own JSON report
-  (you may stage it under `/tmp/brand-icons-review/<slug>.json` for
+  (you may stage it under `${SCRATCH_DIR}/brand-icons-review/<slug>.json` for
   the orchestrator's convenience).
 - **Never** re-fetch sources from the web — the fetcher's JSON is the
   contract. If you suspect the fetcher itself is wrong, raise it as a

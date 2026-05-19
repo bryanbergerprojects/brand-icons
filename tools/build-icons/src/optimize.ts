@@ -12,7 +12,9 @@ const ROOT_SVG_OPEN = /<svg\b([^>]*)>/;
 const ROOT_FILL_ATTR = /\bfill\s*=\s*"([^"]*)"/;
 
 const baseConfig = (input: OptimizeInput): Config => ({
-  multipass: true,
+  // multipass amplifies risk of silent shape loss when fidelity-critical
+  // plugins are disabled — single pass is enough for brand logos.
+  multipass: false,
   plugins: [
     {
       name: 'preset-default',
@@ -20,6 +22,17 @@ const baseConfig = (input: OptimizeInput): Config => ({
         overrides: {
           removeViewBox: false,
           convertColors: input.variant === 'mono' ? { currentColor: true } : false,
+          // Brand-fidelity guard rails. SVGO's default preset can silently
+          // alter path topology on hand-crafted logos. Disable the plugins
+          // that rewrite coordinates, merge paths, or drop visually
+          // significant elements. `convertShapeToPath` stays enabled —
+          // geometry is exact, only the element name changes.
+          convertPathData: false,
+          mergePaths: false,
+          removeHiddenElems: false,
+          collapseGroups: false,
+          moveElemsAttrsToGroup: false,
+          moveGroupAttrsToElems: false,
         },
       },
     },

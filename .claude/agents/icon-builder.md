@@ -1,7 +1,8 @@
 ---
 name: icon-builder
-description: Use after `icon-fetcher` has produced research data for a brand. Reads `/tmp/brand-icons-fetch/<slug>.json` plus its raw assets, writes the brand into `icons/<slug>/` (meta.json + per-year color.svg + mono.svg), runs the build/typecheck/test trio, creates a changeset, commits, pushes branch `feat/add-<slug>`, and opens a PR via `gh`. Always invoked with `isolation: "worktree"` so multiple builders can run in parallel without colliding.
+description: Use after `icon-fetcher` has produced research data for a brand. Reads `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` plus its raw assets, writes the brand into `icons/<slug>/` (meta.json + per-year color.svg + mono.svg), runs the build/typecheck/test trio, creates a changeset, commits, pushes branch `feat/add-<slug>`, and opens a PR via `gh`. Always invoked with `isolation: "worktree"` so multiple builders can run in parallel without colliding.
 tools: Read, Write, Edit, Bash, Glob
+model: sonnet
 ---
 
 # Icon builder
@@ -13,11 +14,11 @@ produced — never re-fetch from the web.
 ## Inputs
 
 - A slug (e.g. `linear`). You read everything else from
-  `/tmp/brand-icons-fetch/<slug>.json` and the raw assets in
-  `/tmp/brand-icons-fetch/<slug>/<year>/`.
+  `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` and the raw assets in
+  `${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/`.
 - Optional: a base commit SHA. Default: `origin/canary`. The harness
   spawns the worktree from local HEAD, so you must `git fetch origin
-  canary` + `git switch -C feat/add-<slug> origin/canary` yourself —
+  canary` + `git switch -c feat/add-<slug> origin/canary` yourself —
   see workflow step 2.
 - Optional flag `--fix=<pr-url>` — you are correcting an existing PR. In
   that case, fetch the PR's branch from `origin` into your worktree and
@@ -40,36 +41,28 @@ if [ "$GIT_DIR" = "$GIT_COMMON_DIR" ]; then
 fi
 git rev-parse --show-toplevel              # log the worktree path
 git status --porcelain                     # must be clean
+
+# Compute the shared scratch dir (main repo's .claude/.tmp/).
+# Resolves to the SAME absolute path from any worktree.
+SCRATCH_DIR="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")/.claude/.tmp"
+export SCRATCH_DIR
+mkdir -p "$SCRATCH_DIR/brand-icons-build"
 ```
 
 Hard-stop on that check — never write a single file from the main
 checkout. Then:
 
 - Multiple builders run in parallel; **never touch files outside your
-  worktree** and never reference `/tmp/brand-icons-fetch/<other-slug>/`.
+  worktree** and never reference `${SCRATCH_DIR}/brand-icons-fetch/<other-slug>/`.
 - The worktree is destroyed if you commit nothing — so the act of
   committing is what persists your work for the orchestrator.
 
-## Success criteria — fidelity (highest priority)
+## Success criteria — fidelity
 
-A structurally-valid SVG that does **not** look like the official mark is
-a failure, not a near-miss. Before committing, every produced
-`color.svg` MUST pass a visual self-check against the fetcher's
-`/tmp/brand-icons-fetch/<slug>/<year>/preview.png`:
-
-- **Silhouette identical.** Same path count (modulo SVGO merging),
-  same hole topology, same corner sharpness, same orientation. No
-  mirrored or rotated marks. No missing or added shapes.
-- **Dominant color matches.** Each top-3 palette entry of the produced
-  `color.svg` is within ΔE < 10 of the matching entry sampled from
-  `preview.png`. Gradients keep direction and stop count.
-- **`mono.svg` silhouette equals `color.svg` silhouette**, with every
-  fill resolved to `currentColor`.
-
-These are checked in §4.5 below — fail the check, fix the SVG, re-render,
-recheck. Cap the visual fix loop at **3 attempts per year**; on the
-third failure, hard-stop and surface the year as `visual_mismatch` so
-the orchestrator can flag it `needs_human`.
+Fidelity contract: see `.claude/rules/icon-fidelity.md`. Builder enforces
+§1.1–§1.4 before commit; reviewer re-verifies. Cap: 3 visual attempts
+per year; surface `visual_mismatch` on exhaustion so the orchestrator
+routes to `needs_human`.
 
 ## Output contract
 
@@ -100,7 +93,7 @@ You return the PR URL.
 ### 1. Validate inputs
 
 ```bash
-test -f /tmp/brand-icons-fetch/<slug>.json || { echo "missing fetch data"; exit 1; }
+test -f ${SCRATCH_DIR}/brand-icons-fetch/<slug>.json || { echo "missing fetch data"; exit 1; }
 ```
 
 Parse the JSON. Verify:
@@ -131,7 +124,8 @@ branch that may have diverged.
 
 ```bash
 git fetch origin canary --no-tags                       # pull the authoritative tip
-git switch -C feat/add-<slug> origin/canary             # branch from remote canary
+git show-ref --verify --quiet refs/heads/feat/add-<slug> && { echo "FATAL: branch feat/add-<slug> already exists in worktree"; exit 1; }
+git switch -c feat/add-<slug> origin/canary             # branch from remote canary (fail-on-exists)
 git status --porcelain                                  # confirm clean
 ```
 
@@ -144,7 +138,7 @@ check out the PR's existing branch into your worktree:
 
 ```bash
 git fetch origin feat/add-<slug> --no-tags
-git switch -C feat/add-<slug> origin/feat/add-<slug>
+git switch -c feat/add-<slug> origin/feat/add-<slug>
 ```
 
 You will push your fixup commit to the same branch with a plain
@@ -178,83 +172,81 @@ For every `year` in `years[]`:
 
 **If `asset.kind` is a raster:**
 
-1. Run `pnpm raster-to-svg --input <raw> --output icons/<slug>/<year>/color.svg`.
-   (If the script is not yet available, abort — do not hand-trace.)
-2. Verify `viewBox="0 0 24 24"`, recenter inside a single group if needed.
-3. Record `notes: "vectorized from <kind> raster"` for that year in the
+1. Run `pnpm raster-to-svg --input=<raw> --output=icons/<slug>/<year>/color.svg --variant=color`.
+   Backed by VTracer (`@neplex/vectorizer`); output is normalized to
+   `viewBox="0 0 24 24"` aspect-preserving fit.
+2. For `mono.svg`, re-run with `--variant=mono` against the same raster
+   to get a binary (single-color, `currentColor`) trace — this is
+   cleaner than deriving mono from a color trace.
+3. Inspect the produced SVGs for stray sub-paths (specks, anti-alias
+   halo). If the raster source is low-resolution, increase
+   `--filter-speckle` (e.g. 8) on a retry. Hand-trace only if VTracer
+   fails outright on both attempts.
+4. Record `notes: "vectorized from <kind> raster"` for that year in the
    final `meta.json`.
 
 Validate every produced SVG against `.claude/rules/svg.md` §1.
 
 ### 4.5 Visual self-check (mandatory)
 
-For every year, render the produced `color.svg` to PNG and `Read` it
-**alongside the fetcher's `preview.png`**. The model performs the
-side-by-side visual comparison — this is the step that catches "looks
-plausible but wrong silhouette / wrong color" bugs that the structural
-checks miss.
+Deterministic tool-first pipeline. The LLM only inspects PNGs when the
+tool flags a blocker — and then only to describe the mismatch, never to
+override the verdict.
+
+For every year:
 
 ```bash
-mkdir -p /tmp/brand-icons-build/<slug>/<year>/
+mkdir -p ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/
+
+# 1. Render produced color.svg to PNG (256×256).
 pnpm --silent render:svg \
   icons/<slug>/<year>/color.svg \
-  /tmp/brand-icons-build/<slug>/<year>/produced.png \
+  ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/produced.png \
   --width=256
+
+# 2. Run the deterministic visual diff (odiff + pixelmatch + ΔE 2000).
+pnpm --silent icon:diff \
+  --produced=${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/produced.png \
+  --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
+  --output-dir=${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/ \
+  --variant=color \
+  --quiet
+DIFF_EXIT=$?
+
+# 3. Read the structured verdict.
+cat ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/verdict.json
 ```
 
-Then in the same turn:
+Interpret the exit code:
 
-1. `Read` `/tmp/brand-icons-build/<slug>/<year>/produced.png`.
-2. `Read` `/tmp/brand-icons-fetch/<slug>/<year>/preview.png`.
-3. Compare against the **Success criteria — fidelity** block above.
-4. If any criterion fails, edit `icons/<slug>/<year>/color.svg`,
-   re-render, re-read, re-compare. Up to **3 visual attempts per year**.
-5. After `color.svg` passes, derive `mono.svg` (§5), then repeat the
-   render-read-compare on `mono.svg` against the **same**
-   `preview.png` — silhouette must still match (color obviously
-   differs, that is expected).
+- `0` → pass. Move on.
+- `2` → warning. Note the issue in the final report; continue.
+- `1` → blocker. `Read` the produced PNG and the reference PNG to
+  describe the mismatch in your retry rationale, edit the SVG to fix
+  the specific issue (missing element, wrong color, mirrored, …),
+  re-render, re-diff. ≤3 attempts per year.
+- `3` → tool error. Hard-stop — the orchestrator must intervene.
 
-If a year exhausts the 3 attempts, abort the run for that brand and
-emit `visual_mismatch: <year>` in the final report so the orchestrator
-can mark it `needs_human`. Do not push a PR that the model itself does
-not recognize as the brand.
+The verdict JSON shape is documented in `tools/icon-diff/diff.mjs`.
+The fields you care about for retry: `issues[].code`,
+`issues[].severity`, `checks.pixelmatch.ratio`,
+`checks.palette.maxDeltaE2000`.
+
+After `color.svg` passes (exit 0 or 2), derive `mono.svg` (§5), then
+re-run the same loop with `--variant=mono`. The mono diff is
+silhouette-only — palette ΔE is skipped by the tool.
+
+If a year exhausts 3 attempts on either variant, abort the run for that
+brand and emit `visual_mismatch: <year>` in the final report. Do not
+push.
 
 ### 5. Derive `<year>/mono.svg`
 
-**Mono must scrupulously follow the silhouette of `color.svg`.**
-Geometry-preserving transform only — no re-authoring of path data, no
-shifting of coordinates, no recentering of sub-shapes. If you find
-yourself typing a number that does not appear verbatim in `color.svg`,
-stop: you are rewriting, not deriving.
+Apply `.claude/rules/icon-fidelity.md` §1.3. Geometry-preserving
+transform only — derive, never rewrite.
 
-From the cleaned `color.svg`:
-
-- **Default path = literal copy.** Start by copying each `<path>` from
-  `color.svg` verbatim into `mono.svg` and swap fills. Keep every
-  coordinate, every command, every sub-path order identical.
-- Remove `<linearGradient>` / `<radialGradient>` / `<pattern>`; replace
-  fills that referenced them with `fill="currentColor"`.
-- Replace every `fill="#..."` and named-color fill with
-  `fill="currentColor"`. Leave `fill="none"` untouched.
-- Remove `stroke` unless inherently stroked; if kept, set
-  `stroke="currentColor"`.
-- **Holes in the silhouette** (shapes painted in `color.svg` with the
-  background or contrasting color — e.g. white dots/lines on a colored
-  body): preserve their geometry exactly by concatenating them as
-  additional sub-paths inside the outer path under
-  `fill-rule="evenodd"`. Sub-path coordinates MUST equal the originals
-  in `color.svg`; the only thing that changes is how the cursor reaches
-  each sub-path start (relative `m` deltas may be recomputed for
-  compactness, but absolute landing points stay identical).
-- **Combining overlapping outer shapes** (e.g. a body + a folded-corner
-  triangle that together form one mark): allowed only when the union's
-  boundary is reconstructible from coordinates already present in
-  `color.svg`. Use the existing vertices as line segments — do not
-  invent intermediate points.
-- Do not merge shapes unless silhouette recognizability survives.
-
-Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule: when
-a parent sets `color: red`, the mark must render red.
+Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule:
+when a parent sets `color: red`, the mark must render red.
 
 **Self-check before §4.5 visual compare:** open `color.svg` and
 `mono.svg` side by side. Every dot center, every line rect, every
@@ -309,10 +301,9 @@ attempts** before reporting back.
 
 ### 9. Register the latest icon in the docs library page
 
-The library page at `/library` reads its slug → component mapping from
-**`apps/docs/src/lib/all-icons.ts`** — a hand-maintained file. Brands
-absent from this map silently fall back to text. Add an entry for the
-new brand:
+`apps/docs/src/lib/all-icons.ts` uses a namespace import
+(`import * as BrandIcons from '@brand-icons/react'`); only the
+`latestIconBySlug` object needs editing.
 
 1. Discover the exact React export name from
    `packages/react/src/icons/<PascalBrand>Latest.tsx` (the build pipeline
@@ -320,12 +311,10 @@ new brand:
    `GoogleChromeLatestIcon` (= `chrome` slug),
    `MicrosoftEdgeLatestIcon` (= `edge` slug). The component name does
    **not** always match the slug — read the file to confirm.
-2. Insert the import alphabetically into the `import { … } from
-   '@brand-icons/react'` block at the top.
-3. Insert the slug entry alphabetically into the `latestIconBySlug`
-   object, keyed by `meta.slug` (kebab-case), value = the imported
-   component.
-4. Re-run `pnpm typecheck` to confirm the import resolves.
+2. Insert the slug entry alphabetically into the `latestIconBySlug`
+   object, keyed by `meta.slug` (kebab-case), value =
+   `BrandIcons.<Pascal>LatestIcon`. No top-level import edit needed.
+3. Re-run `pnpm typecheck` to confirm the lookup resolves.
 
 On `--fix` invocations: only touch this file if the reviewer flagged it
 or if the slug entry is still missing.
@@ -400,7 +389,7 @@ Capture the PR URL from `gh pr create`'s stdout.
   `apps/docs/src/lib/all-icons.ts`, or your worktree.
 - **Never** `git push --force` or push to `main`.
 - **Never** merge the PR — that is a human decision.
-- **Refuse** if `/tmp/brand-icons-fetch/<slug>.json` is missing or invalid.
+- **Refuse** if `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` is missing or invalid.
 - **Refuse** if `pnpm build:icons` fails after 3 attempts — surface the
   error and stop so the orchestrator can decide.
 - **Refuse to push** a PR if any year ended the visual self-check

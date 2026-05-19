@@ -13,7 +13,7 @@ specialized sub-agent **per brand, in parallel**, capped at 10 brands.
 The pipeline mirrors the three agents in `.claude/agents/`:
 
 1. **`icon-fetcher`** — web research only. Produces
-   `/tmp/brand-icons-fetch/<slug>.json` + raw assets.
+   `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` + raw assets.
 2. **`icon-builder`** — runs in a git worktree, writes files, opens
    the PR.
 3. **`icon-reviewer`** — read-only verdict comparing builder output
@@ -82,13 +82,14 @@ Each Agent call:
 - `description`: `"Fetch <Brand>"`.
 - `prompt`: a self-contained brief — the brand name, any URL the user
   provided, the slug if overridden, and the explicit reminder that the
-  agent must write `/tmp/brand-icons-fetch/<slug>.json` and exit.
-- **No `isolation`** — fetchers only touch `/tmp/`, so they share the
-  main checkout safely.
+  agent must write `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` and exit.
+- **No `isolation`** — fetchers only write under
+  `${SCRATCH_DIR}` (= main repo's `.claude/.tmp/`, gitignored), so they
+  share the main checkout safely.
 
 When all fetchers have returned, consolidate:
 
-- Verify every `/tmp/brand-icons-fetch/<slug>.json` exists.
+- Verify every `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` exists.
 - If any fetcher failed (no JSON, source not found, raster too small),
   collect those brands into a `failed_fetch` list and surface them at
   the end — do not block the others.
@@ -110,8 +111,9 @@ Agent per brand in a single message**. Each call:
   own branch and working directory.
 - `prompt`: tells the builder its slug and the absolute path to the
   fetcher JSON. Remind it that the JSON references raw assets under
-  `/tmp/brand-icons-fetch/<slug>/<year>/` which are accessible from
-  inside the worktree (they live outside the repo). **Explicitly
+  `${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/` — same absolute path
+  from any worktree (resolved via `git rev-parse --absolute-git-common-dir`).
+  **Explicitly
   instruct the builder to base its branch on `origin/canary`** — the
   harness spawns the worktree from local HEAD (which may be stale), so
   the builder must `git fetch origin canary --no-tags` then
@@ -251,8 +253,9 @@ user can copy them directly.
 - **Cap at 10 per phase.** Token explosion grows linearly with N
   parallel agents; 10 is the sweet spot where review still surfaces
   patterns without blowing the budget.
-- **Worktrees for builders AND reviewers.** Fetchers write to `/tmp/`
-  and never touch the repo — no isolation. Builders mutate `icons/`,
+- **Worktrees for builders AND reviewers.** Fetchers write to
+  `${SCRATCH_DIR}` (gitignored `.claude/.tmp/`) and never touch tracked
+  files — no isolation needed. Builders mutate `icons/`,
   reviewers run `pnpm` and need a clean checkout of the PR branch —
   both require `isolation: "worktree"`. The ~5s setup is worth it to
   prevent collisions and to guarantee the reviewer sees what is

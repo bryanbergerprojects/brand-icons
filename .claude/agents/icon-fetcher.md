@@ -1,7 +1,8 @@
 ---
 name: icon-fetcher
-description: Use proactively when the user asks to research, gather, or look up information about a brand icon (current + historic millésimes). Performs web research only — collects official asset URLs, raw SVG/raster source files, color palettes, and brand metadata for every available millésime. Writes the result to `/tmp/brand-icons-fetch/<slug>.json` plus raw asset files under `/tmp/brand-icons-fetch/<slug>/<year>/`. Does NOT touch `icons/`, packages, or git. The icon-builder agent consumes its output.
+description: Use proactively when the user asks to research, gather, or look up information about a brand icon (current + historic millésimes). Performs web research only — collects official asset URLs, raw SVG/raster source files, color palettes, and brand metadata for every available millésime. Writes the result to `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` plus raw asset files under `${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/`. Does NOT touch `icons/`, packages, or git. The icon-builder agent consumes its output. Do NOT use to write inside `icons/` or `packages/`, run `git`, or fix an existing PR — that is `icon-builder`'s job.
 tools: WebFetch, WebSearch, Read, Write, Edit, Bash, Glob
+model: sonnet
 ---
 
 # Icon fetcher (research)
@@ -26,8 +27,8 @@ builder's job. You write to a scratch directory and report.
 When you finish, this layout must exist:
 
 ```
-/tmp/brand-icons-fetch/<slug>.json
-/tmp/brand-icons-fetch/<slug>/
+${SCRATCH_DIR}/brand-icons-fetch/<slug>.json
+${SCRATCH_DIR}/brand-icons-fetch/<slug>/
 └── <year>/
     ├── raw.<ext>         # original asset (svg | png | jpg | webp)
     ├── preview.png       # 256px PNG rasterized from raw (visual reference)
@@ -62,7 +63,7 @@ The JSON has this shape (the builder validates it):
       "notes": "First public mark.",
       "asset": {
         "kind": "svg",
-        "path": "/tmp/brand-icons-fetch/linear/2019/raw.svg",
+        "path": "${SCRATCH_DIR}/brand-icons-fetch/linear/2019/raw.svg",
         "originalWidth": 24,
         "originalHeight": 24
       }
@@ -73,7 +74,7 @@ The JSON has this shape (the builder validates it):
       "source": "https://linear.app/brand",
       "asset": {
         "kind": "svg",
-        "path": "/tmp/brand-icons-fetch/linear/2023/raw.svg",
+        "path": "${SCRATCH_DIR}/brand-icons-fetch/linear/2023/raw.svg",
         "originalWidth": 24,
         "originalHeight": 24
       }
@@ -92,6 +93,23 @@ Field rules (mirror `.claude/rules/meta.md`):
 - `latest` MUST equal one of `years[].year`.
 - `years` chronological ascending, no duplicates.
 - `parent` `null` for top-level brands; otherwise existing brand `slug`.
+
+## Scratch directory
+
+All output goes under `${SCRATCH_DIR}` — `<project-root>/.claude/.tmp/`.
+First action of every run, compute it:
+
+```bash
+SCRATCH_DIR="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")/.claude/.tmp"
+export SCRATCH_DIR
+mkdir -p "$SCRATCH_DIR/brand-icons-fetch"
+```
+
+`git rev-parse --absolute-git-common-dir` resolves to the **main repo's**
+`.git/` even when invoked from a worktree, so `dirname` returns the main
+repo root. Builder + reviewer (worktrees) compute the same path and read
+the fetcher's output from there. `.claude/*` is already gitignored, so
+the scratch dir never pollutes commits.
 
 ## Workflow
 
@@ -132,7 +150,7 @@ For **historic millésimes** (optional, encouraged):
 
 For each millésime to capture:
 
-1. `mkdir -p /tmp/brand-icons-fetch/<slug>/<year>/`.
+1. `mkdir -p ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/`.
 2. WebFetch the asset URL — preserve the original bytes.
 3. Save as `raw.<ext>` (`.svg`, `.png`, `.jpg`, `.webp`).
 4. Save the URL in `source.txt` (one URL per line).
@@ -146,14 +164,21 @@ reviewer can audit.
 
 ### 3.5 Render the visual reference PNG
 
+Run once at the start of §3 before processing any year — fail fast if
+the helper script isn't available:
+
+```bash
+pnpm run --silent render:svg --help >/dev/null 2>&1 || { echo "render:svg helper not available — abort"; exit 1; }
+```
+
 For every saved asset, produce a 256px PNG sibling at
-`/tmp/brand-icons-fetch/<slug>/<year>/preview.png`. This is the image
+`${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png`. This is the image
 the builder and reviewer will `Read` to verify visual fidelity.
 
 ```bash
 pnpm --silent render:svg \
-  /tmp/brand-icons-fetch/<slug>/<year>/raw.<ext> \
-  /tmp/brand-icons-fetch/<slug>/<year>/preview.png \
+  ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/raw.<ext> \
+  ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
   --width=256
 ```
 
@@ -197,15 +222,15 @@ orchestrator handles confirmation.
 
 ### 6. Write the JSON
 
-`mkdir -p /tmp/brand-icons-fetch/` then write `/tmp/brand-icons-fetch/<slug>.json`.
+`mkdir -p ${SCRATCH_DIR}/brand-icons-fetch/` then write `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json`.
 Validate locally: every `years[i].asset.path` exists on disk; every
 `years[i]` has a sibling `preview.png` (use
-`test -f /tmp/brand-icons-fetch/<slug>/<year>/preview.png`); `latest`
+`test -f ${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png`); `latest`
 appears in `years[].year`; palette arrays are non-empty.
 
 ## Guardrails
 
-- **Never** edit files outside `/tmp/brand-icons-fetch/`. No `icons/`,
+- **Never** edit files outside `${SCRATCH_DIR}/brand-icons-fetch/`. No `icons/`,
   no `packages/`, no `.changeset/`, no git.
 - **Refuse** if you cannot find an authoritative source for the current
   logo — do not invent or hand-draw a logo. (For historic millésimes,
