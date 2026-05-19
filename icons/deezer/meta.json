@@ -1,0 +1,46 @@
+{
+  "slug": "deezer",
+  "name": "Deezer",
+  "category": "media",
+  "description": "Music streaming service offering access to millions of tracks, podcasts, and radio stations worldwide.",
+  "tags": ["music-streaming", "audio", "streaming", "music-discovery", "podcast", "radio", "subscription", "saas"],
+  "brandColor": "#A335FF",
+  "url": "https://www.deezer.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2007",
+      "palette": ["#B2E6FA", "#F680C5", "#ED1C24", "#FFF200", "#EC008C", "#B2DB18", "#59CAF5", "#F6836C", "#D9ED84"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Deezer_logo_2007.svg",
+      "notes": "Icon-only mark extracted from full wordmark SVG. Five vertical columns of colored rectangular blocks (equalizer motif): red, yellow, pink/magenta, lime green, cyan. Text paths (fill:#231f20) omitted."
+    },
+    {
+      "year": "2019",
+      "palette": [
+        "#CC1953",
+        "#222B90",
+        "#241284",
+        "#40AB5D",
+        "#3559A6",
+        "#FF8000",
+        "#367B99",
+        "#FFCC00",
+        "#358C7B",
+        "#33A65E",
+        "#CE1938",
+        "#FD5A22"
+      ],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Deezer_Icon.svg",
+      "notes": "Simplified equalizer bars mark with gradient fills. Four columns in staircase arrangement. Gradient transitions: orange to crimson, yellow to orange-red, crimson to navy, teal to green, navy to steel-blue."
+    },
+    {
+      "year": "2023",
+      "palette": ["#A335FF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Deezer_New_Icon.svg",
+      "notes": "Rebrand announced 2023-11-07 at Deezer Drop event, Paris. Designed by Koto agency. Stylized purple heart of overlapping vertical ovals evoking a sound waveform — brand color Deezer Purple #A335FF."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
