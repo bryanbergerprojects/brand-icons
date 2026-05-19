@@ -28,7 +28,7 @@
     },
     {
       "year": "2022",
-      "palette": ["#6D4AFF", "#7341FF", "#AA8EFF", "#E3D9FF", "#FFFFFF"],
+      "palette": ["#6D4AFF", "#7341FF", "#AA8EFF", "#E3D9FF"],
       "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/mail/src/icon-maskable.svg",
       "notes": "Post-rebrand Proton Mail envelope mark introduced May 2022 as part of the unified Proton identity. Purple gradient palette."
     }
