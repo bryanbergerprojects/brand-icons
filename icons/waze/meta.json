@@ -1,0 +1,27 @@
+{
+  "slug": "waze",
+  "name": "Waze",
+  "category": "platforms",
+  "description": "Community-based GPS navigation app owned by Google that provides real-time traffic and road condition updates.",
+  "tags": ["navigation", "gps", "maps", "traffic", "directions", "driving", "routing", "mobile", "google"],
+  "brandColor": "#33CCFF",
+  "url": "https://www.waze.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2020",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#59899E", "#3D3D3D", "#373737", "#2B5860", "#CFD9DF", "#515252"],
+      "source": "https://cdn.freebiesupply.com/logos/large/2x/waze-logo-svg-vector.svg",
+      "notes": "Original Waze wordmark with pre-rebrand Wazer mascot: speech-bubble character with wheels at front, teal-gray color scheme. Tagline 'OUTSMARTING TRAFFIC, TOGETHER'. Represents the visual identity used from circa 2013 through June 2020."
+    },
+    {
+      "year": "2020",
+      "palette": ["#33CCFF", "#202124", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/en/b/bc/Logo_for_waze.svg",
+      "notes": "Pentagram rebrand (June 2020, designer Natasha Jen). New Boing typeface, rounder Wazer mascot with wheels on both sides. Source SVG is monochrome; color version synthesized from official brand palette (#33CCFF cyan from Waze CDN favicon)."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
