@@ -12,16 +12,40 @@ paths:
 
 ## §1 Must follow
 
-### 1.1 viewBox is `0 0 24 24`
+### 1.1 viewBox is `0 0 24 24` — no exceptions
 
-Unless the official mark is intrinsically non-square (rare). Document the exception in `meta.notes` only.
+Every committed `color.svg` / `mono.svg` MUST declare
+`viewBox="0 0 24 24"`. The framework runtimes
+(`packages/react/src/runtime.tsx`, the Vue / Svelte / WC equivalents)
+inject the inner SVG markup into a parent `<svg viewBox="0 0 24 24">`
+shell — any other canvas size causes path coordinates to fall outside
+the visible viewport and the icon renders **invisible** in the docs
+grid, the playground, and every downstream consumer.
 
 ```xml
 <!-- ✅ Good -->
 <svg viewBox="0 0 24 24" ... />
 
-<!-- ❌ Bad — varying canvas breaks layout in the docs grid -->
-<svg viewBox="0 0 64 64" ... />
+<!-- ❌ Bad — paths drawn at x=312, y=840 are way outside the runtime's 0–24 viewport -->
+<svg viewBox="0 0 1024 1280" ... />
+```
+
+When the official mark is intrinsically non-square (rare — e.g. Figma's
+2:3 pill, a tall logotype), preserve the source geometry **verbatim**
+and fit it inside the 24×24 canvas with a single wrapping
+`<g transform="translate(tx ty) scale(s)">`. Compute the transform
+aspect-preservingly (see `icon-builder.md` §4 step 3 for the exact
+formula). Never rewrite path coordinates; the transform is the only
+allowed adapter.
+
+```xml
+<!-- ✅ Good — non-square source fitted via wrapping transform -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g transform="translate(4 0) scale(0.08)">
+    <!-- original 200×300 paths kept verbatim -->
+    <path fill="#0ACF83" d="M50 300c27.6 0 ..."/>
+  </g>
+</svg>
 ```
 
 ### 1.2 No fixed `width` / `height`
