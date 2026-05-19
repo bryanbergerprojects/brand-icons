@@ -1,0 +1,22 @@
+{
+  "slug": "vivaldi",
+  "name": "Vivaldi",
+  "category": "platforms",
+  "description": "Feature-rich, privacy-focused web browser built on Chromium and designed for power users.",
+  "tags": ["browser", "web-browser", "chromium", "privacy", "power-user", "desktop", "cross-platform"],
+  "brandColor": "#EF3939",
+  "url": "https://vivaldi.com",
+  "repository": "https://github.com/vivaldi",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2017",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#EF3939", "#FFFFFF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Vivaldi_web_browser_logo.svg",
+      "notes": "Flat redesign introduced with Vivaldi 1.11 (August 2017). Replaced the original skeuomorphic long-shadow V mark with a simpler rounded-square + white circle + V symbol. Canonical cross-platform icon, still current as of 2026. Wikimedia file last optimized September 2019."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
