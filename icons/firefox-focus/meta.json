@@ -1,0 +1,30 @@
+{
+  "slug": "firefox-focus",
+  "name": "Firefox Focus",
+  "category": "dev-tools",
+  "description": "Privacy-focused mobile browser by Mozilla with automatic tracker blocking and one-tap browsing history erasure.",
+  "tags": ["browser", "privacy", "mobile", "tracker-blocking", "mozilla", "ios", "android", "open-source"],
+  "brandColor": "#9658F9",
+  "url": "https://www.mozilla.org/firefox/browsers/mobile/focus/",
+  "repository": "https://github.com/mozilla-mobile/firefox-android",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["focus-by-firefox", "firefox-klar"],
+  "parent": "firefox",
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2017",
+      "palette": ["#FF3BE0", "#FF2838", "#FF272D", "#002079", "#000F43"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/2/29/Firefox_Focus_logo%2C_2017.svg",
+      "notes": "Original Firefox Focus icon-only mark (magenta/pink stylized fox flame). Launched as standalone browser on Android in June 2017. viewBox 1024x1024."
+    },
+    {
+      "year": "2021",
+      "palette": ["#9658F9", "#291D4F", "#7542E5", "#AB71FF", "#FFB753", "#FF7583"],
+      "source": "https://raw.githubusercontent.com/mozilla/protocol-assets/main/logos/firefox/browser/focus/logo.svg",
+      "notes": "Redesigned icon with purple/magenta fox and orange-coral gradient inner flame, matching Firefox family rebrand. Official Mozilla protocol-assets release. viewBox 80x80."
+    }
+  ],
+  "addedAt": "2026-05-19",
+  "updatedAt": "2026-05-19"
+}
