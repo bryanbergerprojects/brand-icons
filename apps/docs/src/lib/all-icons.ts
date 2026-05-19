@@ -23,6 +23,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'disney-plus': BrandIcons.DisneyLatestIcon,
   edge: BrandIcons.MicrosoftEdgeLatestIcon,
   facebook: BrandIcons.FacebookLatestIcon,
+  figma: BrandIcons.FigmaLatestIcon,
   firefox: BrandIcons.FirefoxLatestIcon,
   gemini: BrandIcons.GeminiLatestIcon,
   'gemini-cli': BrandIcons.GeminiCLILatestIcon,
