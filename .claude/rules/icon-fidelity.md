@@ -54,6 +54,44 @@ invented vertices — are defined once in `.claude/rules/svg.md`
 **every `<path>` in `color.svg` has a counterpart in `mono.svg`, at
 identical coordinates** — no dropping, no inventing, no drift.
 
+**Contrast parity (no inversion).** Beyond coordinate parity, the mono
+mark must preserve the *light/dark reading* of the color mark. A region
+that reads light in `color.svg` — a white knockout (negative space) or
+a pale highlight tint — must read light in `mono.svg` too: a knockout
+stays a transparent hole (§1.6b), a highlight becomes low-opacity
+currentColor (§1.6). If a white `+` cutout renders as a solid black `+`
+in mono, that is a **contrast inversion** — a fidelity blocker, even
+when path-parity and the pixel-diff both pass. This is the single most
+common mono defect; check it explicitly (see §1.3b below).
+
+### 1.3b The pixel-diff is unreliable when the reference carries a stripped element
+
+The fetcher's `preview.png` is rendered from the *upstream* asset,
+which may include a full-canvas background that §1.7 requires stripping
+from the committed SVG. When that happens, the committed mark renders
+on a transparent canvas while the reference is mostly opaque
+background — `pixelmatch`/`odiff` ratios then balloon (often 60–85%)
+purely from canvas mismatch, not from any real divergence. The high
+ratio is **noise, not signal**.
+
+In that situation the deterministic gate is non-authoritative. The
+agent (builder §4.5, reviewer §7) MUST fall back to direct PNG
+inspection and judge on the *mark itself*:
+
+- **Fill coverage** — does the mark fill the 24×24 box per §1.1 (touches
+  ≥ 2 opposite edges)? A correctly-stripped-but-not-refit mark shows a
+  small centered glyph with wide transparent margin — a §1.1/§1.7
+  violation the pixel-diff cannot see.
+- **Contrast parity** — render `mono.svg` and confirm no inversion
+  (§1.3): cutouts read empty, ink reads filled.
+
+Detect this case when: (a) the produced SVG has no full-canvas
+background but `preview.png` is ≥ ~50% a single flat color, or (b) the
+mono diff ratio is high while the color diff's *palette* ΔE passes. In
+both, do not trust the ratio — inspect. (Long-term fix: the fetcher
+should also emit a transparent-canvas `preview.png`; until then this
+fallback is mandatory.)
+
 ### 1.4 Render-diff-compare self-check (deterministic tool-first)
 
 Mandatory before commit (builder, §4.5) and as the reviewer's §7 check.

@@ -258,6 +258,15 @@ year** (the §1.4 cap). Retry fields in `verdict.json`: `issues[].code`,
 `issues[].severity`, `checks.pixelmatch.ratio`,
 `checks.palette.maxDeltaE2000`.
 
+**Stripped-background false alarm** (`icon-fidelity.md` §1.3b): if you
+removed a full-canvas background per `svg.md` §1.7, the fetcher's
+`preview.png` still carries it, so the diff ratio balloons from canvas
+mismatch alone — it is noise, not a real divergence. Do not chase the
+ratio. Instead `Read` both PNGs and verify the *mark*: (1) it fills the
+24×24 box (touches ≥ 2 opposite edges — if it sits small and centered,
+you forgot to re-fit per §1.7/§1.1); (2) no contrast inversion in mono.
+Record `notes` for the year noting the reference retains a background.
+
 After `color.svg` passes (exit 0 or 2), derive `mono.svg` (§5), then
 re-run with `--variant=mono` (silhouette-only — palette ΔE skipped).
 
@@ -269,11 +278,25 @@ push.
 
 Apply the authoring rules in `.claude/rules/svg.md` §1.4–§1.7
 (`currentColor` fills, gradient → `stop-opacity` ramp, internal detail
-→ `fill-opacity` shades, opaque-background stripping, strokes) and the
-fidelity contract in `.claude/rules/icon-fidelity.md` §1.3.
-Geometry-preserving only — copy each `<path>` verbatim and swap fills;
-derive, never rewrite. If you type a coordinate not already in
-`color.svg`, stop: you are rewriting.
+→ `fill-opacity` shades, knockouts → transparent holes, opaque-background
+stripping, strokes) and the fidelity contract in
+`.claude/rules/icon-fidelity.md` §1.3. Geometry-preserving only — copy
+each `<path>` verbatim and swap fills; derive, never rewrite. If you
+type a coordinate not already in `color.svg`, stop: you are rewriting.
+
+**Do not blindly `s/#fff/currentColor/`.** Classify each light fill
+before swapping (`svg.md` §1.6b):
+
+- **Knockout / cutout** — a white shape that reads as the surface
+  *through* the mark (a `+` punched out of a tile, a counter, a notch).
+  In mono it must stay a **transparent hole**: merge it into the body
+  path with `fill-rule="evenodd"` so it subtracts, or omit it. Painting
+  it `currentColor` inverts the mark (white `+` → black `+`).
+- **Highlight tint** — a pale overlay *on* the body (a folded corner,
+  a sheen). In mono it becomes **low-opacity** currentColor (≈ `.15`–`.3`),
+  driven by how light it *looks*, not by the source `fill-opacity` (a
+  `fill-opacity=".8"` white tint is **not** `.8` in mono — see §1.6).
+- **Mid/dark accent** — higher `fill-opacity` currentColor.
 
 Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule:
 when a parent sets `color: red`, the mark must render red.
@@ -282,8 +305,11 @@ when a parent sets `color: red`, the mark must render red.
 `mono.svg` side by side. Every dot center, every line rect, every
 corner from `color.svg` must appear at the same coordinates in
 `mono.svg`. If any sub-shape has drifted (different center, different
-size, missing folded corner, etc.), redo it — the §4.5 PNG compare is
-the last gate, not the first.
+size, missing folded corner, etc.), redo it. Then the **contrast
+check**: render mono mentally (or via §4.5) — every region that was
+light/white-as-cutout in `color.svg` must read empty, every inked
+region filled. A cutout that turned solid is a contrast inversion;
+redo it. The §4.5 PNG compare is the last gate, not the first.
 
 ### 6. Recompute palette per year
 

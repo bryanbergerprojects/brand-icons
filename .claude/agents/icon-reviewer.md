@@ -175,10 +175,28 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   (Authoring rule: `.claude/rules/svg.md` §1.5.)
 - **Internal-detail parity** (`.claude/rules/svg.md` §1.6): every
   `<path>` in `color.svg` has a counterpart in `mono.svg`. A missing or
-  invented mono `<path>` is a `blocker`.
+  invented mono `<path>` is a `blocker`. A merged `fill-rule="evenodd"`
+  path in mono legitimately covers a body + its knockouts — count it as
+  the counterpart, do not flag it as missing.
 - **No opaque background** (`.claude/rules/svg.md` §1.7): neither
   variant may carry a full-canvas opaque `<rect>` / `<path>` spanning
   the source viewBox. Baking one in is a `blocker`.
+- **Fill coverage** (`.claude/rules/svg.md` §1.1/§1.7): the mark must
+  fill the 24×24 box — its content bbox touches ≥ 2 opposite edges. A
+  small, centered mark with wide transparent margin (typically a
+  background stripped without re-fitting the wrapping `<g transform>`)
+  is a `blocker` on `visual_fidelity`. Inspect the `<g transform>`
+  scale: if it was computed against the *source canvas* rather than the
+  post-strip content bbox, it is wrong.
+- **No contrast inversion in mono** (`.claude/rules/svg.md` §1.6b,
+  `icon-fidelity.md` §1.3): a white knockout in `color.svg` (negative
+  space — a `+` cutout, a counter, a notch) must NOT appear as a solid
+  `fill="currentColor"` path in `mono.svg`; it must be a transparent
+  hole (evenodd subtract / omitted). A light highlight tint must be
+  **low** `fill-opacity` (≈ `.15`–`.3`), not the source overlay alpha.
+  Painted negative space, or a highlight carrying the color file's high
+  `fill-opacity` verbatim, is a `blocker` on `visual_fidelity` — the
+  pixel-diff does not catch this. Confirm by rendering mono (§7).
 
 ### 6. Cross-file coherence
 
@@ -244,6 +262,22 @@ issue list. On a blocker (`1`), `Read` `produced.<variant>.png`,
 emit a `blocker` quoting stderr. If `render:svg` fails or `preview.png`
 is missing, that is itself a `blocker` on `visual_fidelity` (the
 fetcher broke its contract — surface for the orchestrator).
+
+**Stripped-background reference — the diff lies** (`icon-fidelity.md`
+§1.3b). When the committed SVG correctly strips a full-canvas
+background (§1.7) but `preview.png` still carries it, the ratio
+balloons (60–85%) from pure canvas mismatch, **not** real divergence.
+This is a known false positive — do not pass a defective icon on it,
+and do not fail a correct one on it. Detect it when the produced SVG
+has no full-canvas background yet `preview.png` is ≥ ~50% one flat
+color (or mono ratio is high while color's palette ΔE passes). In that
+case the tool verdict is non-authoritative: `Read` the produced PNGs
+and judge the **mark itself** — (a) fill coverage (touches ≥ 2 opposite
+edges, §5); (b) mono contrast parity (no inversion, §5). Report
+`visual_fidelity` from *that* inspection, and add a `warning` noting
+the reference retains a stripped background (so the fetcher can later
+emit a transparent-canvas preview). This is the exact failure mode that
+must NOT slip through as a silent pass.
 
 Issue `where`/`fix` string templates (severity per §2):
 
