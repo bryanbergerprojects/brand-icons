@@ -297,9 +297,19 @@ before swapping (`svg.md` §1.6b):
   driven by how light it *looks*, not by the source `fill-opacity` (a
   `fill-opacity=".8"` white tint is **not** `.8` in mono — see §1.6).
 - **Mid/dark accent** — higher `fill-opacity` currentColor.
+- **Body gradient** — if the dominant shape is a gradient (≥ 2 stops),
+  keep it as a `currentColor` + `stop-opacity` ramp (`svg.md` §1.5),
+  same `gradientTransform`/`cx`/`cy`/`r`. Do **not** flatten it to a
+  solid `currentColor` — that drops the mark's depth (a fidelity
+  regression). The gradient survives the build (`url(#…)` fills are not
+  touched by `convertColors`); a `<mask>` does not (§1.6b) — never use
+  one to carve mono holes.
 
 Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule:
-when a parent sets `color: red`, the mark must render red.
+when a parent sets `color: red`, the mark must render red. When the
+body is a gradient ramp, render the **generated** mono with a non-black
+`color` to confirm the ramp is visible (`currentColor: black` masks
+it).
 
 **Self-check before §4.5 visual compare:** open `color.svg` and
 `mono.svg` side by side. Every dot center, every line rect, every

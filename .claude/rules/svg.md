@@ -116,6 +116,19 @@ The dominant / darker end stays opaque (`stop-opacity="1"`), the
 lighter end fades (typical range `0.2`–`0.6`). Pure-color fills with
 no gradient stay solid `currentColor`.
 
+**This applies to the dominant body fill, not just decorative accents.**
+If the main shape of `color.svg` is a gradient (≥ 2 distinct stops),
+the mono body MUST keep that gradient as a `currentColor` + opacity
+ramp. Collapsing it to a single flat `currentColor` is a fidelity
+regression — the mark loses its depth and reads as a solid slab. Verify
+by rendering the **generated** mono (`packages/core/src/icons/<slug>.ts`)
+with a non-black `color` (e.g. wrap in `color="#16a34a"`): the ramp must
+be visible there, since `currentColor: black` hides it. The gradient is
+safe through the build — SVGO `convertColors` rewrites color *values*,
+not a `fill="url(#…)"` reference, and stops already on `currentColor`
+plus their `stop-opacity` pass through untouched (unlike a `<mask>`,
+§1.6b).
+
 ```xml
 <!-- ❌ Bad — hex stop in mono -->
 <linearGradient id="g"><stop offset="0" stop-color="#1DB954"/></linearGradient>

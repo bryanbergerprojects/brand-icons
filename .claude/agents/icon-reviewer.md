@@ -197,6 +197,14 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   Painted negative space, or a highlight carrying the color file's high
   `fill-opacity` verbatim, is a `blocker` on `visual_fidelity` — the
   pixel-diff does not catch this. Confirm by rendering mono (§7).
+- **Body gradient preserved in mono** (`.claude/rules/svg.md` §1.5): if
+  `color.svg`'s dominant shape is a gradient (≥ 2 distinct stops),
+  `mono.svg` must keep it as a `currentColor` + `stop-opacity` ramp.
+  A mono body flattened to a single solid `currentColor` where the
+  color body was a gradient is a `blocker` on `visual_fidelity` (lost
+  depth). The mono variant skips the palette ΔE diff, so this is not
+  caught deterministically — verify the `mono.svg` source carries a
+  `<radialGradient>`/`<linearGradient>` whenever `color.svg` does.
 
 ### 6. Cross-file coherence
 
