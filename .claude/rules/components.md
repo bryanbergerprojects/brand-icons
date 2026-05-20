@@ -121,6 +121,34 @@ src/components/header.astro      ← links, no state
 src/features/search/search.tsx   ← combobox, fuzzy match
 ```
 
+### 1.6 Register every brand in `apps/docs/src/lib/all-icons.ts`
+
+`apps/docs/src/lib/all-icons.ts` exports a `latestIconBySlug` map keyed
+by brand slug. The `/library` page reads it to render each card's
+icon — a missing entry silently falls back to the brand name as text.
+
+When a new brand ships (manual edit or via `icon-builder`), insert the
+slug alphabetically into `latestIconBySlug`, value =
+`BrandIcons.<Pascal>LatestIcon`. The component export name is **not**
+always the slug (`chrome` → `GoogleChromeLatestIcon`, `edge` →
+`MicrosoftEdgeLatestIcon`) — confirm the exact export by reading the
+generated `packages/react/src/icons/<Pascal>Latest.tsx`.
+
+```ts
+// apps/docs/src/lib/all-icons.ts
+import * as BrandIcons from '@brand-icons/react';
+
+export const latestIconBySlug = {
+  // ...
+  linear: BrandIcons.LinearLatestIcon,
+  // ...
+} as const;
+```
+
+The top-level namespace import already covers every new export — no
+extra `import` line needed. Re-run `pnpm typecheck` to confirm the
+lookup resolves.
+
 ---
 
 ## §2 Conventions

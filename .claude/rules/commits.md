@@ -81,7 +81,7 @@ A reviewer must be able to understand the change from the title alone.
 `{type}/{slug-or-scope}` — kebab-case.
 
 ```
-add-icon/linear            ← icon-fetcher branches
+feat/add-linear            ← icon-builder branches (one per onboarded brand)
 feat/playground-color-picker
 fix/svgo-strip-style
 docs/sprint-3-plan
@@ -95,13 +95,3 @@ Mirror the commit title. The Release workflow uses commit titles for the changel
 ### 2.3 Sign-off
 
 Not required. Provenance is handled by GitHub Actions + NPM provenance, not commit signatures (unless the maintainer opts in to GPG signing locally).
-
-### 2.4 Co-authors
-
-When the change came from a Claude Code session, append:
-
-```
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
-
-Only when the user has approved this footer for the specific commit.

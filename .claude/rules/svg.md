@@ -30,13 +30,31 @@ grid, the playground, and every downstream consumer.
 <svg viewBox="0 0 1024 1280" ... />
 ```
 
-When the official mark is intrinsically non-square (rare — e.g. Figma's
-2:3 pill, a tall logotype), preserve the source geometry **verbatim**
-and fit it inside the 24×24 canvas with a single wrapping
-`<g transform="translate(tx ty) scale(s)">`. Compute the transform
-aspect-preservingly (see `icon-builder.md` §4 step 3 for the exact
-formula). Never rewrite path coordinates; the transform is the only
-allowed adapter.
+When the source canvas is not `0 0 24 24`, preserve the source geometry
+**verbatim** and fit it with a single wrapping `<g transform>`. Never
+rewrite path coordinates; the transform is the only allowed adapter.
+
+Normalization by source case:
+
+- **Already `0 0 24 24`** → use as-is, no wrapper.
+- **Square but different size** (e.g. `0 0 200 200`, `0 0 64 64`) →
+  wrap all content in `<g transform="scale(24/W)">`, `W` = source
+  width. No translate.
+- **Non-square** (e.g. Figma's 2:3 pill, a tall logotype) → identify
+  the **tight content bounding box** `[x y w h]` — usually the declared
+  viewBox, but crop to the content box when the canvas has whitespace
+  padding (e.g. `0 0 1024 1280` with content only in `[312 340 400 600]`).
+  Then compute, formatting `scale`/`tx`/`ty` to ≤ 4 decimals:
+
+  ```
+  scale = 24 / max(w, h)
+  fitW  = w * scale
+  fitH  = h * scale
+  tx    = (24 - fitW) / 2 - x * scale
+  ty    = (24 - fitH) / 2 - y * scale
+  ```
+
+  Wrap every visible child in `<g transform="translate(tx ty) scale(scale)">`.
 
 ```xml
 <!-- ✅ Good — non-square source fitted via wrapping transform -->
@@ -79,11 +97,67 @@ SVGO config in `tools/build-icons` enforces this. The hand-edited input must alr
 
 `mono.svg`: every fill is `fill="currentColor"`. No hex, no named colors. Consumers set the color via CSS `color` on a parent element.
 
-### 1.5 No gradients in `mono`
+### 1.5 Gradients in `mono` — `currentColor` only
 
-`<linearGradient>` / `<radialGradient>` / `<pattern>` are allowed only in `color.svg`. Mono must be solid single-color renderings.
+`<linearGradient>` / `<radialGradient>` / `<pattern>` are allowed in
+`mono.svg` **only** when every `<stop>` resolves to `currentColor` with
+a `stop-opacity` that mirrors the color version's gradient direction
+and stop count. Hex / named stops in mono are forbidden.
 
-### 1.6 No `<script>`, no event handlers, no external refs
+When `color.svg` carries a gradient, derive the mono gradient by
+keeping the same `<linearGradient>` / `<radialGradient>` element (same
+`x1/y1/x2/y2` or `cx/cy/r`), replacing every stop color with
+`currentColor`, and translating the original color stops into
+`stop-opacity` values that reproduce the perceived light→dark ramp.
+The dominant / darker end stays opaque (`stop-opacity="1"`), the
+lighter end fades (typical range `0.2`–`0.6`). Pure-color fills with
+no gradient stay solid `currentColor`.
+
+```xml
+<!-- ❌ Bad — hex stop in mono -->
+<linearGradient id="g"><stop offset="0" stop-color="#1DB954"/></linearGradient>
+
+<!-- ✅ Good — currentColor + opacity ramp preserves the gradient feel -->
+<linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
+  <stop offset="0" stop-color="currentColor" stop-opacity="1"/>
+  <stop offset="1" stop-color="currentColor" stop-opacity="0.35"/>
+</linearGradient>
+```
+
+### 1.6 Internal details as `fill-opacity` shades in `mono`
+
+When `color.svg` contains internal details (eyes, accents, inner
+shapes, layered marks) painted with distinct hues, the mono variant
+must preserve those details as `currentColor` fills with varying
+`fill-opacity`. The dominant silhouette stays opaque
+(`fill-opacity="1"` or omitted); accent shapes fade
+(`fill-opacity≈0.6`); fine details / highlights fade further
+(`fill-opacity≈0.3`).
+
+Pick opacity values by ranking the source hues by perceived luminance
+relative to the dominant color — darker accents stay closer to 1,
+lighter accents step toward 0. Do not invent shapes the color version
+lacks, and do not drop shapes the color version carries: every
+`<path>` from `color.svg` must have a counterpart in `mono.svg`.
+
+### 1.7 Strip opaque background squares / rects
+
+Some upstream assets ship with an opaque white (or off-white) square
+behind the mark — common on app-icon exports, favicons, press-kit
+PNGs traced to SVG. That background is not part of the brand mark and
+must be removed before commit, leaving the canvas transparent.
+
+- Detect via a full-canvas `<rect width="…" height="…" fill="#fff|white|#ffffff">` or
+  a `<path>` whose bounding box matches the source viewBox and whose
+  fill is white / near-white.
+- Strip the offending element entirely. Do **not** repaint it
+  `currentColor` and do **not** keep it with `fill="none"` — delete the
+  node so the SVG renders truly transparent.
+- The same rule applies in `color.svg`: the runtime exposes a
+  `background` prop that wraps the icon in a colored shell, so source
+  files must never bake their own background in.
+
+### 1.8 No `<script>`, no event handlers, no external refs
 
 - No `<script>` blocks.
 - No `on*` attributes.
@@ -92,7 +166,7 @@ SVGO config in `tools/build-icons` enforces this. The hand-edited input must alr
 
 SVG strings are inlined into JS and HTML — anything dynamic is a security and bundle-size risk.
 
-### 1.7 No `<use>` cross-icon references
+### 1.9 No `<use>` cross-icon references
 
 Each `.svg` must be self-contained. The build pipeline assumes this when generating per-icon files.
 

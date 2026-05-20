@@ -141,8 +141,7 @@ Svelte ; WC reads `meta.latest` at runtime.
 ### 1.13 `years[].source`
 
 The URL the SVG was downloaded from. `web.archive.org/wayback/...`
-permitted for retired official assets — see open question in
-[[00-vision-stack]].
+permitted for retired official assets.
 
 ### 1.14 `parent` (optional)
 

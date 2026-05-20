@@ -105,8 +105,8 @@ export SCRATCH_DIR
 mkdir -p "$SCRATCH_DIR/brand-icons-fetch"
 ```
 
-`git rev-parse --absolute-git-common-dir` resolves to the **main repo's**
-`.git/` even when invoked from a worktree, so `dirname` returns the main
+`git rev-parse --path-format=absolute --git-common-dir` resolves to the
+**main repo's** `.git/` even when invoked from a worktree, so `dirname` returns the main
 repo root. Builder + reviewer (worktrees) compute the same path and read
 the fetcher's output from there. `.claude/*` is already gitignored, so
 the scratch dir never pollutes commits.
@@ -130,22 +130,39 @@ builder will refuse anyway and we want to fail fast.
 ### 2. Find official sources
 
 For the **current** logo (always required) — icon-only mark, never the
-full wordmark (icon + brand text). Prefer search terms that surface
-the symbol/logomark:
+full wordmark (icon + brand text).
 
-1. WebSearch: `"<brand> logomark svg"`, `"<brand> symbol svg"`,
-   `"<brand> icon svg"`, `"<brand> app icon"`,
-   `"<brand> monogram"`, `"<brand> favicon"`. Avoid bare `"<brand>
-   logo"` — frequently returns the horizontal wordmark.
-2. Official sites: `<brand>.com/{press,brand,about,brand-assets}` — read
-   the page; pick the asset labeled "symbol", "icon", "mark",
+**Source priority — official brand site first, reference sites second.**
+Always exhaust the brand's own assets (SVG / PNG / WEBP from its
+domain, GitHub org, press kit, app icon, favicon, PWA manifest) before
+falling back to third-party mirrors. Reference sites (Wikimedia,
+Logopedia, simple-icons, brand-resources) are a last resort — they
+frequently host outdated or community-redrawn variants.
+
+Prefer search terms that surface the symbol/logomark:
+
+1. **Official brand site** (highest priority):
+   `<brand>.com/{press,brand,about,brand-assets,newsroom,media-kit}` —
+   read the page; pick the asset labeled "symbol", "icon", "mark",
    "logomark", "app icon", not "logotype" / "horizontal" / "wordmark".
-3. GitHub orgs: `github.com/<brand>` → `logos/`, `.github/`, `brand/`
-   — prefer files named `icon.svg`, `symbol.svg`, `mark.svg`,
-   `logomark.svg`; skip `wordmark.svg`, `*-horizontal.svg`.
-4. Fallback: `<brand>.com/apple-touch-icon.png` (180×180),
-   `<brand>.com/favicon.ico`, PWA manifest icons (`512×512` preferred).
-5. Last resort: well-known mirrors (simple-icons, brand-resources).
+   Try SVG first, then PNG / WEBP at the highest available resolution.
+2. **Official GitHub org**: `github.com/<brand>` → `logos/`,
+   `.github/`, `brand/` — prefer files named `icon.svg`, `symbol.svg`,
+   `mark.svg`, `logomark.svg`; skip `wordmark.svg`, `*-horizontal.svg`.
+3. **Official app/PWA assets**: `<brand>.com/apple-touch-icon.png`
+   (180×180), `<brand>.com/favicon.ico`,
+   `<brand>.com/manifest.json` PWA icons (512×512 preferred). These
+   are always icon-only and always served from the brand's domain.
+4. **WebSearch** scoped to the brand's domain first
+   (`site:<brand>.com logomark svg`), then broader:
+   `"<brand> logomark svg"`, `"<brand> symbol svg"`,
+   `"<brand> icon svg"`, `"<brand> app icon"`,
+   `"<brand> monogram"`, `"<brand> favicon"`. Avoid bare
+   `"<brand> logo"` — frequently returns the horizontal wordmark.
+5. **Reference sites** (last resort, only when steps 1–4 exhausted):
+   Wikimedia Commons, Logopedia, simple-icons, brand-resources. Treat
+   the asset as authoritative only if it visibly matches what the
+   brand's own site serves at lower resolution.
 
 For **historic millésimes** (optional, encouraged):
 
@@ -258,15 +275,14 @@ half-built scratch dir for the builder.
 
 ### 4. Extract palette per year
 
-For each saved asset, derive `palette`:
+For each saved asset, derive `palette` per `.claude/rules/meta.md`
+§1.12 (collect `fill`/`stop-color`/`stroke` hex, flatten gradient
+stops, weight by surface, cluster RGB distance < 12, output 1–12
+uppercase `#RRGGBB` sorted by weight desc):
 
-- SVG: parse the file, collect every `fill`, `stop-color`, `stroke` hex,
-  flatten gradient stops, weight by approximate bounding-box surface,
-  cluster RGB distance < 12, output 1–12 uppercase `#RRGGBB` entries
-  sorted by weight descending.
-- Raster: sample dominant colors via any heuristic that approximates the
-  above (you can describe a textual estimate; the builder will recompute
-  precisely after vectorization).
+- SVG: compute it from the file.
+- Raster: a textual estimate is fine — the builder recomputes precisely
+  after vectorization.
 
 ### 5. Assemble brand metadata
 

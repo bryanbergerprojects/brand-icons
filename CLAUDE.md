@@ -32,8 +32,9 @@ icons/                  # Source of truth — one folder per brand, year-aware
 tools/
   build-icons/          # @brand-icons/build-icons — generates package sources
 .claude/
-  agents/               # icon-fetcher
+  agents/               # icon-fetcher, icon-builder, icon-reviewer
   rules/                # Authoring rules (typescript, react, svg, meta, …)
+  skills/               # add-icons (multi-brand orchestrator)
 ```
 
 ## Commands
@@ -79,7 +80,7 @@ Three specialized agents form the icon-onboarding pipeline:
 
 - **`.claude/agents/icon-fetcher.md`** — research only. Performs web
   discovery for one brand (current + historic millésimes), downloads
-  raw assets, and writes `/tmp/brand-icons-fetch/<slug>.json` plus the
+  raw assets, and writes `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` plus the
   raw files. Never writes inside `icons/` or `packages/`, never runs git.
 - **`.claude/agents/icon-builder.md`** — consumes the fetcher's JSON in
   an isolated git worktree, materializes `icons/<slug>/meta.json` plus
@@ -144,7 +145,7 @@ templates in `tools/build-icons/templates/` instead.
 ## Git & releases
 
 - Conventional commits, English, imperative mood, lowercase.
-- Branch format: `{type}/{scope-or-slug}` — e.g. `add-icon/linear`, `feat/playground`, `fix/svgo-config`.
+- Branch format: `{type}/{slug-or-scope}` — e.g. `feat/add-linear` (icon onboarding), `feat/playground-color-picker`, `fix/svgo-strip-style`. See `.claude/rules/commits.md` §2.1.
 - One commit = one intention.
 - Every user-visible change → `pnpm changeset`.
 - Release happens through the `Release` GitHub Action when the version PR is merged.

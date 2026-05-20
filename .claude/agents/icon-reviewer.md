@@ -159,17 +159,26 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   (`packages/react/src/runtime.tsx` and its Vue / Svelte / WC siblings)
   inject the inner markup into a hardcoded 24×24 shell, so a different
   canvas renders invisible at every call site. Non-square source marks
-  must be fitted via a wrapping `<g transform>` (see `svg.md` §1.1 and
-  `icon-builder.md` §4 step 3) — never by mutating coordinates.
+  must be fitted via a wrapping `<g transform>` (see `svg.md` §1.1)
+  — never by mutating coordinates.
 - No `<title>`, `<desc>`, `<metadata>`, `sodipodi:*`, or `inkscape:*`
   leftovers.
 - No fixed `width=`/`height=` on the root `<svg>`.
 - `color.svg` contains at least one explicit color (`fill`/`stroke`
   hex or named color, or a gradient with hex stops).
 - `mono.svg` contains **no** hex fill or named color other than
-  `currentColor` and `none`. Any `#xxxxxx` fill in mono is a `blocker`.
-- `mono.svg` has no `<linearGradient>` / `<radialGradient>` /
-  `<pattern>` left over.
+  `currentColor` and `none`. Any `#xxxxxx` fill or `stop-color="#..."`
+  in mono is a `blocker`.
+- Gradients in `mono.svg` (`<linearGradient>` / `<radialGradient>`)
+  allowed **only** when every `<stop>` is `stop-color="currentColor"`;
+  any other stop is a `blocker`. `<pattern>` is forbidden in mono.
+  (Authoring rule: `.claude/rules/svg.md` §1.5.)
+- **Internal-detail parity** (`.claude/rules/svg.md` §1.6): every
+  `<path>` in `color.svg` has a counterpart in `mono.svg`. A missing or
+  invented mono `<path>` is a `blocker`.
+- **No opaque background** (`.claude/rules/svg.md` §1.7): neither
+  variant may carry a full-canvas opaque `<rect>` / `<path>` spanning
+  the source viewBox. Baking one in is a `blocker`.
 
 ### 6. Cross-file coherence
 
@@ -177,11 +186,9 @@ For every `<year>/color.svg` and `<year>/mono.svg`:
   both files. Mismatch is a `blocker`.
 - No orphan `<year>/` directory not declared in `meta.years[]`.
   Orphan is a `blocker`.
-- **`apps/docs/src/lib/all-icons.ts` registers the slug** — the file
-  must contain an entry of the form `'<slug>': BrandIcons.<Pascal>LatestIcon`
-  inside `latestIconBySlug`. Without it, the `/library` page silently
-  renders the brand name as text instead of the icon. Missing entry is
-  a `blocker` on `docs_registration`. Verify with:
+- **`apps/docs/src/lib/all-icons.ts` registers the slug** in
+  `latestIconBySlug` (rule: `.claude/rules/components.md` §1.6). Missing
+  entry is a `blocker` on `docs_registration`. Verify with:
 
   ```bash
   grep -E "['\"]<slug>['\"][[:space:]]*:" apps/docs/src/lib/all-icons.ts
@@ -195,71 +202,57 @@ Structural conformance is necessary but not sufficient. A builder can
 ship a clean, well-formed SVG that simply does **not look like the
 brand**. This check catches that.
 
-Use the same deterministic visual diff pipeline as the builder (§4.5).
-Apply `.claude/rules/icon-fidelity.md` §1.1–§1.2 and §1.4 against every
-year in `meta.years[]`:
+Run the same deterministic diff pipeline as the builder — pipeline
+order, exit codes (`0`/`2`/`1`/`3`), and thresholds live in
+`.claude/rules/icon-fidelity.md` §1.4; the `issues[].code` → severity
+mapping lives in §2. Apply it to every year in `meta.years[]`, for both
+`color.svg` (`--variant=color`) and `mono.svg` (`--variant=mono`,
+silhouette-only):
 
 ```bash
 mkdir -p ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/
 
-# 1. Render the produced color.svg.
+# color
 pnpm --silent render:svg \
   icons/<slug>/<year>/color.svg \
   ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.color.png \
   --width=256
-
-# 2. Run deterministic visual diff against the fetcher's preview.
 pnpm --silent icon:diff \
   --produced=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.color.png \
   --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
   --output-dir=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/color/ \
-  --variant=color \
-  --quiet
-COLOR_EXIT=$?
+  --variant=color --quiet
 COLOR_VERDICT=$(cat ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/color/verdict.json)
 
-# 3. Repeat for mono.svg (silhouette-only — palette ΔE skipped).
+# mono
 pnpm --silent render:svg \
   icons/<slug>/<year>/mono.svg \
   ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.mono.png \
   --width=256
-
 pnpm --silent icon:diff \
   --produced=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/produced.mono.png \
   --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
   --output-dir=${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/mono/ \
-  --variant=mono \
-  --quiet
-MONO_EXIT=$?
+  --variant=mono --quiet
 MONO_VERDICT=$(cat ${SCRATCH_DIR}/brand-icons-review/<slug>/<year>/mono/verdict.json)
 ```
 
-Translate exit codes into the reviewer's `checks.visual_fidelity` and
-issue list:
+Fold both verdicts into `checks.visual_fidelity` (worst wins) and the
+issue list. On a blocker (`1`), `Read` `produced.<variant>.png`,
+`preview.png`, and `<variant>/diff.png` only to enrich the
+`issues[].where`/`fix` strings — never to override the tool. On `3`
+emit a `blocker` quoting stderr. If `render:svg` fails or `preview.png`
+is missing, that is itself a `blocker` on `visual_fidelity` (the
+fetcher broke its contract — surface for the orchestrator).
 
-- `0` → `pass`.
-- `2` → `warning` per issue (`issues[]` from verdict JSON, mapped 1:1).
-- `1` → `blocker` per issue. `Read` `produced.<variant>.png`,
-  `preview.png`, and `diff.png` (under `<variant>/diff.png`) only to
-  enrich the `issues[].where`/`fix` strings with a one-line
-  description of *what* is off — never to override the tool's verdict.
-- `3` → tool error. Emit a `blocker` on `visual_fidelity` quoting
-  stderr.
+Issue `where`/`fix` string templates (severity per §2):
 
-Map `verdict.issues[].code` to the reviewer's output:
-
-- `silhouette_diff` → `blocker`, `where: icons/<slug>/<year>/<variant>.svg`,
+- `silhouette_diff` → `where: icons/<slug>/<year>/<variant>.svg`,
   `fix: rebuild from fetcher source — silhouette diverges by <ratio>%`.
-- `silhouette_drift` → `warning`, `fix: minor shape drift, verify
-  against brand guidelines`.
-- `hue_mismatch` → `blocker`, `where: icons/<slug>/<year>/color.svg`,
+- `silhouette_drift` → `fix: minor shape drift, verify against brand guidelines`.
+- `hue_mismatch` → `where: icons/<slug>/<year>/color.svg`,
   `fix: restore brand colors — ΔE2000=<value> on top entry`.
-- `hue_drift` → `warning`, `fix: hue verification against brand
-  guidelines recommended`.
-
-If the render command fails or `preview.png` is missing, that is itself
-a `blocker` on `visual_fidelity` (the fetcher did not honor its
-contract — surface so the orchestrator can re-run it).
+- `hue_drift` → `fix: hue verification against brand guidelines recommended`.
 
 ### 8. Sanity checks on the builder's PR
 

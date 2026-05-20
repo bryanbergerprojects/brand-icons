@@ -72,11 +72,8 @@ When you finish, all of these are true:
    `tools/build-icons` (see `.claude/rules/meta.md`).
 2. For every year in `meta.years[]`, `icons/<slug>/<year>/color.svg` and
    `icons/<slug>/<year>/mono.svg` exist and follow `.claude/rules/svg.md`.
-3. `apps/docs/src/lib/all-icons.ts` imports `<Brand>LatestIcon` from
-   `@brand-icons/react` and registers it in `latestIconBySlug` under the
-   brand `slug`. Without this entry, the library page (`/library`)
-   silently falls back to the brand name as text instead of rendering
-   the icon.
+3. `apps/docs/src/lib/all-icons.ts` registers the slug in
+   `latestIconBySlug` (see `.claude/rules/components.md` §1.6).
 4. `pnpm build:icons`, `pnpm typecheck`, and `pnpm test` all pass on the
    branch.
 5. A changeset file exists under `.changeset/`.
@@ -198,36 +195,11 @@ For every `year` in `years[]`:
 2. Strip `<title>`, `<desc>`, comments, editor metadata
    (`<sodipodi:*>`, `<inkscape:*>`, `<metadata>`), fixed `width`/`height`,
    stray `class`/`id`, and `style` attributes that don't carry a role.
-3. **Force `viewBox="0 0 24 24"`** — non-negotiable, see
-   `.claude/rules/svg.md` §1.1. The framework runtimes inject the inner
-   markup into a hardcoded `<svg viewBox="0 0 24 24">`; any other
-   canvas means the icon renders invisible at every call site. Never
-   rewrite path coordinates — geometry stays verbatim and is fitted via
-   a wrapping transform:
-
-   - **Source viewBox already `0 0 24 24`** → use as-is.
-   - **Source viewBox is square but different size** (e.g. `0 0 200 200`,
-     `0 0 64 64`): wrap the entire content in
-     `<g transform="scale(24/<W>)">` where `W` is the source width. No
-     translate needed.
-   - **Source viewBox is non-square** (e.g. Figma 2016 `0 0 200 300`,
-     a tall logotype `0 0 100 200`): identify the **tight content
-     bounding box** `[x y w h]` — usually the SVG's declared viewBox,
-     but if the source canvas has whitespace padding (e.g. Figma 2024
-     `0 0 1024 1280` with content only in `[312 340 400 600]`), crop
-     to the tight box. Then compute:
-
-     ```
-     scale = 24 / max(w, h)
-     fitW  = w * scale
-     fitH  = h * scale
-     tx    = (24 - fitW) / 2 - x * scale
-     ty    = (24 - fitH) / 2 - y * scale
-     ```
-
-     Wrap every visible child in a single
-     `<g transform="translate(tx ty) scale(scale)">`. Format `tx`, `ty`,
-     `scale` with at most 4 decimals.
+3. **Force `viewBox="0 0 24 24"`** — non-negotiable. Apply the
+   wrapping-transform normalization (square-scale and non-square
+   bounding-box formula) from `.claude/rules/svg.md` §1.1. Never rewrite
+   path coordinates — geometry stays verbatim, the transform is the
+   only adapter.
    - **Root attributes**: keep `fill="none"` on the `<svg>` root if the
      source had it (some marks rely on it). Drop everything else from
      the original `<svg>` open tag.
@@ -253,57 +225,41 @@ Validate every produced SVG against `.claude/rules/svg.md` §1.
 
 ### 4.5 Visual self-check (mandatory)
 
-Deterministic tool-first pipeline. The LLM only inspects PNGs when the
-tool flags a blocker — and then only to describe the mismatch, never to
-override the verdict.
+Run the deterministic render-diff-compare pipeline from
+`.claude/rules/icon-fidelity.md` §1.4 — pipeline order, exit-code
+semantics (`0` pass / `2` warning / `1` blocker / `3` tool error), and
+thresholds all live there. Builder-specific deltas:
 
-The aspect gate from §3.5 already filtered wordmarks; this stage
-verifies the produced SVG visually matches the (icon-only) reference.
-The `wide_mark_intentional` override flag does NOT apply here — visual
-fidelity is enforced regardless.
+- **Stage path** = `${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/`.
+- The aspect gate from §3.5 already filtered wordmarks; this stage
+  verifies the produced SVG visually matches the (icon-only) reference.
+  The `wide_mark_intentional` override does NOT apply here — visual
+  fidelity is enforced regardless.
 
-For every year:
+For every year, render `color.svg` and diff with `--variant=color`:
 
 ```bash
 mkdir -p ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/
-
-# 1. Render produced color.svg to PNG (256×256).
 pnpm --silent render:svg \
   icons/<slug>/<year>/color.svg \
   ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/produced.png \
   --width=256
-
-# 2. Run the deterministic visual diff (odiff + pixelmatch + ΔE 2000).
 pnpm --silent icon:diff \
   --produced=${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/produced.png \
   --reference=${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/preview.png \
   --output-dir=${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/ \
   --variant=color \
   --quiet
-DIFF_EXIT=$?
-
-# 3. Read the structured verdict.
-cat ${SCRATCH_DIR}/brand-icons-build/<slug>/<year>/verdict.json
 ```
 
-Interpret the exit code:
-
-- `0` → pass. Move on.
-- `2` → warning. Note the issue in the final report; continue.
-- `1` → blocker. `Read` the produced PNG and the reference PNG to
-  describe the mismatch in your retry rationale, edit the SVG to fix
-  the specific issue (missing element, wrong color, mirrored, …),
-  re-render, re-diff. ≤3 attempts per year.
-- `3` → tool error. Hard-stop — the orchestrator must intervene.
-
-The verdict JSON shape is documented in `tools/icon-diff/diff.mjs`.
-The fields you care about for retry: `issues[].code`,
+On a `1` (blocker), `Read` `produced.png` + `preview.png` to describe
+the mismatch, edit the SVG, re-render, re-diff — **≤ 3 attempts per
+year** (the §1.4 cap). Retry fields in `verdict.json`: `issues[].code`,
 `issues[].severity`, `checks.pixelmatch.ratio`,
 `checks.palette.maxDeltaE2000`.
 
 After `color.svg` passes (exit 0 or 2), derive `mono.svg` (§5), then
-re-run the same loop with `--variant=mono`. The mono diff is
-silhouette-only — palette ΔE is skipped by the tool.
+re-run with `--variant=mono` (silhouette-only — palette ΔE skipped).
 
 If a year exhausts 3 attempts on either variant, abort the run for that
 brand and emit `visual_mismatch: <year>` in the final report. Do not
@@ -311,8 +267,13 @@ push.
 
 ### 5. Derive `<year>/mono.svg`
 
-Apply `.claude/rules/icon-fidelity.md` §1.3. Geometry-preserving
-transform only — derive, never rewrite.
+Apply the authoring rules in `.claude/rules/svg.md` §1.4–§1.7
+(`currentColor` fills, gradient → `stop-opacity` ramp, internal detail
+→ `fill-opacity` shades, opaque-background stripping, strokes) and the
+fidelity contract in `.claude/rules/icon-fidelity.md` §1.3.
+Geometry-preserving only — copy each `<path>` verbatim and swap fills;
+derive, never rewrite. If you type a coordinate not already in
+`color.svg`, stop: you are rewriting.
 
 Write `icons/<slug>/<year>/mono.svg`. Verify with the consumer rule:
 when a parent sets `color: red`, the mark must render red.
@@ -326,14 +287,10 @@ the last gate, not the first.
 
 ### 6. Recompute palette per year
 
-Re-derive `palette` from your cleaned `color.svg` (not from the raw):
-
-- Collect `fill` / `stop-color` / `stroke` hex values, flatten gradient
-  stops, weight by bounding-box surface × opacity, cluster RGB distance < 12.
-- 1–12 uppercase `#RRGGBB`, sorted by weight desc.
-
-If your recomputed palette diverges from the fetcher's by more than one
-entry, prefer **yours** — yours reflects the actual file the consumer ships.
+Re-derive `palette` from your cleaned `color.svg` (not the raw) per the
+algorithm in `.claude/rules/meta.md` §1.12. If your recomputed palette
+diverges from the fetcher's by more than one entry, prefer **yours** —
+it reflects the file the consumer actually ships.
 
 ### 7. Write `icons/<slug>/meta.json`
 
@@ -370,23 +327,20 @@ attempts** before reporting back.
 
 ### 9. Register the latest icon in the docs library page
 
-`apps/docs/src/lib/all-icons.ts` uses a namespace import
-(`import * as BrandIcons from '@brand-icons/react'`); only the
-`latestIconBySlug` object needs editing.
+Per `.claude/rules/components.md` §1.6: insert the slug into the
+`latestIconBySlug` map in `apps/docs/src/lib/all-icons.ts`, value =
+`BrandIcons.<Pascal>LatestIcon`. The file uses a namespace import — no
+top-level `import` edit needed.
 
-1. Discover the exact React export name from
-   `packages/react/src/icons/<PascalBrand>Latest.tsx` (the build pipeline
-   just generated it). Example: `TelegramLatestIcon`,
-   `GoogleChromeLatestIcon` (= `chrome` slug),
-   `MicrosoftEdgeLatestIcon` (= `edge` slug). The component name does
-   **not** always match the slug — read the file to confirm.
-2. Insert the slug entry alphabetically into the `latestIconBySlug`
-   object, keyed by `meta.slug` (kebab-case), value =
-   `BrandIcons.<Pascal>LatestIcon`. No top-level import edit needed.
+1. Discover the exact export name from the generated
+   `packages/react/src/icons/<PascalBrand>Latest.tsx` — it does **not**
+   always match the slug (`chrome` → `GoogleChromeLatestIcon`, `edge` →
+   `MicrosoftEdgeLatestIcon`).
+2. Insert the entry alphabetically, keyed by `meta.slug` (kebab-case).
 3. Re-run `pnpm typecheck` to confirm the lookup resolves.
 
 On `--fix` invocations: only touch this file if the reviewer flagged it
-or if the slug entry is still missing.
+or the slug entry is still missing.
 
 ### 10. Create a changeset
 

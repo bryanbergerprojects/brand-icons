@@ -53,12 +53,21 @@ spawning anything. Do not stop in the middle of the pipeline to ask.
 ## Scratch directory convention
 
 Every agent (fetcher, builder, reviewer) computes its own `SCRATCH_DIR`
-via `git rev-parse --absolute-git-common-dir` — it resolves to the
-**main repo's** `.claude/.tmp/` from any worktree, so all agents read
+via `git rev-parse --path-format=absolute --git-common-dir` — it
+resolves to the **main repo's** `.claude/.tmp/` from any worktree, so all agents read
 and write the same shared scratch tree. The orchestrator never sets
 `SCRATCH_DIR` itself; it only references the path verbatim in agent
 prompts (e.g. `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json`). The
 directory is gitignored — never committed.
+
+## Isolation policy
+
+Full rule in `references/parallelism-and-errors.md`. In short: fetchers
+(Phase 1) run with **no** `isolation`; builders + reviewers (Phases 2,
+3, 4, post-fix) **require** `isolation: "worktree"`.
+
+Capture each spawned worktree's path from the Agent result — Phase 5
+cleanup needs them.
 
 ## Pre-flight checks (run once, sequentially)
 
@@ -70,8 +79,8 @@ gh auth status                                           # need gh for PR creati
 test -d .changeset                                       # need changesets configured
 git fetch origin canary --no-tags                        # refresh the authoritative base tip
 git rev-parse origin/canary                              # must resolve — builders branch from here
-pnpm --silent render:svg --help >/dev/null 2>&1 || { echo "render:svg helper missing — abort"; exit 1; }
-pnpm --silent icon:diff   --help >/dev/null 2>&1 || { echo "icon:diff helper missing — abort"; exit 1; }
+test -f tools/render-svg/render.mjs || { echo "render:svg helper missing — abort"; exit 1; }
+test -f tools/icon-diff/diff.mjs    || { echo "icon:diff helper missing — abort"; exit 1; }
 ```
 
 If any pre-flight fails, surface it and stop — the builders will not
@@ -97,17 +106,11 @@ Each Agent call:
 
 - `subagent_type: "icon-fetcher"`.
 - `description`: `"Fetch <Brand>"`.
-- `prompt`: a self-contained brief — the brand name, any URL the user
-  provided, the slug if overridden, and the explicit reminder that the
-  agent must write `${SCRATCH_DIR}/brand-icons-fetch/<slug>.json` and exit.
-  **Capture the icon-only mark (symbol / logomark), never the full
-  wordmark (icon + brand text).** If no icon-only source is available,
-  the fetcher walks its fallback waterfall (app icon → favicon → PWA
-  manifest icon). On exhaustion, the fetcher skips the year with
-  `notes: "icon_only_unavailable"` — see icon-fetcher §2.5.
-- **No `isolation`** — fetchers only write under
-  `${SCRATCH_DIR}` (= main repo's `.claude/.tmp/`, gitignored), so they
-  share the main checkout safely.
+- `prompt`: a self-contained brief — brand name, any URL the user
+  provided, slug if overridden. The fetcher contract (icon-only mark,
+  fallback waterfall, `icon_only_unavailable` skip) is owned by
+  `icon-fetcher.md` §2.5; do not restate it in the prompt.
+- No `isolation` — see Isolation policy above.
 
 When all fetchers have returned, consolidate:
 
@@ -130,19 +133,16 @@ Agent per brand in a single message**. Each call:
 
 - `subagent_type: "icon-builder"`.
 - `description`: `"Build <Brand> PR"`.
-- `isolation: "worktree"` — **mandatory**. Without it, parallel
-  builders will collide on the same checkout. Each worktree gets its
-  own branch and working directory.
+- `isolation: "worktree"` (see Isolation policy).
 - `prompt`: tells the builder its slug and the absolute path to the
   fetcher JSON. Remind it that the JSON references raw assets under
   `${SCRATCH_DIR}/brand-icons-fetch/<slug>/<year>/` — same absolute path
-  from any worktree (resolved via `git rev-parse --absolute-git-common-dir`).
-  **Explicitly
-  instruct the builder to base its branch on `origin/canary`** — the
-  harness spawns the worktree from local HEAD (which may be stale), so
-  the builder must `git fetch origin canary --no-tags` then
-  `git switch -C feat/add-<slug> origin/canary` before any file write.
-  PRs target `canary`, not `main`.
+  from any worktree (resolved via `git rev-parse --path-format=absolute --git-common-dir`).
+  **Explicitly instruct the builder to base its branch on
+  `origin/canary`** — the harness spawns the worktree from local HEAD
+  (which may be stale), so the builder must `git fetch origin canary
+  --no-tags` then `git switch -C feat/add-<slug> origin/canary` before
+  any file write. PRs target `canary`, not `main`.
 
 Capture from each builder's result:
 
@@ -172,10 +172,10 @@ brand in a single message**:
 
 - `subagent_type: "icon-reviewer"`.
 - `description`: `"Review <Brand> PR"`.
-- `isolation: "worktree"` — **mandatory**. The reviewer must work in
-  its own worktree and fetch the PR's branch from `origin` so it
-  reviews the artifact that is actually on the PR, not a local
-  directory that may already be cleaned up.
+- `isolation: "worktree"` (see Isolation policy). The reviewer fetches
+  the PR's branch from `origin` into its worktree — review the
+  artifact that is actually on the PR, not a local directory that may
+  already be cleaned up.
 - `prompt`: includes the slug, `--pr=<url>`, and
   `--branch=feat/add-<slug>`. Do **not** pass `--worktree=<path>` —
   the reviewer rejects it and always fetches `origin/<branch>` into
@@ -199,9 +199,8 @@ with `--fix`**. Each call:
 
 - `subagent_type: "icon-builder"`.
 - `description`: `"Fix <Brand> PR"`.
-- `isolation: "worktree"` — gives the fix builder a fresh worktree.
-  The original builder's worktree is not reused — that path is opaque
-  to the harness.
+- `isolation: "worktree"` (see Isolation policy). Fresh worktree;
+  the original builder's path is opaque to the harness — never reuse.
 - `prompt`: includes the slug, `--fix=<pr-url>`, and the reviewer's
   JSON `issues` array verbatim. Remind it to `git fetch origin
   feat/add-<slug>` and `git switch -C feat/add-<slug>
@@ -258,58 +257,12 @@ keeps output tidy.
 
 ## Final report
 
-Print a single markdown block to the user:
+See `references/final-report-template.md` for the exact markdown
+table to print, plus token-budget rules for quoting fetcher / builder
+/ reviewer output.
 
-```markdown
-## Icon onboarding — <N> brand(s)
+## Parallelism + error policy
 
-| Brand | Slug | PR | Status |
-|-------|------|----|--------|
-| Linear | linear | https://github.com/.../pull/42 | ✅ pass |
-| Discord | discord | https://github.com/.../pull/43 | ⚠️ pass with warnings |
-| Brave | brave | https://github.com/.../pull/44 | 🔁 fixed (round 2) |
-| Notion | notion | — | ❌ needs_human: <reason> |
-| Figma | figma | — | ❌ failed_fetch: <reason> |
-| Slack | slack | — | ❌ failed_build: <reason> |
-| Adobe | adobe | — | ❌ needs_human: wordmark_rejected (2023, 5.2:1) |
-
-**Warnings**: <list per brand>
-**Needs human**: <list per brand>
-**Cleanup**: <list of worktree paths that failed to remove, or "all clean">
-```
-
-Then list the PR URLs as a plain bullet list at the bottom so the
-user can copy them directly.
-
-## Parallelism — the rules that matter
-
-- **One message, many Agent calls.** Claude Code runs Agent tool uses
-  inside the same assistant message concurrently. Two messages with one
-  call each run serially. Always batch.
-- **Cap at 10 per phase.** Token explosion grows linearly with N
-  parallel agents; 10 is the sweet spot where review still surfaces
-  patterns without blowing the budget.
-- **Worktrees for builders AND reviewers, never fetchers.** Fetchers
-  write only to `${SCRATCH_DIR}` (no isolation). Builders + reviewers
-  mutate tracked files or need a clean PR checkout — `isolation:
-  "worktree"` is mandatory. Rationale repeated per-phase above.
-- **Never re-spawn a phase mid-run.** If a fetcher times out, mark it
-  failed and continue with the rest. The pipeline is best-effort across
-  brands, not all-or-nothing.
-
-## Error policy
-
-- A single brand's failure must **not** stop the others. Always collect
-  failures into the final report.
-- Pre-flight failures (missing `gh`, no `.changeset/`, dirty working
-  tree, wrong base branch) **do** stop everything — abort before
-  Phase 1.
-- After Phase 4, if a brand still fails review twice, leave its PR
-  open and label the row `needs_human`. Do not auto-close it.
-
-## Token-budget reminders
-
-Fetcher + builder reports are short — keep them verbatim (narrative
-trace + PR URLs). Reviewer JSON is the longest payload — quote only
-`issues` and `status`; drop the per-check breakdown unless a check
-failed.
+See `references/parallelism-and-errors.md` — one-message batching,
+≤ 10 cap per phase, isolation rules, per-brand failure containment,
+abort-on-pre-flight, two-fix ceiling.

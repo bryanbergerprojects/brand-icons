@@ -46,21 +46,13 @@ of coordinates, no recentering of sub-shapes. If you type a number
 that does not appear verbatim in `color.svg`, stop: you are rewriting,
 not deriving.
 
-- **Default path = literal copy.** Copy each `<path>` from `color.svg`
-  verbatim into `mono.svg` and swap fills.
-- Remove `<linearGradient>` / `<radialGradient>` / `<pattern>`; replace
-  fills that referenced them with `fill="currentColor"`.
-- Replace every `fill="#..."` and named-color fill with
-  `fill="currentColor"`. Leave `fill="none"` untouched.
-- Remove `stroke` unless inherently stroked; if kept, set
-  `stroke="currentColor"`.
-- **Holes** (shapes painted with background/contrast in `color.svg`):
-  preserve geometry exactly by concatenating sub-paths under
-  `fill-rule="evenodd"`. Absolute landing points stay identical;
-  relative `m` deltas may be recomputed for compactness.
-- **Combining overlapping outer shapes** allowed only when the union's
-  boundary is reconstructible from coordinates already in `color.svg`.
-  Use existing vertices — never invent intermediate points.
+The mechanical authoring rules — literal-copy paths, gradients →
+`currentColor` + `stop-opacity` ramp, internal details → `fill-opacity`
+shades, strip opaque backgrounds, holes via `fill-rule="evenodd"`, no
+invented vertices — are defined once in `.claude/rules/svg.md`
+§1.4–§1.7. This section adds only the fidelity contract on top of them:
+**every `<path>` in `color.svg` has a counterpart in `mono.svg`, at
+identical coordinates** — no dropping, no inventing, no drift.
 
 ### 1.4 Render-diff-compare self-check (deterministic tool-first)
 
