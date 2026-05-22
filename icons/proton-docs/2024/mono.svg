@@ -1,15 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <g transform="scale(0.5)">
-    <path fill="url(#proton-docs-2024-mono-grad)" d="M40 0H8a8 8 0 0 0-8 8v32a8 8 0 0 0 8 8h32a8 8 0 0 0 8-8V8a8 8 0 0 0-8-8" />
-    <path fill="currentColor" fill-opacity="0.4" d="M36 0H24v12h12z" />
-    <path fill="currentColor" fill-opacity="0.2" d="M36 0h4a8 8 0 0 1 8 8v4H36z" />
-    <path fill="currentColor" fill-opacity="0.4" d="M48 12H36v12h12z" />
-    <path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M26 38a2 2 0 0 1-2 2H10a2 2 0 1 1 0-4h14a2 2 0 0 1 2 2M20 30a2 2 0 0 1-2 2h-8a2 2 0 1 1 0-4h8a2 2 0 0 1 2 2" clip-rule="evenodd" />
+    <path fill="url(#proton-docs-2024-mono-grad)" fill-rule="evenodd" clip-rule="evenodd" d="M40 0H8a8 8 0 0 0-8 8v32a8 8 0 0 0 8 8h32a8 8 0 0 0 8-8V8a8 8 0 0 0-8-8M26 38a2 2 0 0 1-2 2H10a2 2 0 1 1 0-4h14a2 2 0 0 1 2 2M20 30a2 2 0 0 1-2 2h-8a2 2 0 1 1 0-4h8a2 2 0 0 1 2 2"/>
+    <path fill="currentColor" fill-opacity="0.4" d="M36 0H24v12h12z"/>
+    <path fill="currentColor" fill-opacity="0.2" d="M36 0h4a8 8 0 0 1 8 8v4H36z"/>
+    <path fill="currentColor" fill-opacity="0.4" d="M48 12H36v12h12z"/>
   </g>
   <defs>
     <radialGradient id="proton-docs-2024-mono-grad" cx="0" cy="0" r="1" gradientTransform="rotate(-53.15 55.901 32.11)scale(56.6412)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="currentColor" stop-opacity="1" />
-      <stop offset="1" stop-color="currentColor" stop-opacity="0.4" />
+      <stop stop-color="currentColor"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.4"/>
     </radialGradient>
   </defs>
 </svg>
