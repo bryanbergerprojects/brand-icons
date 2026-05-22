@@ -1,0 +1,23 @@
+{
+  "slug": "proton-pass",
+  "name": "Proton Pass",
+  "category": "productivity",
+  "description": "End-to-end encrypted password manager and identity wallet by Proton AG, launched in public beta in April 2023.",
+  "tags": ["password-manager", "encryption", "privacy", "security", "identity", "credentials", "open-source", "saas", "zero-knowledge"],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/pass",
+  "repository": "https://github.com/ProtonMail/WebClients",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "proton",
+  "latest": "2023",
+  "years": [
+    {
+      "year": "2023",
+      "palette": ["#6D4AFF", "#B39FFB", "#FFE8DB", "#FFD580"],
+      "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/pass-extension/public/assets/protonpass-icon.svg",
+      "notes": "Original and only launch icon (public beta April 2023, global GA June 28 2023). Diamond/keyhole mark with purple-to-amber radial gradient."
+    }
+  ],
+  "addedAt": "2026-05-20",
+  "updatedAt": "2026-05-20"
+}
