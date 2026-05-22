@@ -17,16 +17,16 @@
   />
   <defs>
     <linearGradient id="a" x1="10.503" y1="14.3876" x2="6.64231" y2="0.671403" gradientUnits="userSpaceOnUse">
-      <stop stop-color="currentColor" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="currentColor" stop-opacity="1"/>
+      <stop stop-color="currentColor" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.8"/>
     </linearGradient>
     <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16.2409 10.1611) scale(11.9949 10.9995)">
-      <stop offset="0.5561" stop-color="currentColor" stop-opacity="1"/>
+      <stop offset="0.5561" stop-color="currentColor" stop-opacity="0.85"/>
       <stop offset="0.9944" stop-color="currentColor" stop-opacity="0.5"/>
     </radialGradient>
     <linearGradient id="c" x1="21.8808" y1="22.8607" x2="13.021" y2="3.23424" gradientUnits="userSpaceOnUse">
-      <stop offset="0.271" stop-color="currentColor" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="currentColor" stop-opacity="1"/>
+      <stop offset="0.271" stop-color="currentColor" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.8"/>
     </linearGradient>
   </defs>
 </svg>
