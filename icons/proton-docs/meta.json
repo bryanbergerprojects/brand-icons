@@ -1,0 +1,23 @@
+{
+  "slug": "proton-docs",
+  "name": "Proton Docs",
+  "category": "productivity",
+  "description": "End-to-end encrypted collaborative document editor by Proton AG, integrated into Proton Drive.",
+  "tags": ["document-editor", "encrypted", "privacy", "collaboration", "real-time", "saas", "proton", "office-suite", "open-source"],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/drive/docs",
+  "repository": "https://github.com/ProtonMail/WebClients",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "proton",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#6D4AFF", "#34B8EE", "#85D4F5", "#D6F1FC", "#FFFFFF"],
+      "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/docs/src/favicon.svg",
+      "notes": "Launched publicly July 3, 2024. Rounded-square app icon with radial gradient (purple #6D4AFF → cyan #34B8EE), light-blue document-corner blocks upper-right, and two white rounded-rect bars lower-left representing text lines."
+    }
+  ],
+  "addedAt": "2026-05-22",
+  "updatedAt": "2026-05-22"
+}
