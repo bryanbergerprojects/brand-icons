@@ -1,0 +1,23 @@
+{
+  "slug": "proton-meet",
+  "name": "Proton Meet",
+  "category": "communication",
+  "description": "End-to-end encrypted video conferencing service by Proton AG, built on the MLS protocol.",
+  "tags": ["video-conferencing", "e2ee", "encrypted", "privacy", "secure-communication", "collaboration", "saas"],
+  "brandColor": "#6E45E2",
+  "url": "https://proton.me/meet",
+  "repository": "https://github.com/ProtonMail/WebClients",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "proton",
+  "latest": "2026",
+  "years": [
+    {
+      "year": "2026",
+      "palette": ["#6E45E2", "#82F8E1", "#A086EC", "#86EBDD"],
+      "source": "https://pmecdn.protonweb.com/image-transformation/?s=c&image=image%2Fupload%2Fv1776940263%2Fstatic%2Flogos%2Fmeet%2Fmeet-badge.svg",
+      "notes": "Official app badge icon sourced from Proton media kit. White rounded-square background stripped per svg.md §1.7; white+gradient overlays merged into opaque blended gradients for transparent-canvas fidelity."
+    }
+  ],
+  "addedAt": "2026-05-22",
+  "updatedAt": "2026-05-22"
+}
