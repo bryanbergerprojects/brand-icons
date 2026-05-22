@@ -1,0 +1,23 @@
+{
+  "slug": "proton-authenticator",
+  "name": "Proton Authenticator",
+  "category": "productivity",
+  "description": "Open-source two-factor authentication app with end-to-end encrypted sync, developed by Proton AG.",
+  "tags": ["two-factor-authentication", "totp", "2fa", "authenticator", "open-source", "privacy", "security", "cross-platform", "saas"],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/authenticator",
+  "repository": "https://github.com/protonpass/android-authenticator",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "proton",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#6D4AFF", "#FFFFFF", "#E6AD32", "#F2FB00", "#BE3232", "#8F69FF"],
+      "source": "https://pmecdn.protonweb.com/image-transformation/?s=a&image=proton_Authenticator_logo_0758eb52af.svg",
+      "notes": "Launch year (July 31, 2025). Proton O-mark with keyhole/lock symbol, purple-to-gold gradient, background stripped per svg.md §1.7."
+    }
+  ],
+  "addedAt": "2026-05-22",
+  "updatedAt": "2026-05-22"
+}
