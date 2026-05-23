@@ -12,7 +12,7 @@
   "years": [
     {
       "year": "2016",
-      "palette": ["#635BFF"],
+      "palette": ["#635BFF", "#FFFFFF"],
       "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/stripe.svg",
       "notes": "First Stripe S icon mark introduced alongside the 2016 blurple identity rebrand."
     },
