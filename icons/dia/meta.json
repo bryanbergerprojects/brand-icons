@@ -17,9 +17,9 @@
     },
     {
       "year": "2025",
-      "palette": ["#000000", "#FEFEFE"],
+      "palette": ["#000000"],
       "source": "https://www.diabrowser.com/web-app-manifest-512x512.png",
-      "notes": "vectorized from png raster"
+      "notes": "Dome symbol isolated from the maskable app icon, filled black on a transparent canvas."
     }
   ],
   "addedAt": "2026-05-23",
