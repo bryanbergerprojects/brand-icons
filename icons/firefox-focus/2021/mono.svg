@@ -13,7 +13,9 @@
       </linearGradient>
       <radialGradient id="b" cx="-711.744" cy="-14.9569" r="1.3333" gradientTransform="matrix(-23.5301 55.8694 -59 -24.8486 -17564.7129 39405.7695)" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="currentColor" stop-opacity=".4"/>
-        <stop offset=".65" stop-color="currentColor" stop-opacity=".1"/>
+        <stop offset=".55" stop-color="currentColor" stop-opacity=".1"/>
+        <stop offset=".8" stop-color="currentColor" stop-opacity=".45"/>
+        <stop offset="1" stop-color="currentColor" stop-opacity=".85"/>
       </radialGradient>
       <radialGradient id="c" cx="-705.9343" cy="12.0621" r="1.3333" gradientTransform="translate(42793.1289 -680.7689) scale(60.5531)" gradientUnits="userSpaceOnUse">
         <stop offset=".25" stop-color="currentColor" stop-opacity="0"/>
