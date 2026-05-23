@@ -4,7 +4,7 @@
   "category": "platforms",
   "description": "AI-powered web browser by The Browser Company that surfaces answers and generates ready-to-share outputs from browser tabs.",
   "tags": ["browser", "ai-browser", "chromium", "web-browsing", "tab-management", "ai-assistant", "macos", "productivity-tools"],
-  "brandColor": "#4566B7",
+  "brandColor": "#000000",
   "url": "https://www.diabrowser.com",
   "license": "Trademark — usage for identification (fair use)",
   "latest": "2025",
@@ -17,9 +17,9 @@
     },
     {
       "year": "2025",
-      "palette": ["#4566B7", "#6D9FE4", "#C5D8E8", "#E1E7DB", "#F5E48C", "#FBC95E", "#F59058"],
-      "source": "https://img.alternativeto.net/icons/280/dia-browser_257206.png",
-      "notes": "Gradient dome mark (blue-to-orange vertical gradient on transparent canvas)."
+      "palette": ["#000000", "#FEFEFE"],
+      "source": "https://www.diabrowser.com/web-app-manifest-512x512.png",
+      "notes": "vectorized from png raster"
     }
   ],
   "addedAt": "2026-05-23",
