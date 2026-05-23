@@ -1,0 +1,29 @@
+{
+  "slug": "vercel",
+  "name": "Vercel",
+  "category": "platforms",
+  "description": "Cloud platform for frontend developers to deploy, scale, and iterate on web applications with zero configuration.",
+  "tags": ["deployment", "cloud-hosting", "frontend", "jamstack", "serverless", "nextjs", "static-site", "edge-network", "ci-cd", "devops"],
+  "brandColor": "#000000",
+  "url": "https://vercel.com",
+  "repository": "https://github.com/vercel",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["zeit"],
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2020",
+      "palette": ["#000000"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/a853febf/icons/zeit.svg",
+      "notes": "Rebrand from ZEIT to Vercel in April 2020. The triangle mark was retained from the ZEIT era (founded 2015)."
+    },
+    {
+      "year": "2025",
+      "palette": ["#000000"],
+      "source": "https://k2mkucxia43oc7fa.public.blob.vercel-storage.com/front/press/vercel-assets.zip",
+      "notes": "Official Vercel brand kit (vercel.com/geist/brands). Minor path update aligning the triangle geometry to the official brand spec."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
