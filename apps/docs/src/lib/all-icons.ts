@@ -28,6 +28,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   facebook: BrandIcons.FacebookLatestIcon,
   figma: BrandIcons.FigmaLatestIcon,
   firefox: BrandIcons.FirefoxLatestIcon,
+  'firefox-focus': BrandIcons.FirefoxFocusLatestIcon,
   gemini: BrandIcons.GeminiLatestIcon,
   'gemini-cli': BrandIcons.GeminiCLILatestIcon,
   github: BrandIcons.GitHubLatestIcon,
