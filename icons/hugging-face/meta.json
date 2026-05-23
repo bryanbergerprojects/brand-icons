@@ -30,7 +30,7 @@
     },
     {
       "year": "2024",
-      "palette": ["#FFD21E", "#FF9D00", "#FFAD03", "#32343D", "#FF323D"],
+      "palette": ["#FFD21E", "#FFAD03", "#FF9D00", "#FF323D", "#32343D"],
       "source": "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg?download=true",
       "notes": "Official brand asset from the huggingface/brand-assets dataset. Refined 6-path design at 256x256. Recommended mark from huggingface.co/brand."
     }
