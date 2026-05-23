@@ -1,0 +1,27 @@
+{
+  "slug": "dia",
+  "name": "Dia",
+  "category": "platforms",
+  "description": "AI-powered web browser by The Browser Company that surfaces answers and generates ready-to-share outputs from browser tabs.",
+  "tags": ["browser", "ai-browser", "chromium", "web-browsing", "tab-management", "ai-assistant", "macos", "productivity-tools"],
+  "brandColor": "#000000",
+  "url": "https://www.diabrowser.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#E68163"],
+      "source": "https://web.archive.org/web/20241202084233/https://www.diabrowser.com/",
+      "notes": "Launch teaser mark (December 2024). Orange sun-rising symbol used on the pre-launch page."
+    },
+    {
+      "year": "2025",
+      "palette": ["#000000"],
+      "source": "https://www.diabrowser.com/web-app-manifest-512x512.png",
+      "notes": "Dome symbol isolated from the maskable app icon, filled black on a transparent canvas."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
