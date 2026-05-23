@@ -19,7 +19,7 @@
       style="fill:url(#pw-md)"
       fill-opacity=".9"
     />
-    <path d="m2.394 14.909 2.576-2.927-4.97.62v.618c0 .933.756 1.689 1.688 1.689h.706Z" fill="currentColor" fill-opacity=".3" />
+    <path d="M2.394 14.909 4.315 12.726H0v.494c0 .933.756 1.689 1.688 1.689h.706Z" fill="currentColor" fill-opacity=".3" />
     <path d="M4.407 10.406a1.238 1.238 0 1 0-2.476 0 1.238 1.238 0 0 0 2.476 0Z" fill="currentColor" />
   </g>
   <defs>
