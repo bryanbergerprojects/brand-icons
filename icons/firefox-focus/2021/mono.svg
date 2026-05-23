@@ -19,9 +19,9 @@
       </radialGradient>
       <radialGradient id="c" cx="-705.9343" cy="12.0621" r="1.3333" gradientTransform="translate(42793.1289 -680.7689) scale(60.5531)" gradientUnits="userSpaceOnUse">
         <stop offset=".25" stop-color="currentColor" stop-opacity="0"/>
-        <stop offset=".42" stop-color="currentColor" stop-opacity=".18"/>
-        <stop offset=".73" stop-color="currentColor" stop-opacity=".55"/>
-        <stop offset=".94" stop-color="currentColor" stop-opacity=".8"/>
+        <stop offset=".42" stop-color="currentColor" stop-opacity=".5"/>
+        <stop offset=".73" stop-color="currentColor" stop-opacity=".8"/>
+        <stop offset=".94" stop-color="currentColor" stop-opacity=".92"/>
       </radialGradient>
       <radialGradient id="d" cx="-701.2536" cy="16.3927" r="1.3333" gradientTransform="translate(30752.75 -719.2598) scale(43.7736)" gradientUnits="userSpaceOnUse">
         <stop offset=".18" stop-color="currentColor" stop-opacity="1"/>
