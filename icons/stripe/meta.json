@@ -1,0 +1,28 @@
+{
+  "slug": "stripe",
+  "name": "Stripe",
+  "category": "payments",
+  "description": "Online payment processing platform enabling businesses to accept payments and manage financial operations globally.",
+  "tags": ["payment-processing", "online-payments", "fintech", "developer-api", "subscription-billing", "saas", "ecommerce"],
+  "brandColor": "#533AFD",
+  "url": "https://stripe.com",
+  "repository": "https://github.com/stripe",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#635BFF", "#FFFFFF"],
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/stripe.svg",
+      "notes": "First Stripe S icon mark introduced alongside the 2016 blurple identity rebrand."
+    },
+    {
+      "year": "2025",
+      "palette": ["#533AFD", "#FFFFFF"],
+      "source": "https://images.stripeassets.com/fzn2n1nzq965/1hgcBNd12BfT9VLgbId7By/01d91920114b124fb4cf6d448f9f06eb/favicon.svg",
+      "notes": "New mark introduced September 2025: a white diagonal parallelogram on a darker purple rounded-square background."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}

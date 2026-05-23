@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g transform="scale(0.0469)">
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M 64,0 H 448 Q 512,0 512,64 V 448 Q 512,512 448,512 H 64 Q 0,512 0,448 V 64 Q 0,0 64,0 Z M120 392 L392 334.317 V120 L120 178.357 V392 Z"/>
+  </g>
+</svg>
