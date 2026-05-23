@@ -17,20 +17,7 @@
     },
     {
       "year": "2025",
-      "palette": [
-        "#000000",
-        "#FEFEFE",
-        "#BEBEBE",
-        "#A0A0A0",
-        "#E3E3E3",
-        "#303030",
-        "#AAAAAA",
-        "#1F1F1F",
-        "#747474",
-        "#262626",
-        "#515151",
-        "#434343"
-      ],
+      "palette": ["#000000", "#FEFEFE"],
       "source": "https://www.diabrowser.com/web-app-manifest-512x512.png",
       "notes": "vectorized from png raster"
     }
