@@ -72,6 +72,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   'proton-sheets': BrandIcons.ProtonSheetsLatestIcon,
   'proton-wallet': BrandIcons.ProtonWalletLatestIcon,
   safari: BrandIcons.SafariLatestIcon,
+  slack: BrandIcons.SlackLatestIcon,
   snapchat: BrandIcons.SnapchatLatestIcon,
   soundcloud: BrandIcons.SoundCloudLatestIcon,
   sora: BrandIcons.SoraLatestIcon,
