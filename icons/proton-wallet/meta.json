@@ -1,0 +1,23 @@
+{
+  "slug": "proton-wallet",
+  "name": "Proton Wallet",
+  "category": "finance",
+  "description": "Self-custodial Bitcoin wallet by Proton AG offering end-to-end encrypted key management and privacy-first Bitcoin transactions.",
+  "tags": ["bitcoin", "cryptocurrency", "self-custodial", "privacy", "encryption", "open-source", "swiss", "wallet", "fintech"],
+  "brandColor": "#6D4AFF",
+  "url": "https://proton.me/wallet",
+  "repository": "https://github.com/ProtonMail/WebClients",
+  "license": "Trademark — usage for identification (fair use)",
+  "parent": "proton",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2024",
+      "palette": ["#6D4AFF", "#957AFD", "#FF8065", "#FFBB93", "#FFC6C6", "#FFA51F"],
+      "source": "https://raw.githubusercontent.com/ProtonMail/WebClients/main/applications/wallet/src/favicon.svg",
+      "notes": "Launch icon introduced July 24 2024 (early access to Visionary/Lifetime accounts). Rounded wallet symbol with purple-to-rose-to-peach gradient planes and white coin slot."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
