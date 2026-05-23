@@ -77,6 +77,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   soundcloud: BrandIcons.SoundCloudLatestIcon,
   sora: BrandIcons.SoraLatestIcon,
   spotify: BrandIcons.SpotifyLatestIcon,
+  stripe: BrandIcons.StripeLatestIcon,
   supabase: BrandIcons.SupabaseLatestIcon,
   telegram: BrandIcons.TelegramLatestIcon,
   twitter: BrandIcons.TwitterXLatestIcon,
