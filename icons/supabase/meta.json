@@ -1,0 +1,22 @@
+{
+  "slug": "supabase",
+  "name": "Supabase",
+  "category": "dev-tools",
+  "description": "Open-source Firebase alternative providing a Postgres database, authentication, storage, and real-time subscriptions as a backend platform.",
+  "tags": ["backend-as-a-service", "postgres", "open-source", "database", "real-time", "authentication", "saas", "developer-platform"],
+  "brandColor": "#3ECF8E",
+  "url": "https://supabase.com",
+  "repository": "https://github.com/supabase/supabase",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2021",
+      "palette": ["#3ECF8E", "#249361"],
+      "source": "https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-icon.svg",
+      "notes": "Lightning-bolt logomark (two interlocking triangles) first published as SVG on 2021-05-07 (commit cc9f746d). Shape has remained unchanged since."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
