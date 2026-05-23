@@ -1,0 +1,22 @@
+{
+  "slug": "lemon-squeezy",
+  "name": "Lemon Squeezy",
+  "category": "payments",
+  "description": "Merchant of record and payment platform for software businesses selling digital products and subscriptions.",
+  "tags": ["merchant-of-record", "digital-products", "subscriptions", "saas", "e-commerce", "payments", "billing", "software"],
+  "brandColor": "#FFC233",
+  "url": "https://www.lemonsqueezy.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["lmsqueezy"],
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2022",
+      "palette": ["#FFC233"],
+      "source": "https://cdn.prod.website-files.com/6347244ba8d63489ba51c08e/6347244ba8d63469e851c0d6_footer%20small%20logo.svg",
+      "notes": "Icon-only logomark extracted from official brand page. SVG 21x28, 4 teardrop/wedge paths forming a stylized lemon mark."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
