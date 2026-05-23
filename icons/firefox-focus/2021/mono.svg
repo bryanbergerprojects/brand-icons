@@ -5,10 +5,10 @@
         <stop offset="0" stop-color="currentColor" stop-opacity="1"/>
         <stop offset=".13" stop-color="currentColor" stop-opacity=".95"/>
         <stop offset=".29" stop-color="currentColor" stop-opacity=".85"/>
-        <stop offset=".46" stop-color="currentColor" stop-opacity=".75"/>
-        <stop offset=".64" stop-color="currentColor" stop-opacity=".6"/>
-        <stop offset=".82" stop-color="currentColor" stop-opacity=".45"/>
-        <stop offset="1" stop-color="currentColor" stop-opacity=".3"/>
+        <stop offset=".46" stop-color="currentColor" stop-opacity=".7"/>
+        <stop offset=".64" stop-color="currentColor" stop-opacity=".4"/>
+        <stop offset=".82" stop-color="currentColor" stop-opacity=".22"/>
+        <stop offset="1" stop-color="currentColor" stop-opacity=".15"/>
       </linearGradient>
       <radialGradient id="b" cx="-711.744" cy="-14.9569" r="1.3333" gradientTransform="matrix(-23.5301 55.8694 -59 -24.8486 -17564.7129 39405.7695)" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="currentColor" stop-opacity=".4"/>
@@ -16,9 +16,9 @@
       </radialGradient>
       <radialGradient id="c" cx="-705.9343" cy="12.0621" r="1.3333" gradientTransform="translate(42793.1289 -680.7689) scale(60.5531)" gradientUnits="userSpaceOnUse">
         <stop offset=".25" stop-color="currentColor" stop-opacity="0"/>
-        <stop offset=".42" stop-color="currentColor" stop-opacity=".18"/>
-        <stop offset=".73" stop-color="currentColor" stop-opacity=".55"/>
-        <stop offset=".94" stop-color="currentColor" stop-opacity=".8"/>
+        <stop offset=".42" stop-color="currentColor" stop-opacity=".06"/>
+        <stop offset=".73" stop-color="currentColor" stop-opacity=".18"/>
+        <stop offset=".94" stop-color="currentColor" stop-opacity=".28"/>
       </radialGradient>
       <radialGradient id="d" cx="-701.2536" cy="16.3927" r="1.3333" gradientTransform="translate(30752.75 -719.2598) scale(43.7736)" gradientUnits="userSpaceOnUse">
         <stop offset=".18" stop-color="currentColor" stop-opacity="1"/>
@@ -32,14 +32,14 @@
         <stop offset=".74" stop-color="currentColor" stop-opacity=".28"/>
       </radialGradient>
       <radialGradient id="e" cx="-692.8353" cy="25.3932" r="1.3333" gradientTransform="translate(20022.3984 -673.6136) scale(28.8575)" gradientUnits="userSpaceOnUse">
-        <stop offset=".07" stop-color="currentColor" stop-opacity=".4"/>
-        <stop offset=".13" stop-color="currentColor" stop-opacity=".37"/>
-        <stop offset=".21" stop-color="currentColor" stop-opacity=".32"/>
-        <stop offset=".3" stop-color="currentColor" stop-opacity=".27"/>
-        <stop offset=".39" stop-color="currentColor" stop-opacity=".21"/>
-        <stop offset=".42" stop-color="currentColor" stop-opacity=".2"/>
-        <stop offset=".74" stop-color="currentColor" stop-opacity=".13"/>
-        <stop offset=".97" stop-color="currentColor" stop-opacity=".08"/>
+        <stop offset=".07" stop-color="currentColor" stop-opacity=".18"/>
+        <stop offset=".13" stop-color="currentColor" stop-opacity=".16"/>
+        <stop offset=".21" stop-color="currentColor" stop-opacity=".14"/>
+        <stop offset=".3" stop-color="currentColor" stop-opacity=".12"/>
+        <stop offset=".39" stop-color="currentColor" stop-opacity=".09"/>
+        <stop offset=".42" stop-color="currentColor" stop-opacity=".08"/>
+        <stop offset=".74" stop-color="currentColor" stop-opacity=".05"/>
+        <stop offset=".97" stop-color="currentColor" stop-opacity=".03"/>
       </radialGradient>
       <radialGradient id="f" cx="-683.1455" cy="48.9787" r="1.3333" gradientTransform="matrix(14.8399 -3.6717 4.3134 17.4334 9964.7227 -3330.5896)" gradientUnits="userSpaceOnUse">
         <stop offset=".22" stop-color="currentColor" stop-opacity=".08"/>
@@ -57,12 +57,12 @@
         <stop offset="1" stop-color="currentColor" stop-opacity=".3"/>
       </radialGradient>
       <radialGradient id="h" cx="-711.7429" cy="-13.0574" r="1.3333" gradientTransform="matrix(-18.9321 82.9278 -65.0914 -14.8601 -14274.707 58808.9648)" gradientUnits="userSpaceOnUse">
-        <stop offset=".2" stop-color="currentColor" stop-opacity=".6"/>
-        <stop offset=".29" stop-color="currentColor" stop-opacity=".7"/>
-        <stop offset=".41" stop-color="currentColor" stop-opacity=".85"/>
-        <stop offset=".54" stop-color="currentColor" stop-opacity=".8"/>
-        <stop offset=".64" stop-color="currentColor" stop-opacity=".6"/>
-        <stop offset=".94" stop-color="currentColor" stop-opacity=".3"/>
+        <stop offset=".2" stop-color="currentColor" stop-opacity=".22"/>
+        <stop offset=".29" stop-color="currentColor" stop-opacity=".26"/>
+        <stop offset=".41" stop-color="currentColor" stop-opacity=".3"/>
+        <stop offset=".54" stop-color="currentColor" stop-opacity=".28"/>
+        <stop offset=".64" stop-color="currentColor" stop-opacity=".2"/>
+        <stop offset=".94" stop-color="currentColor" stop-opacity=".1"/>
       </radialGradient>
       <radialGradient id="i" cx="-705.7443" cy="-15.3074" r="1.3333" gradientTransform="matrix(6.8048 64.4667 -42.375 4.4729 4206.1538 45579.9805)" gradientUnits="userSpaceOnUse">
         <stop offset=".09" stop-color="currentColor" stop-opacity="1"/>
