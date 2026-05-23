@@ -1,0 +1,23 @@
+{
+  "slug": "firebase-studio",
+  "name": "Firebase Studio",
+  "category": "dev-tools",
+  "description": "Google's cloud-based agentic development environment for building full-stack applications, formerly known as Project IDX.",
+  "tags": ["cloud-ide", "agentic-development", "google", "full-stack", "web-development", "gemini", "vscode", "browser-based"],
+  "brandColor": "#F8682F",
+  "url": "https://firebase.studio",
+  "repository": "https://github.com/project-idx",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["project-idx", "idx"],
+  "latest": "2025",
+  "years": [
+    {
+      "year": "2025",
+      "palette": ["#F8682F", "#DD2C00", "#FF9100", "#FFC400", "#E92A4E", "#C447FF"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/d/da/Firebase_Studio_logo.svg",
+      "notes": "Firebase Studio era logo introduced April 2025 rebrand. Stylized dual-flame/leaf mark with warm gradient (orange-red to magenta-purple) and yellow accent."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
