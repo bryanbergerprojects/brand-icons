@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g transform="scale(1.5)">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M1.69 14.909A1.688 1.688 0 0 1 .003 13.22V2.753c0-.932.756-1.688 1.689-1.688h7.556A6.753 6.753 0 0 1 16 7.818v5.402c0 .933-.756 1.689-1.688 1.689H1.69ZM3.337 12.726c1.203 0 2.178-1.042 2.178-2.327S4.54 8.073 3.337 8.073H0v4.653h3.337Z"
+      style="fill:url(#pw-mc)"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M1.688 14.944A1.688 1.688 0 0 1 0 13.255V3.351H7.56a5.065 5.065 0 0 1 5.065 5.065v6.527H1.688ZM3.337 12.726c1.203 0 2.178-1.042 2.178-2.327S4.54 8.073 3.337 8.073H0v4.653h3.337Z"
+      fill="currentColor"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M1.688 14.944A1.688 1.688 0 0 1 0 13.255V3.351H7.56a5.065 5.065 0 0 1 5.065 5.065v6.527H1.688ZM3.337 12.726c1.203 0 2.178-1.042 2.178-2.327S4.54 8.073 3.337 8.073H0v4.653h3.337Z"
+      style="fill:url(#pw-md)"
+      fill-opacity=".9"
+    />
+    <path d="M2.394 14.909 4.315 12.726H0v.494c0 .933.756 1.689 1.688 1.689h.706Z" fill="currentColor" fill-opacity=".3" />
+    <path d="M4.407 10.406a1.238 1.238 0 1 0-2.476 0 1.238 1.238 0 0 0 2.476 0Z" fill="currentColor" />
+  </g>
+  <defs>
+    <linearGradient id="pw-mc" x1="-2.008" y1="2.676" x2="17.785" y2="10.386" gradientUnits="userSpaceOnUse">
+      <stop stop-color="currentColor" stop-opacity="1" />
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.35" />
+    </linearGradient>
+    <linearGradient id="pw-md" x1="11.91" y1="5.131" x2="5.771" y2="17.623" gradientUnits="userSpaceOnUse">
+      <stop offset=".15" stop-color="currentColor" stop-opacity="0" />
+      <stop offset=".721" stop-color="currentColor" stop-opacity="0.5" />
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+</svg>
