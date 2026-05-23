@@ -1,0 +1,36 @@
+{
+  "slug": "firefox-focus",
+  "name": "Firefox Focus",
+  "category": "dev-tools",
+  "description": "Mozilla's privacy-focused mobile browser that blocks trackers and erases browsing history automatically.",
+  "tags": ["privacy", "mobile-browser", "tracker-blocking", "mozilla", "ios", "android", "open-source", "ad-blocker"],
+  "brandColor": "#9658F9",
+  "url": "https://www.mozilla.org/firefox/browsers/mobile/focus/",
+  "repository": "https://github.com/mozilla-mobile/firefox-ios",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["firefox-klar"],
+  "parent": "firefox",
+  "latest": "2021",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#8E3E8C", "#FDFDFD", "#E5435E", "#AF5198", "#DD436B", "#4F67AB"],
+      "source": "https://raw.githubusercontent.com/alrra/browser-logos/main/src/archive/firefox-focus_1/firefox-focus_1_256x256.png",
+      "notes": "Original Firefox Focus app icon (iOS launch, November 2016). Rounded square with purple-magenta gradient background and white Firefox fox mark inside a circle. Vectorized from PNG raster."
+    },
+    {
+      "year": "2019",
+      "palette": ["#C42482", "#FF3BE0", "#FF37BE", "#FF3081", "#FF328E"],
+      "source": "https://raw.githubusercontent.com/alrra/browser-logos/main/src/archive/firefox-focus_2/firefox-focus_2.svg",
+      "notes": "Mozilla 2019 brand system redesign. Flat pink-magenta fox/flame logomark on transparent background, no circular container."
+    },
+    {
+      "year": "2021",
+      "palette": ["#9658F9", "#291D4F", "#7542E5", "#8951E5", "#492E81"],
+      "source": "https://www.firefox.com/media/protocol/img/logos/firefox/browser/focus/logo.svg",
+      "notes": "New logo introduced with Firefox Focus 93 (October 2021). Purple-violet fox with flame, orange-coral accent globe — aligns with the Firefox Quantum identity system."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
