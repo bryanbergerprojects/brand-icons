@@ -1,0 +1,38 @@
+{
+  "slug": "firebase",
+  "name": "Firebase",
+  "category": "dev-tools",
+  "description": "Google's app development platform offering backend services, analytics, and hosting for web and mobile applications.",
+  "tags": [
+    "backend-as-a-service",
+    "app-development",
+    "realtime-database",
+    "cloud-functions",
+    "authentication",
+    "hosting",
+    "google",
+    "mobile",
+    "analytics"
+  ],
+  "brandColor": "#DD2C00",
+  "url": "https://firebase.google.com",
+  "repository": "https://github.com/firebase",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2016",
+      "palette": ["#FFA000", "#FFCA28", "#F57C00"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Firebase_icon.svg",
+      "notes": "Triangular flame logomark introduced at Google I/O May 2016 when Firebase expanded to a unified app platform. Material Design style with three geometric planes in amber and orange."
+    },
+    {
+      "year": "2024",
+      "palette": ["#DD2C00", "#FF9100", "#FFC400"],
+      "source": "https://firebase.google.com/downloads/brand-guidelines/SVG/logo-logomark.svg",
+      "notes": "Redesigned flame logomark by R/GA, unveiled at Google I/O May 2024. Organic overlapping teardrop shapes replacing the geometric triangular form. Official brand guidelines asset."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
