@@ -1,0 +1,27 @@
+{
+  "slug": "slack",
+  "name": "Slack",
+  "category": "communication",
+  "description": "Cloud-based team messaging and collaboration platform developed by Salesforce.",
+  "tags": ["team-chat", "messaging", "collaboration", "workspace", "channels", "saas", "enterprise", "notifications"],
+  "brandColor": "#E01E5A",
+  "url": "https://slack.com",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2019",
+  "years": [
+    {
+      "year": "2013",
+      "palette": ["#E01A59", "#89D3DF", "#ECB32D", "#63C1A0", "#258B74", "#819C3C", "#331433", "#D62027"],
+      "source": "https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png",
+      "notes": "Original hashtag (octothorpe) mark used 2013–2018. Four rounded bars arranged in a # shape, slightly tilted. Built directly from the official CDN SVG source."
+    },
+    {
+      "year": "2019",
+      "palette": ["#E01E5A", "#36C5F0", "#2EB67D", "#ECB22E"],
+      "source": "https://a.slack-edge.com/38f0e7c/marketing/img/nav/logo.svg",
+      "notes": "Redesign by Pentagram (Michael Bierut) announced January 16, 2019. Four-color speech-bubble lozenge mark."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
