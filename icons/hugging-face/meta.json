@@ -1,0 +1,40 @@
+{
+  "slug": "hugging-face",
+  "name": "Hugging Face",
+  "category": "ai",
+  "description": "Open-source AI platform and community hub for sharing machine learning models, datasets, and applications.",
+  "tags": [
+    "machine-learning",
+    "open-source",
+    "model-hub",
+    "nlp",
+    "transformers",
+    "dataset-hosting",
+    "llm",
+    "inference-api",
+    "spaces",
+    "community"
+  ],
+  "brandColor": "#FFD21E",
+  "url": "https://huggingface.co",
+  "repository": "https://huggingface.co/datasets/huggingface/brand-assets",
+  "license": "Trademark — usage for identification (fair use)",
+  "aliases": ["hf", "huggingface"],
+  "latest": "2024",
+  "years": [
+    {
+      "year": "2019",
+      "palette": ["#FFD21E", "#FF9D0B", "#3A3B45", "#FF323D"],
+      "source": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+      "notes": "Original emoji-style face mark used on the Hugging Face website since the early ML-community pivot. 9-path design with prominent hands, dimensions 95x88."
+    },
+    {
+      "year": "2024",
+      "palette": ["#FFD21E", "#FFAD03", "#FF9D00", "#FF323D", "#32343D"],
+      "source": "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg?download=true",
+      "notes": "Official brand asset from the huggingface/brand-assets dataset. Refined 6-path design at 256x256. Recommended mark from huggingface.co/brand."
+    }
+  ],
+  "addedAt": "2026-05-23",
+  "updatedAt": "2026-05-23"
+}
