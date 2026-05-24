@@ -1,0 +1,22 @@
+{
+  "slug": "paddle",
+  "name": "Paddle",
+  "category": "payments",
+  "description": "Payment infrastructure and merchant of record platform for SaaS and software companies worldwide.",
+  "tags": ["payments", "merchant-of-record", "saas", "subscriptions", "billing", "tax-compliance", "payment-processing", "e-commerce"],
+  "brandColor": "#FFDD35",
+  "url": "https://www.paddle.com",
+  "repository": "https://github.com/PaddleHQ",
+  "license": "Trademark — usage for identification (fair use)",
+  "latest": "2022",
+  "years": [
+    {
+      "year": "2022",
+      "palette": ["#FFDD35", "#040F11"],
+      "source": "https://logosandtypes.com/wp-content/uploads/2022/04/paddle.svg",
+      "notes": "Post-rebrand identity (February 2022, agency Butchershop). Yellow square background with dark P-and-star logomark."
+    }
+  ],
+  "addedAt": "2026-05-24",
+  "updatedAt": "2026-05-24"
+}

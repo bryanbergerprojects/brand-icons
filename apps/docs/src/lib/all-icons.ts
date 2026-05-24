@@ -64,6 +64,7 @@ export const latestIconBySlug: Readonly<Record<string, BrandIconComponent>> = {
   notion: BrandIcons.NotionLatestIcon,
   openai: BrandIcons.OpenAILatestIcon,
   opera: BrandIcons.OperaLatestIcon,
+  paddle: BrandIcons.PaddleLatestIcon,
   proton: BrandIcons.ProtonLatestIcon,
   'proton-authenticator': BrandIcons.ProtonAuthenticatorLatestIcon,
   'proton-docs': BrandIcons.ProtonDocsLatestIcon,
