@@ -11,9 +11,9 @@
   "years": [
     {
       "year": "2013",
-      "palette": ["#DE1561", "#3DB991", "#351038", "#E7A720", "#6EC8DA", "#1B937C", "#64851C", "#CD0E0A"],
+      "palette": ["#3EB890", "#E9A820", "#70CADB", "#E01760", "#189078", "#608018", "#301038", "#C80808"],
       "source": "https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png",
-      "notes": "Original hashtag (octothorpe) mark used 2013–2018. Eleven-color design with semi-transparent overlapping stripes. Vectorized from PNG raster."
+      "notes": "Original hashtag (octothorpe) mark used 2013–2018. Four rounded rectangular bars in a # shape, rotated 15°. Geometrically reconstructed from reference PNG."
     },
     {
       "year": "2019",
