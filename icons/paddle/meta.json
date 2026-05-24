@@ -3,7 +3,7 @@
   "name": "Paddle",
   "category": "payments",
   "description": "Payment infrastructure and merchant of record platform for SaaS and software companies worldwide.",
-  "tags": ["payments", "merchant-of-record", "saas", "subscriptions", "billing", "tax-compliance", "payment-processing", "e-commerce"],
+  "tags": ["merchant-of-record", "saas", "subscriptions", "billing", "tax-compliance", "payment-processing", "e-commerce", "checkout"],
   "brandColor": "#FFDD35",
   "url": "https://www.paddle.com",
   "repository": "https://github.com/PaddleHQ",
