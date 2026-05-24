@@ -1,24 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!--
-    Slack 2013 hashtag logo — mono variant.
-    Exact same geometry as color.svg; fills replaced with currentColor.
-    The 4 bar rects form the body (opacity 1); the 4 intersection rects
-    use fill-opacity 0.35 to convey the overlap accent visible in color.
-    Center of the # remains transparent (no element covers it).
-  -->
-  <g transform="rotate(15 12 12)">
-    <!-- Vertical bar left -->
-    <rect x="7.2" y="1.5" width="4.6" height="21" rx="2.3" fill="currentColor"/>
-    <!-- Vertical bar right -->
-    <rect x="12.2" y="1.5" width="4.6" height="21" rx="2.3" fill="currentColor"/>
-    <!-- Horizontal bar top -->
-    <rect x="1.5" y="7.2" width="21" height="4.6" rx="2.3" fill="currentColor"/>
-    <!-- Horizontal bar bottom -->
-    <rect x="1.5" y="12.2" width="21" height="4.6" rx="2.3" fill="currentColor"/>
-    <!-- Intersection accents: darker in color → subtle overlay to convey depth -->
-    <rect x="7.2" y="7.2" width="4.6" height="4.6" fill="currentColor" fill-opacity="0.35"/>
-    <rect x="12.2" y="7.2" width="4.6" height="4.6" fill="currentColor" fill-opacity="0.35"/>
-    <rect x="7.2" y="12.2" width="4.6" height="4.6" fill="currentColor" fill-opacity="0.35"/>
-    <rect x="12.2" y="12.2" width="4.6" height="4.6" fill="currentColor" fill-opacity="0.35"/>
+  <g transform="translate(18.3636 -60.1818) scale(0.18182)">
+    <path d="M-16.7 343.1c-1.9-5.7-8-8.8-13.7-7-5.7 1.9-8.8 8-7 13.7l28.1 86.4c1.9 5.3 7.7 8.3 13.2 6.7 5.8-1.7 9.3-7.8 7.4-13.4 0-.2-28-86.4-28-86.4z" fill="currentColor"/>
+    <path d="M-60.2 357.2c-1.9-5.7-8-8.8-13.7-7-5.7 1.9-8.8 8-7 13.7l28.1 86.4c1.9 5.3 7.7 8.3 13.2 6.7 5.8-1.7 9.3-7.8 7.4-13.4 0-.2-28-86.4-28-86.4z" fill="currentColor"/>
+    <path d="M18.7 414.6c5.7-1.9 8.8-8 7-13.7-1.9-5.7-8-8.8-13.7-7l-86.5 28.2c-5.3 1.9-8.3 7.7-6.7 13.2 1.7 5.8 7.8 9.3 13.4 7.4.2 0 86.5-28.1 86.5-28.1z" fill="currentColor"/>
+    <path d="M-56.5 439.1c5.6-1.8 12.9-4.2 20.7-6.7-1.8-5.6-4.2-12.9-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="currentColor" fill-opacity="0.35"/>
+    <path d="M-12.9 424.9c7.8-2.5 15.1-4.9 20.7-6.7-1.8-5.6-4.2-12.9-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="currentColor" fill-opacity="0.35"/>
+    <path d="M4.5 371.1c5.7-1.9 8.8-8 7-13.7-1.9-5.7-8-8.8-13.7-7l-86.4 28.1c-5.3 1.9-8.3 7.7-6.7 13.2 1.7 5.8 7.8 9.3 13.4 7.4.2 0 86.4-28 86.4-28z" fill="currentColor"/>
+    <path d="M-70.6 395.5c5.6-1.8 12.9-4.2 20.7-6.7-2.5-7.8-4.9-15.1-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="currentColor" fill-opacity="0.35"/>
+    <path d="M-27.1 381.4c7.8-2.5 15.1-4.9 20.7-6.7-2.5-7.8-4.9-15.1-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="currentColor" fill-opacity="0.35"/>
   </g>
 </svg>

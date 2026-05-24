@@ -1,52 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!--
-    Slack 2013 hashtag logo. Geometrically reconstructed from official reference.
-    Four rounded rectangular bars arranged in a # shape, rotated ~12° clockwise.
-    Each bar pair (vertical/horizontal) carries a base color; the four
-    intersection zones carry the blended color observed in the reference PNG.
-    The center of the # is transparent (no element covers it).
-
-    Geometry (in un-rotated coordinates, pivot = canvas center 12 12):
-      bar thickness  = 4.0
-      bar half-span  = 8.5 (total length = 17)
-      gap between bar centers = 4.5
-      corner radius  = 2.0
-      rotation = 12° clockwise around (12, 12)
-
-    Vertical bars:
-      V-left  center-x = 12 - 2.25 = 9.75  → x = 7.75, y = 3.5, w=4, h=17
-      V-right center-x = 12 + 2.25 = 14.25 → x = 12.25, y = 3.5, w=4, h=17
-
-    Horizontal bars:
-      H-top   center-y = 12 - 2.25 = 9.75  → x = 3.5, y = 7.75, w=17, h=4
-      H-bot   center-y = 12 + 2.25 = 14.25 → x = 3.5, y = 12.25, w=17, h=4
-
-    Colors (sampled from reference PNG):
-      V-left  = #3EB890  (teal/green)
-      V-right = #E9A820  (gold)
-      H-top   = #70CADB  (cyan/blue)
-      H-bot   = #E01760  (pink/red)
-      TL intersection (V-left  ∩ H-top) = #189078  (dark teal)
-      TR intersection (V-right ∩ H-top) = #608018  (olive)
-      BL intersection (V-left  ∩ H-bot) = #C80808  (dark red)
-      BR intersection (V-right ∩ H-bot) = #B8183C  (dark pink)
-  -->
-  <g transform="rotate(15 12 12)">
-    <!-- Vertical bar left: teal/green — spans full height to reach canvas edges after rotation -->
-    <rect x="7.2" y="1.5" width="4.6" height="21" rx="2.3" fill="#3EB890"/>
-    <!-- Vertical bar right: gold -->
-    <rect x="12.2" y="1.5" width="4.6" height="21" rx="2.3" fill="#E9A820"/>
-    <!-- Horizontal bar top: cyan/blue — spans full width -->
-    <rect x="1.5" y="7.2" width="21" height="4.6" rx="2.3" fill="#70CADB"/>
-    <!-- Horizontal bar bottom: pink/red -->
-    <rect x="1.5" y="12.2" width="21" height="4.6" rx="2.3" fill="#E01760"/>
-    <!-- Intersection TL: V-left ∩ H-top = dark teal -->
-    <rect x="7.2" y="7.2" width="4.6" height="4.6" fill="#189078"/>
-    <!-- Intersection TR: V-right ∩ H-top = olive -->
-    <rect x="12.2" y="7.2" width="4.6" height="4.6" fill="#608018"/>
-    <!-- Intersection BL: V-left ∩ H-bot = dark plum/violet -->
-    <rect x="7.2" y="12.2" width="4.6" height="4.6" fill="#301038"/>
-    <!-- Intersection BR: V-right ∩ H-bot = dark red -->
-    <rect x="12.2" y="12.2" width="4.6" height="4.6" fill="#C80808"/>
+  <g transform="translate(18.3636 -60.1818) scale(0.18182)">
+    <path d="M-16.7 343.1c-1.9-5.7-8-8.8-13.7-7-5.7 1.9-8.8 8-7 13.7l28.1 86.4c1.9 5.3 7.7 8.3 13.2 6.7 5.8-1.7 9.3-7.8 7.4-13.4 0-.2-28-86.4-28-86.4z" fill="#ECB32D"/>
+    <path d="M-60.2 357.2c-1.9-5.7-8-8.8-13.7-7-5.7 1.9-8.8 8-7 13.7l28.1 86.4c1.9 5.3 7.7 8.3 13.2 6.7 5.8-1.7 9.3-7.8 7.4-13.4 0-.2-28-86.4-28-86.4z" fill="#63C1A0"/>
+    <path d="M18.7 414.6c5.7-1.9 8.8-8 7-13.7-1.9-5.7-8-8.8-13.7-7l-86.5 28.2c-5.3 1.9-8.3 7.7-6.7 13.2 1.7 5.8 7.8 9.3 13.4 7.4.2 0 86.5-28.1 86.5-28.1z" fill="#E01A59"/>
+    <path d="M-56.5 439.1c5.6-1.8 12.9-4.2 20.7-6.7-1.8-5.6-4.2-12.9-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="#331433"/>
+    <path d="M-12.9 424.9c7.8-2.5 15.1-4.9 20.7-6.7-1.8-5.6-4.2-12.9-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="#D62027"/>
+    <path d="M4.5 371.1c5.7-1.9 8.8-8 7-13.7-1.9-5.7-8-8.8-13.7-7l-86.4 28.1c-5.3 1.9-8.3 7.7-6.7 13.2 1.7 5.8 7.8 9.3 13.4 7.4.2 0 86.4-28 86.4-28z" fill="#89D3DF"/>
+    <path d="M-70.6 395.5c5.6-1.8 12.9-4.2 20.7-6.7-2.5-7.8-4.9-15.1-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="#258B74"/>
+    <path d="M-27.1 381.4c7.8-2.5 15.1-4.9 20.7-6.7-2.5-7.8-4.9-15.1-6.7-20.7l-20.7 6.7 6.7 20.7z" fill="#819C3C"/>
   </g>
 </svg>
